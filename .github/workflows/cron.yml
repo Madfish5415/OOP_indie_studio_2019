@@ -1,0 +1,31 @@
+name: Cron
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+
+  fedora:
+    runs-on: ubuntu-latest
+    container: cyberryteam/epitech-docker:fedora
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Build
+      run: make
+
+  ubuntu:
+    runs-on: ubuntu-latest
+    container: cyberryteam/epitech-docker:ubuntu
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+
+    - name: Build
+      run: make

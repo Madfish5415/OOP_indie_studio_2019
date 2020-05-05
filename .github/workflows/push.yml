@@ -1,0 +1,62 @@
+name: Push
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+
+  fedora:
+    runs-on: ubuntu-latest
+    container: cyberryteam/epitech-docker:fedora
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: make
+
+    - name: Functional tests
+      run: make fclean && make tests_sh
+
+    - name: Unit tests
+      run: make fclean && make tests_run
+
+  ubuntu:
+    runs-on: ubuntu-latest
+    container: cyberryteam/epitech-docker:ubuntu
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: make
+
+    - name: Functional tests
+      run: make fclean && make tests_sh
+
+    - name: Unit tests
+      run: make fclean && make tests_run
+
+  push:
+    needs: [fedora, ubuntu]
+
+    runs-on: [ubuntu-latest]
+
+    env:
+      REPOSITORY_OWNER: lucas.mathieux@epitech.eu
+      REPOSITORY_NAME: OOP_indie_studio_2019
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Inizialize
+        run: |
+          mkdir -p ~/.ssh/
+          ssh-keyscan git.epitech.eu >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Push
+        run: |
+          git push git@git.epitech.eu:/$REPOSITORY_OWNER/$REPOSITORY_NAME HEAD:master --force
