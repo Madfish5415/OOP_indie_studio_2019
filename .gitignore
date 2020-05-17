@@ -1,6 +1,6 @@
 # Binaries
 a.out
-arcade
+bomberman
 unit_tests
 
 # Objects
@@ -12,9 +12,6 @@ unit_tests
 
 # Resources
 resources/
-
-# ClangFormat
-.clang-format
 
 # Jetbrains
 compile_commands.json
