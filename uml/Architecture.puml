@@ -1,0 +1,162 @@
+@startuml
+
+namespace engine {
+    class World {
+        + World()
+        + ~World()
+
+        + EventBus& getEventBus()
+
+        - EventBus _eventBus
+    }
+
+    namespace eventbus {
+        class EventBus {
+        }
+        engine.World +-- EventBus
+
+        class CallbackHandler {
+        }
+        EventBus +-- CallbackHandler
+
+        class AEvent {
+            + AEvent()
+            + ~AEvent()
+        }
+    }
+
+    namespace event {
+        class Input {
+            + Input()
+            + ~Input()
+        }
+        engine.eventbus.AEvent <|-- Input
+    
+        class Collision {
+            + Collision()
+            + ~Collision()
+        }
+        engine.eventbus.AEvent <|-- Collision
+    
+        class Close {
+            + Close()
+            + ~Close()
+        }
+        engine.eventbus.AEvent <|-- Close
+    }
+
+    namespace ecs {
+        class EntityManager {
+        }
+
+        class SystemManager {
+        }
+
+        class ComponentManager {
+        }
+
+        class EventManager {
+        }
+
+        class ComponentArray {
+            + ComponentArray()
+
+            - std::array<Template &T, MAX_ENTITY> _components
+            - std::unordered_map<Entity, size_t> _entities
+        }
+
+        class AComponent {
+            + AComponent(int id)
+            + virtual ~AComponent() = 0
+        }
+
+        class ISystem {
+            + virtual void init() = 0
+            + virtual void update() = 0
+            + virtual void render() = 0
+        }
+
+        class ASystem {
+            + void init() override = 0
+            + void update() override = 0
+            + void render() override = 0
+        }
+        ISystem <|-- ASystem
+    }
+
+    namespace system {
+        class User {
+        }
+        engine.ecs.ASystem <|-- User
+
+        class AI {
+        }
+        engine.ecs.ASystem <|-- AI
+
+        class Audio {
+        }
+        engine.ecs.ASystem <|-- Audio
+
+        class Animation {
+        }
+        engine.ecs.ASystem <|-- Animation
+
+        class Movement {
+        }
+        engine.ecs.ASystem <|-- Movement
+
+        class Render {
+        }
+        engine.ecs.ASystem <|-- Render
+
+        class Physics {
+        }
+        engine.ecs.ASystem <|-- Physics
+
+        class Size {
+        }
+        engine.ecs.ASystem <|-- Size
+    }
+
+    namespace component {
+        class User {
+        }
+        engine.ecs.AComponent <|-- User
+
+        class AI {
+        }
+        engine.ecs.AComponent <|-- AI
+
+        class Audio {
+        }
+        engine.ecs.AComponent <|-- Audio
+
+        class Animation {
+        }
+        engine.ecs.AComponent <|-- Animation
+
+        class Motion {
+        }
+        engine.ecs.AComponent <|-- Motion
+
+        class Render {
+        }
+        engine.ecs.AComponent <|-- Render
+
+        class Transform {
+        }
+        engine.ecs.AComponent <|-- Transform
+
+        class Hitbox {
+        }
+        engine.ecs.AComponent <|-- Hitbox
+
+        class Size {
+        }
+        engine.ecs.AComponent <|-- Size
+    }
+}
+
+
+
+@enduml
