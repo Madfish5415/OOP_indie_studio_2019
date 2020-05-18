@@ -6,6 +6,7 @@
 */
 
 #include "ecs/ComponentManager.hpp"
+#include "ecs/EntityManager.hpp"
 
 #include <iostream>
 
