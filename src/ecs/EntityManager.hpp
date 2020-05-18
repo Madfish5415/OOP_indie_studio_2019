@@ -25,7 +25,7 @@ class EntityManager {
     ~EntityManager() = default;
 
   public:
-    Entity CreateEntity()
+    Entity createEntity()
     {
         if (_entitiesCount >= MAX_ENTITIES)
             throw std::runtime_error("Too many entities exist.");
@@ -37,7 +37,7 @@ class EntityManager {
         return entity;
     }
 
-    void DestroyEntity(Entity entity)
+    void destroyEntity(Entity entity)
     {
         if (entity >= MAX_ENTITIES)
             throw std::runtime_error("The id of the entity is greater than MAX_ENTITIES.");
@@ -48,7 +48,7 @@ class EntityManager {
     }
 
   public:
-    void SetSignature(Entity entity, Signature signature)
+    void setSignature(Entity entity, Signature signature)
     {
         if (entity >= MAX_ENTITIES)
             throw std::runtime_error("The id of the entity is greater than MAX_ENTITIES.");
@@ -56,7 +56,7 @@ class EntityManager {
         _signatures[entity] = signature;
     }
 
-    Signature GetSignature(Entity entity)
+    Signature& getSignature(Entity entity)
     {
         if (entity >= MAX_ENTITIES)
             throw std::runtime_error("The id of the entity is greater than MAX_ENTITIES.");

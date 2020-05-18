@@ -17,7 +17,7 @@ class IComponentArray {
     virtual ~IComponentArray() = default;
 
   public:
-    virtual void EntityDestroyed(Entity entity) = 0;
+    virtual void entityDestroyed(Entity entity) = 0;
 };
 
 } // namespace ecs

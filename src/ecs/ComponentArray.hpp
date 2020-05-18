@@ -22,7 +22,7 @@ class ComponentArray : public IComponentArray {
     ~ComponentArray() override = default;
 
   public:
-    void Insert(Entity entity, T component)
+    void insert(Entity entity, T component)
     {
         if (_entityToIndex.find(entity) != _entityToIndex.end())
             throw std::runtime_error("A component of this type already exists on this entity.");
@@ -33,7 +33,7 @@ class ComponentArray : public IComponentArray {
         _size++;
     }
 
-    void Remove(Entity entity)
+    void remove(Entity entity)
     {
         if (_entityToIndex.find(entity) == _entityToIndex.end())
             throw std::runtime_error("No such component exists for this entity.");
@@ -53,7 +53,7 @@ class ComponentArray : public IComponentArray {
         _size--;
     }
 
-    T& Get(Entity entity)
+    T& get(Entity entity)
     {
         if (_entityToIndex.find(entity) == _entityToIndex.end())
             throw std::runtime_error("No such component exists for this entity.");
@@ -62,10 +62,10 @@ class ComponentArray : public IComponentArray {
     }
 
   public:
-    void EntityDestroyed(Entity entity) override
+    void entityDestroyed(Entity entity) override
     {
         if (_entityToIndex.find(entity) != _entityToIndex.end()) {
-            Remove(entity);
+            remove(entity);
         }
     }
 

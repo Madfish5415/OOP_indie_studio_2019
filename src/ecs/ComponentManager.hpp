@@ -8,11 +8,11 @@
 #ifndef OOP_INDIE_STUDIO_2019_COMPONENTMANAGER_HPP
 #define OOP_INDIE_STUDIO_2019_COMPONENTMANAGER_HPP
 
-#include "Def.hpp"
-#include "ComponentArray.hpp"
-
-#include <string>
 #include <memory>
+#include <string>
+
+#include "ComponentArray.hpp"
+#include "Def.hpp"
 
 namespace ecs {
 
@@ -23,7 +23,7 @@ class ComponentManager {
 
   public:
     template<typename T>
-    void RegisterComponent()
+    void registerComponent()
     {
         std::string componentName = typeid(T).name();
 
@@ -38,7 +38,7 @@ class ComponentManager {
 
   private:
     template<typename T>
-    std::shared_ptr<ComponentArray<T>> GetComponentArray()
+    std::shared_ptr<ComponentArray<T>> getComponentArray()
     {
         std::string componentName = typeid(T).name();
 
@@ -50,42 +50,53 @@ class ComponentManager {
 
   public:
     template<typename T>
-    void AddComponent(Entity entity, T component)
+    ComponentType getComponentType()
+    {
+        std::string componentName = typeid(T).name();
+
+        if (_componentArrays.find(componentName) == _componentArrays.end())
+            throw std::runtime_error("Register the component before using it.");
+
+        return _componentTypes[componentName];
+    }
+
+    template<typename T>
+    void addComponent(Entity entity, T component)
     {
         try {
-            GetComponentArray<T>()->Insert(entity, component);
+            getComponentArray<T>()->insert(entity, component);
         } catch (std::runtime_error &e) {
             throw e;
         }
     }
 
     template<typename T>
-    void RemoveComponent(Entity entity)
+    void removeComponent(Entity entity)
     {
         try {
-            GetComponentArray<T>()->Remove(entity);
+            getComponentArray<T>()->remove(entity);
         } catch (std::runtime_error &e) {
             throw e;
         }
     }
 
     template<typename T>
-    T& GetComponent(Entity entity)
+    T &getComponent(Entity entity)
     {
         try {
-            return GetComponentArray<T>()->Get(entity);
+            return getComponentArray<T>()->get(entity);
         } catch (std::runtime_error &e) {
             throw e;
         }
     }
 
   public:
-    void EntityDestroyed(Entity entity)
+    void entityDestroyed(Entity entity)
     {
         for (auto const &pair : _componentArrays) {
             auto const &componentArray = pair.second;
 
-            componentArray->EntityDestroyed(entity);
+            componentArray->entityDestroyed(entity);
         }
     }
 
@@ -95,6 +106,6 @@ class ComponentManager {
     ComponentType _componentType = 0;
 };
 
-}
+} // namespace ecs
 
 #endif // OOP_INDIE_STUDIO_2019_COMPONENTMANAGER_HPP

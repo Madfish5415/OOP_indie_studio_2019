@@ -22,4 +22,5 @@ using Signature = std::bitset<MAX_COMPONENTS>;
 
 }
 
+
 #endif // OOP_INDIE_STUDIO_2019_DEF_HPP

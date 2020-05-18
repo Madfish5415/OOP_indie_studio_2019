@@ -5,22 +5,23 @@
 ** main.cpp
 */
 
-#include "ecs/ComponentManager.hpp"
-#include "ecs/EntityManager.hpp"
-
 #include <iostream>
+
+#include "ecs/WorldManager.hpp"
 
 int main()
 {
-    ecs::ComponentManager componentManager;
+    ecs::WorldManager worldManager;
 
-    componentManager.RegisterComponent<int>();
+    worldManager.registerComponent<int>();
 
-    componentManager.AddComponent<int>(1, 1);
+    ecs::Entity entity1 = worldManager.createEntity();
 
-    componentManager.GetComponent<int>(1)++;
+    worldManager.addComponent<int>(entity1, 1);
 
-    std::cout << componentManager.GetComponent<int>(1) << std::endl;
+    worldManager.getComponent<int>(entity1)++;
+
+    std::cout << worldManager.getComponent<int>(entity1) << std::endl;
 
     return 0;
 }
