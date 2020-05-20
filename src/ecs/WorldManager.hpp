@@ -79,7 +79,7 @@ class WorldManager {
     }
 
     template<typename T>
-    void getComponentType()
+    ComponentType getComponentType()
     {
         return _componentManager->getComponentType<T>();
     }
