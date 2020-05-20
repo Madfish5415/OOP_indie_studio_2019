@@ -23,7 +23,12 @@ MAIN_SRC			=		main.cpp
 
 PROJ_SRC			=
 
-TEST_SRC			=
+TEST_SRC			=		ecs/TestsComponentArray.cpp			\
+							ecs/TestsComponentManager.cpp		\
+							ecs/TestsEntityManager.cpp			\
+							ecs/TestsSystem.cpp					\
+							ecs/TestsSystemManager.cpp			\
+							ecs/TestsWorldManager.cpp			\
 
 CFLAGS				+=		-I $(INCL_DIR) -std=c++17
 CFLAGS				+=		-W -Wall -Wextra -Werror
