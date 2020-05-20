@@ -1,159 +1,243 @@
 @startuml
 
 namespace engine {
-    class World {
-        + World()
-        + ~World()
-
-        + EventBus& getEventBus()
-
-        - EventBus _eventBus
-    }
-
-    namespace eventbus {
-        class EventBus {
-        }
-        engine.World +-- EventBus
-
-        class CallbackHandler {
-        }
-        EventBus +-- CallbackHandler
-
-        class AEvent {
-            + AEvent()
-            + ~AEvent()
-        }
-    }
 
     namespace event {
         class Input {
             + Input()
             + ~Input()
         }
-        engine.eventbus.AEvent <|-- Input
-    
+
         class Collision {
             + Collision()
             + ~Collision()
         }
-        engine.eventbus.AEvent <|-- Collision
-    
+
         class Close {
             + Close()
             + ~Close()
         }
-        engine.eventbus.AEvent <|-- Close
     }
 
     namespace ecs {
+        'using Entity = unsigned int
+        'const Entity MAX_ENTITIES = 1000
+        'using ComponentType = unsigned int
+        'const ComponentType MAX_COMPONENTS = 32
+        'using Signature = std::bitset<MAX_COMPONENTS>
+
+        class WorldManager {
+            + WorldManager()
+            + ~WorldManager() = default
+
+            + Entity createEntity()
+            + void destroyEntity(Entity entity)
+
+            + template<typename T> void registerComponent()
+            + template<typename T> void addComponent(Entity entity, T component)
+            + template<typename T> void removeComponent(Entity entity)
+            + template<typename T> T& getComponent(Entity entity)
+            + template<typename T> ComponentType getComponentType()
+
+            + template<typename T> std::shared_ptr<T> registerSystem()
+            + template<typename T> void setSystemSignature(Signature signature)
+
+            + template<typename T, typename E> void subscribe(T& subscriber, Callback<T, E> callback)
+            + void unsubscribe()
+
+            + template<typname E> void publish(E& event)
+
+            - std::unique_ptr<EventManager> _eventManager
+            - std::unique_ptr<EntityManager> _entityManager
+            - std::unique_ptr<SystemManager> _systemManager
+            - std::unique_ptr<ComponentManager> _componentManager
+        }
+
         class EntityManager {
+            + EntityManager()
+            + ~EntityManager() = default
+
+            + Entity createEntity()
+            + void destroyEntity(Entity entity)
+
+            + void setSignature(Entity entity, Signature signature)
+            + Signature& getSignature(Entity entity)
+
+            - std::queue<Entity> _availableEntities
+            - std::array<Signature, MAX_ENTITIES> _signatures
+            - size_t _entitiesCount
         }
 
         class SystemManager {
+            + SystemManager() = default
+            + ~SystemManager() = default
+
+            + template<typename T> std::shared_ptr<T> registerSystem()
+
+            + template<typename T> void setSignature(Signature signature)
+
+            + void entityDestroyed(Entity entity)
+
+            + void entitySignatureChanged(Entity entity, Signature entSignature)
+
+            - std::unordered_map<std::string, std::shared_ptr<System>> _systems
+            - std::unordered_map<std::string, Signature> _signatures
         }
 
         class ComponentManager {
+            + ComponentManager() = default
+            + ~ComponentManager() = default
+
+            + template<typename T> void registerComponent()
+
+            - template<typename T> std::shared_ptr<ComponentArray<T>> getComponentArray()
+
+            + template<typename T> ComponentType getComponentType()
+            + template<typename T> void addComponent(Entity entity, T component)
+            + template<typename T> void removeComponent(Entity entity)
+            + template<typename T> T& getComponent(Entity entity)
+
+            + void entityDestroyed(Entity entity)
+
+            - std::unordered_map<std::string, ComponentType> _componentTypes
+            - std::unordered_map<std::string, std::shared_ptr<IComponentArray>> _componentArrays
+            - ComponentType _componentType
+        }
+
+        class IComponentArray {
+            + virtual ~IComponentArray() = default
+
+            + virtual void entityDestroyed(Entity entity) = 0
+        }
+
+        'template<typename T>
+        class ComponentArray {
+            + ComponentArray() = default
+            + ~ComponentArray() override = default
+
+            + void insert(Entity entity, T component)
+            + void remove(Entity entity)
+            + T& get(Entity entity)
+
+            + void entityDestroyed(Entity entity) override
+
+            - std::array<T, MAX_ENTITIES> _componentArray
+            - std::unordered_map<Entity, size_t> _entityToIndex
+            - std::unordered_map<size_t, Entity> _indexToEntity
+            - size_t _size
+        }
+        IComponentArray <|-- ComponentArray
+
+        class System {
+            + System()
+            + ~System()
+
+            + std::set<Entity> entities
         }
 
         class EventManager {
+            + EventManager() = default
+            + ~EventManager()
+
+            + template<typename T, typename E> void subscribe(T& subscriber, Callback<T, E> callback)
+            + void unsubscribe()
+
+            + template<typname E> void publish(E& event)
+
+            - std::map<std::type_index, std::vector<ICallbackHandler*>*> _subscribers
         }
 
-        class ComponentArray {
-            + ComponentArray()
+        class ICallbackHandler {
+            + virtual ~ICallbackHandler() = default
 
-            - std::array<Template &T, MAX_ENTITY> _components
-            - std::unordered_map<Entity, size_t> _entities
+            + virtual void call(AEvent& event) = 0
         }
+        EventManager +-- ICallbackHandler
 
-        class AComponent {
-            + AComponent(int id)
-            + virtual ~AComponent() = 0
-        }
+        'template<typename T, typename E> using Callback = void (T::*)(E&)
+        'template<typename T, typename E>
+        class CallbackHandler {
+            + CallbackHandler(T& subscriber, Callback<T, E> callback)
+            + ~CallbackHandler() override = default
 
-        class ISystem {
-            + virtual void init() = 0
-            + virtual void update() = 0
-            + virtual void render() = 0
-        }
+            + void call(AEvent& event) override
 
-        class ASystem {
-            + void init() override = 0
-            + void update() override = 0
-            + void render() override = 0
+            - T& _subscriber
+            - Callback<T, E> _callback
         }
-        ISystem <|-- ASystem
+        EventManager +-- CallbackHandler
+        ICallbackHandler <|-- CallbackHandler
+
+        class AEvent {
+            + AEvent() = delete
+            + ~AEvent() = default
+        }
+        AEvent <|-- engine.event.Input
+        AEvent <|-- engine.event.Close
+        AEvent <|-- engine.event.Collision
     }
 
     namespace system {
         class User {
         }
-        engine.ecs.ASystem <|-- User
+        engine.ecs.System <|-- User
 
         class AI {
         }
-        engine.ecs.ASystem <|-- AI
+        engine.ecs.System <|-- AI
 
         class Audio {
         }
-        engine.ecs.ASystem <|-- Audio
+        engine.ecs.System <|-- Audio
 
         class Animation {
         }
-        engine.ecs.ASystem <|-- Animation
+        engine.ecs.System <|-- Animation
 
         class Movement {
         }
-        engine.ecs.ASystem <|-- Movement
+        engine.ecs.System <|-- Movement
 
         class Render {
         }
-        engine.ecs.ASystem <|-- Render
+        engine.ecs.System <|-- Render
 
         class Physics {
         }
-        engine.ecs.ASystem <|-- Physics
+        engine.ecs.System <|-- Physics
 
         class Size {
         }
-        engine.ecs.ASystem <|-- Size
+        engine.ecs.System <|-- Size
     }
 
     namespace component {
         class User {
         }
-        engine.ecs.AComponent <|-- User
 
         class AI {
         }
-        engine.ecs.AComponent <|-- AI
 
         class Audio {
         }
-        engine.ecs.AComponent <|-- Audio
 
         class Animation {
         }
-        engine.ecs.AComponent <|-- Animation
 
         class Motion {
         }
-        engine.ecs.AComponent <|-- Motion
 
         class Render {
         }
-        engine.ecs.AComponent <|-- Render
 
         class Transform {
         }
-        engine.ecs.AComponent <|-- Transform
 
         class Hitbox {
         }
-        engine.ecs.AComponent <|-- Hitbox
 
         class Size {
         }
-        engine.ecs.AComponent <|-- Size
     }
 }
 
