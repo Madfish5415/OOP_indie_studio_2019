@@ -198,9 +198,9 @@ namespace engine {
         }
         engine.ecs.System <|-- AI
 
-        class Audio {
-            + AI(ISceneManager* smgr)
-            + ~AI()
+        class Music {
+            + Music(ISceneManager* smgr)
+            + ~Music()
 
             + void init()
             + void update()
@@ -208,7 +208,7 @@ namespace engine {
 
             + ISceneManager* smgr
         }
-        engine.ecs.System <|-- Audio
+        engine.ecs.System <|-- Music
 
         class Animation {
             + Animation(ISceneManager* smgr)
@@ -288,11 +288,18 @@ namespace engine {
             + ~AI()
         }
 
-        class Audio {
-            + Audio()
-            + ~Audio()
+        class Music {
+            + Music()
+            + ~Music()
 
             + sf::Music music
+        }
+
+        class Sound {
+            + Sound()
+            + ~Sound()
+
+            + std::map<std::string, sf::Music>
         }
 
         class Motion {
@@ -303,11 +310,68 @@ namespace engine {
             + irr::core::vector3df direction
         }
 
-        class Render {
+        class Animation {
+            + Animation()
+            + ~Animation()
+
+            + std::map<std::string, std::pair<size_t, size_t>> animationRanges
+        }
+
+        class LookingView {
+            + LookingView()
+            + ~LookingView()
+
+            + irr::core::vector3df direction
+        }
+
+        class Render3d {
             + Render(irr::ISceneNode* node)
             + ~Render()
 
             + irr::ISceneNode* node
+        }
+
+        class BombTimer {
+            + BombTimer(irr::u32 duration)
+            + ~BombTimer()
+
+            + irr::u32 timerStart
+            + irr::u32 duration
+        }
+
+        class Stats {
+            + Stats()
+            + ~Stats()
+
+            + size_t moveSpeed
+            + size_t bombRadius
+            + size_t maxBomb
+            + bool wallPass
+        }
+
+        class Unbreakable {
+            + Unbreakable()
+            + ~Unbreakable()
+        }
+
+        class Lootable {
+            + Lootable()
+            + ~Lootable()
+        }
+
+        class BombStats {
+            + BombStats (size_t bombRadius, bool wallPass)
+            + ~BombStats()
+
+            + size_t bombRadius
+            + bool wallPass
+        }
+
+        class Owner {
+            + Owner(const size_t ID)
+            + ~Owner()
+
+            + size_t entityID
         }
 
         class Transform {
