@@ -269,6 +269,17 @@ namespace engine {
             + ISceneManager* smgr
         }
         engine.ecs.System <|-- Size
+
+        class Image {
+            + Image(irr:video::IVideoDriver* driver)
+            + ~Image()
+
+            + void init()
+            + void update()
+            + void render()
+
+            + irr::video::IVideoDriver* driver
+        }
     }
 
     namespace component {
@@ -393,6 +404,47 @@ namespace engine {
             + ~Size()
 
             + irr::core::vector3df size
+        }
+
+        class Text {
+            + Text()
+            + ~Text()
+
+            + irr::gui::IGUIStaticText text
+            + irr::gui::IGUIFont font;
+        }
+
+        class Button {
+            + Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32> position, IGUIElement* parent = 0, s32 id = -1, const wchar_t* text = 0, const wchar_t* tooltipText = 0)
+            + ~Button()
+
+            + void setFont(std::string path)
+            + void setImage(std::string path)
+            + void setPressedImage(std::string path)
+
+            + irr::gui::IGUIEnvironment* gui
+            + irr::gui::IGUIButton button
+        }
+
+        class MessageBox {
+            + MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t *caption, const wchar_t *text, bool modal = true, s32 flags = EMBF_OK, IGUIEnvironment* parent = 0, s32 id = -1, irr::video::ITexture* image = 0)
+            + ~MessageBox()
+
+            + irr::gui::IGUIEnvironment* gui
+            + irr:gui::IGUIWindow messageBox
+        }
+
+        class Image {
+            + Image(irr::video::IVideoDriver* driver, std::string texture, irr::core::position2d<irr::s32> position, irr::core::rect<irr::s32> rect, irr::core::rect<irr::s32> *clipRect = 0, irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false )
+            + ~Image()
+
+            + irr::video::IVideoDriver* driver
+            + irr::video::ITexture image
+            + irr::core::position2d<irr::s32> position
+            + irr::core::rect<irr::s32> rect
+            + irr::core::rect<irr::s32> *clipRect
+            + irr::video::SColor scolor
+            + bool useAlphaChannelOfTexture
         }
     }
 }
