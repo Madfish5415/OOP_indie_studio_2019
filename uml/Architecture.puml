@@ -407,11 +407,13 @@ namespace engine {
         }
 
         class Text {
-            + Text()
+            + Text(irr::gui::irr::gui::IGUIEnvironment* gui, const wchar_t * text, const core::rect<s32> &rectangle, bool border = false, bool wordWrap = true, IGUIElement *parent = 0, s32 id = -1, bool fillBackground = false)
             + ~Text()
 
-            + irr::gui::IGUIStaticText text
-            + irr::gui::IGUIFont font;
+            + void setFont(std::string path)
+
+            + irr::gui::IGUIStaticText* text
+            + irr::gui::IGUIFont* font
         }
 
         class Button {
@@ -423,7 +425,7 @@ namespace engine {
             + void setPressedImage(std::string path)
 
             + irr::gui::IGUIEnvironment* gui
-            + irr::gui::IGUIButton button
+            + irr::gui::IGUIButton* button
         }
 
         class MessageBox {
@@ -431,7 +433,7 @@ namespace engine {
             + ~MessageBox()
 
             + irr::gui::IGUIEnvironment* gui
-            + irr:gui::IGUIWindow messageBox
+            + irr:gui::IGUIWindow* messageBox
         }
 
         class Image {
@@ -439,7 +441,7 @@ namespace engine {
             + ~Image()
 
             + irr::video::IVideoDriver* driver
-            + irr::video::ITexture image
+            + irr::video::ITexture* image
             + irr::core::position2d<irr::s32> position
             + irr::core::rect<irr::s32> rect
             + irr::core::rect<irr::s32> *clipRect
