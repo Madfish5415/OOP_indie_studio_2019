@@ -53,65 +53,85 @@ int main ()
     video::IVideoDriver* driver = device->getVideoDriver();
     scene::ISceneManager* smgr = device->getSceneManager();
 
-    device->getFileSystem()->addFileArchive("./media/map-20kdm2.pk3");
-
-    scene::IAnimatedMesh* q3levelmesh = smgr->getMesh("20kdm2.bsp");
-    scene::IMeshSceneNode* q3node = 0;
-
-    // The Quake mesh is pickable, but doesn't get highlighted.
-    if (q3levelmesh)
-        q3node = smgr->addOctreeSceneNode(q3levelmesh->getMesh(0), 0);
-
-        scene::ITriangleSelector* map_selector = 0;
-
-    if (q3node)
-    {
-        q3node->setPosition(core::vector3df(-1350,-130,-1400));
-        map_selector = smgr->createOctreeTriangleSelector(
-                q3node->getMesh(), q3node, 128);
-        q3node->setTriangleSelector(map_selector);
-        // We're not done with this selector yet, so don't drop it.
-    }
-
-    scene::IAnimatedMeshSceneNode* node =
-        smgr->addAnimatedMeshSceneNode(smgr->getMesh("./media/ninja.b3d"));
-
+    scene::ISceneNode * node = smgr->addSphereSceneNode();
     if (node)
     {
-        // scene::ISceneNodeAnimator* anim =
-        //     smgr->createFlyStraightAnimator(core::vector3df(100,0,60),
-        //     core::vector3df(-100,0,60), 3500, true);
-        // if (anim)
-        // {
-        //     node->addAnimator(anim);
-        //     anim->drop();
-        // }
-
+        node->setPosition(core::vector3df(0,0,30));
+        node->setMaterialTexture(0, driver->getTexture("./media/wall.bmp"));
         node->setMaterialFlag(video::EMF_LIGHTING, false);
-
-        node->setFrameLoop(183, 204);
-        node->setAnimationSpeed(15);
-//      node->setMD2Animation(scene::EMAT_RUN);
-
-        node->setScale(core::vector3df(10));
-        node->setPosition(core::vector3df(-75,-40,-80));
-        node->setRotation(core::vector3df(0,-90,0));
-//      node->setMaterialTexture(0, driver->getTexture("../../media/sydney.bmp"));
     }
 
-    if (map_selector)
+    scene::ISceneNode* n = smgr->addCubeSceneNode();
+
+    if (n)
     {
-        const core::aabbox3d<f32>& box = node->getBoundingBox();
-        core::vector3df radius = box.MaxEdge - box.getCenter();
-        scene::ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(
-            map_selector, node, radius,
-            core::vector3df(0,-10,0), core::vector3df(0,0,0));
-        node->addAnimator(anim);
-        anim->drop();  // And likewise, drop the animator when we're done referring to it.
+        n->setMaterialTexture(0, driver->getTexture("./media/t351sml.jpg"));
+        n->setMaterialFlag(video::EMF_LIGHTING, false);
+        scene::ISceneNodeAnimator* anim =
+            smgr->createFlyCircleAnimator(core::vector3df(0,0,30), 20.0f);
+        if (anim)
+        {
+            n->addAnimator(anim);
+            anim->drop();
+        }
+    }
+
+    scene::IAnimatedMeshSceneNode* anms =
+        smgr->addAnimatedMeshSceneNode(smgr->getMesh("./media/ninja.b3d"));
+
+    if (anms)
+    {
+        scene::ISceneNodeAnimator* anim =
+            smgr->createFlyStraightAnimator(core::vector3df(100,0,60),
+            core::vector3df(-100,0,60), 3500, true);
+        if (anim)
+        {
+            anms->addAnimator(anim);
+            anim->drop();
+        }
+
+        anms->setMaterialFlag(video::EMF_LIGHTING, false);
+
+        anms->setFrameLoop(0, 13);
+        anms->setAnimationSpeed(15);
+//      anms->setMD2Animation(scene::EMAT_RUN);
+
+        anms->setScale(core::vector3df(2.f,2.f,2.f));
+        anms->setRotation(core::vector3df(0,-90,0));
+//      anms->setMaterialTexture(0, driver->getTexture("../../media/sydney.bmp"));
     }
 
     smgr->addCameraSceneNodeFPS();
     device->getCursorControl()->setVisible(false);
+
+    device->getGUIEnvironment()->addImage(
+        driver->getTexture("./media/irrlichtlogoalpha2.tga"),
+        core::position2d<s32>(10,20));
+
+    gui::IGUIStaticText* diagnostics = device->getGUIEnvironment()->addStaticText(
+        L"", core::rect<s32>(10, 10, 400, 20));
+    diagnostics->setOverrideColor(video::SColor(255, 255, 255, 0));
+
+    scene::IParticleSystemSceneNode* particleSystem = smgr->addParticleSystemSceneNode(false);
+
+    scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
+    core::aabbox3df(-12,0,-6,6,1,6), // coordonnees de la boite
+    core::vector3df(0.0f,0.06f,0.0f),        // direction de diffusion
+    80,100,                                       // nb particules emises a la sec min / max
+    video::SColor(0,255,255,255),            // couleur la plus sombre
+    video::SColor(0,255,255,255),            // couleur la plus claire
+    400, 600,                                    // duree de vie min / max
+    0,                                            // angle max d'ecart / direction prevue
+    core::dimension2df(8.0f,8.0f),           // taille minimum
+    core::dimension2df(14.0f,14.0f));        // taille maximum
+
+    particleSystem->setEmitter(emitter);              // on attache l'emetteur
+    emitter->drop();                                  // plus besoin de ca
+
+    particleSystem->setMaterialFlag(video::EMF_LIGHTING, false);          // insensible a la lumiere
+    particleSystem->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);     // desactive zbuffer pour surfaces derriere
+    particleSystem->setMaterialTexture(0, driver->getTexture("media/fire.bmp"));     // on colle une texture
+    // particleSystem->setMaterialType(video::EMT_TRANSPARENT_VERTEX_ALPHA); // application transparence
 
     int lastFPS = -1;
 
@@ -120,7 +140,7 @@ int main ()
     u32 then = device->getTimer()->getTime();
 
     // This is the movemen speed in units per second.
-    const f32 MOVEMENT_SPEED = 100.f;
+    const f32 MOVEMENT_SPEED = 5.f;
 
     while(device->run())
     {
@@ -128,59 +148,20 @@ int main ()
         const u32 now = device->getTimer()->getTime();
         const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
         then = now;
-        bool cur_mov = false;
-        bool sneak = false;
 
         core::vector3df nodePosition = node->getPosition();
 
-        if(receiver.IsKeyDown(irr::KEY_KEY_D)) {
-            nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-            node->setRotation(core::vector3df(0, 0, 0));
-            cur_mov = true;
-        }
-        else if(receiver.IsKeyDown(irr::KEY_KEY_Q)) {
-            nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-            node->setRotation(core::vector3df(0, 180, 0));
-            cur_mov = true;
-        }
+        if(receiver.IsKeyDown(irr::KEY_KEY_Z))
+            nodePosition.Y += MOVEMENT_SPEED * frameDeltaTime;
+        else if(receiver.IsKeyDown(irr::KEY_KEY_S))
+            nodePosition.Y -= MOVEMENT_SPEED * frameDeltaTime;
 
-        if(receiver.IsKeyDown(irr::KEY_KEY_Z)) {
+        if(receiver.IsKeyDown(irr::KEY_KEY_Q))
             nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-            node->setRotation(core::vector3df(0, -90, 0));
-            cur_mov = true;
-        }
-        else if(receiver.IsKeyDown(irr::KEY_KEY_S)) {
+        else if(receiver.IsKeyDown(irr::KEY_KEY_D))
             nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-            node->setRotation(core::vector3df(0, 90, 0));
-            cur_mov = true;
-        }
 
-        if(receiver.IsKeyDown(irr::KEY_KEY_W)) {
-            sneak = true;
-        }
         node->setPosition(nodePosition);
-
-
-        if (cur_mov && node->getFrameNr() >= 183) {
-            node->setFrameLoop(0, 13);
-            node->setCurrentFrame(0);
-        }
-        if (cur_mov && !sneak && node->getFrameNr() > 13 && node->getFrameNr() <= 30) {
-            node->setFrameLoop(0, 13);
-            node->setCurrentFrame(node->getFrameNr() - 14);
-        }
-        if (sneak) {
-            if (node->getFrameNr() < 14) {
-                node->setFrameLoop(14, 29);
-                node->setCurrentFrame(node->getFrameNr() + 14);
-            }
-        }
-        if (!cur_mov && node->getFrameNr() < 183) {
-            node->setFrameLoop(183, 204);
-        }
-
-        smgr->getActiveCamera()->setPosition(core::vector3df(nodePosition.X + 50, nodePosition.Y + 150, nodePosition.Z));
-        smgr->getActiveCamera()->setTarget(core::vector3df(nodePosition.X, nodePosition.Y + 20, nodePosition.Z));
 
         driver->beginScene(true, true, video::SColor(255,113,113,133));
 
