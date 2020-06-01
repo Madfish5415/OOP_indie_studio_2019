@@ -73,11 +73,13 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 find_package (Irrlicht)
 
-if (Irrlicht_FOUND)
+find_package (SFML)
+
+if (Irrlicht_FOUND AND SFML_FOUND)
     # Une fois la dépendance trouvée, nous l'incluons au projet
-    target_include_directories(main PUBLIC ${Irrlicht_INCLUDE_DIRS})
+    target_include_directories(main PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
     message(SUCCESS_MESSAGE: " This is the include path ${Irrlicht_INCLUDE_DIRS}\n")
-    target_link_libraries (main ${Irrlicht_LIBRARIES})
+    target_link_libraries (main ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
 else ()
     # Sinon, nous affichons un message
     message(FATAL_ERROR "libIrrlicht not found")
