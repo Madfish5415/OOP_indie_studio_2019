@@ -9,7 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_TEXT_HPP
 
 #include <string>
-#include <IRR/irrlicht.h>
+#include "irrlicht.h"
 
 class Text {
   public:

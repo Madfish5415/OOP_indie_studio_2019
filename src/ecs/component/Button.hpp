@@ -9,7 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_BUTTON_HPP
 
 #include <string>
-#include <IRR/irrlicht.h>
+#include "irrlicht.h"
 
 class Button {
   public:

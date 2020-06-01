@@ -8,7 +8,7 @@
 #ifndef OOP_INDIE_STUDIO_2019_MESSAGEBOX_HPP
 #define OOP_INDIE_STUDIO_2019_MESSAGEBOX_HPP
 
-#include <IRR/irrlicht.h>
+#include "irrlicht.h"
 
 class MessageBox {
   public:

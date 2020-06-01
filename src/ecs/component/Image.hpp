@@ -8,7 +8,7 @@
 #ifndef OOP_INDIE_STUDIO_2019_IMAGE_HPP
 #define OOP_INDIE_STUDIO_2019_IMAGE_HPP
 
-#include <IRR/irrlicht.h>
+#include "irrlicht.h"
 
 class Image {
   public:
