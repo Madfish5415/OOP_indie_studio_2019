@@ -10,10 +10,10 @@
 
 #include <memory>
 
-#include "ecs/ComponentManager.hpp"
-#include "ecs/EntityManager.hpp"
-#include "ecs/SystemManager.hpp"
-#include "ecs/EventManager.hpp"
+#include "ComponentManager.hpp"
+#include "EntityManager.hpp"
+#include "SystemManager.hpp"
+#include "EventManager.hpp"
 
 namespace ecs {
 

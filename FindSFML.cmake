@@ -37,7 +37,7 @@ IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_LIBRARIES)
 
   FIND_LIBRARY(SFML_LIBRARIES
     NAMES
-      csfml-audio
+      sfml-audio
     PATHS
       /usr/lib64/                   # Default Fedora28 library path
       /usr/lib/                     # Some more Linux library path

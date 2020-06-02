@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.0)
 # Notre projet est étiqueté hello
 project(helloIRR)
 
+# Permet de placer l'executable a la racine du projt apres la compilation
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}) 
+
 # Créer un chemin relatif
 # include_directories(${CMAKE_SOURCE_DIR}/src)
 
@@ -78,9 +81,14 @@ find_package (SFML)
 if (Irrlicht_FOUND AND SFML_FOUND)
     # Une fois la dépendance trouvée, nous l'incluons au projet
     target_include_directories(main PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
-    message(SUCCESS_MESSAGE: " This is the include path ${Irrlicht_INCLUDE_DIRS}\n")
+    message(SUCCESS_MESSAGE: " This is the irrlicht include path ${Irrlicht_INCLUDE_DIRS}\n And this is the sfml include path ${SFML_INCLUDE_DIRS}")
     target_link_libraries (main ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
+    message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml libraries path ${SFML_LIBRARIES}")
 else ()
-    # Sinon, nous affichons un message
-    message(FATAL_ERROR "libIrrlicht not found")
+    if (NOT Irrlicht_FOUND)
+        # Sinon, nous affichons un message
+        message(FATAL_ERROR "libIrrlicht not found")
+    else ()
+        message(FATAL_ERROR "libSFML not found")
+    endif ()
 endif ()
