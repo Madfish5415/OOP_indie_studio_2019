@@ -1,3 +1,4 @@
+/*
 ** EPITECH PROJECT, 2020
 ** BootstrapIndie
 ** File description:
@@ -116,7 +117,7 @@ int main ()
 //      node->setMD2Animation(scene::EMAT_RUN);
 
         node->setScale(core::vector3df(10));
-        node->setPosition(core::vector3df(-75,-120,-80));
+        node->setPosition(core::vector3df(-75,-40,-80));
         node->setRotation(core::vector3df(0,-90,0));
 //      node->setMaterialTexture(0, driver->getTexture("../../media/sydney.bmp"));
     }
@@ -159,7 +160,7 @@ int main ()
 
     if (cube)
     {
-        cube->setMaterialTexture(0, driver->getTexture("../../media/t351sml.jpg"));
+        cube->setMaterialTexture(0, driver->getTexture("./media/t351sml.jpg"));
         cube->setMaterialFlag(video::EMF_LIGHTING, false);
     }
     if (map_selector)
