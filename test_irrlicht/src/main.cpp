@@ -53,6 +53,13 @@ int main ()
     video::IVideoDriver* driver = device->getVideoDriver();
     scene::ISceneManager* smgr = device->getSceneManager();
 
+
+    scene::ISceneNode *plan_node = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(irr::core::dimension2d<irr::f32>(13, 13), irr::core::dimension2d<irr::u32>(10, 10)));
+    if (plan_node) {
+        plan_node->setMaterialTexture(0, driver->getTexture("./media/orange.png"));
+        plan_node->setMaterialFlag(video::EMF_LIGHTING, false);
+    }
+
     scene::ISceneNode * node = smgr->addSphereSceneNode();
     if (node)
     {
