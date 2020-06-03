@@ -17,7 +17,10 @@ namespace ecs {
 
 class SystemManager {
   public:
-    SystemManager() = default;
+    explicit SystemManager(ComponentManager *componentManager)
+    {
+        _componentManager = componentManager;
+    }
     ~SystemManager() = default;
 
   public:
@@ -29,10 +32,21 @@ class SystemManager {
         if (_systems.find(systemName) != _systems.end())
             throw std::runtime_error("System is already register.");
 
-        auto system = std::make_shared<T>();
+        auto system = std::make_shared<T>(_componentManager);
 
         _systems.emplace(systemName, system);
         return system;
+    }
+
+    template<typename T>
+    std::shared_ptr<T> getSystem()
+    {
+        std::string systemName = typeid(T).name();
+
+        if (_systems.find(systemName) == _systems.end())
+            throw std::runtime_error("Register the system before using it.");
+
+        return _systems[systemName];
     }
 
     template<typename T>
@@ -77,6 +91,7 @@ class SystemManager {
   private:
     std::unordered_map<std::string, std::shared_ptr<System>> _systems {};
     std::unordered_map<std::string, Signature> _signatures {};
+    ComponentManager *_componentManager;
 };
 
 } // namespace ecs

@@ -10,16 +10,21 @@
 
 #include <set>
 
+#include "ComponentManager.hpp"
 #include "Def.hpp"
 
 namespace ecs {
 class System {
   public:
-    System() = default;
+    explicit System(ComponentManager *componentManager)
+    {
+        this->componentManager = componentManager;
+    }
     ~System() = default;
 
   public:
     std::set<Entity> entities {};
+    ComponentManager *componentManager;
 };
 } // namespace ecs
 

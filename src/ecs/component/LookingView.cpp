@@ -7,9 +7,8 @@
 
 #include "LookingView.hpp"
 
-LookingView::LookingView(const irr::core::vector3df &direction)
+LookingView::LookingView(const irr::core::vector3df &direction) : direction(direction)
 {
-    direction = direction;
 }
 
 LookingView::~LookingView() = default;

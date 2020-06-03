@@ -70,7 +70,7 @@ set(HEADERS
 
 
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
-add_executable(main ${SRCS} ${HEADERS})
+add_executable(bomberman ${SRCS} ${HEADERS})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
@@ -80,9 +80,9 @@ find_package (SFML)
 
 if (Irrlicht_FOUND AND SFML_FOUND)
     # Une fois la dépendance trouvée, nous l'incluons au projet
-    target_include_directories(main PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
+    target_include_directories(bomberman PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
     message(SUCCESS_MESSAGE: " This is the irrlicht include path ${Irrlicht_INCLUDE_DIRS}\n And this is the sfml include path ${SFML_INCLUDE_DIRS}")
-    target_link_libraries (main ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
+    target_link_libraries (bomberman ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
     message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml libraries path ${SFML_LIBRARIES}")
 else ()
     if (NOT Irrlicht_FOUND)

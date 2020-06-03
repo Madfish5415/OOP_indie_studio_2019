@@ -23,7 +23,7 @@ class WorldManager {
     {
         _entityManager = std::make_unique<EntityManager>();
         _componentManager = std::make_unique<ComponentManager>();
-        _systemManager = std::make_unique<SystemManager>();
+        _systemManager = std::make_unique<SystemManager>(_componentManager.get());
         _eventManager = std::make_unique<EventManager>();
     }
     ~WorldManager() = default;
@@ -89,6 +89,12 @@ class WorldManager {
     std::shared_ptr<T> registerSystem()
     {
         return _systemManager->registerSystem<T>();
+    }
+
+    template<typename T>
+    std::shared_ptr<T> getSystem()
+    {
+        return _systemManager->getSystem<T>();
     }
 
     template<typename T>
