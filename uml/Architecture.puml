@@ -129,9 +129,10 @@ namespace engine {
         IComponentArray <|-- ComponentArray
 
         class System {
-            + System()
+            + System(ComponentManager *manager)
             + ~System()
 
+            + ComponentManager *manager
             + std::set<Entity> entities
         }
 
@@ -142,7 +143,7 @@ namespace engine {
             + template<typename T, typename E> void subscribe(T& subscriber, Callback<T, E> callback)
             + void unsubscribe()
 
-            + template<typname E> void publish(E& event)
+            + template<typename E> void publish(E& event)
 
             - std::map<std::type_index, std::vector<ICallbackHandler*>*> _subscribers
         }
@@ -179,12 +180,26 @@ namespace engine {
 
     namespace system {
         class Player {
-            + Player(ISceneManager* smgr)
+            + Player(irr::ISceneManager* smgr)
             + ~Player()
 
-            + ISceneManager* smgr
+            + void init()
+            + void update()
+            + void render()
+
+            + irr::ISceneManager* smgr
         }
         engine.ecs.System <|-- User
+
+        class CollisionBox {
+            + CollisionBox()
+            + ~CollisionBox()
+
+            + void init()
+            + void update()
+            + void render()
+        }
+        engine.ecs.System <|-- CollisionBox
 
         class AI {
             + AI()
@@ -313,6 +328,13 @@ namespace engine {
             + std::map<std::string, sf::Music>
         }
 
+         class Particle {
+            + Particle(irr::video::IVideoDriver *driver, irr::scene::IParticleSystemSceneNode *prtc, irr::vector3df pos, const irr::io::path &texture)
+            + ~Particle()
+
+            + irr::scene::IParticleSystemSceneNode *particle
+        }
+
         class Motion {
             + Motion(float movementSpeed)
             + ~Motion()
@@ -343,7 +365,7 @@ namespace engine {
         }
 
         class BombTimer {
-            + BombTimer(irr::u32 duration)
+            + BombTimer(irr::IrrlichtDevice *device, irr::u32 duration)
             + ~BombTimer()
 
             + irr::u32 timerStart
@@ -392,11 +414,9 @@ namespace engine {
             + irr::core::vector3df position
         }
 
-        class HitboxDetection {
-            + Hitbox()
-            + ~Hitbox()
-
-            + std::vector<irr::core::line3d> rays
+        class CollisionBox {
+            + CollisionBox()
+            + ~CollisionBox()
         }
 
         class Size {
@@ -410,8 +430,9 @@ namespace engine {
             + Text(irr::gui::irr::gui::IGUIEnvironment* gui, const wchar_t * text, const core::rect<s32> &rectangle, bool border = false, bool wordWrap = true, IGUIElement *parent = 0, s32 id = -1, bool fillBackground = false)
             + ~Text()
 
-            + void setFont(std::string path)
+            + void setFont(const irr::io::path &path)
 
+            + irr::gui::IGUIEnvironment* gui
             + irr::gui::IGUIStaticText* text
             + irr::gui::IGUIFont* font
         }
@@ -420,16 +441,17 @@ namespace engine {
             + Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32> position, IGUIElement* parent = 0, s32 id = -1, const wchar_t* text = 0, const wchar_t* tooltipText = 0)
             + ~Button()
 
-            + void setFont(std::string path)
-            + void setImage(std::string path)
-            + void setPressedImage(std::string path)
+            + void setFont(const irr::io::path &path)
+            + void setImage(irr::video::ITexture *texture)
+            + void setPressedImage(irr::video::ITexture *texture)
 
             + irr::gui::IGUIEnvironment* gui
             + irr::gui::IGUIButton* button
+            + irr::gui::IGUIFont *font
         }
 
         class MessageBox {
-            + MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t *caption, const wchar_t *text, bool modal = true, s32 flags = EMBF_OK, IGUIEnvironment* parent = 0, s32 id = -1, irr::video::ITexture* image = 0)
+            + MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t *caption, const wchar_t *text, bool modal = true, irr::s32 flags = irr::gui::EMBF_OK, IGUIEnvironment* parent = 0, irr::s32 id = -1, irr::video::ITexture* image = 0)
             + ~MessageBox()
 
             + irr::gui::IGUIEnvironment* gui
@@ -437,7 +459,7 @@ namespace engine {
         }
 
         class Image {
-            + Image(irr::video::IVideoDriver* driver, std::string texture, irr::core::position2d<irr::s32> position, irr::core::rect<irr::s32> rect, irr::core::rect<irr::s32> *clipRect = 0, irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false )
+            + Image(irr::video::IVideoDriver* driver, irr::io::path texture, irr::core::position2d<irr::s32> position, irr::core::rect<irr::s32> rect, irr::core::rect<irr::s32> *clipRect = 0, irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false )
             + ~Image()
 
             + irr::video::IVideoDriver* driver
