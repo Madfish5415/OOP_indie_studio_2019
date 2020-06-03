@@ -15,8 +15,8 @@
 #include "Def.hpp"
 
 /**
- * @file WorldManager.hpp
- * @brief WorldManager Class
+ * @file ComponentManager.hpp
+ * @brief ComponentManager Class
  * @author Lucas.M Mattéo.F
  * @version 1.0
  * @date 03 june 2020

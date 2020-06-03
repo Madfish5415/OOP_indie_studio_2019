@@ -1,7 +1,7 @@
 <map id="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/Def.hpp" name="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/Def.hpp">
 <area shape="rect" id="node1" title="Def File." alt="" coords="212,5,383,76"/>
 <area shape="rect" id="node2" href="$IComponentArray_8hpp.html" title="IComponentArray Class." alt="" coords="39,124,231,195"/>
-<area shape="rect" id="node4" href="$ComponentManager_8hpp_source.html" title=" " alt="" coords="5,361,216,432"/>
+<area shape="rect" id="node4" href="$ComponentManager_8hpp.html" title="ComponentManager Class." alt="" coords="5,361,216,432"/>
 <area shape="rect" id="node7" href="$EntityManager_8hpp.html" title="EntityManager Class." alt="" coords="241,361,415,432"/>
 <area shape="rect" id="node8" href="$System_8hpp.html" title="System Class." alt="" coords="495,124,665,195"/>
 <area shape="rect" id="node3" href="$ComponentArray_8hpp.html" title="ComponentArray Class." alt="" coords="33,243,221,313"/>
