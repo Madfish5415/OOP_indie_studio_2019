@@ -7,12 +7,12 @@
 
 #include "Button.hpp"
 
-Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32> position, irr:gui::IGUIElement* parent, irr::s32 id, const wchar_t* text, const wchar_t* tooltipText) {
+Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32> position, irr::gui::IGUIElement* parent, irr::s32 id, const wchar_t* text, const wchar_t* tooltipText) {
     this->gui = gui;
     this->button = gui->addButton(position, parent, id, text, tooltipText);
 }
 
-void Button::setFont(std::string path) {
+void Button::setFont(const irr::io::path& path) {
     this->font = this->gui->getFont(path);
     this->button->setOverrideFont(this->font);
 }

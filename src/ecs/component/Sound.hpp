@@ -13,7 +13,7 @@
 
 class Sound {
     public:
-        Sound();
+        Sound(const std::string &soundPath);
         ~Sound();
 
     public:
