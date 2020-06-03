@@ -11,7 +11,7 @@
 #include <map>
 #include <typeindex>
 
-#include "AEvent.hpp"
+#include "Event.hpp"
 
 namespace ecs {
 
@@ -25,7 +25,7 @@ class EventManager {
         virtual ~ICallbackHandler() = default;
 
       public:
-        virtual void call(AEvent& event) = 0;
+        virtual void call(Event& event) = 0;
     };
 
     template<typename T, typename E>
@@ -39,7 +39,7 @@ class EventManager {
         ~CallbackHandler() override = default;
 
       public:
-        void call(AEvent& event) override
+        void call(Event& event) override
         {
             (_subscriber.*_callback)(dynamic_cast<E&>(event));
         }

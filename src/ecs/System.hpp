@@ -8,24 +8,34 @@
 #ifndef OOP_INDIE_STUDIO_2019_SYSTEM_HPP
 #define OOP_INDIE_STUDIO_2019_SYSTEM_HPP
 
-#include <set>
 
-#include "ComponentManager.hpp"
+namespace ecs {
+class WorldManager;
+}
+
+#include <set>
 #include "Def.hpp"
 
 namespace ecs {
+
 class System {
   public:
-    explicit System(ComponentManager *componentManager)
+    explicit System(WorldManager *worldManager)
     {
-        this->componentManager = componentManager;
+        this->worldManager = worldManager;
     }
-    ~System() = default;
+    virtual ~System() = default;
+
+  public:
+    virtual void update()
+    {
+    }
 
   public:
     std::set<Entity> entities {};
-    ComponentManager *componentManager;
+    WorldManager *worldManager;
 };
+
 } // namespace ecs
 
 #endif // OOP_INDIE_STUDIO_2019_SYSTEM_HPP

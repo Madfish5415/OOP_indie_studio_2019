@@ -23,7 +23,7 @@ class WorldManager {
     {
         _entityManager = std::make_unique<EntityManager>();
         _componentManager = std::make_unique<ComponentManager>();
-        _systemManager = std::make_unique<SystemManager>(_componentManager.get());
+        _systemManager = std::make_unique<SystemManager>(this);
         _eventManager = std::make_unique<EventManager>();
     }
     ~WorldManager() = default;
@@ -55,7 +55,7 @@ class WorldManager {
     {
         _componentManager->addComponent<T>(entity, component);
 
-        auto sig = _entityManager->getSignature(entity);
+        auto& sig = _entityManager->getSignature(entity);
         sig.set(_componentManager->getComponentType<T>(), true);
 
         _systemManager->entitySignatureChanged(entity, sig);
@@ -66,7 +66,7 @@ class WorldManager {
     {
         _componentManager->removeComponent<T>(entity);
 
-        auto sig = _entityManager->getSignature(entity);
+        auto& sig = _entityManager->getSignature(entity);
         sig.set(_componentManager->getComponentType<T>(), false);
 
         _systemManager->entitySignatureChanged(entity, sig);
@@ -89,6 +89,11 @@ class WorldManager {
     std::shared_ptr<T> registerSystem()
     {
         return _systemManager->registerSystem<T>();
+    }
+
+    void updateSystem()
+    {
+        _systemManager->update();
     }
 
     template<typename T>

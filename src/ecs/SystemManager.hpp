@@ -17,9 +17,9 @@ namespace ecs {
 
 class SystemManager {
   public:
-    explicit SystemManager(ComponentManager *componentManager)
+    explicit SystemManager(WorldManager *worldManager)
     {
-        _componentManager = componentManager;
+        _worldManager = worldManager;
     }
     ~SystemManager() = default;
 
@@ -32,7 +32,7 @@ class SystemManager {
         if (_systems.find(systemName) != _systems.end())
             throw std::runtime_error("System is already register.");
 
-        auto system = std::make_shared<T>(_componentManager);
+        auto system = std::make_shared<T>(_worldManager);
 
         _systems.emplace(systemName, system);
         return system;
@@ -46,7 +46,15 @@ class SystemManager {
         if (_systems.find(systemName) == _systems.end())
             throw std::runtime_error("Register the system before using it.");
 
-        return _systems[systemName];
+        return std::static_pointer_cast<T>(_systems[systemName]);
+    }
+
+    void update()
+    {
+        for (auto const &pair : _systems) {
+            auto const &system = pair.second;
+            system->update();
+        }
     }
 
     template<typename T>
@@ -63,8 +71,7 @@ class SystemManager {
   public:
     void entityDestroyed(Entity entity)
     {
-        for (auto const &pair : _systems)
-        {
+        for (auto const &pair : _systems) {
             auto const &system = pair.second;
 
             system->entities.erase(entity);
@@ -74,8 +81,7 @@ class SystemManager {
   public:
     void entitySignatureChanged(Entity entity, Signature entSignature)
     {
-        for (auto const &pair : _systems)
-        {
+        for (auto const &pair : _systems) {
             auto const &systemName = pair.first;
             auto const &system = pair.second;
             auto const &systemSignature = _signatures[systemName];
@@ -91,7 +97,7 @@ class SystemManager {
   private:
     std::unordered_map<std::string, std::shared_ptr<System>> _systems {};
     std::unordered_map<std::string, Signature> _signatures {};
-    ComponentManager *_componentManager;
+    WorldManager *_worldManager;
 };
 
 } // namespace ecs
