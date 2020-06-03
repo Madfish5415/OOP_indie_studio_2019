@@ -14,14 +14,42 @@
 #include "ComponentArray.hpp"
 #include "Def.hpp"
 
+/**
+ * @file WorldManager.hpp
+ * @brief WorldManager Class
+ * @author Lucas.M Mattéo.F
+ * @version 1.0
+ * @date 03 june 2020
+ */
+
+/**
+ * @namespace ecs
+ */
 namespace ecs {
 
+/**
+ * @class ComponentManager
+ * @brief Class that manages components.
+ */
 class ComponentManager {
   public:
+    /**
+     * @brief Constructor
+     * Default constructor of ComponentManager Class.
+     */
     ComponentManager() = default;
+    /**
+     * @brief Destructor
+     * Default destructor of ComponentManager Class.
+     */
     ~ComponentManager() = default;
 
   public:
+    /**
+     * @brief registerComponent method
+     * Register a component so that it is known by the ecs.
+     * @tparam T : Type of the component to be registered.
+     */
     template<typename T>
     void registerComponent()
     {
@@ -37,6 +65,12 @@ class ComponentManager {
     }
 
   private:
+    /**
+     * @brief getComponentArray method
+     * This method makes it possible to retrieve a ComponentArray depending on the type of component.
+     * @tparam T : The type of the component
+     * @return A shared pointer on a ComponentArray of type T
+     */
     template<typename T>
     std::shared_ptr<ComponentArray<T>> getComponentArray()
     {
@@ -49,6 +83,12 @@ class ComponentManager {
     }
 
   public:
+    /**
+     * @brief getComponentType method
+     * This method makes it possible to recover a unique identifier of a component of the ecs.
+     * @tparam T : Type of the component to be retrieved.
+     * @return A string that represents the signature of the component.
+     */
     template<typename T>
     ComponentType getComponentType()
     {
@@ -60,6 +100,14 @@ class ComponentManager {
         return _componentTypes[componentName];
     }
 
+    /**
+     * @brief addComponent method
+     * This method makes it possible to add a previously registered component to an already existing entity.
+     * This method also modifies the signature of the entity so that it is taken into account by the systems.
+     * @tparam T : Type of the component to be added.
+     * @param entity : The entity to which the component is to be added.
+     * @param component : The component that will be added to the entity.
+     */
     template<typename T>
     void addComponent(Entity entity, T component)
     {
@@ -70,6 +118,13 @@ class ComponentManager {
         }
     }
 
+    /**
+     * @brief removeComponent method
+     * This method makes it possible to remove a previously added component of an already existing entity.
+     * This method also modifies the signature of the entity so that it is taken into account by the systems.
+     * @tparam T : Type of the component to be removed.
+     * @param entity : The entity to which the component is to be removed.
+     */
     template<typename T>
     void removeComponent(Entity entity)
     {
@@ -80,6 +135,13 @@ class ComponentManager {
         }
     }
 
+    /**
+     * @brief getComponent method
+     * This method makes it possible to retrieve a component that has previously been added to an entity.
+     * @tparam T : Type of the component to be retrieved.
+     * @param entity : The entity to which the component is to be retrieved.
+     * @return A reference on the requested component.
+     */
     template<typename T>
     T &getComponent(Entity entity)
     {
@@ -91,6 +153,11 @@ class ComponentManager {
     }
 
   public:
+    /**
+     * @brief entityDestroyed method
+     * This method must be called when an entity is destroyed.
+     * @param entity : The destroyed entity
+     */
     void entityDestroyed(Entity entity)
     {
         for (auto const &pair : _componentArrays) {

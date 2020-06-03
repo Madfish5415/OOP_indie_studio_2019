@@ -1,0 +1,6 @@
+<map id="ecs::System" name="ecs::System">
+<area shape="rect" id="node1" title="Default system class." alt="" coords="207,5,309,32"/>
+<area shape="rect" id="node2" href="$classecs_1_1system_1_1Motion.html" title=" " alt="" coords="5,80,159,107"/>
+<area shape="rect" id="node3" href="$classecs_1_1system_1_1Player.html" title="System that get user entries and handles them." alt="" coords="183,80,333,107"/>
+<area shape="rect" id="node4" href="$classecs_1_1system_1_1Render.html" title="System that update and display entity." alt="" coords="357,80,511,107"/>
+</map>

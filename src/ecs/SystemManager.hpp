@@ -13,17 +13,48 @@
 
 #include "System.hpp"
 
+/**
+ * @file SystemManager.hpp
+ * @brief SystemManager Class
+ * @author Lucas.M Mattéo.F
+ * @version 1.0
+ * @date 03 june 2020
+ */
+
+/**
+ * @namespace ecs
+ */
 namespace ecs {
 
+/**
+ * @class SystemManager
+ * @brief Class that manage systems.
+ */
 class SystemManager {
   public:
+    /**
+     * @brief Constructor
+     * Constructor of SystemManager.
+     * @param worldManager : Manager of our World.
+     */
     explicit SystemManager(WorldManager *worldManager)
     {
         _worldManager = worldManager;
     }
+    /**
+     * @brief Destructor
+     * It's a default destructor because the garbage collector will take care of the rest.
+     */
     ~SystemManager() = default;
 
   public:
+    /**
+     * @brief registerSystem method
+     * This method makes it possible to register a system so that it is known by the ecs.
+     * This method also creates the requested system and returns it.
+     * @tparam T : Type of the system to be registered.
+     * @return The requested system.
+     */
     template<typename T>
     std::shared_ptr<T> registerSystem()
     {
@@ -38,6 +69,12 @@ class SystemManager {
         return system;
     }
 
+    /**
+     * @brief getSystem method
+     * This method makes it possible to recover a system according to its type.
+     * @tparam T : Type of the system to be retrieved.
+     * @return The requested system.
+     */
     template<typename T>
     std::shared_ptr<T> getSystem()
     {
@@ -49,6 +86,10 @@ class SystemManager {
         return std::static_pointer_cast<T>(_systems[systemName]);
     }
 
+    /**
+     * @brief updateSystem method
+     * This method calls the update method of each system of the ecs.
+     */
     void update()
     {
         for (auto const &pair : _systems) {
@@ -57,6 +98,12 @@ class SystemManager {
         }
     }
 
+    /**
+     * @brief setSignature method
+     * This method makes it possible to define the signature of an existing system.
+     * @tparam T : Type of the system to be retrieved.
+     * @param signature : The signature to be defined in the system.
+     */
     template<typename T>
     void setSignature(Signature signature)
     {
@@ -69,6 +116,11 @@ class SystemManager {
     }
 
   public:
+    /**
+     * @brief entityDestroyed method
+     * This method must be called when an entity is destroyed.
+     * @param entity : The destroyed entity
+     */
     void entityDestroyed(Entity entity)
     {
         for (auto const &pair : _systems) {
@@ -79,6 +131,12 @@ class SystemManager {
     }
 
   public:
+    /**
+     * @brief entitySignatureChanged method
+     * This method must be called when an entity's signature changed.
+     * @param entity : The entity that changed its signature.
+     * @param entSignature : The new signature of the entity.
+     */
     void entitySignatureChanged(Entity entity, Signature entSignature)
     {
         for (auto const &pair : _systems) {
@@ -95,9 +153,9 @@ class SystemManager {
     }
 
   private:
-    std::unordered_map<std::string, std::shared_ptr<System>> _systems {};
-    std::unordered_map<std::string, Signature> _signatures {};
-    WorldManager *_worldManager;
+    std::unordered_map<std::string, std::shared_ptr<System>> _systems {}; /**< Unordered map of systems. */
+    std::unordered_map<std::string, Signature> _signatures {}; /**< Unordered map of signatures. */
+    WorldManager *_worldManager; /**< Manager of our world. */
 };
 
 } // namespace ecs

@@ -1,0 +1,297 @@
+\hypertarget{classecs_1_1WorldManager}{}\doxysection{ecs\+::World\+Manager Class Reference}
+\label{classecs_1_1WorldManager}\index{ecs::WorldManager@{ecs::WorldManager}}
+
+
+Manager who manages all the other managers of the ecs.  
+
+
+
+
+{\ttfamily \#include $<$World\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1WorldManager_a3d3b67306d5d79b142d875febde05961}\label{classecs_1_1WorldManager_a3d3b67306d5d79b142d875febde05961}} 
+\mbox{\hyperlink{classecs_1_1WorldManager_a3d3b67306d5d79b142d875febde05961}{World\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Constructor Initializes the four managers. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1WorldManager_ad664e8b3149930ecb59a0afb36733d01}\label{classecs_1_1WorldManager_ad664e8b3149930ecb59a0afb36733d01}} 
+\mbox{\hyperlink{classecs_1_1WorldManager_ad664e8b3149930ecb59a0afb36733d01}{$\sim$\+World\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor It\textquotesingle{}s a default destructor because the garbage collector will take care of the rest. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} \mbox{\hyperlink{classecs_1_1WorldManager_aea7a6f53dfa069a9c4b0faadd92bfca9}{create\+Entity}} ()
+\begin{DoxyCompactList}\small\item\em create\+Entity method This method creates an entity and returns it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1WorldManager_ad9dcdbe4c9c29a9067809de207fc5eaf}{destroy\+Entity}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em destroy\+Entity method This method destroys an entity and informs other managers of the change. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_a2b82b4778224b41416e6894c36202a22}{register\+Component}} ()
+\begin{DoxyCompactList}\small\item\em register\+Component method Register a component so that it is known by the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_afc749d78b503cff662604614b64b7e3d}{add\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity, T component)
+\begin{DoxyCompactList}\small\item\em add\+Component method This method makes it possible to add a previously registered component to an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_a6a648edeefdc3d1b79ae3feec4cac400}{remove\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em remove\+Component method This method makes it possible to remove a previously added component of an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \& \mbox{\hyperlink{classecs_1_1WorldManager_adba6e0824d54b628aba65784921c7d95}{get\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em get\+Component method This method makes it possible to retrieve a component that has previously been added to an entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{Def_8hpp_a371fa59085a607228c5286b2b1eec167}{Component\+Type}} \mbox{\hyperlink{classecs_1_1WorldManager_a8448bafc1aa88f9c2792b0ca3d0d2365}{get\+Component\+Type}} ()
+\begin{DoxyCompactList}\small\item\em get\+Component\+Type method This method makes it possible to recover a unique identifier of a component of the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classecs_1_1WorldManager_a4aaed8010d802bbece694f62c76051a2}{register\+System}} ()
+\begin{DoxyCompactList}\small\item\em register\+System method This method makes it possible to register a system so that it is known by the ecs. This method also creates the requested system and returns it. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1WorldManager_a4bf6279d00396fed8097a9ac266f1f6e}\label{classecs_1_1WorldManager_a4bf6279d00396fed8097a9ac266f1f6e}} 
+void \mbox{\hyperlink{classecs_1_1WorldManager_a4bf6279d00396fed8097a9ac266f1f6e}{update\+System}} ()
+\begin{DoxyCompactList}\small\item\em update\+System method This method calls the update method of each system of the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classecs_1_1WorldManager_a26f793a284dc41df7e70f4467426fa75}{get\+System}} ()
+\begin{DoxyCompactList}\small\item\em get\+System method This method makes it possible to recover a system according to its type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_a97ffd567a3fe7a97fb021423e73a1e2f}{set\+System\+Signature}} (\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}} signature)
+\begin{DoxyCompactList}\small\item\em set\+System\+Signature method This method makes it possible to define the signature of an existing system. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename E $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_ad10f9c224e37c866a309c54ab5e0379c}{subscribe}} (T \&subscriber, Callback$<$ T, E $>$ callback)
+\begin{DoxyCompactList}\small\item\em subscribe method This method allows a class to subscribe one of its methods to a specific event. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1WorldManager_ac59c6bc44e83c9b0b05205731943e2e8}\label{classecs_1_1WorldManager_ac59c6bc44e83c9b0b05205731943e2e8}} 
+void \mbox{\hyperlink{classecs_1_1WorldManager_ac59c6bc44e83c9b0b05205731943e2e8}{unsubscribe}} ()
+\begin{DoxyCompactList}\small\item\em unsubscribe method This method allows to unsubscribe all previously subscribed classes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename E $>$ }\\void \mbox{\hyperlink{classecs_1_1WorldManager_ad5b2351cf43d43014cc76489917d57ab}{publish}} (E \&event)
+\begin{DoxyCompactList}\small\item\em publish method This method allows to transmit an event to all previously subscribed methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manager who manages all the other managers of the ecs. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1WorldManager_afc749d78b503cff662604614b64b7e3d}\label{classecs_1_1WorldManager_afc749d78b503cff662604614b64b7e3d}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+World\+Manager\+::add\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity,  }\item[{T}]{component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+Component method This method makes it possible to add a previously registered component to an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be added. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be added. \\
+\hline
+{\em component} & \+: The component that will be added to the entity. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_aea7a6f53dfa069a9c4b0faadd92bfca9}\label{classecs_1_1WorldManager_aea7a6f53dfa069a9c4b0faadd92bfca9}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!createEntity@{createEntity}}
+\index{createEntity@{createEntity}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{createEntity()}{createEntity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} ecs\+::\+World\+Manager\+::create\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+create\+Entity method This method creates an entity and returns it. 
+
+\begin{DoxyReturn}{Returns}
+The entity that was created. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1WorldManager_ad9dcdbe4c9c29a9067809de207fc5eaf}\label{classecs_1_1WorldManager_ad9dcdbe4c9c29a9067809de207fc5eaf}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!destroyEntity@{destroyEntity}}
+\index{destroyEntity@{destroyEntity}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{destroyEntity()}{destroyEntity()}}
+{\footnotesize\ttfamily void ecs\+::\+World\+Manager\+::destroy\+Entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+destroy\+Entity method This method destroys an entity and informs other managers of the change. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to be destroyed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_adba6e0824d54b628aba65784921c7d95}\label{classecs_1_1WorldManager_adba6e0824d54b628aba65784921c7d95}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{getComponent()}{getComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T\& ecs\+::\+World\+Manager\+::get\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+Component method This method makes it possible to retrieve a component that has previously been added to an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be retrieved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference on the requested component. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a8448bafc1aa88f9c2792b0ca3d0d2365}\label{classecs_1_1WorldManager_a8448bafc1aa88f9c2792b0ca3d0d2365}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!getComponentType@{getComponentType}}
+\index{getComponentType@{getComponentType}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{getComponentType()}{getComponentType()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{Def_8hpp_a371fa59085a607228c5286b2b1eec167}{Component\+Type}} ecs\+::\+World\+Manager\+::get\+Component\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+Component\+Type method This method makes it possible to recover a unique identifier of a component of the ecs. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A string that represents the signature of the component. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a26f793a284dc41df7e70f4467426fa75}\label{classecs_1_1WorldManager_a26f793a284dc41df7e70f4467426fa75}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!getSystem@{getSystem}}
+\index{getSystem@{getSystem}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{getSystem()}{getSystem()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$T$>$ ecs\+::\+World\+Manager\+::get\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+System method This method makes it possible to recover a system according to its type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The requested system. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1WorldManager_ad5b2351cf43d43014cc76489917d57ab}\label{classecs_1_1WorldManager_ad5b2351cf43d43014cc76489917d57ab}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!publish@{publish}}
+\index{publish@{publish}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily template$<$typename E $>$ \\
+void ecs\+::\+World\+Manager\+::publish (\begin{DoxyParamCaption}\item[{E \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+publish method This method allows to transmit an event to all previously subscribed methods. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em E} & \+: The event type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \+: The event to be transmitted. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a2b82b4778224b41416e6894c36202a22}\label{classecs_1_1WorldManager_a2b82b4778224b41416e6894c36202a22}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!registerComponent@{registerComponent}}
+\index{registerComponent@{registerComponent}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{registerComponent()}{registerComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+World\+Manager\+::register\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+register\+Component method Register a component so that it is known by the ecs. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be registered. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a4aaed8010d802bbece694f62c76051a2}\label{classecs_1_1WorldManager_a4aaed8010d802bbece694f62c76051a2}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!registerSystem@{registerSystem}}
+\index{registerSystem@{registerSystem}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{registerSystem()}{registerSystem()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$T$>$ ecs\+::\+World\+Manager\+::register\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+register\+System method This method makes it possible to register a system so that it is known by the ecs. This method also creates the requested system and returns it. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be registered. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The requested system. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a6a648edeefdc3d1b79ae3feec4cac400}\label{classecs_1_1WorldManager_a6a648edeefdc3d1b79ae3feec4cac400}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{removeComponent()}{removeComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+World\+Manager\+::remove\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+remove\+Component method This method makes it possible to remove a previously added component of an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be removed. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be removed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_a97ffd567a3fe7a97fb021423e73a1e2f}\label{classecs_1_1WorldManager_a97ffd567a3fe7a97fb021423e73a1e2f}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!setSystemSignature@{setSystemSignature}}
+\index{setSystemSignature@{setSystemSignature}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{setSystemSignature()}{setSystemSignature()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+World\+Manager\+::set\+System\+Signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}}}]{signature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+System\+Signature method This method makes it possible to define the signature of an existing system. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em signature} & \+: The signature to be defined in the system. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1WorldManager_ad10f9c224e37c866a309c54ab5e0379c}\label{classecs_1_1WorldManager_ad10f9c224e37c866a309c54ab5e0379c}} 
+\index{ecs::WorldManager@{ecs::WorldManager}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!ecs::WorldManager@{ecs::WorldManager}}
+\doxysubsubsection{\texorpdfstring{subscribe()}{subscribe()}}
+{\footnotesize\ttfamily template$<$typename T , typename E $>$ \\
+void ecs\+::\+World\+Manager\+::subscribe (\begin{DoxyParamCaption}\item[{T \&}]{subscriber,  }\item[{Callback$<$ T, E $>$}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+subscribe method This method allows a class to subscribe one of its methods to a specific event. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: The Class. \\
+\hline
+{\em E} & \+: Type of the \mbox{\hyperlink{classecs_1_1Event}{Event}}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em subscriber} & \+: Reference on the subscribing class. \\
+\hline
+{\em callback} & \+: Method of the subscribing class. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{WorldManager_8hpp}{World\+Manager.\+hpp}}\end{DoxyCompactItemize}

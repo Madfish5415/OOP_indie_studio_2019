@@ -1,0 +1,84 @@
+\hypertarget{classecs_1_1EventManager}{}\doxysection{ecs\+::Event\+Manager Class Reference}
+\label{classecs_1_1EventManager}\index{ecs::EventManager@{ecs::EventManager}}
+
+
+Class that manages events.  
+
+
+
+
+{\ttfamily \#include $<$Event\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1EventManager_a443c054ac5a93bb265928da9b99fc5fd}\label{classecs_1_1EventManager_a443c054ac5a93bb265928da9b99fc5fd}} 
+\mbox{\hyperlink{classecs_1_1EventManager_a443c054ac5a93bb265928da9b99fc5fd}{Event\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructor Constructor of \mbox{\hyperlink{classecs_1_1EventManager}{Event\+Manager}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1EventManager_af0ef91b8a5db26338483f7b7308085ff}\label{classecs_1_1EventManager_af0ef91b8a5db26338483f7b7308085ff}} 
+\mbox{\hyperlink{classecs_1_1EventManager_af0ef91b8a5db26338483f7b7308085ff}{$\sim$\+Event\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Destructor that call unsubscribed method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename E $>$ }\\void \mbox{\hyperlink{classecs_1_1EventManager_a916a39238870006a3078ceba5dbfc2a7}{subscribe}} (T \&subscriber, Callback$<$ T, E $>$ callback)
+\begin{DoxyCompactList}\small\item\em subscribe method This method allows a class to subscribe one of its methods to a specific event. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1EventManager_a8c113ad7a980f222cca72447cf98f9f0}\label{classecs_1_1EventManager_a8c113ad7a980f222cca72447cf98f9f0}} 
+void \mbox{\hyperlink{classecs_1_1EventManager_a8c113ad7a980f222cca72447cf98f9f0}{unsubscribe}} ()
+\begin{DoxyCompactList}\small\item\em unsubscribe method This method allows to unsubscribe all previously subscribed classes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename E $>$ }\\void \mbox{\hyperlink{classecs_1_1EventManager_a96e6ff10bf61355ca731ce3dc41b30bd}{publish}} (E \&event)
+\begin{DoxyCompactList}\small\item\em publish method This method allows to transmit an event to all previously subscribed methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that manages events. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1EventManager_a96e6ff10bf61355ca731ce3dc41b30bd}\label{classecs_1_1EventManager_a96e6ff10bf61355ca731ce3dc41b30bd}} 
+\index{ecs::EventManager@{ecs::EventManager}!publish@{publish}}
+\index{publish@{publish}!ecs::EventManager@{ecs::EventManager}}
+\doxysubsubsection{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily template$<$typename E $>$ \\
+void ecs\+::\+Event\+Manager\+::publish (\begin{DoxyParamCaption}\item[{E \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+publish method This method allows to transmit an event to all previously subscribed methods. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em E} & \+: The event type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \+: The event to be transmitted. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1EventManager_a916a39238870006a3078ceba5dbfc2a7}\label{classecs_1_1EventManager_a916a39238870006a3078ceba5dbfc2a7}} 
+\index{ecs::EventManager@{ecs::EventManager}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!ecs::EventManager@{ecs::EventManager}}
+\doxysubsubsection{\texorpdfstring{subscribe()}{subscribe()}}
+{\footnotesize\ttfamily template$<$typename T , typename E $>$ \\
+void ecs\+::\+Event\+Manager\+::subscribe (\begin{DoxyParamCaption}\item[{T \&}]{subscriber,  }\item[{Callback$<$ T, E $>$}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+subscribe method This method allows a class to subscribe one of its methods to a specific event. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: The Class. \\
+\hline
+{\em E} & \+: Type of the \mbox{\hyperlink{classecs_1_1Event}{Event}}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em subscriber} & \+: Reference on the subscribing class. \\
+\hline
+{\em callback} & \+: Method of the subscribing class. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{EventManager_8hpp}{Event\+Manager.\+hpp}}\end{DoxyCompactItemize}

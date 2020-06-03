@@ -10,15 +10,26 @@
 
 #include <bitset>
 
+/**
+ * @file Def.hpp
+ * @brief Def File
+ * @author Lucas.M Mattéo.F
+ * @version 1.0
+ * @date 03 june 2020
+ */
+
+/**
+ * @namespace ecs
+ */
 namespace ecs {
 
-using Entity = unsigned int;
-const Entity MAX_ENTITIES = 1000;
+using Entity = unsigned int; /**< Using Entity as unsigned int.*/
+const Entity MAX_ENTITIES = 1000; /**< Defined the max number of entities for the project.*/
 
-using ComponentType = unsigned int;
-const ComponentType MAX_COMPONENTS = 32;
+using ComponentType = unsigned int; /**< Using ComponentType as unsigned int.*/
+const ComponentType MAX_COMPONENTS = 32; /**< Defined the max number of components for an entity for the project.*/
 
-using Signature = std::bitset<MAX_COMPONENTS>;
+using Signature = std::bitset<MAX_COMPONENTS>; /**< Using Signature as std::bitset<MAX_COMPONENTS>.*/
 
 }
 

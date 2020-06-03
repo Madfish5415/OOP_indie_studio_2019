@@ -1,0 +1,4 @@
+<map id="ecs::system::Player" name="ecs::system::Player">
+<area shape="rect" id="node1" title="System that get user entries and handles them." alt="" coords="5,80,155,107"/>
+<area shape="rect" id="node2" href="$classecs_1_1System.html" title="Default system class." alt="" coords="29,5,131,32"/>
+</map>

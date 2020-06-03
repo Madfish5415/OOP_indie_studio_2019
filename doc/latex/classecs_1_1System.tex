@@ -1,0 +1,90 @@
+\hypertarget{classecs_1_1System}{}\doxysection{ecs\+::System Class Reference}
+\label{classecs_1_1System}\index{ecs::System@{ecs::System}}
+
+
+Default system class.  
+
+
+
+
+{\ttfamily \#include $<$System.\+hpp$>$}
+
+
+
+Inheritance diagram for ecs\+::System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classecs_1_1System__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for ecs\+::System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classecs_1_1System__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1System_ac724f19cb30123dfa9e417fb9a29683e}{System}} (\mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}} $\ast$\mbox{\hyperlink{classecs_1_1System_abdb719d5cf7d5c9d734bc4ad1b990d70}{world\+Manager}})
+\begin{DoxyCompactList}\small\item\em Constructor Constructor of \mbox{\hyperlink{classecs_1_1System}{System}} Class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1System_ab0ae8f1804130e3b8cfa2bbe2b0c5e6b}\label{classecs_1_1System_ab0ae8f1804130e3b8cfa2bbe2b0c5e6b}} 
+virtual \mbox{\hyperlink{classecs_1_1System_ab0ae8f1804130e3b8cfa2bbe2b0c5e6b}{$\sim$\+System}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor It\textquotesingle{}s a default destructor because the garbage collector will take care of the rest. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1System_ab4dcf7d8ff18adec704202cb33a262e9}\label{classecs_1_1System_ab4dcf7d8ff18adec704202cb33a262e9}} 
+virtual void \mbox{\hyperlink{classecs_1_1System_ab4dcf7d8ff18adec704202cb33a262e9}{update}} ()
+\begin{DoxyCompactList}\small\item\em update method Method that update the entity. She\textquotesingle{}s called every loop turn. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::set$<$ \mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} $>$ \mbox{\hyperlink{classecs_1_1System_a6880c43f1dcc3abe7317f3e784488241}{entities}} \{\}
+\item 
+\mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}} $\ast$ \mbox{\hyperlink{classecs_1_1System_abdb719d5cf7d5c9d734bc4ad1b990d70}{world\+Manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Default system class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1System_ac724f19cb30123dfa9e417fb9a29683e}\label{classecs_1_1System_ac724f19cb30123dfa9e417fb9a29683e}} 
+\index{ecs::System@{ecs::System}!System@{System}}
+\index{System@{System}!ecs::System@{ecs::System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}}
+{\footnotesize\ttfamily ecs\+::\+System\+::\+System (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}} $\ast$}]{world\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor Constructor of \mbox{\hyperlink{classecs_1_1System}{System}} Class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: Manager of our World. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1System_a6880c43f1dcc3abe7317f3e784488241}\label{classecs_1_1System_a6880c43f1dcc3abe7317f3e784488241}} 
+\index{ecs::System@{ecs::System}!entities@{entities}}
+\index{entities@{entities}!ecs::System@{ecs::System}}
+\doxysubsubsection{\texorpdfstring{entities}{entities}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}$>$ ecs\+::\+System\+::entities \{\}}
+
+Entity set who match with the system signature. \mbox{\Hypertarget{classecs_1_1System_abdb719d5cf7d5c9d734bc4ad1b990d70}\label{classecs_1_1System_abdb719d5cf7d5c9d734bc4ad1b990d70}} 
+\index{ecs::System@{ecs::System}!worldManager@{worldManager}}
+\index{worldManager@{worldManager}!ecs::System@{ecs::System}}
+\doxysubsubsection{\texorpdfstring{worldManager}{worldManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}}$\ast$ ecs\+::\+System\+::world\+Manager}
+
+Manager of our World. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{System_8hpp}{System.\+hpp}}\end{DoxyCompactItemize}

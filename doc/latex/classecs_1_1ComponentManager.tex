@@ -1,0 +1,161 @@
+\hypertarget{classecs_1_1ComponentManager}{}\doxysection{ecs\+::Component\+Manager Class Reference}
+\label{classecs_1_1ComponentManager}\index{ecs::ComponentManager@{ecs::ComponentManager}}
+
+
+Class that manages components.  
+
+
+
+
+{\ttfamily \#include $<$Component\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1ComponentManager_aba9b1d96d21b0d36ae1c83a1c321dc5f}\label{classecs_1_1ComponentManager_aba9b1d96d21b0d36ae1c83a1c321dc5f}} 
+\mbox{\hyperlink{classecs_1_1ComponentManager_aba9b1d96d21b0d36ae1c83a1c321dc5f}{Component\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor of \mbox{\hyperlink{classecs_1_1ComponentManager}{Component\+Manager}} Class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a3ad2253271afc28b4d81b51cd87f4f6b}\label{classecs_1_1ComponentManager_a3ad2253271afc28b4d81b51cd87f4f6b}} 
+\mbox{\hyperlink{classecs_1_1ComponentManager_a3ad2253271afc28b4d81b51cd87f4f6b}{$\sim$\+Component\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor of \mbox{\hyperlink{classecs_1_1ComponentManager}{Component\+Manager}} Class. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1ComponentManager_afd30b9a57c14dc34cbdc5137a4d66ba5}{register\+Component}} ()
+\begin{DoxyCompactList}\small\item\em register\+Component method Register a component so that it is known by the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{Def_8hpp_a371fa59085a607228c5286b2b1eec167}{Component\+Type}} \mbox{\hyperlink{classecs_1_1ComponentManager_a064bef841749d693e57fec6321d34d4b}{get\+Component\+Type}} ()
+\begin{DoxyCompactList}\small\item\em get\+Component\+Type method This method makes it possible to recover a unique identifier of a component of the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1ComponentManager_a1f0f01d14af9f53d9dc788a03c56d5d4}{add\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity, T component)
+\begin{DoxyCompactList}\small\item\em add\+Component method This method makes it possible to add a previously registered component to an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1ComponentManager_a8032c80eeb417c6bb3762c5fad9ec593}{remove\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em remove\+Component method This method makes it possible to remove a previously added component of an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \& \mbox{\hyperlink{classecs_1_1ComponentManager_a629f8be134abe8c58369bbcaa8d70ebb}{get\+Component}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em get\+Component method This method makes it possible to retrieve a component that has previously been added to an entity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1ComponentManager_a771de18cf71bfeab91afa2ce161c80a8}{entity\+Destroyed}} (\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}} entity)
+\begin{DoxyCompactList}\small\item\em entity\+Destroyed method This method must be called when an entity is destroyed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that manages components. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a1f0f01d14af9f53d9dc788a03c56d5d4}\label{classecs_1_1ComponentManager_a1f0f01d14af9f53d9dc788a03c56d5d4}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+Component\+Manager\+::add\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity,  }\item[{T}]{component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+Component method This method makes it possible to add a previously registered component to an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be added. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be added. \\
+\hline
+{\em component} & \+: The component that will be added to the entity. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a771de18cf71bfeab91afa2ce161c80a8}\label{classecs_1_1ComponentManager_a771de18cf71bfeab91afa2ce161c80a8}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!entityDestroyed@{entityDestroyed}}
+\index{entityDestroyed@{entityDestroyed}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{entityDestroyed()}{entityDestroyed()}}
+{\footnotesize\ttfamily void ecs\+::\+Component\+Manager\+::entity\+Destroyed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+entity\+Destroyed method This method must be called when an entity is destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The destroyed entity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a629f8be134abe8c58369bbcaa8d70ebb}\label{classecs_1_1ComponentManager_a629f8be134abe8c58369bbcaa8d70ebb}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{getComponent()}{getComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T\& ecs\+::\+Component\+Manager\+::get\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+Component method This method makes it possible to retrieve a component that has previously been added to an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be retrieved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference on the requested component. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a064bef841749d693e57fec6321d34d4b}\label{classecs_1_1ComponentManager_a064bef841749d693e57fec6321d34d4b}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!getComponentType@{getComponentType}}
+\index{getComponentType@{getComponentType}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{getComponentType()}{getComponentType()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{Def_8hpp_a371fa59085a607228c5286b2b1eec167}{Component\+Type}} ecs\+::\+Component\+Manager\+::get\+Component\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+Component\+Type method This method makes it possible to recover a unique identifier of a component of the ecs. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A string that represents the signature of the component. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_afd30b9a57c14dc34cbdc5137a4d66ba5}\label{classecs_1_1ComponentManager_afd30b9a57c14dc34cbdc5137a4d66ba5}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!registerComponent@{registerComponent}}
+\index{registerComponent@{registerComponent}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{registerComponent()}{registerComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+Component\+Manager\+::register\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+register\+Component method Register a component so that it is known by the ecs. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be registered. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classecs_1_1ComponentManager_a8032c80eeb417c6bb3762c5fad9ec593}\label{classecs_1_1ComponentManager_a8032c80eeb417c6bb3762c5fad9ec593}} 
+\index{ecs::ComponentManager@{ecs::ComponentManager}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!ecs::ComponentManager@{ecs::ComponentManager}}
+\doxysubsubsection{\texorpdfstring{removeComponent()}{removeComponent()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+Component\+Manager\+::remove\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_ac8c3172a153aae2f3bd7a1d3508d4aed}{Entity}}}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+remove\+Component method This method makes it possible to remove a previously added component of an already existing entity. This method also modifies the signature of the entity so that it is taken into account by the systems. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be removed. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to which the component is to be removed. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/Component\+Manager.\+hpp\end{DoxyCompactItemize}

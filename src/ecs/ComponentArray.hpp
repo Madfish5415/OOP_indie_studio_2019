@@ -13,15 +13,45 @@
 
 #include "IComponentArray.hpp"
 
+/**
+ * @file ComponentArray.hpp
+ * @brief ComponentArray Class
+ * @author Lucas.M Mattéo.F
+ * @version 1.0
+ * @date 03 june 2020
+ */
+
+/**
+ * @namespace ecs
+ */
 namespace ecs {
 
+/**
+ * @class ComponentArray
+ * @tparam T : Type of the component to be contained
+ * @brief An array of components
+ */
 template<typename T>
 class ComponentArray : public IComponentArray {
   public:
+    /**
+     * @brief Constructor
+     * Default constructor of ComponentArray Class.
+     */
     ComponentArray() = default;
+    /**
+     * @brief Constructor
+     * Default destructor of ComponentArray Class.
+     */
     ~ComponentArray() override = default;
 
   public:
+    /**
+     * @brief insert method
+     * This method allows to insert a component for an entity in the array.
+     * @param entity : The entity related to the component
+     * @param component : The entity-related component
+     */
     void insert(Entity entity, T component)
     {
         if (_entityToIndex.find(entity) != _entityToIndex.end())
@@ -33,6 +63,11 @@ class ComponentArray : public IComponentArray {
         _size++;
     }
 
+    /**
+     * @brief remove method
+     * This method allows to remove a component from an entity.
+     * @param entity : The entity from whom the component is to be removed.
+     */
     void remove(Entity entity)
     {
         if (_entityToIndex.find(entity) == _entityToIndex.end())
@@ -53,6 +88,12 @@ class ComponentArray : public IComponentArray {
         _size--;
     }
 
+    /**
+     * @brief get method
+     * This method makes it possible to recover the component of an entity.
+     * @param entity : The entity from which to retrieve the component.
+     * @return A reference to the component of the entity.
+     */
     T& get(Entity entity)
     {
         if (_entityToIndex.find(entity) == _entityToIndex.end())
@@ -62,6 +103,11 @@ class ComponentArray : public IComponentArray {
     }
 
   public:
+    /**
+     * @brief entityDestroyed method
+     * This method must be called when an entity is destroyed.
+     * @param entity : The destroyed entity
+     */
     void entityDestroyed(Entity entity) override
     {
         if (_entityToIndex.find(entity) != _entityToIndex.end()) {
@@ -70,10 +116,10 @@ class ComponentArray : public IComponentArray {
     }
 
   private:
-    std::array<T, MAX_ENTITIES> _componentArray {};
-    std::unordered_map<Entity, size_t> _entityToIndex {};
-    std::unordered_map<size_t, Entity> _indexToEntity {};
-    size_t _size = 0;
+    std::array<T, MAX_ENTITIES> _componentArray {}; /**< An array of T component and of MAX_ENTITIES size. */
+    std::unordered_map<Entity, size_t> _entityToIndex {}; /** < An unordered map which link entity to index. */
+    std::unordered_map<size_t, Entity> _indexToEntity {}; /** < An unordered map which link index to entity. */
+    size_t _size = 0; /** < Real length of the array. */
 };
 
 } // namespace ecs

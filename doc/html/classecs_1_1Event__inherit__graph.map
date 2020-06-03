@@ -1,0 +1,4 @@
+<map id="ecs::Event" name="ecs::Event">
+<area shape="rect" id="node1" title="Default class of an event." alt="" coords="26,5,115,32"/>
+<area shape="rect" id="node2" href="$classecs_1_1event_1_1Input.html" title="Input event good for manage user entries." alt="" coords="5,80,136,107"/>
+</map>
