@@ -7,21 +7,14 @@
 
 #include <iostream>
 
-#include "ecs/WorldManager.hpp"
+#include "GameLoop.hpp"
 
 int main()
 {
-    ecs::WorldManager worldManager;
+    GameLoop gameLoop;
 
-    worldManager.registerComponent<int>();
-
-    ecs::Entity entity1 = worldManager.createEntity();
-
-    worldManager.addComponent<int>(entity1, 1);
-
-    worldManager.getComponent<int>(entity1)++;
-
-    std::cout << worldManager.getComponent<int>(entity1) << std::endl;
+    gameLoop.init();
+    gameLoop.run();
 
     return 0;
 }
