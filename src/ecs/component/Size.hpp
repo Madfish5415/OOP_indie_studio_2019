@@ -11,12 +11,12 @@
 #include <irrlicht.h>
 
 class Size {
-    public:
-        Size(const irr::core::vector3df &size);
-        ~Size();
+  public:
+    explicit Size(const irr::core::vector3df &size);
+    ~Size();
 
-    public:
-        irr::core::vector3df _size;
+  public:
+    irr::core::vector3df size;
 };
 
 #endif /* !SIZE_HPP_ */

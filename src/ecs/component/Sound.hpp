@@ -8,16 +8,16 @@
 #ifndef SOUND_HPP_
 #define SOUND_HPP_
 
-#include <string>
 #include <SFML/Audio.hpp>
+#include <string>
 
 class Sound {
-    public:
-        Sound(const std::string &soundPath);
-        ~Sound();
+  public:
+    explicit Sound(const std::string &soundPath);
+    ~Sound();
 
-    public:
-        sf::Music *_sound;
+  public:
+    sf::Music *sound;
 };
 
 #endif /* !SOUND_HPP_ */

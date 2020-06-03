@@ -7,11 +7,8 @@
 
 #include "Size.hpp"
 
-Size::Size(const irr::core::vector3df &size)
+Size::Size(const irr::core::vector3df &size) : size(size)
 {
-    _size = size;
 }
 
-Size::~Size()
-{
-}
+Size::~Size() = default;

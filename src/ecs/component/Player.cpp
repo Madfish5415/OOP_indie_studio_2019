@@ -8,14 +8,8 @@
 #include "Player.hpp"
 
 Player::Player(irr::EKEY_CODE left, irr::EKEY_CODE right, irr::EKEY_CODE up, irr::EKEY_CODE down, irr::EKEY_CODE bomb)
+    : left(left), right(right), up(up), down(down), bomb(bomb)
 {
-    _left = left;
-    _right = right;
-    _up = up;
-    _down = down;
-    _bomb = bomb;
 }
 
-Player::~Player()
-{
-}
+Player::~Player() = default;

@@ -11,15 +11,15 @@
 #include <cstddef>
 
 class Stats {
-    public:
-        Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &maxBomb, const bool &wallPass);
-        ~Stats();
+  public:
+    Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &maxBomb, const bool &wallPass);
+    ~Stats();
 
-    public:
-        size_t _moveSpeed;
-        size_t _bombRadius;
-        size_t _maxBomb;
-        size_t _wallPass;
+  public:
+    size_t moveSpeed;
+    size_t bombRadius;
+    size_t maxBomb;
+    size_t wallPass;
 };
 
 #endif /* !STATS_HPP_ */

@@ -15,7 +15,7 @@
 class Text {
   public:
     Text(irr::gui::IGUIEnvironment* gui, const wchar_t* text, const irr::core::rect<irr::s32>& rectangle,
-        bool border = false, bool wordWrap = true, irr::gui::IGUIElement* parent = 0, irr::s32 id = -1,
+        bool border = false, bool wordWrap = true, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1,
         bool fillBackground = false);
     ~Text();
 

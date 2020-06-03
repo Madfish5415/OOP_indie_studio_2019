@@ -7,11 +7,8 @@
 
 #include "Render3d.hpp"
 
-Render3d::Render3d(irr::scene::ISceneNode *node)
+Render3d::Render3d(irr::scene::ISceneNode *node) : node(node)
 {
-    _node = node;
 }
 
-Render3d::~Render3d()
-{
-}
+Render3d::~Render3d() = default;

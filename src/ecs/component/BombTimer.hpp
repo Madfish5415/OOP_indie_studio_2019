@@ -9,15 +9,17 @@
 #define BOMBTIMER_HPP_
 
 #include <irrlicht.h>
+#include <irrlicht/IrrlichtDevice.h>
+#include <irrlicht/irrTypes.h>
 
 class BombTimer {
-    public:
-        BombTimer(const irr::u32 &duration);
-        ~BombTimer();
+  public:
+    explicit BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *device);
+    ~BombTimer();
 
-    public:
-        irr::u32 _timerStart;
-        irr::u32 _duration;
+  public:
+    irr::u32 timerStart;
+    irr::u32 duration;
 };
 
 #endif /* !BOMBTIMER_HPP_ */

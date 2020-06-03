@@ -7,12 +7,9 @@
 
 #include "Music.hpp"
 
-Music::Music(const std::string &musicPath) : _music(new sf::Music())
+Music::Music(const std::string &musicPath) : music(new sf::Music())
 {
-    _music->openFromFile(musicPath);
+    music->openFromFile(musicPath);
 }
 
-Music::~Music()
-{
-    delete _music;
-}
+Music::~Music() = default;

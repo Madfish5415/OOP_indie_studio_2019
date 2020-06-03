@@ -11,12 +11,12 @@
 #include <irrlicht.h>
 
 class LookingView {
-    public:
-        LookingView(const irr::core::vector3df &direction);
-        ~LookingView();
+  public:
+    explicit LookingView(const irr::core::vector3df &direction);
+    ~LookingView();
 
-    public:
-        irr::core::vector3df _direction;
+  public:
+    irr::core::vector3df direction;
 };
 
 #endif /* !LOOKINGVIEW_HPP_ */

@@ -11,12 +11,12 @@
 #include <irrlicht.h>
 
 class Transform {
-    public:
-        Transform(const irr::core::vector3df &position);
-        ~Transform();
+  public:
+    explicit Transform(const irr::core::vector3df &position);
+    ~Transform();
 
-    public:
-        irr::core::vector3df _position;
+  public:
+    irr::core::vector3df position;
 };
 
 #endif /* !TRANSFORM_HPP_ */

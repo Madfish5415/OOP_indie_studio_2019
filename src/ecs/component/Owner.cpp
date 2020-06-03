@@ -7,11 +7,8 @@
 
 #include "Owner.hpp"
 
-Owner::Owner(const size_t &ID)
+Owner::Owner(const ecs::Entity &ID) : entity(ID)
 {
-    _entityID = ID;
 }
 
-Owner::~Owner()
-{
-}
+Owner::~Owner() = default;

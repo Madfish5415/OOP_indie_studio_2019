@@ -8,15 +8,15 @@
 #ifndef OWNER_HPP_
 #define OWNER_HPP_
 
-#include <cstddef>
+#include "../Def.hpp"
 
 class Owner {
-    public:
-        Owner(const size_t &ID);
-        ~Owner();
+  public:
+    explicit Owner(const ecs::Entity &ID);
+    ~Owner();
 
-    public:
-        size_t _entityID;
+  public:
+    ecs::Entity entity;
 };
 
 #endif /* !OWNER_HPP_ */

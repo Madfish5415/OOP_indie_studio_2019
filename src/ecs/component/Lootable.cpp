@@ -7,10 +7,6 @@
 
 #include "Lootable.hpp"
 
-Lootable::Lootable()
-{
-}
+Lootable::Lootable() = default;
 
-Lootable::~Lootable()
-{
-}
+Lootable::~Lootable() = default;

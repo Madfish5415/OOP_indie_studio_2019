@@ -8,16 +8,16 @@
 #ifndef MUSIC_HPP_
 #define MUSIC_HPP_
 
-#include <string>
 #include <SFML/Audio.hpp>
+#include <string>
 
 class Music {
-    public:
-        Music(const std::string &musicPath);
-        ~Music();
+  public:
+    explicit Music(const std::string &musicPath);
+    ~Music();
 
-    public:
-        sf::Music *_music;
+  public:
+    sf::Music *music;
 };
 
 #endif /* !MUSIC_HPP_ */

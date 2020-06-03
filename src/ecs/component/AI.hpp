@@ -9,10 +9,9 @@
 #define OOP_INDIE_STUDIO_2019_AI_HPP_
 
 class AI {
-    public:
-        AI();
-        ~AI();
-
+  public:
+    AI();
+    ~AI();
 };
 
 #endif /* !OOP_INDIE_STUDIO_2019_AI_HPP_ */

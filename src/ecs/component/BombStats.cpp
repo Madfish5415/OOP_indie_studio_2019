@@ -7,12 +7,8 @@
 
 #include "BombStats.hpp"
 
-BombStats::BombStats(const size_t &bombRadius, const bool &wallPass)
+BombStats::BombStats(const size_t &bombRadius, const bool &wallPass) : bombRadius(bombRadius), wallPass(wallPass)
 {
-    _bombRadius = bombRadius;
-    _wallPass = wallPass;
 }
 
-BombStats::~BombStats()
-{
-}
+BombStats::~BombStats() = default;

@@ -8,11 +8,8 @@
 #include "Motion.hpp"
 
 Motion::Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direction)
+    : movementSpeed(movementSpeed), direction(direction)
 {
-    _movementSpeed = movementSpeed;
-    _direction = direction;
 }
 
-Motion::~Motion()
-{
-}
+Motion::~Motion() = default;

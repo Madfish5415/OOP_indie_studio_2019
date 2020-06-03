@@ -11,13 +11,13 @@
 #include <cstddef>
 
 class BombStats {
-    public:
-        BombStats(const size_t &bombRadius, const bool &wallPass);
-        ~BombStats();
+  public:
+    BombStats(const size_t &bombRadius, const bool &wallPass);
+    ~BombStats();
 
-    public:
-        size_t _bombRadius;
-        bool _wallPass;
+  public:
+    size_t bombRadius;
+    bool wallPass;
 };
 
 #endif /* !BOMBSTATS_HPP_ */

@@ -7,11 +7,10 @@
 
 #include "HitboxDetection.hpp"
 
-HitboxDetection::HitboxDetection(const std::vector<irr::core::line3df> &rays)
+#include <utility>
+
+HitboxDetection::HitboxDetection(const std::vector<irr::core::line3df>& rays) : rays(rays)
 {
-    _rays = rays;
 }
 
-HitboxDetection::~HitboxDetection()
-{
-}
+HitboxDetection::~HitboxDetection() = default;

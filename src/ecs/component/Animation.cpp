@@ -8,10 +8,8 @@
 #include "Animation.hpp"
 
 Animation::Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange)
+    : animationRange(animationRange)
 {
-    _animationRange = animationRange;
 }
 
-Animation::~Animation()
-{
-}
+Animation::~Animation() = default;

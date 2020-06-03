@@ -7,10 +7,6 @@
 
 #include "AI.hpp"
 
-AI::AI()
-{
-}
+AI::AI() = default;
 
-AI::~AI()
-{
-}
+AI::~AI() = default;

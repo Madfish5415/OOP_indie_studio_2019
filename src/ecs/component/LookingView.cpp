@@ -9,9 +9,7 @@
 
 LookingView::LookingView(const irr::core::vector3df &direction)
 {
-    _direction = direction;
+    direction = direction;
 }
 
-LookingView::~LookingView()
-{
-}
+LookingView::~LookingView() = default;

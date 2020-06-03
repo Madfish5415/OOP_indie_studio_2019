@@ -8,13 +8,8 @@
 #include "Stats.hpp"
 
 Stats::Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &maxBomb, const bool &wallPass)
+    : moveSpeed(moveSpeed), bombRadius(bombRadius), maxBomb(maxBomb), wallPass(wallPass)
 {
-    _moveSpeed = moveSpeed;
-    _bombRadius = bombRadius;
-    _maxBomb = maxBomb;
-    _wallPass = wallPass;
 }
 
-Stats::~Stats()
-{
-}
+Stats::~Stats() = default;

@@ -9,10 +9,9 @@
 #define UNBREAKABLE_HPP_
 
 class Unbreakable {
-    public:
-        Unbreakable();
-        ~Unbreakable();
-
+  public:
+    Unbreakable();
+    ~Unbreakable();
 };
 
 #endif /* !UNBREAKABLE_HPP_ */

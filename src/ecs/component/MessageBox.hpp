@@ -12,7 +12,9 @@
 
 class MessageBox {
   public:
-    MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t* caption, const wchar_t* text, bool modal = true, irr::s32 flags = irr::gui::EMBF_OK, irr::gui::IGUIElement* parent = 0, irr::s32 id = -1, irr::video::ITexture* image = 0);
+    MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t* caption, const wchar_t* text, bool modal = true,
+        irr::s32 flags = irr::gui::EMBF_OK, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1,
+        irr::video::ITexture* image = nullptr);
     ~MessageBox();
 
   public:

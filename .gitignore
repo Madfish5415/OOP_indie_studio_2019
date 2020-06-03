@@ -3,6 +3,12 @@ a.out
 bomberman
 unit_tests
 
+# Compilation
+Makefile
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles
+
 # Objects
 *.o
 

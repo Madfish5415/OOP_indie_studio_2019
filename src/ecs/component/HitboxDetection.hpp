@@ -8,16 +8,17 @@
 #ifndef HITBOXDETECTION_HPP_
 #define HITBOXDETECTION_HPP_
 
-#include <vector>
 #include <irrlicht.h>
 
-class HitboxDetection {
-    public:
-        HitboxDetection(const std::vector<irr::core::line3df> &rays);
-        ~HitboxDetection();
+#include <vector>
 
-    public:
-        std::vector<irr::core::line3df> _rays;
+class HitboxDetection {
+  public:
+    explicit HitboxDetection(const std::vector<irr::core::line3df>& rays);
+    ~HitboxDetection();
+
+  public:
+    std::vector<irr::core::line3df> rays;
 };
 
 #endif /* !HITBOXDETECTION_HPP_ */

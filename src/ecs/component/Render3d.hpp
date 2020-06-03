@@ -11,12 +11,12 @@
 #include <irrlicht.h>
 
 class Render3d {
-    public:
-        Render3d(irr::scene::ISceneNode *node);
-        ~Render3d();
+  public:
+    explicit Render3d(irr::scene::ISceneNode *node);
+    ~Render3d();
 
-    public:
-        irr::scene::ISceneNode *_node;
+  public:
+    irr::scene::ISceneNode *node;
 };
 
 #endif /* !RENDER3D_HPP_ */

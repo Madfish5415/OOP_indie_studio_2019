@@ -7,11 +7,11 @@
 
 #include "BombTimer.hpp"
 
-BombTimer::BombTimer(const irr::u32 &duration)
+#include <ctime>
+
+BombTimer::BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *device)
+    : timerStart(device->getTimer()->getTime()), duration(duration)
 {
-    _duration = duration;
 }
 
-BombTimer::~BombTimer()
-{
-}
+BombTimer::~BombTimer() = default;

@@ -7,12 +7,9 @@
 
 #include "Sound.hpp"
 
-Sound::Sound(const std::string &soundPath) : _sound(new sf::Music())
+Sound::Sound(const std::string &soundPath) : sound(new sf::Music())
 {
-    _sound->openFromFile(soundPath);
+    sound->openFromFile(soundPath);
 }
 
-Sound::~Sound()
-{
-    delete _sound;
-}
+Sound::~Sound() = default;

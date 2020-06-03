@@ -7,11 +7,8 @@
 
 #include "Transform.hpp"
 
-Transform::Transform(const irr::core::vector3df &position)
+Transform::Transform(const irr::core::vector3df &position) : position(position)
 {
-    _position = position;
 }
 
-Transform::~Transform()
-{
-}
+Transform::~Transform() = default;

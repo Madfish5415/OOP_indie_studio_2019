@@ -9,10 +9,9 @@
 #define LOOTABLE_HPP_
 
 class Lootable {
-    public:
-        Lootable();
-        ~Lootable();
-
+  public:
+    Lootable();
+    ~Lootable();
 };
 
 #endif /* !LOOTABLE_HPP_ */

@@ -11,13 +11,13 @@
 #include <irrlicht.h>
 
 class Motion {
-    public:
-        Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direction);
-        ~Motion();
+  public:
+    Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direction);
+    ~Motion();
 
-    public:
-        irr::f32 _movementSpeed;
-        irr::core::vector3df _direction;
+  public:
+    irr::f32 movementSpeed;
+    irr::core::vector3df direction;
 };
 
 #endif /* !MOTION_HPP_ */

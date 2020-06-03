@@ -11,12 +11,12 @@
 #include <map>
 
 class Animation {
-    public:
-        Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange);
-        ~Animation();
+  public:
+    explicit Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange);
+    ~Animation();
 
-    public:
-        std::map<std::string, std::pair<size_t, size_t>> _animationRange;
+  public:
+    std::map<std::string, std::pair<size_t, size_t>> animationRange;
 };
 
 #endif /* !ANIMATION_HPP_ */

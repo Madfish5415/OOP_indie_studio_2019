@@ -7,10 +7,6 @@
 
 #include "Unbreakable.hpp"
 
-Unbreakable::Unbreakable()
-{
-}
+Unbreakable::Unbreakable() = default;
 
-Unbreakable::~Unbreakable()
-{
-}
+Unbreakable::~Unbreakable() = default;
