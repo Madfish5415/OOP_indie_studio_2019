@@ -87,6 +87,12 @@ class Universe {
      * @param name : Name of the WorldManager.
      */
     void deleteWorldManager(const std::string &name);
+    /**
+     * @brief getDevice method
+     * This method return the Irrlicth device.
+     * @return The Irrlicht device.
+     */
+    irr::IrrlichtDevice *Universe::getDevice() const;
 
   private:
     std::unordered_map<std::string, std::unique_ptr<WorldManager>> _worldManagers; /** < List of all our WorldManager sorted by name */
