@@ -6,6 +6,7 @@
 */
 
 #include "LookingView.hpp"
+using namespace ecs::component;
 
 LookingView::LookingView(const irr::core::vector3df &direction) : direction(direction)
 {

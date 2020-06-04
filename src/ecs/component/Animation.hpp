@@ -10,6 +10,8 @@
 
 #include <map>
 
+namespace ecs::component {
+
 class Animation {
   public:
     explicit Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange);
@@ -18,5 +20,7 @@ class Animation {
   public:
     std::map<std::string, std::pair<size_t, size_t>> animationRange;
 };
+
+} // namespace ecs::component
 
 #endif /* !ANIMATION_HPP_ */

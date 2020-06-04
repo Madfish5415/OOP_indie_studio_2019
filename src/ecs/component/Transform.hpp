@@ -10,6 +10,8 @@
 
 #include <irrlicht.h>
 
+namespace ecs::component {
+
 class Transform {
   public:
     explicit Transform(const irr::core::vector3df &position);
@@ -18,5 +20,7 @@ class Transform {
   public:
     irr::core::vector3df position;
 };
+
+} // namespace ecs::component
 
 #endif /* !TRANSFORM_HPP_ */

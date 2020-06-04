@@ -9,6 +9,8 @@
 
 #include <utility>
 
+using namespace ecs::component;
+
 Image::Image(irr::video::IVideoDriver* driver, const irr::io::path& texture,
     const irr::core::position2d<irr::s32>& position, irr::core::rect<irr::s32> rect,
     irr::core::rect<irr::s32>* clipRect, irr::video::SColor scolor, bool useAlphaChannelOfTexture)

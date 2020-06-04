@@ -10,6 +10,8 @@
 
 #include <cstddef>
 
+namespace ecs::component {
+
 class Stats {
   public:
     Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &maxBomb, const bool &wallPass);
@@ -21,5 +23,7 @@ class Stats {
     size_t maxBomb;
     size_t wallPass;
 };
+
+} // namespace ecs::component
 
 #endif /* !STATS_HPP_ */

@@ -10,6 +10,8 @@
 
 #include "../Def.hpp"
 
+namespace ecs::component {
+
 class Owner {
   public:
     explicit Owner(const ecs::Entity &ID);
@@ -18,5 +20,7 @@ class Owner {
   public:
     ecs::Entity entity;
 };
+
+} // namespace ecs::component
 
 #endif /* !OWNER_HPP_ */

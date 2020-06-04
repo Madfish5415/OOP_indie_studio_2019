@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.0)
 # Notre projet est étiqueté hello
 project(helloIRR)
 
+set(CMAKE_CXX_STANDARD 17)
+
 # Permet de placer l'executable a la racine du projt apres la compilation
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}) 
 
@@ -16,6 +18,7 @@ set(SRCS
         src/ecs/component/AI.cpp
         src/ecs/component/Animation.cpp
         src/ecs/component/BombStats.cpp
+        src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
         src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
@@ -33,6 +36,7 @@ set(SRCS
         src/ecs/component/Text.cpp
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
+        src/ecs/system/Image.cpp
     )
 
 set(HEADERS
@@ -49,6 +53,7 @@ set(HEADERS
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
         src/ecs/component/BombStats.hpp
+        src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
         src/ecs/component/HitboxDetection.hpp
         src/ecs/component/Image.hpp
@@ -66,6 +71,7 @@ set(HEADERS
         src/ecs/component/Text.hpp
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
+        src/ecs/system/Image.hpp
         )
 
 

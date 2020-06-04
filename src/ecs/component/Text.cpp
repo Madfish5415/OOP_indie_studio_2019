@@ -7,6 +7,8 @@
 
 #include "Text.hpp"
 
+using namespace ecs::component;
+
 Text::Text(irr::gui::IGUIEnvironment* gui, const wchar_t* text, const irr::core::rect<irr::s32>& rectangle, bool border,
     bool wordWrap, irr::gui::IGUIElement* parent, irr::s32 id, bool fillBackground)
     : gui(gui), text(gui->addStaticText(text, rectangle, border, wordWrap, parent, id, fillBackground)), font(nullptr)

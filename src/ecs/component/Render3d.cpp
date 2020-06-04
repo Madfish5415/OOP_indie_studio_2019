@@ -7,6 +7,8 @@
 
 #include "Render3d.hpp"
 
+using namespace ecs::component;
+
 Render3d::Render3d(irr::scene::ISceneNode *node) : node(node)
 {
 }

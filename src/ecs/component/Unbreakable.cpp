@@ -7,6 +7,8 @@
 
 #include "Unbreakable.hpp"
 
+using namespace ecs::component;
+
 Unbreakable::Unbreakable() = default;
 
 Unbreakable::~Unbreakable() = default;

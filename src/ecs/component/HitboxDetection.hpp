@@ -12,6 +12,8 @@
 
 #include <vector>
 
+namespace ecs::component {
+
 class HitboxDetection {
   public:
     explicit HitboxDetection(const std::vector<irr::core::line3df>& rays);
@@ -21,4 +23,5 @@ class HitboxDetection {
     std::vector<irr::core::line3df> rays;
 };
 
+} // namespace ecs::component
 #endif /* !HITBOXDETECTION_HPP_ */

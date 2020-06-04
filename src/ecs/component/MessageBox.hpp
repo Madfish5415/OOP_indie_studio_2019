@@ -10,6 +10,8 @@
 
 #include "irrlicht.h"
 
+namespace ecs::component {
+
 class MessageBox {
   public:
     MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t* caption, const wchar_t* text, bool modal = true,
@@ -21,5 +23,7 @@ class MessageBox {
     irr::gui::IGUIEnvironment* gui;
     irr::gui::IGUIWindow* messageBox;
 };
+
+} // namespace ecs::component
 
 #endif // OOP_INDIE_STUDIO_2019_MESSAGEBOX_HPP

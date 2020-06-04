@@ -10,6 +10,8 @@
 
 #include <irrlicht.h>
 
+namespace ecs::component {
+
 class Render3d {
   public:
     explicit Render3d(irr::scene::ISceneNode *node);
@@ -18,5 +20,7 @@ class Render3d {
   public:
     irr::scene::ISceneNode *node;
 };
+
+} // namespace ecs::component
 
 #endif /* !RENDER3D_HPP_ */

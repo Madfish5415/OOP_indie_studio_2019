@@ -7,6 +7,8 @@
 
 #include "Owner.hpp"
 
+using namespace ecs::component;
+
 Owner::Owner(const ecs::Entity &ID) : entity(ID)
 {
 }

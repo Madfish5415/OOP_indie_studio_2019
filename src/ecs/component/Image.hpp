@@ -12,10 +12,13 @@
 
 #include "irrlicht.h"
 
+namespace ecs::component {
+
 class Image {
   public:
-    Image(irr::video::IVideoDriver* driver, const irr::io::path& texture, const irr::core::position2d<irr::s32>& position,
-        irr::core::rect<irr::s32> rect, irr::core::rect<irr::s32>* clipRect = nullptr,
+    Image(irr::video::IVideoDriver* driver, const irr::io::path& texture,
+        const irr::core::position2d<irr::s32>& position, irr::core::rect<irr::s32> rect,
+        irr::core::rect<irr::s32>* clipRect = nullptr,
         irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false);
     ~Image();
 
@@ -28,5 +31,7 @@ class Image {
     irr::video::SColor scolor;
     bool useAlphaChannelOfTexture;
 };
+
+} // namespace ecs::component
 
 #endif // OOP_INDIE_STUDIO_2019_IMAGE_HPP

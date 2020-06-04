@@ -10,6 +10,8 @@
 
 #include <cstddef>
 
+namespace ecs::component {
+
 class BombStats {
   public:
     BombStats(const size_t &bombRadius, const bool &wallPass);
@@ -20,4 +22,5 @@ class BombStats {
     bool wallPass;
 };
 
+} // namespace ecs::component
 #endif /* !BOMBSTATS_HPP_ */

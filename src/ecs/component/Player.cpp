@@ -7,6 +7,8 @@
 
 #include "Player.hpp"
 
+using namespace ecs::component;
+
 Player::Player(irr::EKEY_CODE left, irr::EKEY_CODE right, irr::EKEY_CODE up, irr::EKEY_CODE down, irr::EKEY_CODE bomb)
     : left(left), right(right), up(up), down(down), bomb(bomb)
 {

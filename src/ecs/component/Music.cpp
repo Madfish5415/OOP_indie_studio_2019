@@ -7,6 +7,8 @@
 
 #include "Music.hpp"
 
+using namespace ecs::component;
+
 Music::Music(const std::string &musicPath) : music(new sf::Music())
 {
     music->openFromFile(musicPath);

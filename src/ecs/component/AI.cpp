@@ -7,6 +7,8 @@
 
 #include "AI.hpp"
 
+using namespace ecs::component;
+
 AI::AI() = default;
 
 AI::~AI() = default;

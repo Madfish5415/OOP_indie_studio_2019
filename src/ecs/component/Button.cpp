@@ -7,6 +7,8 @@
 
 #include "Button.hpp"
 
+using namespace ecs::component;
+
 Button::Button(irr::gui::IGUIEnvironment* gui, const irr::core::rect<irr::s32>& position, irr::gui::IGUIElement* parent,
     irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
     : gui(gui), button(gui->addButton(position, parent, id, text, tooltipText)), font(nullptr)

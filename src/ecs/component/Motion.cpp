@@ -7,6 +7,8 @@
 
 #include "Motion.hpp"
 
+using namespace ecs::component;
+
 Motion::Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direction)
     : movementSpeed(movementSpeed), direction(direction)
 {

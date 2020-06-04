@@ -11,6 +11,8 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
+namespace ecs::component {
+
 class Music {
   public:
     explicit Music(const std::string &musicPath);
@@ -19,5 +21,7 @@ class Music {
   public:
     sf::Music *music;
 };
+
+} // namespace ecs::component
 
 #endif /* !MUSIC_HPP_ */

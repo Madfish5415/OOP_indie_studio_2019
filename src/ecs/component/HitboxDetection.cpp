@@ -9,6 +9,8 @@
 
 #include <utility>
 
+using namespace ecs::component;
+
 HitboxDetection::HitboxDetection(const std::vector<irr::core::line3df>& rays) : rays(rays)
 {
 }

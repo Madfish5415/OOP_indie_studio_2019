@@ -7,6 +7,8 @@
 
 #include "Transform.hpp"
 
+using namespace ecs::component;
+
 Transform::Transform(const irr::core::vector3df &position) : position(position)
 {
 }

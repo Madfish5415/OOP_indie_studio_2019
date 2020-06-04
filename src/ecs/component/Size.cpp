@@ -7,6 +7,8 @@
 
 #include "Size.hpp"
 
+using namespace ecs::component;
+
 Size::Size(const irr::core::vector3df &size) : size(size)
 {
 }

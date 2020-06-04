@@ -12,6 +12,8 @@
 
 #include "irrlicht.h"
 
+namespace ecs::component {
+
 class Text {
   public:
     Text(irr::gui::IGUIEnvironment* gui, const wchar_t* text, const irr::core::rect<irr::s32>& rectangle,
@@ -26,5 +28,7 @@ class Text {
     irr::gui::IGUIStaticText* text;
     irr::gui::IGUIFont* font;
 };
+
+} // namespace ecs::component
 
 #endif // OOP_INDIE_STUDIO_2019_TEXT_HPP

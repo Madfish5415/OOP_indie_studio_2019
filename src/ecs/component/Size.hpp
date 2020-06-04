@@ -10,6 +10,8 @@
 
 #include <irrlicht.h>
 
+namespace ecs::component {
+
 class Size {
   public:
     explicit Size(const irr::core::vector3df &size);
@@ -18,5 +20,7 @@ class Size {
   public:
     irr::core::vector3df size;
 };
+
+} // namespace ecs::component
 
 #endif /* !SIZE_HPP_ */

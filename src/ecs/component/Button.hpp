@@ -12,6 +12,8 @@
 
 #include "irrlicht.h"
 
+namespace ecs::component {
+
 class Button {
   public:
     Button(irr::gui::IGUIEnvironment* gui, const irr::core::rect<irr::s32>& position,
@@ -28,5 +30,7 @@ class Button {
     irr::gui::IGUIButton* button;
     irr::gui::IGUIFont* font;
 };
+
+} // namespace ecs::component
 
 #endif // OOP_INDIE_STUDIO_2019_BUTTON_HPP

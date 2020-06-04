@@ -12,6 +12,8 @@
 #include <irrlicht/IrrlichtDevice.h>
 #include <irrlicht/irrTypes.h>
 
+namespace ecs::component {
+
 class BombTimer {
   public:
     explicit BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *device);
@@ -21,5 +23,7 @@ class BombTimer {
     irr::u32 timerStart;
     irr::u32 duration;
 };
+
+} // namespace ecs::component
 
 #endif /* !BOMBTIMER_HPP_ */

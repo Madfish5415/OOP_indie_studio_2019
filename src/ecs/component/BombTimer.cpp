@@ -9,6 +9,8 @@
 
 #include <ctime>
 
+using namespace ecs::component;
+
 BombTimer::BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *device)
     : timerStart(device->getTimer()->getTime()), duration(duration)
 {

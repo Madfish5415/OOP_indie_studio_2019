@@ -7,6 +7,8 @@
 
 #include "BombStats.hpp"
 
+using namespace ecs::component;
+
 BombStats::BombStats(const size_t &bombRadius, const bool &wallPass) : bombRadius(bombRadius), wallPass(wallPass)
 {
 }

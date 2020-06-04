@@ -7,6 +7,8 @@
 
 #include "Lootable.hpp"
 
+using namespace ecs::component;
+
 Lootable::Lootable() = default;
 
 Lootable::~Lootable() = default;
