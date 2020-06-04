@@ -17,9 +17,10 @@ Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, 
       id(id),
       text(text),
       tooltipText(tooltipText),
-      button(gui->addButton(*rect, parent, id, text, tooltipText)),
       font(nullptr)
 {
+    if (gui)
+        button = gui->addButton(*rect, parent, id, text, tooltipText);
 }
 
 void Button::setFont(const irr::io::path& path)
@@ -41,10 +42,10 @@ void Button::setPressedImage(irr::video::ITexture* pressedImage)
 Button::Button(const Button& btn)
 {
     gui = btn.gui;
-    rect->UpperLeftCorner.X = btn.rect->UpperLeftCorner.X;
-    rect->UpperLeftCorner.Y = btn.rect->UpperLeftCorner.Y;
-    rect->LowerRightCorner.X = btn.rect->LowerRightCorner.X;
-    rect->LowerRightCorner.Y = btn.rect->LowerRightCorner.Y;
+    if (btn.rect)
+        rect = new irr::core::rect<irr::s32>(btn.rect->UpperLeftCorner, btn.rect->LowerRightCorner);
+    else
+        rect = nullptr;
     parent = btn.parent;
     id = btn.id;
     text = btn.text;
