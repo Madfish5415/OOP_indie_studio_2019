@@ -9,9 +9,16 @@
 
 using namespace ecs::component;
 
-Button::Button(irr::gui::IGUIEnvironment* gui, const irr::core::rect<irr::s32>& position, irr::gui::IGUIElement* parent,
+Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent,
     irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
-    : gui(gui), button(gui->addButton(position, parent, id, text, tooltipText)), font(nullptr)
+    : gui(gui),
+      rect(rect),
+      parent(parent),
+      id(id),
+      text(text),
+      tooltipText(tooltipText),
+      button(gui->addButton(*rect, parent, id, text, tooltipText)),
+      font(nullptr)
 {
 }
 
@@ -29,5 +36,20 @@ void Button::setImage(irr::video::ITexture* image)
 void Button::setPressedImage(irr::video::ITexture* pressedImage)
 {
     this->button->setPressedImage(pressedImage);
+}
+
+Button::Button(const Button& btn)
+{
+    gui = btn.gui;
+    rect->UpperLeftCorner.X = btn.rect->UpperLeftCorner.X;
+    rect->UpperLeftCorner.Y = btn.rect->UpperLeftCorner.Y;
+    rect->LowerRightCorner.X = btn.rect->LowerRightCorner.X;
+    rect->LowerRightCorner.Y = btn.rect->LowerRightCorner.Y;
+    parent = btn.parent;
+    id = btn.id;
+    text = btn.text;
+    tooltipText = btn.tooltipText;
+    button = btn.button;
+    font = btn.font;
 }
 Button::~Button() = default;
