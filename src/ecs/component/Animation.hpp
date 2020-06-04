@@ -8,17 +8,19 @@
 #ifndef ANIMATION_HPP_
 #define ANIMATION_HPP_
 
-#include <map>
+#include <unordered_map>
+#include <string>
 
 namespace ecs::component {
 
 class Animation {
   public:
-    explicit Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange);
+    explicit Animation(const std::unordered_map<std::string, std::pair<size_t, size_t>> &animationRange);
     ~Animation();
 
   public:
-    std::map<std::string, std::pair<size_t, size_t>> animationRange;
+    std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange;
+    std::string currentAnimation;
 };
 
 } // namespace ecs::component
