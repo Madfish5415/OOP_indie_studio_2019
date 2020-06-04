@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['_7ecomponentarray_45',['~ComponentArray',['../classecs_1_1ComponentArray.html#a07dc3d5737f29428dd967f546973387f',1,'ecs::ComponentArray']]],
-  ['_7ecomponentmanager_46',['~ComponentManager',['../classecs_1_1ComponentManager.html#a3ad2253271afc28b4d81b51cd87f4f6b',1,'ecs::ComponentManager']]],
-  ['_7eentitymanager_47',['~EntityManager',['../classecs_1_1EntityManager.html#aff49d037faf0dd9e2a3ae5bad2ca7161',1,'ecs::EntityManager']]],
-  ['_7eevent_48',['~Event',['../classecs_1_1Event.html#a9fb4f119b92acd0515f28b914b4869da',1,'ecs::Event']]],
-  ['_7eeventmanager_49',['~EventManager',['../classecs_1_1EventManager.html#af0ef91b8a5db26338483f7b7308085ff',1,'ecs::EventManager']]],
-  ['_7eicomponentarray_50',['~IComponentArray',['../classecs_1_1IComponentArray.html#a545718692c898d7b4bc31af496efb90e',1,'ecs::IComponentArray']]],
-  ['_7esystem_51',['~System',['../classecs_1_1System.html#ab0ae8f1804130e3b8cfa2bbe2b0c5e6b',1,'ecs::System']]],
-  ['_7esystemmanager_52',['~SystemManager',['../classecs_1_1SystemManager.html#a034b7034b5fb31ac683731614c4adcd4',1,'ecs::SystemManager']]],
-  ['_7eworldmanager_53',['~WorldManager',['../classecs_1_1WorldManager.html#ad664e8b3149930ecb59a0afb36733d01',1,'ecs::WorldManager']]]
+  ['worldmanager_72',['WorldManager',['../classecs_1_1WorldManager.html',1,'ecs::WorldManager'],['../classecs_1_1WorldManager.html#a3d3b67306d5d79b142d875febde05961',1,'ecs::WorldManager::WorldManager()'],['../classecs_1_1System.html#abdb719d5cf7d5c9d734bc4ad1b990d70',1,'ecs::System::worldManager()']]],
+  ['worldmanager_2ehpp_73',['WorldManager.hpp',['../WorldManager_8hpp.html',1,'']]]
 ];

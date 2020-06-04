@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['max_5fcomponents_25',['MAX_COMPONENTS',['../Def_8hpp.html#afaecb8dcaf01738b4a6498d5d2c27c67',1,'ecs']]],
-  ['max_5fentities_26',['MAX_ENTITIES',['../Def_8hpp.html#a2ebf05bcfeb6d9eaa53c729d4ba9d0e9',1,'ecs']]]
+  ['icomponentarray_51',['IComponentArray',['../classecs_1_1IComponentArray.html',1,'ecs']]],
+  ['icomponentarray_2ehpp_52',['IComponentArray.hpp',['../IComponentArray_8hpp.html',1,'']]],
+  ['insert_53',['insert',['../classecs_1_1ComponentArray.html#a3cad0acb46ed7f230e1a485851bdff82',1,'ecs::ComponentArray']]]
 ];
