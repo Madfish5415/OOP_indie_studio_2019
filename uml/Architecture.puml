@@ -7,7 +7,6 @@ class Core {
     + void init()
     + void run()
 
-    - std::vector<IGame> _games
     - engine::ecs::Universe& _universe
 }
 
