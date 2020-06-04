@@ -6,22 +6,14 @@
 */
 
 #include <iostream>
-
+#include "ecs/Universe.hpp"
+#include "core/Core.hpp"
 #include "ecs/WorldManager.hpp"
 
 int main()
 {
-    ecs::WorldManager worldManager;
+    core::Core core;
 
-    worldManager.registerComponent<int>();
-
-    ecs::Entity entity1 = worldManager.createEntity();
-
-    worldManager.addComponent<int>(entity1, 1);
-
-    worldManager.getComponent<int>(entity1)++;
-
-    std::cout << worldManager.getComponent<int>(entity1) << std::endl;
-
-    return 0;
+    core.init();
+    core.run();
 }
