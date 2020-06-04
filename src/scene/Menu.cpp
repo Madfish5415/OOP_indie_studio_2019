@@ -9,6 +9,7 @@
 
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Button.hpp"
+#include "../ecs/system/Render.hpp"
 
 using namespace scene;
 
@@ -25,10 +26,11 @@ void Menu::init(ecs::WorldManager* worldManager)
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
 
     worldManager->registerComponent<ecs::component::Button>();
+    worldManager->registerSystem<ecs::system::Render>();
     createButton(
-        worldManager, gui, new irr::core::rect<irr::s32>(100, 200, 200, 200 + 40), nullptr, GUI_MENU_PLAY, L"PLAY");
+        worldManager, gui, new irr::core::rect<irr::s32>(960 - 200, 300, 960 + 200, 300 + 60), nullptr, GUI_MENU_PLAY, L"PLAY");
     createButton(
-        worldManager, gui, new irr::core::rect<irr::s32>(100, 400, 200, 400 + 40), nullptr, GUI_MENU_QUIT, L"QUIT");
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(100, 600, 200, 600 + 40), nullptr, GUI_MENU_HTP,
+        worldManager, gui, new irr::core::rect<irr::s32>(960 - 200, 400, 960 + 200, 400 + 60), nullptr, GUI_MENU_QUIT, L"QUIT");
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 200, 500, 960 + 200, 500 + 60), nullptr, GUI_MENU_HTP,
         L"HOW TO PLAY");
 }
