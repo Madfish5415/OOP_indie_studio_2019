@@ -1,5 +1,87 @@
 @startuml
 
+class Core {
+    + Core()
+    + ~Core()
+
+    + void init()
+    + void run()
+
+    - std::vector<IGame> _games
+    - engine::ecs::Universe& _universe
+}
+
+enum BUTTON_ID {
+    GUI_MENU_PLAY = 1,
+    GUI_MENU_QUIT,
+    GUI_MENU_HTP,
+    GUI_MENU_OPT,
+    GUI_SELECT_VALID,
+    GUI_SELECT_P1,
+    GUI_SELECT_P2,
+    GUI_SELECT_P3,
+    GUI_SELECT_P4,
+    GUI_SELECT_KB_P1_UP,
+    GUI_SELECT_KB_P1_DOWN,
+    GUI_SELECT_KB_P1_LEFT,
+    GUI_SELECT_KB_P1_RIGHT,
+    GUI_SELECT_KB_P1_BOMB,
+
+    GUI_SELECT_KB_P2_UP,
+    GUI_SELECT_KB_P2_DOWN,
+    GUI_SELECT_KB_P2_LEFT,
+    GUI_SELECT_KB_P2_RIGHT,
+    GUI_SELECT_KB_P2_BOMB,
+
+    GUI_SELECT_KB_P3_UP,
+    GUI_SELECT_KB_P3_DOWN,
+    GUI_SELECT_KB_P3_LEFT,
+    GUI_SELECT_KB_P3_RIGHT,
+    GUI_SELECT_KB_P3_BOMB,
+
+    GUI_SELECT_KB_P4_UP,
+    GUI_SELECT_KB_P4_DOWN,
+    GUI_SELECT_KB_P4_LEFT,
+    GUI_SELECT_KB_P4_RIGHT,
+    GUI_SELECT_KB_P4_BOMB,
+
+
+}
+
+class Menu {
+    + Menu() = delete
+    + ~Menu() = delete
+
+    + static void init()
+    + static void reset()
+}
+
+class PlayerSelector {
+    + PlayerSelector() = delete
+    + ~PlayerSelector() = delete
+
+    + static void init()
+    + static void reset()
+}
+
+class BomberMan {
+    + BomberMan) = delete
+    + ~BomberMan() = delete
+
+    + static void init()
+    + static void reset()
+
+    - std::map
+}
+
+class KeyBinding {
+    + KeyBinding(irr::EKEY_CODE up = irr::KEY_Z, irr::EKEY_CODE down = irr::KEY_S, irr::EKEY_CODE left = irr::KEY_Q, irr::EKEY_CODE right = irr::KEY_D, irr::EKEY_CODE bomb = irr::KEY_SPACE)
+    + KeyBinding(const KeyBinding& key) = default
+    + ~KeyBinding()
+
+    + std::map<std::string, irr::EKEY_CODE> keys
+}
+
 namespace engine {
 
     namespace event {
@@ -26,6 +108,34 @@ namespace engine {
         'const ComponentType MAX_COMPONENTS = 32
         'using Signature = std::bitset<MAX_COMPONENTS>
 
+        class Universe {
+            + Universe()
+            + ~Universe()
+
+            + WorldManager* createWorldManager(const std::string& name)
+            + bool hasWorldManager(const std::string& name) const
+            + WorldManager* getWorldManager(const std::string& name) const
+            + WorldManager* getCurrentWorldManager() const
+            + void setCurrentWorldManager(const std::string& name)
+            + void deleteWorldManager(const std::string& name)
+
+            - std::map<std::string, std::unique_ptr<WorldManager>> _worldManagers
+            - std::string _currentWorldManager
+            - EventReceiver _eventReceiver
+            - irr::IrrlichtDevice *device
+        }
+        Universe <-- WorldManager
+
+        class EventReceiver {
+            + EventReceiver(Universe *universe)
+            + ~EventReceiver()
+
+            + bool OnEvent(const SEvent& event) override
+
+            - Universe *_universe
+        }
+        irr::IEventReceiver <|-- EventReceiver
+
         class WorldManager {
             + WorldManager()
             + ~WorldManager() = default
@@ -47,7 +157,8 @@ namespace engine {
 
             + template<typname E> void publish(E& event)
 
-            - std::unique_ptr<EventManager> _eventManager
+
+            - eventManager _eventManager
             - std::unique_ptr<EntityManager> _entityManager
             - std::unique_ptr<SystemManager> _systemManager
             - std::unique_ptr<ComponentManager> _componentManager
@@ -299,14 +410,10 @@ namespace engine {
 
     namespace component {
         class Player {
-            + Player(irr::EKEY_CODE left, irr::EKEY_CODE right, irr::EKEY_CODE up, irr::EKEY_CODE down, irr::EKEY_CODE bomb)
+            + Player(const KeyBinding& keybinding)
             + ~Player()
 
-            + irr::EKEY_CODE left
-            + irr::EKEY_CODE right
-            + irr::EKEY_CODE up
-            + irr::EKEY_CODE down
-            + irr::EKEY_CODE bomb
+            + KeyBinding keys
         }
 
         class AI {
