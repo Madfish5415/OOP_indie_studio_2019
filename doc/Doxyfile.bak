@@ -799,16 +799,7 @@ INPUT                  = 	../src/ecs/Event.hpp                        \
 							../src/ecs/IComponentArray.hpp				\
 							../src/ecs/System.hpp						\
 							../src/ecs/SystemManager.hpp				\
-							../src/ecs/WorldManager.hpp					\
-							../src/ecs/component/Player.hpp             \
-							../src/ecs/component/Position.hpp           \
-							../src/ecs/component/Render.hpp             \
-							../src/ecs/component/Velocity.hpp           \
-							../src/ecs/event/Input.hpp                  \
-							../src/ecs/system/Motion.hpp                \
-							../src/ecs/system/Player.hpp                \
-							../src/ecs/system/Render.hpp                \
-							../src/GameLoop.hpp
+							../src/ecs/WorldManager.hpp
 
 
 # This tag can be used to specify the character encoding of the source files
