@@ -9,9 +9,12 @@
 
 using namespace ecs::component;
 
-Sound::Sound(const std::string &soundPath) : sound(new sf::Music())
+Sound::Sound(const std::unordered_map<std::string, std::string>& paths)
 {
-    sound->openFromFile(soundPath);
+    for (const auto& i : paths) {
+        sounds[i.first] = new sf::Music();
+        sounds[i.first]->openFromFile(i.first);
+    }
 }
 
 Sound::~Sound() = default;
