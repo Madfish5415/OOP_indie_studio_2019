@@ -8,6 +8,10 @@
 #ifndef OOP_INDIE_STUDIO_2019_WORLDMANAGER_HPP
 #define OOP_INDIE_STUDIO_2019_WORLDMANAGER_HPP
 
+namespace ecs {
+    class Universe;
+}
+
 #include <memory>
 
 #include "ComponentManager.hpp"
@@ -36,14 +40,15 @@ class WorldManager {
   public:
     /**
      * @brief Constructor
-     * Initializes the four managers
+     * Initializes the four managers and the universe
      */
-    WorldManager()
+    WorldManager(Universe *universe)
     {
         _entityManager = std::make_unique<EntityManager>();
         _componentManager = std::make_unique<ComponentManager>();
         _systemManager = std::make_unique<SystemManager>(this);
         _eventManager = std::make_unique<EventManager>();
+        _universe = universe;
     }
     /**
      * @brief Destructor
@@ -233,11 +238,22 @@ class WorldManager {
         _eventManager->publish<E>(event);
     }
 
+    /**
+     * @brief getUniverse method
+     * This method get the universe of the world manager.
+     * @return The universe.
+     */
+    Universe *getUniverse() const
+    {
+        return _universe;
+    }
+
   private:
     std::unique_ptr<EntityManager> _entityManager; /** < The entity manager. */
     std::unique_ptr<ComponentManager> _componentManager; /** < The component manager. */
     std::unique_ptr<SystemManager> _systemManager; /** < The system manager. */
     std::unique_ptr<EventManager> _eventManager; /** < The event manager. */
+    Universe *_universe; /** < The universe of the world manager. */
 };
 
 } // namespace ecs

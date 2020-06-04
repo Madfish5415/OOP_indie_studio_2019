@@ -18,10 +18,10 @@ namespace ecs::system {
 class Image : public ecs::System {
   public:
     explicit Image(irr::video::IVideoDriver *driver, WorldManager *worldManager);
-    ~Image();
+    ~Image() override;
 
   public:
-    void update();
+    void update() override;
 
   public:
     irr::video::IVideoDriver *driver;
