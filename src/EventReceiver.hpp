@@ -15,20 +15,15 @@ class Universe;
 #include <irrlicht.h>
 
 class EventReceiver : public irr::IEventReceiver {
-    public:
-        EventReceiver(ecs::Universe *universe)
-        {
-            _universe = universe;
-        }
+  public:
+    explicit EventReceiver(ecs::Universe *universe);
 
-        ~EventReceiver() override;
+    ~EventReceiver() override;
 
-        bool OnEvent(const irr::SEvent& event) override;
+    bool OnEvent(const irr::SEvent &event) override;
 
-    private:
-        ecs::Universe *_universe;
+  private:
+    ecs::Universe *_universe;
 };
-
-EventReceiver::~EventReceiver() = default;
 
 #endif /* !EVENTRECEIVER_HPP_ */
