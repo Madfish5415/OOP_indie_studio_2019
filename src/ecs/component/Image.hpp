@@ -5,8 +5,8 @@
 ** Image.hpp
 */
 
-#ifndef OOP_INDIE_STUDIO_2019_IMAGE_HPP
-#define OOP_INDIE_STUDIO_2019_IMAGE_HPP
+#ifndef OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP
+#define OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP
 
 #include <string>
 
@@ -34,4 +34,4 @@ class Image {
 
 } // namespace ecs::component
 
-#endif // OOP_INDIE_STUDIO_2019_IMAGE_HPP
+#endif // OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP

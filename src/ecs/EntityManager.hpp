@@ -13,18 +13,47 @@
 
 #include "Def.hpp"
 
+/**
+ * @file EntityManager.hpp
+ * @brief EntityManager Class
+ * @author Lucas.M Mattéo.F
+ * @version 1.0
+ * @date 03 june 2020
+ */
+
+/**
+ * @namespace ecs
+ */
 namespace ecs {
+
+/**
+ * @class EntityManager
+ * @brief Class that manages entities.
+ */
 class EntityManager {
   public:
+    /**
+     * @brief Constructor
+     * Constructor of EntityManager
+     */
     EntityManager()
     {
         for (Entity entity = 0; entity < MAX_ENTITIES; entity++) {
             _availableEntities.push(entity);
         }
     }
+    /**
+     * @brief Destructor
+     * It's a default destructor because the garbage collector will take care of the rest.
+     */
     ~EntityManager() = default;
 
   public:
+    /**
+     * @brief createEntity method
+     * This method creates an entity and returns it.
+     * @return The entity that was created.
+     */
     Entity createEntity()
     {
         if (_entitiesCount >= MAX_ENTITIES)
@@ -37,6 +66,11 @@ class EntityManager {
         return entity;
     }
 
+    /**
+     * @brief destroyEntity method
+     * This method destroys an entity.
+     * @param entity : The entity to be destroyed.
+     */
     void destroyEntity(Entity entity)
     {
         if (entity >= MAX_ENTITIES)
@@ -48,6 +82,12 @@ class EntityManager {
     }
 
   public:
+    /**
+     * @brief setSystemSignature method
+     * This method makes it possible to define the signature of an existing entity.
+     * @param entity : Entity to be retrieved.
+     * @param signature : The signature to be defined to the entity.
+     */
     void setSignature(Entity entity, Signature signature)
     {
         if (entity >= MAX_ENTITIES)
@@ -56,6 +96,12 @@ class EntityManager {
         _signatures[entity] = signature;
     }
 
+    /**
+     * @brief getSignature method
+     * This method will return a reference to the signature defined to the entity past in parameter.
+     * @param entity : The entity you want to retrieve the signature.
+     * @return A reference to the signature defined to the entity past in parameter.
+     */
     Signature& getSignature(Entity entity)
     {
         if (entity >= MAX_ENTITIES)
@@ -65,9 +111,9 @@ class EntityManager {
     }
 
   private:
-    std::queue<Entity> _availableEntities {};
-    std::array<Signature, MAX_ENTITIES> _signatures {};
-    unsigned int _entitiesCount = 0;
+    std::queue<Entity> _availableEntities {}; /** < Queue of available entities. */
+    std::array<Signature, MAX_ENTITIES> _signatures {}; /** < Array of singatures*/
+    unsigned int _entitiesCount = 0; /** < Entity counter*/
 };
 } // namespace ecs
 

@@ -12,7 +12,7 @@
 
 using namespace ecs::system;
 
-Image::Image(irr::video::IVideoDriver *driver, ecs::WorldManager *worldManager) : driver(driver), ecs::System(worldManager);
+Image::Image(irr::video::IVideoDriver *driver, ecs::WorldManager *worldManager) : ecs::System(worldManager), driver(driver)
 {
 }
 

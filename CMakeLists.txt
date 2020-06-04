@@ -1,8 +1,7 @@
 # Nous voulons un cmake "récent" pour utiliser les dernières fonctionnalités
 cmake_minimum_required(VERSION 3.0)
 
-# Notre projet est étiqueté hello
-project(helloIRR)
+project(IndieStudio)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -40,7 +39,7 @@ set(SRCS
     )
 
 set(HEADERS
-        src/ecs/AEvent.hpp
+        src/ecs/Event.hpp
         src/ecs/ComponentArray.hpp
         src/ecs/ComponentManager.hpp
         src/ecs/Def.hpp
