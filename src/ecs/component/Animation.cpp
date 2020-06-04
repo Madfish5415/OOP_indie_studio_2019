@@ -9,8 +9,8 @@
 
 using namespace ecs::component;
 
-Animation::Animation(const std::map<std::string, std::pair<size_t, size_t>> &animationRange)
-    : animationRange(animationRange)
+Animation::Animation(const std::unordered_map<std::string, std::pair<size_t, size_t>> &animationRange)
+    : animationRange(animationRange), currentAnimation(nullptr)
 {
 }
 

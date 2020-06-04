@@ -41,6 +41,7 @@ set(SRCS
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
+        src/ecs/system/Animation.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/PlayerSelector.cpp
@@ -88,6 +89,7 @@ set(HEADERS
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
+        src/ecs/system/Animation.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
