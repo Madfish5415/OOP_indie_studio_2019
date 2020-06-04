@@ -16,10 +16,10 @@ namespace ecs::system {
 class Music : public ecs::System {
   public:
     explicit Music(ecs::WorldManager *worldManager);
-    ~Music();
+    ~Music() override;
 
   public:
-    void update();
+    void update() override;
 };
 
 } // namespace ecs::system
