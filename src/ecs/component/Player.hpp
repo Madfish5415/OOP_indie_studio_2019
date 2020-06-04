@@ -10,19 +10,24 @@
 
 #include <irrlicht.h>
 
+#include <unordered_map>
+
+#include "../../KeyBinding.hpp"
+
 namespace ecs::component {
 
 class Player {
   public:
-    Player(irr::EKEY_CODE left, irr::EKEY_CODE right, irr::EKEY_CODE up, irr::EKEY_CODE down, irr::EKEY_CODE bomb);
+    Player(std::unordered_map<std::string, irr::EKEY_CODE> keys = {{"up", irr::EKEY_CODE::KEY_KEY_Z},
+               {"down", irr::EKEY_CODE::KEY_KEY_S}, {"left", irr::EKEY_CODE::KEY_KEY_Q},
+               {"right", irr::EKEY_CODE::KEY_KEY_D}, {"bomb", irr::EKEY_CODE::KEY_SPACE}},
+        size_t id = 1);
+    Player(const Player& player);
     ~Player();
 
   public:
-    irr::EKEY_CODE left;
-    irr::EKEY_CODE right;
-    irr::EKEY_CODE up;
-    irr::EKEY_CODE down;
-    irr::EKEY_CODE bomb;
+    std::unordered_map<std::string, irr::EKEY_CODE> keys;
+    size_t id;
 };
 
 } // namespace ecs::component

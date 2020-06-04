@@ -36,6 +36,9 @@ set(SRCS
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
         src/ecs/system/Image.cpp
+        src/scene/Bomberman.cpp
+        src/scene/Menu.cpp
+        src/scene/PlayerSelector.cpp
     )
 
 set(HEADERS
@@ -71,6 +74,9 @@ set(HEADERS
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
         src/ecs/system/Image.hpp
+        src/scene/Bomberman.hpp
+        src/scene/Menu.hpp
+        src/scene/PlayerSelector.hpp
         )
 
 
