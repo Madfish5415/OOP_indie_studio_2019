@@ -33,7 +33,7 @@ WorldManager* Universe::getWorldManager(const std::string& name) const
 {
     if (_worldManagers.count(name) == 0)
         return (nullptr);
-    if (_worldManagers.at(_currentWorldManager) == nullptr)
+    if (_worldManagers.at(name) == nullptr)
         return (nullptr);
     return (_worldManagers.at(name).get());
 }

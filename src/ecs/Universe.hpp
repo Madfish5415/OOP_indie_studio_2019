@@ -92,10 +92,10 @@ class Universe {
      * This method return the Irrlicth device.
      * @return The Irrlicht device.
      */
-    irr::IrrlichtDevice *Universe::getDevice() const;
+    irr::IrrlichtDevice *getDevice() const;
 
   private:
-    std::unordered_map<std::string, std::unique_ptr<WorldManager>> _worldManagers; /** < List of all our WorldManager sorted by name */
+    std::unordered_map<std::string, std::unique_ptr<WorldManager>> _worldManagers {}; /** < List of all our WorldManager sorted by name */
     std::string _currentWorldManager; /** < Name of the current WorldManager */
     EventReceiver _eventReceiver; /** < The EventReceiver Class */
     irr::IrrlichtDevice *_device; /** < The Irrlicht device */
