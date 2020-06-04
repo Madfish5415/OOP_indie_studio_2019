@@ -77,6 +77,7 @@ set(HEADERS
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
+        src/ecs/EventReceiver.hpp
         )
 
 

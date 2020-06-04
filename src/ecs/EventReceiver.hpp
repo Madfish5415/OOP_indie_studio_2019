@@ -21,12 +21,14 @@ class EventReceiver : public irr::IEventReceiver {
             _universe = universe;
         }
 
-        ~EventReceiver() = default;
+        ~EventReceiver() override;
 
         bool OnEvent(const irr::SEvent& event) override;
 
     private:
         ecs::Universe *_universe;
 };
+
+EventReceiver::~EventReceiver() = default;
 
 #endif /* !EVENTRECEIVER_HPP_ */
