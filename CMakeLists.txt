@@ -43,7 +43,7 @@ set(SRCS
         src/scene/Menu.cpp
         src/scene/PlayerSelector.cpp
         src/EventReceiver.cpp
-        src/Core/Core.cpp
+        src/core/Core.cpp
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
         )
@@ -88,7 +88,7 @@ set(HEADERS
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
         src/EventReceiver.hpp
-        src/Core/Core.hpp
+        src/core/Core.hpp
         src/ecs/Universe.hpp
         )
 
