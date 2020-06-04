@@ -36,6 +36,7 @@ set(SRCS
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
         src/ecs/system/Image.cpp
+        src/ecs/system/Music.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/PlayerSelector.cpp
@@ -76,6 +77,7 @@ set(HEADERS
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
         src/ecs/system/Image.hpp
+        src/ecs/system/Music.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
