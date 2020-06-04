@@ -30,6 +30,8 @@ void Core::init()
 [[noreturn]] void Core::run()
 {
     while (true) {
+        _universe->getDevice()->getVideoDriver()->beginScene();
         _universe->getCurrentWorldManager()->updateSystem();
+        _universe->getDevice()->getVideoDriver()->endScene();
     }
 }

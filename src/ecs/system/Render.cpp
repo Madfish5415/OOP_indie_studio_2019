@@ -25,11 +25,9 @@ Render::~Render() = default;
 void Render::update() 
 {
     if (driver) {
-        driver->beginScene();
         if (gui)
             gui->drawAll();
         if (smgr)
             smgr->drawAll();
-        driver->endScene();
     }
 }
