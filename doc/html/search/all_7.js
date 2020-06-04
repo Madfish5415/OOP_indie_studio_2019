@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['publish_27',['publish',['../classecs_1_1EventManager.html#a96e6ff10bf61355ca731ce3dc41b30bd',1,'ecs::EventManager::publish()'],['../classecs_1_1WorldManager.html#ad5b2351cf43d43014cc76489917d57ab',1,'ecs::WorldManager::publish()']]]
+  ['max_5fcomponents_54',['MAX_COMPONENTS',['../Def_8hpp.html#afaecb8dcaf01738b4a6498d5d2c27c67',1,'ecs']]],
+  ['max_5fentities_55',['MAX_ENTITIES',['../Def_8hpp.html#a2ebf05bcfeb6d9eaa53c729d4ba9d0e9',1,'ecs']]]
 ];
