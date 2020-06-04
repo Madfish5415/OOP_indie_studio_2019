@@ -10,16 +10,18 @@
 
 #include <SFML/Audio.hpp>
 #include <string>
+#include <unordered_map>
 
 namespace ecs::component {
 
 class Sound {
   public:
-    explicit Sound(const std::string &soundPath);
+    explicit Sound(const std::unordered_map<std::string, std::string>& paths);
     ~Sound();
 
   public:
-    sf::Music *sound;
+    std::unordered_map<std::string, sf::Music *> sounds;
+    std::vector<std::string> soundsToPlay;
 };
 
 } // namespace ecs::component
