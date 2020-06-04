@@ -13,7 +13,7 @@ Universe::Universe()
       _currentWorldManager(""),
       _eventReceiver(EventReceiver(this)),
       _device(createDevice(
-          irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(640, 480), 16, false, false, &_eventReceiver))
+          irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(640, 480), 16, false, false, false, &_eventReceiver))
 {
 }
 
@@ -31,9 +31,10 @@ bool Universe::hasWorldManager(const std::string& name) const
 
 WorldManager* Universe::getWorldManager(const std::string& name) const
 {
-    if (_worldManagers.count(name) == 0) {
+    if (_worldManagers.count(name) == 0)
         return (nullptr);
-    }
+    if (_worldManagers.at(_currentWorldManager) == nullptr)
+        return (nullptr);
     return (_worldManagers.at(name).get());
 }
 
@@ -53,7 +54,11 @@ void Universe::setCurrentWorldManager(const std::string& name)
 
 void Universe::deleteWorldManager(const std::string& name)
 {
-    if (_worldManagers.count(name) != 0) {
+    if (_worldManagers.count(name))
         _worldManagers.erase(name);
-    }
+}
+
+irr::IrrlichtDevice *Universe::getDevice() const
+{
+    return (_device);
 }
