@@ -12,8 +12,6 @@
 
 #include <unordered_map>
 
-#include "../../KeyBinding.hpp"
-
 namespace ecs::component {
 
 class Player {
