@@ -33,5 +33,3 @@ void Render::update()
         driver->endScene();
     }
 }
-
-
