@@ -40,8 +40,10 @@ set(SRCS
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/PlayerSelector.cpp
+        src/EventReceiver.cpp
         src/Core/Core.cpp
-    )
+        src/ecs/Universe.cpp
+        )
 
 set(HEADERS
         src/ecs/Event.hpp
@@ -80,8 +82,9 @@ set(HEADERS
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
-        src/ecs/EventReceiver.hpp
+        src/EventReceiver.hpp
         src/Core/Core.hpp
+        src/ecs/Universe.hpp
         )
 
 
