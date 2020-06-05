@@ -14,7 +14,8 @@ namespace ecs::component {
 
 class Size {
   public:
-    explicit Size(const irr::core::vector3df &size);
+    explicit Size(const irr::core::vector3df &size = irr::core::vector3df(0));
+    Size(const Size &size);
     ~Size();
 
   public:
