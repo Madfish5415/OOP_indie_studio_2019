@@ -14,7 +14,8 @@ namespace ecs::component {
 
 class Stats {
   public:
-    Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &maxBomb, const bool &wallPass);
+    Stats(const size_t &moveSpeed = 0, const size_t &bombRadius = 0, const size_t &maxBomb = 0, const bool &wallPass = 0);
+    Stats(const Stats& stats);
     ~Stats();
 
   public:
