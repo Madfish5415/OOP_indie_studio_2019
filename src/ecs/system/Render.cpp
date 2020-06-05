@@ -17,19 +17,14 @@ Render::Render(WorldManager *worldManager) : ecs::System(worldManager)
 
     smgr = device->getSceneManager();
     gui = device->getGUIEnvironment();
-    driver = device->getVideoDriver();
 }
 
 Render::~Render() = default;
 
 void Render::update() 
 {
-    if (driver) {
-        driver->beginScene();
-        if (gui)
-            gui->drawAll();
-        if (smgr)
-            smgr->drawAll();
-        driver->endScene();
-    }
+    if (gui)
+        gui->drawAll();
+    if (smgr)
+        smgr->drawAll();
 }

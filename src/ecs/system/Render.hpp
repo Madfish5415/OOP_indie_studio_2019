@@ -26,7 +26,6 @@ class Render : public ecs::System {
     public:
         irr::scene::ISceneManager *smgr;
         irr::gui::IGUIEnvironment *gui;
-        irr::video::IVideoDriver *driver;
 };
 }
 
