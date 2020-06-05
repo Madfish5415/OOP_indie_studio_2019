@@ -10,18 +10,24 @@
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
+#include "../ecs/system/Button.hpp"
 #include "../ecs/system/Image.hpp"
 #include "../ecs/system/Render.hpp"
 
 using namespace scene;
 
 static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
-    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const wchar_t* text,
-    const wchar_t* tooltipText = nullptr)
+    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const irr::io::path& normalImage,
+    const irr::io::path& hoverImage, const irr::io::path& setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
-    worldManager->addComponent<ecs::component::Button>(
-        button, ecs::component::Button(gui, rect, parent, id, text, tooltipText));
+    auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
+    auto buttonComp = ecs::component::Button(gui, rect, parent, id, L"", L"");
+
+    buttonComp.setImage(worldManager->getUniverse()->getDevice()->getVideoDriver()->getTexture(normalImage));
+    buttonComp.setHoverImage(videoDriver->getTexture(hoverImage));
+    buttonComp.setPressedImage(videoDriver->getTexture(setPressedImage));
+    worldManager->addComponent<ecs::component::Button>(button, buttonComp);
 }
 
 void Menu::init(ecs::WorldManager* worldManager)
@@ -39,18 +45,29 @@ void Menu::init(ecs::WorldManager* worldManager)
         signature.set(worldManager->getComponentType<ecs::component::Image>());
         worldManager->setSystemSignature<ecs::system::Image>(signature);
     }
+    worldManager->registerSystem<ecs::system::Button>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Button>());
+        worldManager->setSystemSignature<ecs::system::Button>(signature);
+    }
+
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
-        ecs::component::Image(driver, "./assets/background.jpg", new irr::core::position2d<irr::s32> {0, 0},
+        ecs::component::Image(driver, "./assets/img/background.jpg", new irr::core::position2d<irr::s32> {0, 0},
             new irr::core::rect<irr::s32> {0, 0, 1920, 1080}));
+
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
-        ecs::component::Image(driver, "./assets/bomberman_logo.png", new irr::core::position2d<irr::s32> {960 - 364, 100},
-            new irr::core::rect<irr::s32> {0, 0, 728, 202}));
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 200, 800, 400 + 200, 800 + 60), nullptr,
-        GUI_MENU_PLAY, L"PLAY");
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 200, 800, 960 + 200, 800 + 60), nullptr,
-        GUI_MENU_QUIT, L"QUIT");
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 200, 800, 1520 + 200, 800 + 60), nullptr,
-        GUI_MENU_HTP, L"HOW TO PLAY");
+        ecs::component::Image(driver, "./assets/img/bomberman_logo.png",
+            new irr::core::position2d<irr::s32>(960 - 640, 0), new irr::core::rect<irr::s32> {0, 0, 1280, 356}, nullptr,
+            irr::video::SColor(255, 255, 255, 255), true));
+
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
+        GUI_MENU_PLAY, "assets/img/button-play.png", "assets/img/button-play.png", "assets/img/button-play.png");
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 150, 800, 960 + 150, 800 + 150), nullptr,
+        GUI_MENU_HTP, "assets/img/button-htp.png", "assets/img/button-htp.png", "assets/img/button-htp.png");
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 150, 800, 1520 + 150, 800 + 150), nullptr,
+        GUI_MENU_QUIT, "assets/img/button-quit.png", "assets/img/button-quit-hover.png", "assets/img/button-quit.png");
 }
