@@ -7,6 +7,8 @@
 
 #include "Menu.hpp"
 
+#include <irrlicht.h>
+
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
@@ -17,21 +19,22 @@
 using namespace scene;
 
 static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
-    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const irr::io::path& normalImage,
-    const irr::io::path& hoverImage, const irr::io::path& setPressedImage)
+    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
+                         const std::string& hoverImage, const std::string& setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     auto buttonComp = ecs::component::Button(gui, rect, parent, id, L"", L"");
 
-    buttonComp.setImage(videoDriver->getTexture(normalImage));
-    buttonComp.setHoverImage(videoDriver->getTexture(hoverImage));
-    buttonComp.setPressedImage(videoDriver->getTexture(setPressedImage));
+    buttonComp.setImage(videoDriver->getTexture(normalImage.c_str()));
+    buttonComp.setHoverImage(videoDriver->getTexture(hoverImage.c_str()));
+    buttonComp.setPressedImage(videoDriver->getTexture(setPressedImage.c_str()));
     worldManager->addComponent<ecs::component::Button>(button, buttonComp);
 }
 
-void Menu::init(ecs::WorldManager* worldManager)
+void Menu::init(ecs::Universe* universe)
 {
+    auto worldManager = universe->createWorldManager("Menu");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
 
@@ -55,20 +58,24 @@ void Menu::init(ecs::WorldManager* worldManager)
 
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
-        ecs::component::Image(driver, "./assets/img/background.jpg", new irr::core::position2d<irr::s32> {0, 0},
+        ecs::component::Image(driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0},
             new irr::core::rect<irr::s32> {0, 0, 1920, 1080}));
 
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
-        ecs::component::Image(driver, "./assets/img/bomberman_logo.png",
-            new irr::core::position2d<irr::s32>(960 - 640, 0), new irr::core::rect<irr::s32> {0, 0, 1280, 356}, nullptr,
-            irr::video::SColor(255, 255, 255, 255), true));
+        ecs::component::Image(driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0),
+            new irr::core::rect<irr::s32> {0, 0, 1280, 356}, nullptr, irr::video::SColor(255, 255, 255, 255), true));
 
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
-        GUI_MENU_PLAY, "assets/img/button/button-play-normal.png", "assets/img/button/button-play-hover.png", "assets/img/button/button-play-pressed.png");
+        GUI_MENU_PLAY, menu::button::play::NORMAL, menu::button::play::HOVER, menu::button::play::PRESSED);
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 150, 800, 960 + 150, 800 + 150), nullptr,
-        GUI_MENU_HTP, "assets/img/button/button-htp-normal.png", "assets/img/button/button-htp-hover.png", "assets/img/button/button-htp-pressed.png");
+        GUI_MENU_HTP, menu::button::htp::NORMAL, menu::button::htp::HOVER, menu::button::htp::PRESSED);
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 150, 800, 1520 + 150, 800 + 150), nullptr,
-        GUI_MENU_QUIT, "assets/img/button/button-quit-normal.png", "assets/img/button/button-quit-hover.png",
-        "assets/img/button/button-quit-pressed.png");
+        GUI_MENU_QUIT, menu::button::quit::NORMAL, menu::button::quit::HOVER, menu::button::quit::PRESSED);
+}
+
+void Menu::destroy(ecs::Universe* universe)
+{
+    universe->deleteWorldManager("Menu");
+    universe->getDevice()->getGUIEnvironment()->clear();
 }
