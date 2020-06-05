@@ -21,8 +21,8 @@ Core::~Core() = default;
 
 void Core::init()
 {
-    _universe->createWorldManager("Menu");
-    scene::Menu::init(_universe->getWorldManager("Menu"));
+    auto menu = _universe->createWorldManager("Menu");
+    scene::Menu::init(menu);
     //scene::PlayerSelector::init();
     _universe->setCurrentWorldManager("Menu");
 }
