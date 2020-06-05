@@ -17,14 +17,15 @@ namespace ecs::component {
 class Button {
   public:
     Button(irr::gui::IGUIEnvironment* gui = nullptr, irr::core::rect<irr::s32>* rect = nullptr,
-        irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
-        const wchar_t* tooltipText = nullptr);
+           irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
+           const wchar_t* tooltipText = nullptr);
     Button(const Button& button);
     ~Button();
 
     void setFont(const irr::io::path& path);
     void setImage(irr::video::ITexture* image);
-    void setPressedImage(irr::video::ITexture* pressedImage);
+    void setHoverImage(irr::video::ITexture* image);
+    void setPressedImage(irr::video::ITexture* image);
 
   public:
     irr::gui::IGUIEnvironment* gui;
@@ -35,6 +36,8 @@ class Button {
     const wchar_t* tooltipText;
     irr::gui::IGUIButton* button;
     irr::gui::IGUIFont* font;
+    irr::video::ITexture *normalImage;
+    irr::video::ITexture *hoverImage;
 };
 
 } // namespace ecs::component
