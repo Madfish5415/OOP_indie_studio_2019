@@ -14,5 +14,6 @@ using namespace ecs::component;
 HitboxDetection::HitboxDetection(const std::vector<irr::core::line3df>& rays) : rays(rays)
 {
 }
+HitboxDetection::HitboxDetection(const HitboxDetection& transform) = default;
 
 HitboxDetection::~HitboxDetection() = default;
