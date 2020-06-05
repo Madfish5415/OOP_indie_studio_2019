@@ -11,7 +11,7 @@ using namespace ecs;
 Universe::Universe()
     : _worldManagers(std::unordered_map<std::string, std::unique_ptr<WorldManager>>()),
       _currentWorldManager(""),
-      _eventReceiver(EventReceiver(this)),teams
+      _eventReceiver(EventReceiver(this)),
       _device(createDevice(
           irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1920, 1080), 16, true, false, false, &_eventReceiver))
 {

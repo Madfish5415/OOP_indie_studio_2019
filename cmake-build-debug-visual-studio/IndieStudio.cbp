@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="IndieStudio"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bomberman">
+				<Option output="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/bomberman.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.26.28801\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 bomberman"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bomberman/fast">
+				<Option output="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/bomberman.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.26.28801\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.26.28801\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 bomberman/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Lucas\CLionProjects\OOP_indie_studio_2019\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/EventReceiver.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/EventReceiver.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/core/Core.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/core/Core.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/ComponentArray.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/ComponentManager.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/Def.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/EntityManager.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/Event.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/EventManager.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/IComponentArray.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/System.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/SystemManager.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/Universe.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/Universe.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/WorldManager.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/AI.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/AI.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Animation.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Animation.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/BombStats.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/BombStats.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/BombTimer.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/BombTimer.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Button.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Button.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/HitboxDetection.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/HitboxDetection.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Image.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Image.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/LookingView.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/LookingView.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Lootable.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Lootable.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/MessageBox.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/MessageBox.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Motion.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Motion.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Music.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Music.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Owner.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Owner.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Player.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Player.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Render3d.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Render3d.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Size.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Size.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Sound.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Sound.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Stats.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Stats.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Text.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Text.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Transform.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Transform.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Unbreakable.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/component/Unbreakable.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Animation.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Animation.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Button.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Button.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Image.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Image.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Movement.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Movement.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Music.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Music.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Render.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Render.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Size.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Size.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Sound.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/ecs/system/Sound.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/irrlicht/vector3df.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/main.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/Bomberman.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/Bomberman.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/Menu.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/Menu.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/PlayerSelector.cpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/src/scene/PlayerSelector.hpp">
+			<Option target="bomberman"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/FindIrrlicht.cmake">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/Lucas/CLionProjects/OOP_indie_studio_2019/FindSFML.cmake">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
