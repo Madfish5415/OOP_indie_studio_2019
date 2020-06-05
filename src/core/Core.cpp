@@ -27,9 +27,11 @@ void Core::init()
     _universe->setCurrentWorldManager("Menu");
 }
 
-[[noreturn]] void Core::run()
+void Core::run()
 {
-    while (true) {
+    while (_universe->getDevice()->run()) {
+        _universe->getDevice()->getVideoDriver()->beginScene();
         _universe->getCurrentWorldManager()->updateSystem();
+        _universe->getDevice()->getVideoDriver()->endScene();
     }
 }
