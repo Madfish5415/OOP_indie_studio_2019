@@ -14,7 +14,8 @@ namespace ecs::component {
 
 class Render3d {
   public:
-    explicit Render3d(irr::scene::ISceneNode *node);
+    Render3d(irr::scene::ISceneNode *node = nullptr);
+    Render3d(const Render3d &render);
     ~Render3d();
 
   public:

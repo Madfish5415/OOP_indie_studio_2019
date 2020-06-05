@@ -7,6 +7,7 @@
 
 #include "../scene/PlayerSelector.hpp"
 #include "../scene/Menu.hpp"
+#include "../scene/Bomberman.hpp"
 
 #include "Core.hpp"
 
@@ -21,10 +22,13 @@ Core::~Core() = default;
 
 void Core::init()
 {
-    _universe->createWorldManager("Menu");
-    scene::Menu::init(_universe->getWorldManager("Menu"));
+    // _universe->createWorldManager("Menu");
+    // scene::Menu::init(_universe->getWorldManager("Menu"));
+    _universe->createWorldManager("Bomberman");
+    scene::Bomberman::init(_universe->getWorldManager("Bomberman"));
     //scene::PlayerSelector::init();
-    _universe->setCurrentWorldManager("Menu");
+    // _universe->setCurrentWorldManager("Menu");
+    _universe->setCurrentWorldManager("Bomberman");
 }
 
 void Core::run()

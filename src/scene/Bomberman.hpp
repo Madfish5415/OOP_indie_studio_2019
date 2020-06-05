@@ -10,16 +10,19 @@
 
 #include <vector>
 
+#include "../ecs/WorldManager.hpp"
 #include "../ecs/component/Player.hpp"
 
+namespace scene {
 class Bomberman {
   public:
     Bomberman() = delete;
     ~Bomberman() = delete;
 
   public:
-    static void init(std::vector<ecs::component::Player>);
+    static void init(ecs::WorldManager *worldManager);
     static void reset();
 };
+}
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP
