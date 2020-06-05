@@ -13,4 +13,6 @@ Owner::Owner(const ecs::Entity &ID) : entity(ID)
 {
 }
 
+Owner::Owner(const Owner &owner) = default;
+
 Owner::~Owner() = default;
