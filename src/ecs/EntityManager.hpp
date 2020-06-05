@@ -11,6 +11,10 @@
 #include <array>
 #include <queue>
 
+#ifdef _WIN32
+#include <stdexcept>
+#endif
+
 #include "Def.hpp"
 
 /**

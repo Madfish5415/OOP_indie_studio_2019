@@ -64,7 +64,6 @@ void PlayerSelector::init(ecs::Universe* universe)
 
     worldManager->registerComponent<ecs::component::Button>();
     worldManager->registerComponent<ecs::component::Image>();
-    worldManager->registerSystem<ecs::system::Render>();
     worldManager->registerSystem<ecs::system::Image>();
     {
         ecs::Signature signature;
@@ -72,6 +71,7 @@ void PlayerSelector::init(ecs::Universe* universe)
         signature.set(worldManager->getComponentType<ecs::component::Image>());
         worldManager->setSystemSignature<ecs::system::Image>(signature);
     }
+    worldManager->registerSystem<ecs::system::Render>();
     worldManager->registerSystem<ecs::system::Button>();
     {
         ecs::Signature signature;
