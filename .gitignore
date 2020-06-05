@@ -1,6 +1,9 @@
 # Binaries
 a.out
 bomberman
+bomberman.exe
+bomberman.ilk
+bomberman.pdb
 unit_tests
 
 # Compilation
