@@ -13,4 +13,6 @@ BombStats::BombStats(const size_t &bombRadius, const bool &wallPass) : bombRadiu
 {
 }
 
+BombStats::BombStats(const BombStats &bombstat) = default;
+
 BombStats::~BombStats() = default;
