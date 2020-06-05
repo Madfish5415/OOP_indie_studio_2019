@@ -22,6 +22,8 @@ Universe::~Universe() = default;
 WorldManager* Universe::createWorldManager(const std::string& name)
 {
     _worldManagers.emplace(name, new WorldManager(this));
+
+    return _worldManagers.at(name).get();
 }
 
 bool Universe::hasWorldManager(const std::string& name) const
