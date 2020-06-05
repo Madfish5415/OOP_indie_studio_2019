@@ -25,7 +25,7 @@ Image::Image(irr::video::IVideoDriver* driver, const irr::io::path& texture,
 }
 Image::Image(const Image& image)
     : driver(image.driver),
-      texture(driver->getTexture(image.texture)),
+      texture(image.texture),
       position(image.position),
       rect(image.rect),
       clipRect(image.clipRect),
