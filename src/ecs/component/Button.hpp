@@ -5,8 +5,8 @@
 ** Button.hpp
 */
 
-#ifndef OOP_INDIE_STUDIO_2019_BUTTON_HPP
-#define OOP_INDIE_STUDIO_2019_BUTTON_HPP
+#ifndef OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
+#define OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
 
 #include <string>
 
@@ -24,6 +24,7 @@ class Button {
 
     void setFont(const irr::io::path& path);
     void setImage(irr::video::ITexture* image);
+    void setHoverImage(irr::video::ITexture* hoverImage);
     void setPressedImage(irr::video::ITexture* pressedImage);
 
   public:
@@ -35,8 +36,10 @@ class Button {
     const wchar_t* tooltipText;
     irr::gui::IGUIButton* button;
     irr::gui::IGUIFont* font;
+    irr::video::ITexture *normalImage;
+    irr::video::ITexture *hoverImage;
 };
 
 } // namespace ecs::component
 
-#endif // OOP_INDIE_STUDIO_2019_BUTTON_HPP
+#endif // OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
