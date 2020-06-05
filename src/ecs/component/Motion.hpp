@@ -14,7 +14,8 @@ namespace ecs::component {
 
 class Motion {
   public:
-    Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direction);
+    Motion(const irr::f32 &movementSpeed = 0.0, const irr::core::vector3df &direction = irr::core::vector3df(0.0));
+    Motion(const Motion &motion);
     ~Motion();
 
   public:
