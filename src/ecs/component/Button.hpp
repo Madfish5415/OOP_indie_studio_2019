@@ -24,8 +24,8 @@ class Button {
 
     void setFont(const irr::io::path& path);
     void setImage(irr::video::ITexture* image);
-    void setHoverImage(irr::video::ITexture* hoverImage);
-    void setPressedImage(irr::video::ITexture* pressedImage);
+    void setHoverImage(irr::video::ITexture* image);
+    void setPressedImage(irr::video::ITexture* image);
 
   public:
     irr::gui::IGUIEnvironment* gui;

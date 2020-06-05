@@ -11,34 +11,14 @@ using namespace ecs::component;
 
 Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent,
     irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
-    : gui(gui), rect(rect), parent(parent), id(id), text(text), tooltipText(tooltipText), font(nullptr)
+    : gui(gui), rect(rect), parent(parent), id(id), text(text), tooltipText(tooltipText), font(nullptr),
+      normalImage(nullptr), hoverImage(nullptr)
 {
-    if (gui)
+    if (gui) {
         button = gui->addButton(*rect, parent, id, text, tooltipText);
-}
-
-void Button::setFont(const irr::io::path& path)
-{
-    this->font = this->gui->getFont(path);
-    this->button->setOverrideFont(this->font);
-}
-
-void Button::setImage(irr::video::ITexture* image)
-{
-    this->normalImage = image;
-    this->button->setImage(image);
-    this->button->setUseAlphaChannel(true);
-    button->setDrawBorder(false);
-}
-
-void Button::setHoverImage(irr::video::ITexture* hoverImage)
-{
-    this->hoverImage = hoverImage;
-}
-
-void Button::setPressedImage(irr::video::ITexture* pressedImage)
-{
-    this->button->setPressedImage(pressedImage);
+        button->setUseAlphaChannel(true);
+        button->setDrawBorder(false);
+    }
 }
 
 Button::Button(const Button& btn)
@@ -54,5 +34,31 @@ Button::Button(const Button& btn)
     tooltipText = btn.tooltipText;
     button = btn.button;
     font = btn.font;
+    normalImage = btn.normalImage;
+    hoverImage = btn.hoverImage;
 }
+
 Button::~Button() = default;
+
+void Button::setFont(const irr::io::path& path)
+{
+    this->font = this->gui->getFont(path);
+    this->button->setOverrideFont(this->font);
+}
+
+void Button::setImage(irr::video::ITexture* image)
+{
+    normalImage = image;
+    button->setImage(image);
+}
+
+void Button::setHoverImage(irr::video::ITexture* image)
+{
+    hoverImage = image;
+}
+
+void Button::setPressedImage(irr::video::ITexture* image)
+{
+    button->setPressedImage(image);
+}
+

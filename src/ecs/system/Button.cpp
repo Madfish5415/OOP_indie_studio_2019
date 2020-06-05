@@ -24,9 +24,9 @@ void Button::update()
     for (const auto& entity : entities) {
         auto& button = worldManager->getComponent<ecs::component::Button>(entity);
         if (button.button->getRelativePosition().isPointInside(mouse->getPosition())) {
-            button.setImage(button.hoverImage);
+            button.button->setImage(button.hoverImage);
         } else {
-            button.setImage(button.normalImage);
+            button.button->setImage(button.normalImage);
         }
     }
 }

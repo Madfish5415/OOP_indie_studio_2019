@@ -24,7 +24,7 @@ static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironm
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     auto buttonComp = ecs::component::Button(gui, rect, parent, id, L"", L"");
 
-    buttonComp.setImage(worldManager->getUniverse()->getDevice()->getVideoDriver()->getTexture(normalImage));
+    buttonComp.setImage(videoDriver->getTexture(normalImage));
     buttonComp.setHoverImage(videoDriver->getTexture(hoverImage));
     buttonComp.setPressedImage(videoDriver->getTexture(setPressedImage));
     worldManager->addComponent<ecs::component::Button>(button, buttonComp);
@@ -65,9 +65,10 @@ void Menu::init(ecs::WorldManager* worldManager)
             irr::video::SColor(255, 255, 255, 255), true));
 
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
-        GUI_MENU_PLAY, "assets/img/button-play.png", "assets/img/button-play.png", "assets/img/button-play.png");
+        GUI_MENU_PLAY, "assets/img/button/button-play-normal.png", "assets/img/button/button-play-hover.png", "assets/img/button/button-play-pressed.png");
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 150, 800, 960 + 150, 800 + 150), nullptr,
-        GUI_MENU_HTP, "assets/img/button-htp.png", "assets/img/button-htp.png", "assets/img/button-htp.png");
+        GUI_MENU_HTP, "assets/img/button/button-htp-normal.png", "assets/img/button/button-htp-hover.png", "assets/img/button/button-htp-pressed.png");
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 150, 800, 1520 + 150, 800 + 150), nullptr,
-        GUI_MENU_QUIT, "assets/img/button-quit.png", "assets/img/button-quit-hover.png", "assets/img/button-quit.png");
+        GUI_MENU_QUIT, "assets/img/button/button-quit-normal.png", "assets/img/button/button-quit-hover.png",
+        "assets/img/button/button-quit-pressed.png");
 }
