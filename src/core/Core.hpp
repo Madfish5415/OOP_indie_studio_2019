@@ -17,7 +17,7 @@ namespace core {
         ~Core();
 
         void init();
-        [[noreturn]] void run();
+        void run();
 
       private:
         std::unique_ptr<ecs::Universe> _universe;
