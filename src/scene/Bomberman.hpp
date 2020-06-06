@@ -21,7 +21,7 @@ class Bomberman {
     ~Bomberman() = delete;
 
   public:
-    static void init(ecs::Universe *, std::vector<ecs::component::Player>, std::vector<std::string>);
+    static void init(ecs::Universe *universe, std::vector<ecs::component::Player> player, std::vector<std::string> path);
     static void reset();
 };
 
