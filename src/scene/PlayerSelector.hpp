@@ -90,6 +90,13 @@ static const std::string YELLOW = "assets/img/player-selector/player/player-yell
 
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
     {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
+
+static const std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, scene::bomberman::ninja::AQUA},
+    {BLACK, scene::bomberman::ninja::BLACK}, {BLUE, scene::bomberman::ninja::BLUE},
+    {GREEN, scene::bomberman::ninja::GREEN}, {PINK, scene::bomberman::ninja::PINK},
+    {WHITE, scene::bomberman::ninja::WHITE}, {PINK, scene::bomberman::ninja::YELLOW}
+};
+
 } // namespace player
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
