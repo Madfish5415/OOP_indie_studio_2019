@@ -9,11 +9,11 @@
 
 using namespace ecs::component;
 
-Player::Player(std::unordered_map<std::string, irr::EKEY_CODE> keys, size_t id): keys(keys), id(id)
+Player::Player(std::unordered_map<std::string, irr::EKEY_CODE> keys, size_t id): keys(keys)
 {
 }
 
-Player::Player(const Player& player) : id(player.id), keys(player.keys)
+Player::Player(const Player& player) : keys(player.keys)
 {
 }
 
