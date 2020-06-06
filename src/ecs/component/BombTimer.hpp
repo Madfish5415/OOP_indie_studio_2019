@@ -14,7 +14,7 @@ namespace ecs::component {
 
 class BombTimer {
   public:
-    explicit BombTimer(const irr::u32 &duration = 0, irr::IrrlichtDevice *dev = nullptr);
+    BombTimer(const irr::u32 &duration = 0, irr::IrrlichtDevice *dev = nullptr);
     BombTimer(const BombTimer &bombTimer);
     ~BombTimer();
 
