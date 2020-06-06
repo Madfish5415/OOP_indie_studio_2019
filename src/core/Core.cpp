@@ -25,7 +25,7 @@ void Core::init()
     // _universe->createWorldManager("Menu");
     // scene::Menu::init(_universe->getWorldManager("Menu"));
     _universe->createWorldManager("Bomberman");
-    scene::Bomberman::init(_universe->getWorldManager("Bomberman"));
+    scene::Bomberman::init(_universe->getWorldManager("Bomberman"), std::vector<ecs::component::Player>());
     //scene::PlayerSelector::init();
     // _universe->setCurrentWorldManager("Menu");
     _universe->setCurrentWorldManager("Bomberman");
@@ -33,7 +33,14 @@ void Core::init()
 
 void Core::run()
 {
+    irr::IrrlichtDevice *device = _universe->getDevice();
+    irr::core::vector3df posCam = device->getSceneManager()->getActiveCamera()->getPosition();
+
     while (_universe->getDevice()->run()) {
+        wchar_t titre[100];
+        posCam = device->getSceneManager()->getActiveCamera()->getPosition();
+        swprintf(titre, 100, L"X : %f Y : %f Z : %f", posCam.X, posCam.Y, posCam.Z);
+        device->setWindowCaption(titre);
         _universe->getDevice()->getVideoDriver()->beginScene();
         _universe->getCurrentWorldManager()->updateSystem();
         _universe->getDevice()->getVideoDriver()->endScene();

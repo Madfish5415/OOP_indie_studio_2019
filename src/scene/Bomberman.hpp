@@ -20,7 +20,7 @@ class Bomberman {
     ~Bomberman() = delete;
 
   public:
-    static void init(ecs::WorldManager *worldManager);
+    static void init(ecs::WorldManager *worldManager, std::vector<ecs::component::Player> players);
     static void reset();
 };
 }

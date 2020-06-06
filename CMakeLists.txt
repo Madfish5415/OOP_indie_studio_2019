@@ -49,6 +49,7 @@ set(SRCS
         src/core/Core.cpp
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
+        src/map_generator/MapGenerator.cpp
         )
 
 set(HEADERS
@@ -96,6 +97,7 @@ set(HEADERS
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
+        src/map_generator/MapGenerator.hpp
         )
 
 
