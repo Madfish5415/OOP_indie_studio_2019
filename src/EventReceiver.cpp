@@ -5,6 +5,8 @@
 ** EventReceiver.cpp
 */
 
+#include <vector>
+
 #include "EventReceiver.hpp"
 
 #include "ecs/Def.hpp"
@@ -164,6 +166,18 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == GUI_SELECT_FIGHT) {
                     if (!scene::PlayerSelector::checkKeybinding(_universe)) {
                         scene::PlayerSelector::invalidKeybinding(_universe);
+                    } else {
+                        std::vector<std::string> pathTextureList;
+                        for (const auto& entity : scene::PlayerSelector::playerIds) {
+                            auto& image = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(entity);
+                            auto item = scene::playerselector::player::SKIN_TO_MODEL.begin();
+                            for (; item != scene::playerselector::player::SKIN_TO_MODEL.end(); item++) {
+                                if (item->first == image.pathTexture) {
+                                    pathTextureList.push_back(item->second);
+                                }
+                            }
+                        }
+                        scene::Bomberman::init(_universe, scene::PlayerSelector::playerComponent, pathTextureList);
                     }
                     return true;
                 }
