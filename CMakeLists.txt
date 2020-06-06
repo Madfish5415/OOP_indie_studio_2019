@@ -112,9 +112,11 @@ set(HEADERS
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
 
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 find_package (Irrlicht)
+
 
 find_package (SFML)
 
