@@ -12,15 +12,12 @@
 #include "../ecs/component/Transform.hpp"
 #include "../ecs/component/Unbreakable.hpp"
 #include "../ecs/component/AI.hpp"
+#include "../ecs/component/Motion.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/Movement.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
-static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos)
-{
-
-}
-
-static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos)
+static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos, size_t charNbr)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -29,6 +26,36 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos)
 
     caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     caracter_mesh->setPosition(pos);
+    if (charNbr == 0 || charNbr == 2)
+        caracter_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+    else
+        caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+    caracter_mesh->setScale(irr::core::vector3df(1.9,1.9,1.9));
+    caracter_mesh->setFrameLoop(183, 204);
+
+    //Adapt to player infos
+    //caracter_mesh->setMaterialTexture(0, driver->getTexture("./media/nskinye.jpg"));
+
+    worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
+    worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
+}
+
+static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr)
+{
+    irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+    irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
+    ecs::Entity caracter = worldManager->createEntity();
+    irr::scene::IAnimatedMeshSceneNode *caracter_mesh = smgr->addAnimatedMeshSceneNode(smgr->getMesh("./media/ninja.b3d"));
+
+    caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    caracter_mesh->setPosition(pos);
+    if (charNbr == 0 || charNbr == 2)
+        caracter_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+    else
+        caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+    caracter_mesh->setScale(irr::core::vector3df(1.9,1.9,1.9));
+    caracter_mesh->setFrameLoop(183, 204);
+
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::AI>(caracter, ecs::component::AI());
 }
@@ -37,17 +64,17 @@ static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, 
 {
     irr::f32 offset = tileSize / 2;
     std::vector<irr::core::vector3df> caracterPositions = {
-        irr::core::vector3df(tileSize + offset, 5.0, tileSize + offset),
-        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 5.0, tileSize + offset),
+        irr::core::vector3df(tileSize + offset, 0.0, tileSize + offset),
+        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize + offset, 0.0, tileSize * (nbTile - 2) + offset),
-        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 5.0, tileSize * (nbTile - 2) + offset)};
+        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
     for (size_t i = 0; i < 4; i++) {
         if (i < players.size()) {
-            createPlayer(worldManager, players[i], caracterPositions[i]);
+            createPlayer(worldManager, players[i], caracterPositions[i], i);
         }
         else {
-            createBot(worldManager, caracterPositions[i]);
+            createBot(worldManager, caracterPositions[i], i);
         }
     }
 }
@@ -98,6 +125,7 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
     worldManager->registerComponent<ecs::component::Transform>();
     worldManager->registerComponent<ecs::component::Unbreakable>();
     worldManager->registerComponent<ecs::component::AI>();
+    worldManager->registerComponent<ecs::component::Motion>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -147,4 +175,12 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
     createMap(worldManager, tileSize);
 
     createCaracters(worldManager, tileSize, nbTile, players);
+
+    worldManager->registerSystem<ecs::system::Movement>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        worldManager->setSystemSignature<ecs::system::Movement>(signature);
+    }
 }
