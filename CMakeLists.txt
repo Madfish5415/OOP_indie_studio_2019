@@ -7,8 +7,12 @@ project(helloIRR)
 # Crée des variables avec les fichiers à compiler
 set(SRCS
     src/main.cpp
+    src/MapGenerator/MapGenerator.cpp
     )
 
+set(HEADERS
+    src/MapGenerator/MapGenerator.hpp
+    )
 
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(main ${SRCS})
