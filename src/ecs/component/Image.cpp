@@ -23,5 +23,15 @@ Image::Image(irr::video::IVideoDriver* driver, const irr::io::path& texture,
       useAlphaChannelOfTexture(useAlphaChannelOfTexture)
 {
 }
+Image::Image(const Image& image)
+    : driver(image.driver),
+      texture(image.texture),
+      position(image.position),
+      rect(image.rect),
+      clipRect(image.clipRect),
+      scolor(image.scolor),
+      useAlphaChannelOfTexture(image.useAlphaChannelOfTexture)
+{
+}
 
 Image::~Image() = default;

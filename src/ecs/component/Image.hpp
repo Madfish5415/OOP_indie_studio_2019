@@ -16,10 +16,11 @@ namespace ecs::component {
 
 class Image {
   public:
-    Image(irr::video::IVideoDriver* driver, const irr::io::path& texture,
-        const irr::core::position2d<irr::s32>& position, irr::core::rect<irr::s32> rect,
+    Image(irr::video::IVideoDriver* driver = nullptr, const irr::io::path& texture = "",
+        const irr::core::position2d<irr::s32>& position = irr::core::position2d<irr::s32>(0, 0), irr::core::rect<irr::s32> rect = irr::core::rect<irr::s32>(),
         irr::core::rect<irr::s32>* clipRect = nullptr,
         irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false);
+    Image(const Image &image);
     ~Image();
 
   public:

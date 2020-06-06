@@ -17,4 +17,8 @@ Sound::Sound(const std::unordered_map<std::string, std::string>& paths)
     }
 }
 
+Sound::Sound(const Sound &sound) : sounds(sound.sounds), soundsToPlay(sound.soundsToPlay)
+{
+}
+
 Sound::~Sound() = default;

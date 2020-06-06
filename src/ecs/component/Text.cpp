@@ -15,6 +15,10 @@ Text::Text(irr::gui::IGUIEnvironment* gui, const wchar_t* text, const irr::core:
 {
 }
 
+Text::Text(const Text &text) : gui(text.gui), text(text.text), font(text.font)
+{
+}
+
 Text::~Text() = default;
 
 void Text::setFont(const irr::io::path& path)

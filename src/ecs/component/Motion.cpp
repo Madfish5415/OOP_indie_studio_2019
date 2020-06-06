@@ -14,4 +14,6 @@ Motion::Motion(const irr::f32 &movementSpeed, const irr::core::vector3df &direct
 {
 }
 
+Motion::Motion(const Motion &motion) = default;
+
 Motion::~Motion() = default;

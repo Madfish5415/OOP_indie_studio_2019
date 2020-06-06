@@ -16,7 +16,8 @@ namespace ecs::component {
 
 class HitboxDetection {
   public:
-    explicit HitboxDetection(const std::vector<irr::core::line3df>& rays);
+    explicit HitboxDetection(const std::vector<irr::core::line3df>& rays = std::vector<irr::core::line3df>());
+    HitboxDetection(const HitboxDetection& transform);
     ~HitboxDetection();
 
   public:

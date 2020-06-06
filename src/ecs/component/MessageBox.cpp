@@ -15,4 +15,8 @@ MessageBox::MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t* caption, c
 {
 }
 
+MessageBox::MessageBox(const MessageBox &messageBox) : gui(messageBox.gui), messageBox(messageBox.messageBox)
+{
+}
+
 MessageBox::~MessageBox() = default;
