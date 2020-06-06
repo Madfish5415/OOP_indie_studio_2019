@@ -16,10 +16,12 @@ namespace ecs::component {
 
 class Text {
   public:
-    Text(irr::gui::IGUIEnvironment* gui, const wchar_t* text, const irr::core::rect<irr::s32>& rectangle,
+    Text(irr::gui::IGUIEnvironment* gui = nullptr, const wchar_t* text = L"", const irr::core::rect<irr::s32>& rectangle = irr::core::recti(),
         bool border = false, bool wordWrap = true, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1,
         bool fillBackground = false);
     ~Text();
+
+    Text(const Text &text);
 
     void setFont(const irr::io::path& path);
 

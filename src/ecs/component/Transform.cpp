@@ -13,4 +13,6 @@ Transform::Transform(const irr::core::vector3df &position) : position(position)
 {
 }
 
+Transform::Transform(const Transform &transform) = default;
+
 Transform::~Transform() = default;

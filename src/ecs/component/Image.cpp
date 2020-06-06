@@ -27,6 +27,16 @@ Image::Image(irr::gui::IGUIEnvironment* gui, irr::video::IVideoDriver* driver, c
         this->image = gui->addImage(texture, *position, useAlphaChannelOfTexture, parent, id, nullptr);
     }
 }
+Image::Image(const Image& image)
+    : driver(image.driver),
+      texture(image.texture),
+      position(image.position),
+      rect(image.rect),
+      clipRect(image.clipRect),
+      scolor(image.scolor),
+      useAlphaChannelOfTexture(image.useAlphaChannelOfTexture)
+{
+}
 
 Image::Image(const Image& image) = default;
 

@@ -16,7 +16,8 @@ namespace ecs::component {
 
 class Sound {
   public:
-    explicit Sound(const std::unordered_map<std::string, std::string>& paths);
+    Sound(const std::unordered_map<std::string, std::string>& paths = std::unordered_map<std::string, std::string>());
+    Sound(const Sound &sound);
     ~Sound();
 
   public:

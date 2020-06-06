@@ -13,4 +13,6 @@ Size::Size(const irr::core::vector3df &size) : size(size)
 {
 }
 
+Size::Size(const Size &size) = default;
+
 Size::~Size() = default;

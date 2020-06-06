@@ -17,8 +17,8 @@ namespace ecs::component {
 class Button {
   public:
     Button(irr::gui::IGUIEnvironment* gui = nullptr, irr::core::rect<irr::s32>* rect = nullptr,
-        irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
-        const wchar_t* tooltipText = nullptr);
+           irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
+           const wchar_t* tooltipText = nullptr);
     Button(const Button& button);
     ~Button();
 

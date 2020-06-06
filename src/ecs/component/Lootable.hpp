@@ -13,6 +13,7 @@ namespace ecs::component {
 class Lootable {
   public:
     Lootable();
+    Lootable(const Lootable& lootable);
     ~Lootable();
 };
 

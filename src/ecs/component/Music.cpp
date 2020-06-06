@@ -14,4 +14,8 @@ Music::Music(const std::string &musicPath) : music(new sf::Music())
     music->openFromFile(musicPath);
 }
 
+Music::Music(const Music& music) : music(music.music)
+{
+}
+
 Music::~Music() = default;

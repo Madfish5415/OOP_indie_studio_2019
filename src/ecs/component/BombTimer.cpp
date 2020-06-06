@@ -11,8 +11,13 @@
 
 using namespace ecs::component;
 
-BombTimer::BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *device)
-    : timerStart(device->getTimer()->getTime()), duration(duration)
+BombTimer::BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *dev)
+    : duration(duration)
+{
+    timerStart = (dev) ? dev->getTimer()->getTime() : 0;
+}
+
+BombTimer::BombTimer(const BombTimer &bombTimer) : timerStart(bombTimer.duration), duration(bombTimer.duration)
 {
 }
 

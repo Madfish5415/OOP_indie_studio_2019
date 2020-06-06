@@ -15,7 +15,8 @@ namespace ecs::component {
 
 class Music {
   public:
-    explicit Music(const std::string &musicPath);
+    Music(const std::string &musicPath = "");
+    Music(const Music& music);
     ~Music();
 
   public:
