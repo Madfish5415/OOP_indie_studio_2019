@@ -14,7 +14,7 @@ namespace ecs::component {
 
 class Transform {
   public:
-    explicit Transform(const irr::core::vector3df &position = irr::core::vector3df(0.0));
+    Transform(const irr::core::vector3df &position = irr::core::vector3df(0.0));
     Transform(const Transform& transform);
     ~Transform();
 

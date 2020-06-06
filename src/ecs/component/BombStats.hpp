@@ -14,7 +14,7 @@ namespace ecs::component {
 
 class BombStats {
   public:
-    explicit BombStats(const size_t &bombRadius = 0, const bool &wallPass = false);
+    BombStats(const size_t &bombRadius = 0, const bool &wallPass = false);
     BombStats(const BombStats &bombstat);
     ~BombStats();
 

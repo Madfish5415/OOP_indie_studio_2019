@@ -5,12 +5,15 @@
 ** EventReceiver.cpp
 */
 
+#include <vector>
+
 #include "EventReceiver.hpp"
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/PushButton.hpp"
+#include "scene/Bomberman.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
@@ -164,6 +167,14 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == GUI_SELECT_FIGHT) {
                     if (!scene::PlayerSelector::checkKeybinding(_universe)) {
                         scene::PlayerSelector::invalidKeybinding(_universe);
+                    } else {
+                        std::vector<std::string> pathTextureList;
+                        for (const auto& entity : scene::PlayerSelector::playerIds) {
+                            auto& image = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(entity);
+                            std::string path = scene::playerselector::player::SKIN_TO_MODEL[image.pathTexture];
+                            pathTextureList.push_back(path);
+                        }
+                        scene::Bomberman::init(_universe, scene::PlayerSelector::playerComponent, pathTextureList);
                     }
                     return true;
                 }

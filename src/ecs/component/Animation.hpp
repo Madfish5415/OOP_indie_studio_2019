@@ -15,7 +15,7 @@ namespace ecs::component {
 
 class Animation {
   public:
-    explicit Animation(std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange  = std::unordered_map<std::string, std::pair<size_t, size_t>>());
+    Animation(std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange  = std::unordered_map<std::string, std::pair<size_t, size_t>>());
     Animation(const Animation& Animation);
     ~Animation();
 

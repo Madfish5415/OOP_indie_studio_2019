@@ -12,6 +12,7 @@
 
 #include "../ecs/WorldManager.hpp"
 #include "../ecs/component/Player.hpp"
+#include "Bomberman.hpp"
 
 namespace scene {
 
@@ -90,6 +91,12 @@ static const std::string YELLOW = "assets/img/player-selector/player/player-yell
 
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
     {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
+
+static std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, scene::bomberman::ninja::AQUA},
+    {BLACK, scene::bomberman::ninja::BLACK}, {BLUE, scene::bomberman::ninja::BLUE},
+    {GREEN, scene::bomberman::ninja::GREEN}, {PINK, scene::bomberman::ninja::PINK}, {RED, scene::bomberman::ninja::RED},
+    {WHITE, scene::bomberman::ninja::WHITE}, {YELLOW, scene::bomberman::ninja::YELLOW}};
+
 } // namespace player
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";

@@ -17,7 +17,7 @@ namespace ecs::system {
 
 class Animation : public ecs::System {
     public:
-        explicit Animation(ecs::WorldManager* worldManager);
+        Animation(ecs::WorldManager* worldManager);
         ~Animation();
 
     public:
