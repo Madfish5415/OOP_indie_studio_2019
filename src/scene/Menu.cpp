@@ -6,13 +6,14 @@
 */
 
 #include "Menu.hpp"
-#include "PlayerSelector.hpp"
 
 #include <irrlicht.h>
 
 #include "../ecs/Universe.hpp"
+#include "../ecs/component/Blink.hpp"
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
+#include "../ecs/system/Blink.hpp"
 #include "../ecs/system/Button.hpp"
 #include "../ecs/system/Render.hpp"
 
@@ -40,6 +41,8 @@ void Menu::init(ecs::Universe* universe)
 
     worldManager->registerComponent<ecs::component::Button>();
     worldManager->registerComponent<ecs::component::Image>();
+    worldManager->registerComponent<ecs::component::Blink>();
+
     worldManager->registerSystem<ecs::system::Render>();
     worldManager->registerSystem<ecs::system::Button>();
     {
@@ -48,6 +51,15 @@ void Menu::init(ecs::Universe* universe)
         signature.set(worldManager->getComponentType<ecs::component::Button>());
         worldManager->setSystemSignature<ecs::system::Button>(signature);
     }
+    worldManager->registerSystem<ecs::system::Blink>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Blink>());
+        signature.set(worldManager->getComponentType<ecs::component::Image>());
+        worldManager->setSystemSignature<ecs::system::Blink>(signature);
+    }
+
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
         ecs::component::Image(gui, driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
@@ -55,6 +67,7 @@ void Menu::init(ecs::Universe* universe)
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
         ecs::component::Image(gui, driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0)));
+    worldManager->addComponent(bombermanLogo, ecs::component::Blink(500));
 
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
         GUI_MENU_PLAY, menu::button::play::NORMAL, menu::button::play::HOVER, menu::button::play::PRESSED);

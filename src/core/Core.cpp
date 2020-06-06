@@ -5,10 +5,11 @@
 ** Core.cpp
 */
 
-#include "../scene/PlayerSelector.hpp"
-#include "../scene/Menu.hpp"
-
 #include "Core.hpp"
+
+#include "../scene/LoadingMenu.hpp"
+#include "../scene/Menu.hpp"
+#include "../scene/PlayerSelector.hpp"
 
 using namespace core;
 
@@ -21,8 +22,8 @@ Core::~Core() = default;
 
 void Core::init()
 {
-    scene::Menu::init(_universe.get());
-    _universe->setCurrentWorldManager("Menu");
+    scene::LoadingMenu::init(_universe.get());
+    _universe->setCurrentWorldManager("LoadingMenu");
 }
 
 void Core::run()

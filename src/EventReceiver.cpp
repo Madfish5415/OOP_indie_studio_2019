@@ -12,6 +12,7 @@
 #include "ecs/component/Image.hpp"
 #include "ecs/component/PushButton.hpp"
 #include "scene/Keybinding.hpp"
+#include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
 #include "scene/PlayerSelector.hpp"
 
@@ -24,12 +25,17 @@ EventReceiver::~EventReceiver() = default;
 bool EventReceiver::OnEvent(const irr::SEvent &event)
 {
     if (event.EventType == irr::EET_KEY_INPUT_EVENT) {
+        if (_universe->hasWorldManager("LoadingMenu") &&
+            _universe->getCurrentWorldManager() == _universe->getWorldManager("LoadingMenu")) {
+            scene::LoadingMenu::destroy(_universe);
+            scene::Menu::init(_universe);
+            _universe->setCurrentWorldManager("Menu");
+        }
         if (_universe->hasWorldManager("Keybinding") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("Keybinding")) {
             int idx = 0;
             for (auto &entity : scene::Keybinding::pushButtons) {
-                auto &btn =
-                    _universe->getWorldManager("Keybinding")->getComponent<ecs::component::PushButton>(entity);
+                auto &btn = _universe->getWorldManager("Keybinding")->getComponent<ecs::component::PushButton>(entity);
                 if (idx == 0 && btn.button->isPressed()) {
                     if (scene::KEYBINDING_MAP.count(event.KeyInput.Key)) {
                         scene::Keybinding::player->keys["up"] = event.KeyInput.Key;

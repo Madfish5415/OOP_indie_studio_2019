@@ -36,6 +36,7 @@ set(SRCS
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
         src/ecs/component/PushButton.cpp
+        src/ecs/component/Blink.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Sound.cpp
@@ -43,8 +44,10 @@ set(SRCS
         src/ecs/system/Size.cpp
         src/ecs/system/Animation.cpp
         src/ecs/system/Button.cpp
+        src/ecs/system/Blink.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
+        src/scene/LoadingMenu.cpp
         src/scene/PlayerSelector.cpp
         src/scene/Keybinding.cpp
         src/EventReceiver.cpp
@@ -86,6 +89,7 @@ set(HEADERS
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
         src/ecs/component/PushButton.hpp
+        src/ecs/component/Blink.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Sound.hpp
@@ -93,8 +97,10 @@ set(HEADERS
         src/ecs/system/Size.hpp
         src/ecs/system/Animation.hpp
         src/ecs/system/Button.hpp
+        src/ecs/system/Blink.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
+        src/scene/LoadingMenu.hpp
         src/scene/PlayerSelector.hpp
         src/scene/Keybinding.hpp
         src/EventReceiver.hpp
