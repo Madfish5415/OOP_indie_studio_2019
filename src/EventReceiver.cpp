@@ -13,6 +13,7 @@
 #include "ecs/Universe.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/PushButton.hpp"
+#include "scene/Bomberman.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
