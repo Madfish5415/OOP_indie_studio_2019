@@ -37,11 +37,11 @@ void LoadingMenu::init(ecs::Universe *universe)
 
     auto logo = worldManager->createEntity();
     worldManager->addComponent(logo,
-                               ecs::component::Image(gui, driver, loadingmenu::LOGO, new irr::core::position2d<irr::s32> {720, 50}));
+                               ecs::component::Image(gui, driver, loadingmenu::LOGO, new irr::core::position2d<irr::s32> {720, 100}));
 
     auto text = worldManager->createEntity();
     worldManager->addComponent(text,
-                               ecs::component::Image(gui, driver, loadingmenu::TEXT, new irr::core::position2d<irr::s32> {410, 730}));
+                               ecs::component::Image(gui, driver, loadingmenu::TEXT, new irr::core::position2d<irr::s32> {410, 865}));
     worldManager->addComponent(text, ecs::component::Blink(600));
 
     irr::gui::IGUIInOutFader* fader = universe->getDevice()->getGUIEnvironment()->addInOutFader();
