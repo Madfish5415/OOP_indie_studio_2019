@@ -27,7 +27,7 @@ jobs:
       run: cmake -B build && make -C build
 
   windows:
-    runs_on: windows-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
