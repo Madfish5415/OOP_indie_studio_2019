@@ -6,8 +6,8 @@
 */
 
 #include "Render.hpp"
-#include "../Universe.hpp"
 
+#include "../Universe.hpp"
 
 using namespace ecs::system;
 
@@ -17,17 +17,14 @@ Render::Render(WorldManager *worldManager) : ecs::System(worldManager)
 
     smgr = device->getSceneManager();
     gui = device->getGUIEnvironment();
-    driver = device->getVideoDriver();
 }
 
 Render::~Render() = default;
 
-void Render::update() 
+void Render::update()
 {
-    if (driver) {
-        if (gui)
-            gui->drawAll();
-        if (smgr)
-            smgr->drawAll();
-    }
+    if (gui)
+        gui->drawAll();
+    if (smgr)
+        smgr->drawAll();
 }

@@ -14,14 +14,11 @@ Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, 
     : gui(gui), rect(rect), parent(parent), id(id), text(text), tooltipText(tooltipText), font(nullptr),
       normalImage(nullptr), hoverImage(nullptr)
 {
-    if (gui)
+    if (gui) {
         button = gui->addButton(*rect, parent, id, text, tooltipText);
-}
-
-void Button::setFont(const irr::io::path& path)
-{
-    this->font = this->gui->getFont(path);
-    this->button->setOverrideFont(this->font);
+        button->setUseAlphaChannel(true);
+        button->setDrawBorder(false);
+    }
 }
 
 Button::Button(const Button& btn)
