@@ -170,12 +170,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         std::vector<std::string> pathTextureList;
                         for (const auto& entity : scene::PlayerSelector::playerIds) {
                             auto& image = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(entity);
-                            auto item = scene::playerselector::player::SKIN_TO_MODEL.begin();
-                            for (; item != scene::playerselector::player::SKIN_TO_MODEL.end(); item++) {
-                                if (item->first == image.pathTexture) {
-                                    pathTextureList.push_back(item->second);
-                                }
-                            }
+                            std::string path = scene::playerselector::player::SKIN_TO_MODEL[image.pathTexture];
+                            pathTextureList.push_back(path);
                         }
                         scene::Bomberman::init(_universe, scene::PlayerSelector::playerComponent, pathTextureList);
                     }

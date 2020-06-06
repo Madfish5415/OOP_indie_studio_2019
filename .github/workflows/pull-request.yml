@@ -12,13 +12,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build
-      run: make
-
-    - name: Functional tests
-      run: make fclean && make tests_sh
-
-    - name: Unit tests
-      run: make fclean && make tests_run
+      run: cmake -B build && make -C build
 
   ubuntu:
     runs-on: ubuntu-latest
@@ -28,10 +22,13 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build
-      run: make
+      run: cmake -B build && make -C build
 
-    - name: Functional tests
-      run: make fclean && make tests_sh
+  windows:
+    runs_on: windows-latest
 
-    - name: Unit tests
-      run: make fclean && make tests_run
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: cmake -B build && cmake --build .
