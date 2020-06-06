@@ -11,19 +11,21 @@
 
 using namespace ecs::component;
 
-Image::Image(irr::video::IVideoDriver* driver, const std::string& texture,
-    irr::core::position2d<irr::s32>* position, irr::core::rect<irr::s32>* rect,
-    irr::core::rect<irr::s32>* clipRect, irr::video::SColor scolor, bool useAlphaChannelOfTexture)
-    : driver(driver),
+Image::Image(irr::gui::IGUIEnvironment* gui, irr::video::IVideoDriver* driver, const std::string& pathTexture,
+             irr::core::position2d<irr::s32>* position, bool useAlphaChannelOfTexture,
+             irr::gui::IGUIElement* parent, irr::s32 id)
+    : gui(gui),
+      driver(driver),
+      pathTexture(pathTexture),
       position(position),
-      pathTexture(texture),
-      rect(rect),
-      clipRect(clipRect),
-      scolor(scolor),
-      useAlphaChannelOfTexture(useAlphaChannelOfTexture)
+      useAlphaChannelOfTexture(useAlphaChannelOfTexture),
+      parent(parent),
+      id(id)
 {
-    if(driver)
-        this->texture = driver->getTexture(texture.c_str());
+    if (gui && driver) {
+        irr::video::ITexture *texture = driver->getTexture(pathTexture.c_str());
+        this->image = gui->addImage(texture, *position, useAlphaChannelOfTexture, parent, id, nullptr);
+    }
 }
 
 Image::Image(const Image& image) = default;
