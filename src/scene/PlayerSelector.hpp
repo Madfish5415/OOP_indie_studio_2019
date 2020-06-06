@@ -11,6 +11,7 @@
 #include <irrlicht.h>
 
 #include "../ecs/WorldManager.hpp"
+#include "../ecs/component/Player.hpp"
 
 namespace scene {
 
@@ -26,12 +27,15 @@ class PlayerSelector {
     static void addPlayer(ecs::Universe* universe);
     static void removePlayer(ecs::Universe* universe);
     static void changeSkin(ecs::Universe* universe, irr::s32 id);
+    static bool checkKeybinding(ecs::Universe* universe);
+    static void invalidKeybinding(ecs::Universe* universe);
 
   public:
     static std::vector<ecs::Entity> playerIds;
     static std::vector<ecs::Entity> playerKeysIds;
     static std::vector<ecs::Entity> playerSkinButtonLeftIds;
     static std::vector<ecs::Entity> playerSkinButtonRightIds;
+    static std::vector<ecs::component::Player> playerComponent;
 };
 
 namespace playerselector {
@@ -89,6 +93,7 @@ static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, 
 } // namespace player
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
+static const std::string WARNING = "assets/img/player-selector/warning.png";
 } // namespace playerselector
 
 } // namespace scene

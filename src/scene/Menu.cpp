@@ -6,6 +6,7 @@
 */
 
 #include "Menu.hpp"
+#include "PlayerSelector.hpp"
 
 #include <irrlicht.h>
 
@@ -13,7 +14,6 @@
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
 #include "../ecs/system/Button.hpp"
-#include "../ecs/system/Image.hpp"
 #include "../ecs/system/Render.hpp"
 
 using namespace scene;
@@ -40,13 +40,6 @@ void Menu::init(ecs::Universe* universe)
 
     worldManager->registerComponent<ecs::component::Button>();
     worldManager->registerComponent<ecs::component::Image>();
-    worldManager->registerSystem<ecs::system::Image>();
-    {
-        ecs::Signature signature;
-
-        signature.set(worldManager->getComponentType<ecs::component::Image>());
-        worldManager->setSystemSignature<ecs::system::Image>(signature);
-    }
     worldManager->registerSystem<ecs::system::Render>();
     worldManager->registerSystem<ecs::system::Button>();
     {
@@ -55,16 +48,13 @@ void Menu::init(ecs::Universe* universe)
         signature.set(worldManager->getComponentType<ecs::component::Button>());
         worldManager->setSystemSignature<ecs::system::Button>(signature);
     }
-
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
-        ecs::component::Image(driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0},
-            new irr::core::rect<irr::s32> {0, 0, 1920, 1080}));
+        ecs::component::Image(gui, driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
 
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
-        ecs::component::Image(driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0),
-            new irr::core::rect<irr::s32> {0, 0, 1280, 356}, nullptr, irr::video::SColor(255, 255, 255, 255), true));
+        ecs::component::Image(gui, driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0)));
 
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
         GUI_MENU_PLAY, menu::button::play::NORMAL, menu::button::play::HOVER, menu::button::play::PRESSED);

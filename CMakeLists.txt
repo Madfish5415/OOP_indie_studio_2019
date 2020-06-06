@@ -35,7 +35,7 @@ set(SRCS
         src/ecs/component/Text.cpp
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
-        src/ecs/system/Image.cpp
+        src/ecs/component/PushButton.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Sound.cpp
@@ -46,6 +46,7 @@ set(SRCS
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/PlayerSelector.cpp
+        src/scene/Keybinding.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -84,7 +85,7 @@ set(HEADERS
         src/ecs/component/Text.hpp
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
-        src/ecs/system/Image.hpp
+        src/ecs/component/PushButton.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Sound.hpp
@@ -95,6 +96,7 @@ set(HEADERS
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/PlayerSelector.hpp
+        src/scene/Keybinding.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp

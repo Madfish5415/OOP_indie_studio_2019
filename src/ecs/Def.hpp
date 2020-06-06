@@ -61,29 +61,13 @@ enum BUTTON_ID {
     GUI_SELECT_KB_P3, /** < Open Player 3 keybinding window */
     GUI_SELECT_KB_P4, /** < Open Player 4 keybinding window */
 
-    GUI_SELECT_KB_P1_UP, /** < Change UP Key code for Player 1.*/
-    GUI_SELECT_KB_P1_DOWN, /** < Change DOWN Key code for Player 1.*/
-    GUI_SELECT_KB_P1_LEFT, /** < Change LEFT Key code for Player 1.*/
-    GUI_SELECT_KB_P1_RIGHT, /** < Change RIGHT Key code for Player 1.*/
-    GUI_SELECT_KB_P1_BOMB, /** < Change BOMB Key code for Player 1.*/
 
-    GUI_SELECT_KB_P2_UP, /** < Change UP Key code for Player 2.*/
-    GUI_SELECT_KB_P2_DOWN, /** < Change DOWN Key code for Player 2.*/
-    GUI_SELECT_KB_P2_LEFT, /** < Change LEFT Key code for Player 2.*/
-    GUI_SELECT_KB_P2_RIGHT, /** < Change RIGHT Key code for Player 2.*/
-    GUI_SELECT_KB_P2_BOMB, /** < Change BOMB Key code for Player 2.*/
-
-    GUI_SELECT_KB_P3_UP, /** < Change UP Key code for Player 3.*/
-    GUI_SELECT_KB_P3_DOWN, /** < Change DOWN Key code for Player 3.*/
-    GUI_SELECT_KB_P3_LEFT, /** < Change LEFT Key code for Player 3.*/
-    GUI_SELECT_KB_P3_RIGHT, /** < Change RIGHT Key code for Player 3.*/
-    GUI_SELECT_KB_P3_BOMB, /** < Change BOMB Key code for Player 3.*/
-
-    GUI_SELECT_KB_P4_UP, /** < Change UP Key code for Player 4.*/
-    GUI_SELECT_KB_P4_DOWN, /** < Change DOWN Key code for Player 4.*/
-    GUI_SELECT_KB_P4_LEFT, /** < Change LEFT Key code for Player 4.*/
-    GUI_SELECT_KB_P4_RIGHT, /** < Change RIGHT Key code for Player 4.*/
-    GUI_SELECT_KB_P4_BOMB, /** < Change BOMB Key code for Player 4.*/
+    GUI_SELECT_KB_UP, /** < Change UP Key code.*/
+    GUI_SELECT_KB_DOWN, /** < Change DOWN Key code.*/
+    GUI_SELECT_KB_LEFT, /** < Change LEFT Key code.*/
+    GUI_SELECT_KB_RIGHT, /** < Change RIGHT Key code.*/
+    GUI_SELECT_KB_ACTION, /** < Change BOMB Key code.*/
+    GUI_SELECT_KB_BACK, /** < Back to the player selector */
 
     GUI_PAUSE_RESUME, /** < Resume the party */
     GUI_PAUSE_MENU, /** < Back to the menu */

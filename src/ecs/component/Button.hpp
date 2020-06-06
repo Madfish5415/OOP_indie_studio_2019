@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "irrlicht.h"
+#include <irrlicht.h>
 
 namespace ecs::component {
 
