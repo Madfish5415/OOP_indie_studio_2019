@@ -1,0 +1,140 @@
+\hypertarget{classecs_1_1ComponentArray}{}\doxysection{ecs\+::Component\+Array$<$ T $>$ Class Template Reference}
+\label{classecs_1_1ComponentArray}\index{ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}}
+
+
+An array of components.  
+
+
+
+
+{\ttfamily \#include $<$Component\+Array.\+hpp$>$}
+
+
+
+Inheritance diagram for ecs\+::Component\+Array$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classecs_1_1ComponentArray__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for ecs\+::Component\+Array$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classecs_1_1ComponentArray__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1ComponentArray_a49e02d3ca90bb25cae43917a9d814527}\label{classecs_1_1ComponentArray_a49e02d3ca90bb25cae43917a9d814527}} 
+\mbox{\hyperlink{classecs_1_1ComponentArray_a49e02d3ca90bb25cae43917a9d814527}{Component\+Array}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor of \mbox{\hyperlink{classecs_1_1ComponentArray}{Component\+Array}} Class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1ComponentArray_a07dc3d5737f29428dd967f546973387f}\label{classecs_1_1ComponentArray_a07dc3d5737f29428dd967f546973387f}} 
+\mbox{\hyperlink{classecs_1_1ComponentArray_a07dc3d5737f29428dd967f546973387f}{$\sim$\+Component\+Array}} () override=default
+\begin{DoxyCompactList}\small\item\em Constructor Default destructor of \mbox{\hyperlink{classecs_1_1ComponentArray}{Component\+Array}} Class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1ComponentArray_a3cad0acb46ed7f230e1a485851bdff82}{insert}} (Entity entity, T component)
+\begin{DoxyCompactList}\small\item\em insert method This method allows to insert a component for an entity in the array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1ComponentArray_a62c2c2847ceb164f4db121146b64db91}{remove}} (Entity entity)
+\begin{DoxyCompactList}\small\item\em remove method This method allows to remove a component from an entity. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classecs_1_1ComponentArray_ac25a6b05e92bb46fe5035bdc97c3dee8}{get}} (Entity entity)
+\begin{DoxyCompactList}\small\item\em get method This method makes it possible to recover the component of an entity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1ComponentArray_acca8bf77cbc4d74743fd2ce44f70478f}{entity\+Destroyed}} (Entity entity) override
+\begin{DoxyCompactList}\small\item\em entity\+Destroyed method This method must be called when an entity is destroyed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class ecs\+::\+Component\+Array$<$ T $>$}
+
+An array of components. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the component to be contained \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1ComponentArray_acca8bf77cbc4d74743fd2ce44f70478f}\label{classecs_1_1ComponentArray_acca8bf77cbc4d74743fd2ce44f70478f}} 
+\index{ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}!entityDestroyed@{entityDestroyed}}
+\index{entityDestroyed@{entityDestroyed}!ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{entityDestroyed()}{entityDestroyed()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classecs_1_1ComponentArray}{ecs\+::\+Component\+Array}}$<$ T $>$\+::entity\+Destroyed (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+entity\+Destroyed method This method must be called when an entity is destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The destroyed entity \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classecs_1_1IComponentArray_a4cbcb9b0b4eeaa48440974d9bdd15e03}{ecs\+::\+I\+Component\+Array}}.
+
+\mbox{\Hypertarget{classecs_1_1ComponentArray_ac25a6b05e92bb46fe5035bdc97c3dee8}\label{classecs_1_1ComponentArray_ac25a6b05e92bb46fe5035bdc97c3dee8}} 
+\index{ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}!get@{get}}
+\index{get@{get}!ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T\& \mbox{\hyperlink{classecs_1_1ComponentArray}{ecs\+::\+Component\+Array}}$<$ T $>$\+::get (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get method This method makes it possible to recover the component of an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity from which to retrieve the component. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the component of the entity. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1ComponentArray_a3cad0acb46ed7f230e1a485851bdff82}\label{classecs_1_1ComponentArray_a3cad0acb46ed7f230e1a485851bdff82}} 
+\index{ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}!insert@{insert}}
+\index{insert@{insert}!ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classecs_1_1ComponentArray}{ecs\+::\+Component\+Array}}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{Entity}]{entity,  }\item[{T}]{component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+insert method This method allows to insert a component for an entity in the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity related to the component \\
+\hline
+{\em component} & \+: The entity-\/related component \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1ComponentArray_a62c2c2847ceb164f4db121146b64db91}\label{classecs_1_1ComponentArray_a62c2c2847ceb164f4db121146b64db91}} 
+\index{ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}!remove@{remove}}
+\index{remove@{remove}!ecs::ComponentArray$<$ T $>$@{ecs::ComponentArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classecs_1_1ComponentArray}{ecs\+::\+Component\+Array}}$<$ T $>$\+::remove (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+remove method This method allows to remove a component from an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity from whom the component is to be removed. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{ComponentArray_8hpp}{Component\+Array.\+hpp}}\end{DoxyCompactItemize}

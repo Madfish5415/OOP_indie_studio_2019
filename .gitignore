@@ -1,7 +1,17 @@
 # Binaries
 a.out
 bomberman
+bomberman.exe
+bomberman.ilk
+bomberman.pdb
 unit_tests
+
+# Compilation
+Makefile
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles
+cmake-build*
 
 # Objects
 *.o
@@ -19,6 +29,7 @@ compile_commands.json
 
 # Visual Studio Code
 .vscode/
+.vs/
 
-# Libraries
-lib_arcade_*.so
+#Compilation
+build*

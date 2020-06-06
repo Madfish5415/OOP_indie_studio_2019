@@ -1,0 +1,102 @@
+\hypertarget{classecs_1_1EntityManager}{}\doxysection{ecs\+::Entity\+Manager Class Reference}
+\label{classecs_1_1EntityManager}\index{ecs::EntityManager@{ecs::EntityManager}}
+
+
+Class that manages entities.  
+
+
+
+
+{\ttfamily \#include $<$Entity\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1EntityManager_acba3847d62f7cd79e22d5ffa490c1f53}\label{classecs_1_1EntityManager_acba3847d62f7cd79e22d5ffa490c1f53}} 
+\mbox{\hyperlink{classecs_1_1EntityManager_acba3847d62f7cd79e22d5ffa490c1f53}{Entity\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Constructor Constructor of \mbox{\hyperlink{classecs_1_1EntityManager}{Entity\+Manager}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1EntityManager_aff49d037faf0dd9e2a3ae5bad2ca7161}\label{classecs_1_1EntityManager_aff49d037faf0dd9e2a3ae5bad2ca7161}} 
+\mbox{\hyperlink{classecs_1_1EntityManager_aff49d037faf0dd9e2a3ae5bad2ca7161}{$\sim$\+Entity\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor It\textquotesingle{}s a default destructor because the garbage collector will take care of the rest. \end{DoxyCompactList}\item 
+Entity \mbox{\hyperlink{classecs_1_1EntityManager_a468004b08f560fb82ccf1e3ac7f9ffe7}{create\+Entity}} ()
+\begin{DoxyCompactList}\small\item\em create\+Entity method This method creates an entity and returns it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1EntityManager_a303fccbe53187dc96435b72fa871deac}{destroy\+Entity}} (Entity entity)
+\begin{DoxyCompactList}\small\item\em destroy\+Entity method This method destroys an entity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1EntityManager_aff12914e3dc6e93cfc25f87474b6c44d}{set\+Signature}} (Entity entity, \mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}} signature)
+\begin{DoxyCompactList}\small\item\em set\+System\+Signature method This method makes it possible to define the signature of an existing entity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}} \& \mbox{\hyperlink{classecs_1_1EntityManager_a9b9b8f2b009689f9f706e742f6b4e28b}{get\+Signature}} (Entity entity)
+\begin{DoxyCompactList}\small\item\em get\+Signature method This method will return a reference to the signature defined to the entity past in parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that manages entities. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1EntityManager_a468004b08f560fb82ccf1e3ac7f9ffe7}\label{classecs_1_1EntityManager_a468004b08f560fb82ccf1e3ac7f9ffe7}} 
+\index{ecs::EntityManager@{ecs::EntityManager}!createEntity@{createEntity}}
+\index{createEntity@{createEntity}!ecs::EntityManager@{ecs::EntityManager}}
+\doxysubsubsection{\texorpdfstring{createEntity()}{createEntity()}}
+{\footnotesize\ttfamily Entity ecs\+::\+Entity\+Manager\+::create\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+create\+Entity method This method creates an entity and returns it. 
+
+\begin{DoxyReturn}{Returns}
+The entity that was created. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1EntityManager_a303fccbe53187dc96435b72fa871deac}\label{classecs_1_1EntityManager_a303fccbe53187dc96435b72fa871deac}} 
+\index{ecs::EntityManager@{ecs::EntityManager}!destroyEntity@{destroyEntity}}
+\index{destroyEntity@{destroyEntity}!ecs::EntityManager@{ecs::EntityManager}}
+\doxysubsubsection{\texorpdfstring{destroyEntity()}{destroyEntity()}}
+{\footnotesize\ttfamily void ecs\+::\+Entity\+Manager\+::destroy\+Entity (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+destroy\+Entity method This method destroys an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity to be destroyed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1EntityManager_a9b9b8f2b009689f9f706e742f6b4e28b}\label{classecs_1_1EntityManager_a9b9b8f2b009689f9f706e742f6b4e28b}} 
+\index{ecs::EntityManager@{ecs::EntityManager}!getSignature@{getSignature}}
+\index{getSignature@{getSignature}!ecs::EntityManager@{ecs::EntityManager}}
+\doxysubsubsection{\texorpdfstring{getSignature()}{getSignature()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}}\& ecs\+::\+Entity\+Manager\+::get\+Signature (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+Signature method This method will return a reference to the signature defined to the entity past in parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity you want to retrieve the signature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the signature defined to the entity past in parameter. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1EntityManager_aff12914e3dc6e93cfc25f87474b6c44d}\label{classecs_1_1EntityManager_aff12914e3dc6e93cfc25f87474b6c44d}} 
+\index{ecs::EntityManager@{ecs::EntityManager}!setSignature@{setSignature}}
+\index{setSignature@{setSignature}!ecs::EntityManager@{ecs::EntityManager}}
+\doxysubsubsection{\texorpdfstring{setSignature()}{setSignature()}}
+{\footnotesize\ttfamily void ecs\+::\+Entity\+Manager\+::set\+Signature (\begin{DoxyParamCaption}\item[{Entity}]{entity,  }\item[{\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}}}]{signature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+System\+Signature method This method makes it possible to define the signature of an existing entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: Entity to be retrieved. \\
+\hline
+{\em signature} & \+: The signature to be defined to the entity. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{EntityManager_8hpp}{Entity\+Manager.\+hpp}}\end{DoxyCompactItemize}

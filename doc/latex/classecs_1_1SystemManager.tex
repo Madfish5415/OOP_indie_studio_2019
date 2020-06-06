@@ -1,0 +1,152 @@
+\hypertarget{classecs_1_1SystemManager}{}\doxysection{ecs\+::System\+Manager Class Reference}
+\label{classecs_1_1SystemManager}\index{ecs::SystemManager@{ecs::SystemManager}}
+
+
+Class that manage systems.  
+
+
+
+
+{\ttfamily \#include $<$System\+Manager.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1SystemManager_a926a7574637a8f26918e3140ea53b921}{System\+Manager}} (\mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}} $\ast$world\+Manager)
+\begin{DoxyCompactList}\small\item\em Constructor Constructor of \mbox{\hyperlink{classecs_1_1SystemManager}{System\+Manager}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1SystemManager_a034b7034b5fb31ac683731614c4adcd4}\label{classecs_1_1SystemManager_a034b7034b5fb31ac683731614c4adcd4}} 
+\mbox{\hyperlink{classecs_1_1SystemManager_a034b7034b5fb31ac683731614c4adcd4}{$\sim$\+System\+Manager}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor It\textquotesingle{}s a default destructor because the garbage collector will take care of the rest. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classecs_1_1SystemManager_acc053bebdd76402e40f7737eb2605dcc}{register\+System}} ()
+\begin{DoxyCompactList}\small\item\em register\+System method This method makes it possible to register a system so that it is known by the ecs. This method also creates the requested system and returns it. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classecs_1_1SystemManager_a16cc591398a7f572d039c8502bad4b7b}{get\+System}} ()
+\begin{DoxyCompactList}\small\item\em get\+System method This method makes it possible to recover a system according to its type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1SystemManager_a33fdf9c0176772f9e70723183b06929b}\label{classecs_1_1SystemManager_a33fdf9c0176772f9e70723183b06929b}} 
+void \mbox{\hyperlink{classecs_1_1SystemManager_a33fdf9c0176772f9e70723183b06929b}{update}} ()
+\begin{DoxyCompactList}\small\item\em update\+System method This method calls the update method of each system of the ecs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classecs_1_1SystemManager_a022ee5d17ab1b51f8305046c909dd031}{set\+Signature}} (\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}} signature)
+\begin{DoxyCompactList}\small\item\em set\+Signature method This method makes it possible to define the signature of an existing system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1SystemManager_a435efd8c4d8f8bd23a97ad71525bec54}{entity\+Destroyed}} (Entity entity)
+\begin{DoxyCompactList}\small\item\em entity\+Destroyed method This method must be called when an entity is destroyed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1SystemManager_a0abf4270ed13499ddb47b4b7f4f87bb5}{entity\+Signature\+Changed}} (Entity entity, \mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}} ent\+Signature)
+\begin{DoxyCompactList}\small\item\em entity\+Signature\+Changed method This method must be called when an entity\textquotesingle{}s signature changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that manage systems. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1SystemManager_a926a7574637a8f26918e3140ea53b921}\label{classecs_1_1SystemManager_a926a7574637a8f26918e3140ea53b921}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!SystemManager@{SystemManager}}
+\index{SystemManager@{SystemManager}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{SystemManager()}{SystemManager()}}
+{\footnotesize\ttfamily ecs\+::\+System\+Manager\+::\+System\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{World\+Manager}} $\ast$}]{world\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor Constructor of \mbox{\hyperlink{classecs_1_1SystemManager}{System\+Manager}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: Manager of our World. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1SystemManager_a435efd8c4d8f8bd23a97ad71525bec54}\label{classecs_1_1SystemManager_a435efd8c4d8f8bd23a97ad71525bec54}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!entityDestroyed@{entityDestroyed}}
+\index{entityDestroyed@{entityDestroyed}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{entityDestroyed()}{entityDestroyed()}}
+{\footnotesize\ttfamily void ecs\+::\+System\+Manager\+::entity\+Destroyed (\begin{DoxyParamCaption}\item[{Entity}]{entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+entity\+Destroyed method This method must be called when an entity is destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The destroyed entity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1SystemManager_a0abf4270ed13499ddb47b4b7f4f87bb5}\label{classecs_1_1SystemManager_a0abf4270ed13499ddb47b4b7f4f87bb5}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!entitySignatureChanged@{entitySignatureChanged}}
+\index{entitySignatureChanged@{entitySignatureChanged}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{entitySignatureChanged()}{entitySignatureChanged()}}
+{\footnotesize\ttfamily void ecs\+::\+System\+Manager\+::entity\+Signature\+Changed (\begin{DoxyParamCaption}\item[{Entity}]{entity,  }\item[{\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}}}]{ent\+Signature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+entity\+Signature\+Changed method This method must be called when an entity\textquotesingle{}s signature changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & \+: The entity that changed its signature. \\
+\hline
+{\em ent\+Signature} & \+: The new signature of the entity. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1SystemManager_a16cc591398a7f572d039c8502bad4b7b}\label{classecs_1_1SystemManager_a16cc591398a7f572d039c8502bad4b7b}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!getSystem@{getSystem}}
+\index{getSystem@{getSystem}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{getSystem()}{getSystem()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$T$>$ ecs\+::\+System\+Manager\+::get\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+System method This method makes it possible to recover a system according to its type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The requested system. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1SystemManager_acc053bebdd76402e40f7737eb2605dcc}\label{classecs_1_1SystemManager_acc053bebdd76402e40f7737eb2605dcc}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!registerSystem@{registerSystem}}
+\index{registerSystem@{registerSystem}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{registerSystem()}{registerSystem()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$T$>$ ecs\+::\+System\+Manager\+::register\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+register\+System method This method makes it possible to register a system so that it is known by the ecs. This method also creates the requested system and returns it. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be registered. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The requested system. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classecs_1_1SystemManager_a022ee5d17ab1b51f8305046c909dd031}\label{classecs_1_1SystemManager_a022ee5d17ab1b51f8305046c909dd031}} 
+\index{ecs::SystemManager@{ecs::SystemManager}!setSignature@{setSignature}}
+\index{setSignature@{setSignature}!ecs::SystemManager@{ecs::SystemManager}}
+\doxysubsubsection{\texorpdfstring{setSignature()}{setSignature()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void ecs\+::\+System\+Manager\+::set\+Signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Def_8hpp_a5314cf0bdf0ad6c7babd6740e70b0270}{Signature}}}]{signature }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+Signature method This method makes it possible to define the signature of an existing system. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \+: Type of the system to be retrieved. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em signature} & \+: The signature to be defined in the system. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/\mbox{\hyperlink{SystemManager_8hpp}{System\+Manager.\+hpp}}\end{DoxyCompactItemize}
