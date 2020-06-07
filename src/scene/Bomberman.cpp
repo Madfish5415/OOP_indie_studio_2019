@@ -32,7 +32,7 @@ static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player
 
     caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     caracter_mesh->setPosition(pos);
-    if (charNbr == 0 || charNbr == 2)
+    if (charNbr == 0 || charNbr == 1)
         caracter_mesh->setRotation(irr::core::vector3df(0, 90, 0));
     else
         caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
@@ -43,7 +43,9 @@ static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player
     bomberman::ninja::PLAYER_SKINS[path] = true;
 
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
+    worldManager->addComponent<ecs::component::Player>(caracter, ecs::component::Player(player_comp));
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
+    worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
 }
 
 static const std::string getUnusedSkin()
@@ -70,7 +72,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
 
     caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     caracter_mesh->setPosition(pos);
-    if (charNbr == 0 || charNbr == 2)
+    if (charNbr == 0 || charNbr == 1)
         caracter_mesh->setRotation(irr::core::vector3df(0, 90, 0));
     else
         caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
@@ -81,6 +83,8 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
 
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::AI>(caracter, ecs::component::AI());
+    worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
+    worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
 }
 
 static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
@@ -88,8 +92,8 @@ static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, 
     irr::f32 offset = tileSize / 2;
     std::vector<irr::core::vector3df> caracterPositions = {
         irr::core::vector3df(tileSize + offset, 0.0, tileSize + offset),
-        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize + offset, 0.0, tileSize * (nbTile - 2) + offset),
+        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
     for (size_t i = 0; i < 4; i++) {
@@ -146,6 +150,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     irr::u32 nbTile = 13;
 
     worldManager->registerComponent<ecs::component::Render3d>();
+    worldManager->registerComponent<ecs::component::Player>();
     worldManager->registerComponent<ecs::component::Transform>();
     worldManager->registerComponent<ecs::component::Unbreakable>();
     worldManager->registerComponent<ecs::component::AI>();
