@@ -1,0 +1,22 @@
+<map id="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/WorldManager.hpp" name="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/WorldManager.hpp">
+<area shape="rect" id="node1" title="WorldManager Class." alt="" coords="440,5,613,76"/>
+<area shape="rect" id="node2" title=" " alt="" coords="491,199,568,225"/>
+<area shape="rect" id="node3" href="$ComponentManager_8hpp.html" title="ComponentManager Class." alt="" coords="296,124,477,151"/>
+<area shape="rect" id="node11" href="$EntityManager_8hpp.html" title="EntityManager Class." alt="" coords="5,199,149,225"/>
+<area shape="rect" id="node14" href="$EventManager_8hpp.html" title="EventManager Class." alt="" coords="787,124,930,151"/>
+<area shape="rect" id="node19" href="$SystemManager_8hpp.html" title="SystemManager Class." alt="" coords="564,124,719,151"/>
+<area shape="rect" id="node4" title=" " alt="" coords="173,199,232,225"/>
+<area shape="rect" id="node5" href="$ComponentArray_8hpp.html" title="ComponentArray Class." alt="" coords="307,199,466,225"/>
+<area shape="rect" id="node9" href="$Def_8hpp.html" title="Def File." alt="" coords="320,348,392,375"/>
+<area shape="rect" id="node6" title=" " alt="" coords="295,273,351,300"/>
+<area shape="rect" id="node7" title=" " alt="" coords="679,273,803,300"/>
+<area shape="rect" id="node8" href="$IComponentArray_8hpp.html" title="IComponentArray Class." alt="" coords="375,273,537,300"/>
+<area shape="rect" id="node10" title=" " alt="" coords="327,423,385,449"/>
+<area shape="rect" id="node12" title=" " alt="" coords="115,273,178,300"/>
+<area shape="rect" id="node13" title=" " alt="" coords="561,273,604,300"/>
+<area shape="rect" id="node15" title=" " alt="" coords="877,199,928,225"/>
+<area shape="rect" id="node16" title=" " alt="" coords="953,199,1039,225"/>
+<area shape="rect" id="node17" href="$Event_8hpp.html" title="Event Class." alt="" coords="766,199,853,225"/>
+<area shape="rect" id="node18" title=" " alt="" coords="827,273,887,300"/>
+<area shape="rect" id="node20" href="$System_8hpp.html" title="System Class." alt="" coords="592,199,691,225"/>
+</map>

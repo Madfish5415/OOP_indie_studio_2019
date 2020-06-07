@@ -5,7 +5,15 @@
 ** main.cpp
 */
 
+#include <iostream>
+#include "ecs/Universe.hpp"
+#include "core/Core.hpp"
+#include "ecs/WorldManager.hpp"
+
 int main()
 {
-    return 0;
+    core::Core core;
+
+    core.init();
+    core.run();
 }
