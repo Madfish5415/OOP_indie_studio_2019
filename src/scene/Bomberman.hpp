@@ -27,6 +27,7 @@ class Bomberman {
 
   public:
     static std::vector<ecs::Entity> playerIds;
+    static irr::scene::IMetaTriangleSelector* metaTriangleSelector;
 };
 
 namespace bomberman {

@@ -13,7 +13,7 @@ Universe::Universe()
       _currentWorldManager(""),
       _eventReceiver(EventReceiver(this)),
       _device(createDevice(
-          irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1920, 1080), 16, false, false, false, &_eventReceiver))
+          irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1920, 1080), 16, true, false, false, &_eventReceiver))
 {
 }
 

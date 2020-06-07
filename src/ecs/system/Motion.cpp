@@ -7,9 +7,10 @@
 
 #include "Motion.hpp"
 
-#include "../component/Motion.hpp"
-#include "../component/Transform.hpp"
 #include "../Universe.hpp"
+#include "../component/Motion.hpp"
+#include "../component/Render3d.hpp"
+#include "../component/Transform.hpp"
 
 using namespace ecs::system;
 
@@ -29,7 +30,9 @@ void Motion::update()
     for (const auto& entity : entities) {
         auto& motion = worldManager->getComponent<ecs::component::Motion>(entity);
         auto& tranform = worldManager->getComponent<ecs::component::Transform>(entity);
+        auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
+        tranform = render3d.node->getPosition();
         tranform.position += motion.direction * motion.movementSpeed * deltaTime;
     }
 }
