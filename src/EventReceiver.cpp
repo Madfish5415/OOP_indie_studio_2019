@@ -174,7 +174,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                             std::string path = scene::playerselector::player::SKIN_TO_MODEL[image.pathTexture];
                             pathTextureList.push_back(path);
                         }
-                        scene::Bomberman::init(_universe, scene::PlayerSelector::playerComponent, pathTextureList);
+                        std::vector<ecs::component::Player> tmp = scene::PlayerSelector::playerComponent;
+                        scene::PlayerSelector::destroy(_universe);
+                        scene::Bomberman::init(_universe, tmp, pathTextureList);
+                        if (_universe->hasWorldManager("Bomberman"))
+                            _universe->setCurrentWorldManager("Bomberman");
                     }
                     return true;
                 }

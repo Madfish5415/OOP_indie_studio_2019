@@ -21,12 +21,14 @@
 #include "../ecs/system/Movement.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
+using namespace scene;
+
 static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos, size_t charNbr, std::string path)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     ecs::Entity caracter = worldManager->createEntity();
-    irr::scene::IAnimatedMeshSceneNode *caracter_mesh = smgr->addAnimatedMeshSceneNode(smgr->getMesh("./media/ninja.b3d"));
+    irr::scene::IAnimatedMeshSceneNode *caracter_mesh = smgr->addAnimatedMeshSceneNode(smgr->getMesh(bomberman::ninja::NINJA.c_str()));
 
     caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     caracter_mesh->setPosition(pos);
@@ -35,7 +37,7 @@ static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player
     else
         caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
     caracter_mesh->setScale(irr::core::vector3df(1.9,1.9,1.9));
-    // caracter_mesh->setFrameLoop(183, 204);
+    caracter_mesh->setFrameLoop(183, 204);
 
     caracter_mesh->setMaterialTexture(0, driver->getTexture(path.c_str()));
     bomberman::ninja::PLAYER_SKINS[path] = true;
@@ -134,8 +136,9 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
     }
 }
 
-void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
+void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
 {
+    auto worldManager = universe->createWorldManager("Bomberman");
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     irr::core::vector3df ground_pos;
