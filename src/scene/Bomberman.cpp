@@ -217,17 +217,19 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     ecs::Entity camera = worldManager->createEntity();
 
 
-    irr::scene::ICameraSceneNode *camera_node = nullptr;
+    irr::scene::ICameraSceneNode *cameraNode = nullptr;
 #ifndef DEBUG
-    camera_node = smgr->addCameraSceneNode();
+    cameraNode = smgr->addCameraSceneNode();
 #else
-    camera_node = smgr->addCameraSceneNodeFPS();
+    cameraNode = smgr->addCameraSceneNodeFPS();
 #endif
-    if (camera_node) {
-        camera_node->setPosition(irr::core::vector3df((tileSize * nbTile) * 0.7, 125.0, (tileSize * nbTile) / 2));
-        camera_node->setTarget(ground_mesh->getPosition());
+    if (cameraNode) {
+        cameraNode->setPosition(irr::core::vector3df((tileSize * nbTile) * 0.88, 125.0, (tileSize * nbTile) / 2));
+        auto vector = ground_mesh->getPosition();
+        vector.X += 30;
+        cameraNode->setTarget(vector);
     }
-    worldManager->addComponent<ecs::component::Render3d>(camera, ecs::component::Render3d(camera_node));
+    worldManager->addComponent<ecs::component::Render3d>(camera, ecs::component::Render3d(cameraNode));
 
     createMap(worldManager, tileSize);
 
