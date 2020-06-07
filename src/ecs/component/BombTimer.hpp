@@ -9,8 +9,6 @@
 #define BOMBTIMER_HPP_
 
 #include <irrlicht.h>
-#include <irrlicht/IrrlichtDevice.h>
-#include <irrlicht/irrTypes.h>
 
 namespace ecs::component {
 

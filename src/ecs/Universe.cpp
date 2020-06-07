@@ -21,10 +21,9 @@ Universe::~Universe() = default;
 
 WorldManager* Universe::createWorldManager(const std::string& name)
 {
-    WorldManager *worldManager = new WorldManager(this);
+    _worldManagers.emplace(name, new WorldManager(this));
 
-    _worldManagers.emplace(name, worldManager);
-    return (worldManager);
+    return _worldManagers.at(name).get();
 }
 
 bool Universe::hasWorldManager(const std::string& name) const

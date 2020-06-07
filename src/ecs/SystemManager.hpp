@@ -66,6 +66,7 @@ class SystemManager {
         auto system = std::make_shared<T>(_worldManager);
 
         _systems.emplace(systemName, system);
+        _priority.push_back(systemName);
         return system;
     }
 
@@ -92,8 +93,8 @@ class SystemManager {
      */
     void update()
     {
-        for (auto const &pair : _systems) {
-            auto const &system = pair.second;
+        for (auto const &name : _priority) {
+            auto const &system = _systems[name];
             system->update();
         }
     }
@@ -154,6 +155,7 @@ class SystemManager {
 
   private:
     std::unordered_map<std::string, std::shared_ptr<System>> _systems {}; /** < Unordered map of systems. */
+    std::vector<std::string> _priority {}; /** < Keep registering order in memory. */
     std::unordered_map<std::string, Signature> _signatures {}; /** < Unordered map of signatures. */
     WorldManager *_worldManager; /** < Manager of our world. */
 };

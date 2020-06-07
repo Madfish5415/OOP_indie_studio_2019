@@ -5,12 +5,12 @@
 ** Button.hpp
 */
 
-#ifndef OOP_INDIE_STUDIO_2019_BUTTON_HPP
-#define OOP_INDIE_STUDIO_2019_BUTTON_HPP
+#ifndef OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
+#define OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
 
 #include <string>
 
-#include "irrlicht.h"
+#include <irrlicht.h>
 
 namespace ecs::component {
 
@@ -42,4 +42,4 @@ class Button {
 
 } // namespace ecs::component
 
-#endif // OOP_INDIE_STUDIO_2019_BUTTON_HPP
+#endif // OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP

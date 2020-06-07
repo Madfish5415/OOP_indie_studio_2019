@@ -16,21 +16,21 @@ namespace ecs::component {
 
 class Image {
   public:
-    Image(irr::video::IVideoDriver* driver = nullptr, const irr::io::path& texture = "",
-        const irr::core::position2d<irr::s32>& position = irr::core::position2d<irr::s32>(0, 0), irr::core::rect<irr::s32> rect = irr::core::rect<irr::s32>(),
-        irr::core::rect<irr::s32>* clipRect = nullptr,
-        irr::video::SColor scolor = irr::video::SColor(255, 255, 255, 255), bool useAlphaChannelOfTexture = false);
-    Image(const Image &image);
+    Image(irr::gui::IGUIEnvironment* gui = nullptr, irr::video::IVideoDriver* driver = nullptr,
+        const std::string& pathTexture = "", irr::core::position2d<irr::s32>* position = nullptr,
+        bool useAlphaChannelOfTexture = true, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1);
+    Image(const Image& image);
     ~Image();
 
   public:
+    irr::gui::IGUIEnvironment* gui;
     irr::video::IVideoDriver* driver;
-    irr::video::ITexture* texture;
-    irr::core::position2d<irr::s32> position;
-    irr::core::rect<irr::s32> rect;
-    irr::core::rect<irr::s32>* clipRect;
-    irr::video::SColor scolor;
+    irr::gui::IGUIImage* image;
+    std::string pathTexture;
+    irr::core::position2d<irr::s32>* position;
     bool useAlphaChannelOfTexture;
+    irr::gui::IGUIElement* parent;
+    irr::s32 id;
 };
 
 } // namespace ecs::component

@@ -35,16 +35,21 @@ set(SRCS
         src/ecs/component/Text.cpp
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
-        src/ecs/system/Image.cpp
+        src/ecs/component/PushButton.cpp
+        src/ecs/component/Blink.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
         src/ecs/system/Animation.cpp
+        src/ecs/system/Button.cpp
+        src/ecs/system/Blink.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
+        src/scene/LoadingMenu.cpp
         src/scene/PlayerSelector.cpp
+        src/scene/Keybinding.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -84,16 +89,21 @@ set(HEADERS
         src/ecs/component/Text.hpp
         src/ecs/component/Transform.hpp
         src/ecs/component/Unbreakable.hpp
-        src/ecs/system/Image.hpp
+        src/ecs/component/PushButton.hpp
+        src/ecs/component/Blink.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
         src/ecs/system/Animation.hpp
+        src/ecs/system/Button.hpp
+        src/ecs/system/Blink.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
+        src/scene/LoadingMenu.hpp
         src/scene/PlayerSelector.hpp
+        src/scene/Keybinding.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
@@ -104,9 +114,11 @@ set(HEADERS
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
 
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 find_package (Irrlicht)
+
 
 find_package (SFML)
 

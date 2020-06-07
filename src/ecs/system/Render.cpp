@@ -6,8 +6,8 @@
 */
 
 #include "Render.hpp"
-#include "../Universe.hpp"
 
+#include "../Universe.hpp"
 
 using namespace ecs::system;
 
@@ -21,7 +21,7 @@ Render::Render(WorldManager *worldManager) : ecs::System(worldManager)
 
 Render::~Render() = default;
 
-void Render::update() 
+void Render::update()
 {
     if (gui)
         gui->drawAll();

@@ -5,11 +5,12 @@
 ** Player
 */
 
-#ifndef PLAYER_HPP_
-#define PLAYER_HPP_
+#ifndef OOP_INDIE_STUDIO_2019_COMP_PLAYER_HPP
+#define OOP_INDIE_STUDIO_2019_COMP_PLAYER_HPP
 
 #include <irrlicht.h>
 
+#include <map>
 #include <unordered_map>
 
 namespace ecs::component {
@@ -25,7 +26,6 @@ class Player {
 
   public:
     std::unordered_map<std::string, irr::EKEY_CODE> keys;
-    size_t id;
 };
 
 } // namespace ecs::component
