@@ -46,9 +46,9 @@ static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, 
                                                          {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
 }
 namespace map {
-static const std::string GROUND = "media/map/min_grass.png";
-static const std::string WALL = "media/map/min_brick.png";
-static const std::string BOX = "media/map/box.jpg";
+static const std::string GROUND = "media/map/neon-ground.png";
+static const std::string WALL = "media/map/neon-brick.png";
+static const std::string BOX = "media/map/neon-crate.png";
 }
 }
 
