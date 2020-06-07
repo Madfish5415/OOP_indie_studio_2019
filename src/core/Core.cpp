@@ -25,7 +25,7 @@ void Core::init()
     // _universe->createWorldManager("Menu");
     // scene::Menu::init(_universe->getWorldManager("Menu"));
     _universe->createWorldManager("Bomberman");
-    scene::Bomberman::init(_universe->getWorldManager("Bomberman"), std::vector<ecs::component::Player>());
+    scene::Bomberman::init(_universe->getWorldManager("Bomberman"), std::vector<ecs::component::Player>(), std::vector<std::string>());
     //scene::PlayerSelector::init();
     // _universe->setCurrentWorldManager("Menu");
     _universe->setCurrentWorldManager("Bomberman");

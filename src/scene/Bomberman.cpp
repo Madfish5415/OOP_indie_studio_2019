@@ -7,6 +7,8 @@
 
 #include "Bomberman.hpp"
 
+#include <ctime>
+
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Transform.hpp"
@@ -19,7 +21,7 @@
 #include "../ecs/system/Movement.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
-static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos, size_t charNbr)
+static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos, size_t charNbr, std::string path)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -33,13 +35,28 @@ static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player
     else
         caracter_mesh->setRotation(irr::core::vector3df(0, -90, 0));
     caracter_mesh->setScale(irr::core::vector3df(1.9,1.9,1.9));
-    caracter_mesh->setFrameLoop(183, 204);
+    // caracter_mesh->setFrameLoop(183, 204);
 
-    //Adapt to player infos
-    //caracter_mesh->setMaterialTexture(0, driver->getTexture("./media/nskinye.jpg"));
+    caracter_mesh->setMaterialTexture(0, driver->getTexture(path.c_str()));
+    bomberman::ninja::PLAYER_SKINS[path] = true;
 
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
+}
+
+static const std::string getUnusedSkin()
+{
+    auto item = bomberman::ninja::PLAYER_SKINS.begin();
+
+    std::srand(std::time(nullptr));
+    while (true) {
+        item = bomberman::ninja::PLAYER_SKINS.begin();
+        std::advance(item, std::rand() % bomberman::ninja::PLAYER_SKINS.size());
+        if (!item->second) {
+            item->second = true;
+            return item->first;
+        }
+    }
 }
 
 static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr)
@@ -58,11 +75,13 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     caracter_mesh->setScale(irr::core::vector3df(1.9,1.9,1.9));
     caracter_mesh->setFrameLoop(183, 204);
 
+    caracter_mesh->setMaterialTexture(0, driver->getTexture(getUnusedSkin().c_str()));
+
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::AI>(caracter, ecs::component::AI());
 }
 
-static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players)
+static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
 {
     irr::f32 offset = tileSize / 2;
     std::vector<irr::core::vector3df> caracterPositions = {
@@ -73,7 +92,7 @@ static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, 
 
     for (size_t i = 0; i < 4; i++) {
         if (i < players.size()) {
-            createPlayer(worldManager, players[i], caracterPositions[i], i);
+            createPlayer(worldManager, players[i], caracterPositions[i], i, paths[i]);
         }
         else {
             createBot(worldManager, caracterPositions[i], i);
@@ -115,7 +134,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
     }
 }
 
-void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::component::Player> players)
+void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
 {
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -172,5 +191,14 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
 
     createMap(worldManager, tileSize);
 
-    createCaracters(worldManager, tileSize, nbTile, players);
+    createCaracters(worldManager, tileSize, nbTile, players, paths);
+}
+
+void scene::Bomberman::destroy(ecs::Universe *universe)
+{
+    universe->deleteWorldManager("PlayerSelector");
+    universe->getDevice()->getGUIEnvironment()->clear();
+    for (auto& skin : bomberman::ninja::PLAYER_SKINS) {
+        skin.second = false;
+    }
 }
