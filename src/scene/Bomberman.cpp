@@ -187,7 +187,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     irr::scene::ITriangleSelector *selector =
                         smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
                     wallMesh->setTriangleSelector(selector);
-                    //Bomberman::metaTriangleSelector->addTriangleSelector(selector);
+                    Bomberman::metaTriangleSelector->addTriangleSelector(selector);
                     selector->drop();
 
                     wallMesh->setMaterialTexture(0, driver->getTexture(bomberman::map::BOX.c_str()));
