@@ -400,7 +400,7 @@ void PlayerSelector::changeSkin(ecs::Universe* universe, irr::s32 id)
 
 bool PlayerSelector::checkKeybinding(ecs::Universe* universe)
 {
-    std::vector<irr::EKEY_CODE> keys;
+    std::vector<irr::EKEY_CODE> keys = {};
 
     for (const auto& cmp : playerComponent) {
         for (const auto& key : cmp.keys) {

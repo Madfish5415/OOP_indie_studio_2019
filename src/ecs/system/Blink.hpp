@@ -25,7 +25,6 @@ class Blink : public ecs::System {
 
   private:
     irr::u32 time;
-    irr::u32 deltaTime;
 };
 
 } // namespace ecs::system

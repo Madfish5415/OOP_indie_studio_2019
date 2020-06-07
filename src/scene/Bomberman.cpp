@@ -9,7 +9,6 @@
 
 #include <ctime>
 
-#include "../ecs/Universe.hpp"
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Transform.hpp"
 #include "../ecs/component/Unbreakable.hpp"
@@ -19,11 +18,12 @@
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/system/Render.hpp"
 #include "../ecs/system/Movement.hpp"
+#include "../ecs/system/Motion.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
 using namespace scene;
 
-static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player player_comp, irr::core::vector3df pos, size_t charNbr, std::string path)
+static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::Player& player_comp, const irr::core::vector3df& pos, size_t charNbr, const std::string& path)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -43,7 +43,7 @@ static void createPlayer(ecs::WorldManager *worldManager, ecs::component::Player
     bomberman::ninja::PLAYER_SKINS[path] = true;
 
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
-    worldManager->addComponent<ecs::component::Player>(caracter, ecs::component::Player(player_comp));
+    worldManager->addComponent<ecs::component::Player>(caracter, player_comp);
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
 }
@@ -165,12 +165,20 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         worldManager->setSystemSignature<ecs::system::Render>(signature);
     }
+    worldManager->registerSystem<ecs::system::Motion>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Transform>());
+        worldManager->setSystemSignature<ecs::system::Motion>(signature);
+
+    }
     worldManager->registerSystem<ecs::system::Movement>();
     {
         ecs::Signature signature;
 
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
-        signature.set(worldManager->getComponentType<ecs::component::Motion>());
         signature.set(worldManager->getComponentType<ecs::component::Transform>());
         worldManager->setSystemSignature<ecs::system::Movement>(signature);
     }
