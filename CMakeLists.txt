@@ -39,6 +39,7 @@ set(SRCS
         src/ecs/component/Blink.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
+        src/ecs/system/Motion.cpp
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
@@ -93,6 +94,7 @@ set(HEADERS
         src/ecs/component/Blink.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
+        src/ecs/system/Motion.hpp
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
@@ -110,6 +112,9 @@ set(HEADERS
         src/map_generator/MapGenerator.hpp
         )
 
+if (DEBUG)
+    add_definitions(-DDEBUG)
+endif()
 
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
