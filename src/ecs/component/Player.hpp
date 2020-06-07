@@ -19,13 +19,14 @@ class Player {
   public:
     Player(std::unordered_map<std::string, irr::EKEY_CODE> keys = {{"up", irr::EKEY_CODE::KEY_KEY_Z},
                {"down", irr::EKEY_CODE::KEY_KEY_S}, {"left", irr::EKEY_CODE::KEY_KEY_Q},
-               {"right", irr::EKEY_CODE::KEY_KEY_D}, {"bomb", irr::EKEY_CODE::KEY_SPACE}},
-        size_t id = 1);
+               {"right", irr::EKEY_CODE::KEY_KEY_D}, {"bomb", irr::EKEY_CODE::KEY_SPACE}});
     Player(const Player& player);
     ~Player();
 
+
   public:
     std::unordered_map<std::string, irr::EKEY_CODE> keys;
+    std::string lastKey;
 };
 
 } // namespace ecs::component

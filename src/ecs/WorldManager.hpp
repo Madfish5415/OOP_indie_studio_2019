@@ -81,6 +81,50 @@ class WorldManager {
         _systemManager->entityDestroyed(entity);
     }
 
+  private:
+    /**
+     * @brief createSignature method
+     * Allow to generate a signature.
+     * @tparam T : The first component.
+     * @tparam TArgs : The others components.
+     * @return A signature of the components.
+     */
+    template<typename T = void, typename... TArgs>
+    Signature createSignature()
+    {
+        Signature has;
+        if (typeid(T) != typeid(void))
+            has.set(_componentManager->getComponentType<T>());
+
+        if (sizeof...(TArgs))
+            has &= this->createSignature<TArgs...>();
+
+        return has;
+    }
+
+  public:
+    /**
+     * @brief getEntities method
+     * This method return a list of entity based on the components passed in parameters.
+     * @tparam TArgs : List of component you needs.
+     * @return List of entity who have the list of components.
+     */
+    template<typename... TArgs>
+    std::vector<ecs::Entity> getEntities()
+    {
+        std::vector<ecs::Entity> entities;
+        auto allEntities = _entityManager->getEntities();
+
+        Signature sig = createSignature<TArgs...>();
+
+        for (const auto& entity : allEntities) {
+            const auto& signature = _entityManager->getSignature(entity);
+            if ((signature & sig) == sig)
+                entities.push_back(entity);
+        }
+        return (entities);
+    }
+
   public:
     /**
      * @brief registerComponent method

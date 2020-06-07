@@ -16,6 +16,7 @@ set(SRCS
         src/main.cpp
         src/ecs/component/AI.cpp
         src/ecs/component/Animation.cpp
+        src/ecs/component/Collision.cpp
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
@@ -39,12 +40,14 @@ set(SRCS
         src/ecs/component/Blink.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
+        src/ecs/system/Motion.cpp
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
         src/ecs/system/Animation.cpp
         src/ecs/system/Button.cpp
         src/ecs/system/Blink.cpp
+        src/ecs/system/Player.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -54,6 +57,8 @@ set(SRCS
         src/core/Core.cpp
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
+        src/map-generator/MapGenerator.cpp
+        src/ecs/event/Key.cpp
         )
 
 set(HEADERS
@@ -69,6 +74,7 @@ set(HEADERS
         src/ecs/WorldManager.hpp
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
+        src/ecs/component/Collision.hpp
         src/ecs/component/BombStats.hpp
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
@@ -92,12 +98,14 @@ set(HEADERS
         src/ecs/component/Blink.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
+        src/ecs/system/Motion.hpp
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
         src/ecs/system/Animation.hpp
         src/ecs/system/Button.hpp
         src/ecs/system/Blink.hpp
+        src/ecs/system/Player.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp
@@ -106,8 +114,13 @@ set(HEADERS
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
+        src/map-generator/MapGenerator.hpp
+        src/ecs/event/Key.hpp
         )
 
+if (DEBUG)
+    add_definitions(-DDEBUG)
+endif()
 
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})

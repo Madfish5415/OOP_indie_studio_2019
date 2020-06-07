@@ -13,6 +13,7 @@
 #include "ecs/Universe.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/PushButton.hpp"
+#include "ecs/event/Key.hpp"
 #include "scene/Bomberman.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
@@ -77,6 +78,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 }
                 idx++;
             }
+        }
+        if (_universe->hasWorldManager("Bomberman") &&
+        _universe->getCurrentWorldManager() == _universe->getWorldManager("Bomberman")) {
+            ecs::event::Key keyEvent(event.KeyInput.Key, event.KeyInput.PressedDown);
+            _universe->getWorldManager("Bomberman")->publish(keyEvent);
         }
     }
     if (event.EventType == irr::EET_MOUSE_INPUT_EVENT) {
@@ -174,7 +180,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                             std::string path = scene::playerselector::player::SKIN_TO_MODEL[image.pathTexture];
                             pathTextureList.push_back(path);
                         }
-                        scene::Bomberman::init(_universe, scene::PlayerSelector::playerComponent, pathTextureList);
+                        std::vector<ecs::component::Player> tmp = scene::PlayerSelector::playerComponent;
+                        scene::PlayerSelector::destroy(_universe);
+                        scene::Bomberman::init(_universe, tmp, pathTextureList);
+                        if (_universe->hasWorldManager("Bomberman"))
+                            _universe->setCurrentWorldManager("Bomberman");
                     }
                     return true;
                 }

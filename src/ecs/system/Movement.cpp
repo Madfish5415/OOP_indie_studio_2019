@@ -7,7 +7,6 @@
 
 #include "Movement.hpp"
 
-#include "../component/Motion.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Transform.hpp"
 
@@ -23,9 +22,8 @@ void Movement::update()
 {
     for (const auto& entity : entities) {
         auto& node = worldManager->getComponent<ecs::component::Render3d>(entity).node;
-        auto& motion = worldManager->getComponent<ecs::component::Motion>(entity);
         auto& tranform = worldManager->getComponent<ecs::component::Transform>(entity);
-        tranform.position += motion.direction * motion.movementSpeed;
+
         node->setPosition(tranform.position);
     }
 }
