@@ -13,6 +13,8 @@
 #include "../ecs/component/Unbreakable.hpp"
 #include "../ecs/component/AI.hpp"
 #include "../ecs/component/Motion.hpp"
+#include "../ecs/component/Animation.hpp"
+#include "../ecs/component/Stats.hpp"
 #include "../ecs/system/Render.hpp"
 #include "../ecs/system/Movement.hpp"
 #include "../map_generator/MapGenerator.hpp"
@@ -45,7 +47,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     ecs::Entity caracter = worldManager->createEntity();
-    irr::scene::IAnimatedMeshSceneNode *caracter_mesh = smgr->addAnimatedMeshSceneNode(smgr->getMesh("./media/ninja.b3d"));
+    irr::scene::IAnimatedMeshSceneNode *caracter_mesh = smgr->addAnimatedMeshSceneNode(smgr->getMesh(bomberman::ninja::NINJA.c_str()));
 
     caracter_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     caracter_mesh->setPosition(pos);
@@ -92,7 +94,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                 {
                     ecs::Entity wall = worldManager->createEntity();
                     irr::scene::ISceneNode *wall_mesh = smgr->addCubeSceneNode(tileSize);
-                    wall_mesh->setMaterialTexture(0, driver->getTexture("./media/min_brick.png"));
+                    wall_mesh->setMaterialTexture(0, driver->getTexture(bomberman::map::WALL.c_str()));
                     wall_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
                     wall_mesh->setPosition(irr::core::vector3df((x * tileSize) + (tileSize / 2), tileSize / 2, (y * tileSize) + (tileSize / 2)));
                     worldManager->addComponent<ecs::component::Render3d>(wall, ecs::component::Render3d(wall_mesh));
@@ -103,7 +105,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                 {
                     ecs::Entity wall = worldManager->createEntity();
                     irr::scene::ISceneNode *wall_mesh = smgr->addCubeSceneNode(tileSize);
-                    wall_mesh->setMaterialTexture(0, driver->getTexture("./media/box.jpg"));
+                    wall_mesh->setMaterialTexture(0, driver->getTexture(bomberman::map::BOX.c_str()));
                     wall_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
                     wall_mesh->setPosition(irr::core::vector3df((x * tileSize) + (tileSize / 2), tileSize / 2, (y * tileSize) + (tileSize / 2)));
                     worldManager->addComponent<ecs::component::Render3d>(wall, ecs::component::Render3d(wall_mesh));
@@ -126,6 +128,8 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
     worldManager->registerComponent<ecs::component::Unbreakable>();
     worldManager->registerComponent<ecs::component::AI>();
     worldManager->registerComponent<ecs::component::Motion>();
+    worldManager->registerComponent<ecs::component::Animation>();
+    worldManager->registerComponent<ecs::component::Stats>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -134,27 +138,21 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         worldManager->setSystemSignature<ecs::system::Render>(signature);
     }
+    worldManager->registerSystem<ecs::system::Movement>();
+    {
+        ecs::Signature signature;
 
-    // irr::scene::ISceneNode *cube = smgr->addCubeSceneNode();
-    // cube->setPosition(irr::core::vector3df(0.0, 0.0, 0.0));
-    // cube->setMaterialTexture(0, driver->getTexture("./media/not_a_petite_fille.png"));
-    // cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-
-    // irr::scene::ISceneNode *sphere = smgr->addSphereSceneNode();
-    // sphere->setPosition(irr::core::vector3df((nbTile * tileSize) / 2, 0.0, 0.0));
-    // sphere->setMaterialTexture(0, driver->getTexture("./media/not_a_petite_fille.png"));
-    // sphere->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-
-    // irr::scene::ISceneNode *lil_cube = smgr->addCubeSceneNode(5.0);
-    // lil_cube->setPosition(irr::core::vector3df(0.0, 0.0, (nbTile * tileSize) / 2));
-    // lil_cube->setMaterialTexture(0, driver->getTexture("./media/not_a_petite_fille.png"));
-    // lil_cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Transform>());
+        worldManager->setSystemSignature<ecs::system::Movement>(signature);
+    }
 
     ecs::Entity ground = worldManager->createEntity();
     irr::scene::IMeshSceneNode *ground_mesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile)));
     if (ground_mesh) {
         smgr->getMeshManipulator()->makePlanarTextureMapping(ground_mesh->getMesh(), 0.1f, 0.1f, 1, irr::core::vector3df(0.0, 0.0, 5.0));
-        ground_mesh->setMaterialTexture(0, driver->getTexture("./media/min_grass.png"));
+        ground_mesh->setMaterialTexture(0, driver->getTexture(bomberman::map::GROUND.c_str()));
         ground_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         ground_pos = ground_mesh->getPosition();
         ground_pos.X = ground_pos.X + ((tileSize * nbTile) / 2);
@@ -175,12 +173,4 @@ void scene::Bomberman::init(ecs::WorldManager *worldManager, std::vector<ecs::co
     createMap(worldManager, tileSize);
 
     createCaracters(worldManager, tileSize, nbTile, players);
-
-    worldManager->registerSystem<ecs::system::Movement>();
-    {
-        ecs::Signature signature;
-
-        signature.set(worldManager->getComponentType<ecs::component::Motion>());
-        worldManager->setSystemSignature<ecs::system::Movement>(signature);
-    }
 }
