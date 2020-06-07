@@ -20,6 +20,7 @@
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Player.hpp"
+#include "../ecs/system/Animation.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
 using namespace scene;
@@ -50,6 +51,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
+    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALK", {0, 13}}})));
 
     Bomberman::playerIds.push_back(caracter);
 }
@@ -92,6 +94,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
+    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALK", {0, 13}}})));
 }
 
 static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
@@ -189,10 +192,19 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         signature.set(worldManager->getComponentType<ecs::component::Transform>());
         worldManager->setSystemSignature<ecs::system::Movement>(signature);
     }
+    worldManager->registerSystem<ecs::system::Animation>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        signature.set(worldManager->getComponentType<ecs::component::Animation>());
+        worldManager->setSystemSignature<ecs::system::Animation>(signature);
+    }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
         ecs::Signature signature;
 
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Player>());
         signature.set(worldManager->getComponentType<ecs::component::Stats>());
         signature.set(worldManager->getComponentType<ecs::component::Motion>());
@@ -224,7 +236,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     camera_node = smgr->addCameraSceneNodeFPS();
 #endif
     if (camera_node) {
-        camera_node->setPosition(irr::core::vector3df((tileSize * nbTile) * 0.7, 125.0, (tileSize * nbTile) / 2));
+        camera_node->setPosition(irr::core::vector3df((tileSize * nbTile) * 0.51, 125.0, (tileSize * nbTile) / 2));
         camera_node->setTarget(ground_mesh->getPosition());
     }
     worldManager->addComponent<ecs::component::Render3d>(camera, ecs::component::Render3d(camera_node));
