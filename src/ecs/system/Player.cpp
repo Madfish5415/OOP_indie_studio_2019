@@ -11,6 +11,7 @@
 #include "../component/Player.hpp"
 #include "../component/Motion.hpp"
 #include "../component/Stats.hpp"
+#include "../component/Animation.hpp"
 #include <iostream>
 
 using namespace ecs::system;
@@ -31,6 +32,7 @@ void Player::receiveKeyEvent(event::Key& event)
         auto& player = worldManager->getComponent<ecs::component::Player>(entity);
         auto& motion = worldManager->getComponent<ecs::component::Motion>(entity);
         auto& stats = worldManager->getComponent<ecs::component::Stats>(entity);
+        auto& animation = worldManager->getComponent<ecs::component::Animation>(entity);
 
         if (event.keycode == player.keys["up"]) {
             if (event.pressed) {
@@ -40,9 +42,12 @@ void Player::receiveKeyEvent(event::Key& event)
                 motion.direction.Z = 0;
                 motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
                 node->setRotation(irr::core::vector3df(0, -90, 0));
+                animation.currentAnimation = "WALKING";
             } else {
-                if (player.lastKey == "up")
+                if (player.lastKey == "up") {
                     motion.movementSpeed = 0;
+                    animation.currentAnimation = "IDLE";
+                }
             }
         } else if (event.keycode == player.keys["down"]) {
             if (event.pressed) {
@@ -52,9 +57,12 @@ void Player::receiveKeyEvent(event::Key& event)
                 motion.direction.Z = 0;
                 motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
                 node->setRotation(irr::core::vector3df(0, 90, 0));
+                animation.currentAnimation = "WALKING";
             } else {
-                if (player.lastKey == "down")
+                if (player.lastKey == "down") {
                     motion.movementSpeed = 0;
+                    animation.currentAnimation = "IDLE";
+                }
             }
         } else if (event.keycode == player.keys["left"]) {
             if (event.pressed) {
@@ -64,9 +72,12 @@ void Player::receiveKeyEvent(event::Key& event)
                 motion.direction.Z = -1;
                 motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
                 node->setRotation(irr::core::vector3df(0, 180, 0));
+                animation.currentAnimation = "WALKING";
             } else {
-                if (player.lastKey == "left")
+                if (player.lastKey == "left") {
                     motion.movementSpeed = 0;
+                    animation.currentAnimation = "IDLE";
+                }
             }
         } else if (event.keycode == player.keys["right"]) {
             if (event.pressed) {
@@ -76,8 +87,12 @@ void Player::receiveKeyEvent(event::Key& event)
                 motion.direction.Z = 1;
                 motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
                 node->setRotation(irr::core::vector3df(0, 0, 0));
-                if (player.lastKey == "right")
+                animation.currentAnimation = "WALKING";
+            } else {
+                if (player.lastKey == "right") {
                     motion.movementSpeed = 0;
+                    animation.currentAnimation = "IDLE";
+                }
             }
         } else if (event.keycode == player.keys["bomb"]) {
             //plant a bomb and do some magic

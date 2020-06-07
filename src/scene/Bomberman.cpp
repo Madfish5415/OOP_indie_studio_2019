@@ -52,7 +52,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
-    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALK", {0, 13}}})));
+    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
 
     Bomberman::playerIds.push_back(caracter);
 }
@@ -209,6 +209,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         signature.set(worldManager->getComponentType<ecs::component::Player>());
         signature.set(worldManager->getComponentType<ecs::component::Stats>());
         signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Animation>());
         worldManager->setSystemSignature<ecs::system::Player>(signature);
     }
     worldManager->subscribe(*(playerSystem.get()), &ecs::system::Player::receiveKeyEvent);
