@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** helloIRR
+** IndieStudio
 ** File description:
 ** Menu.cpp
 */

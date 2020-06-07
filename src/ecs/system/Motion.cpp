@@ -9,19 +9,27 @@
 
 #include "../component/Motion.hpp"
 #include "../component/Transform.hpp"
+#include "../Universe.hpp"
 
-ecs::system::Motion::Motion(ecs::WorldManager* worldManager) : System(worldManager)
+using namespace ecs::system;
+
+Motion::Motion(ecs::WorldManager* worldManager) : System(worldManager)
 {
+    _then = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
 }
 
-ecs::system::Motion::~Motion() = default;
+Motion::~Motion() = default;
 
-void ecs::system::Motion::update()
+void Motion::update()
 {
+    const irr::u32 now = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
+    const irr::f32 deltaTime = static_cast<irr::f32>(now - _then) / 1000.f;
+    _then = now;
+
     for (const auto& entity : entities) {
         auto& motion = worldManager->getComponent<ecs::component::Motion>(entity);
         auto& tranform = worldManager->getComponent<ecs::component::Transform>(entity);
 
-        tranform.position += motion.direction * motion.movementSpeed;
+        tranform.position += motion.direction * motion.movementSpeed * deltaTime;
     }
 }

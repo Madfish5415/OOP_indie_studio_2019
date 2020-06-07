@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** helloIRR
+** IndieStudio
 ** File description:
 ** Bomberman.cpp
 */
@@ -19,9 +19,12 @@
 #include "../ecs/system/Render.hpp"
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Motion.hpp"
+#include "../ecs/system/Player.hpp"
 #include "../map_generator/MapGenerator.hpp"
 
 using namespace scene;
+
+std::vector<ecs::Entity> Bomberman::playerIds = {};
 
 static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::Player& player_comp, const irr::core::vector3df& pos, size_t charNbr, const std::string& path)
 {
@@ -46,6 +49,9 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Player>(caracter, player_comp);
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
+    worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
+
+    Bomberman::playerIds.push_back(caracter);
 }
 
 static const std::string getUnusedSkin()
@@ -85,6 +91,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     worldManager->addComponent<ecs::component::AI>(caracter, ecs::component::AI());
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
+    worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
 }
 
 static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
@@ -182,6 +189,16 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         signature.set(worldManager->getComponentType<ecs::component::Transform>());
         worldManager->setSystemSignature<ecs::system::Movement>(signature);
     }
+    std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Player>());
+        signature.set(worldManager->getComponentType<ecs::component::Stats>());
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        worldManager->setSystemSignature<ecs::system::Player>(signature);
+    }
+    worldManager->subscribe(*(playerSystem.get()), &ecs::system::Player::receiveKeyEvent);
 
     ecs::Entity ground = worldManager->createEntity();
     irr::scene::IMeshSceneNode *ground_mesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile)));
@@ -198,7 +215,14 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     worldManager->addComponent<ecs::component::Transform>(ground, ecs::component::Transform(ground_mesh->getPosition()));
 
     ecs::Entity camera = worldManager->createEntity();
-    irr::scene::ICameraSceneNode *camera_node = smgr->addCameraSceneNodeFPS();
+
+
+    irr::scene::ICameraSceneNode *camera_node = nullptr;
+#ifndef DEBUG
+    camera_node = smgr->addCameraSceneNode();
+#else
+    camera_node = smgr->addCameraSceneNodeFPS();
+#endif
     if (camera_node) {
         camera_node->setPosition(irr::core::vector3df((tileSize * nbTile) * 0.7, 125.0, (tileSize * nbTile) / 2));
         camera_node->setTarget(ground_mesh->getPosition());
@@ -214,6 +238,7 @@ void scene::Bomberman::destroy(ecs::Universe *universe)
 {
     universe->deleteWorldManager("PlayerSelector");
     universe->getDevice()->getGUIEnvironment()->clear();
+    Bomberman::playerIds.clear();
     for (auto& skin : bomberman::ninja::PLAYER_SKINS) {
         skin.second = false;
     }

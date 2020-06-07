@@ -8,6 +8,8 @@
 #ifndef INDIESTUDIO_MOTION_HPP
 #define INDIESTUDIO_MOTION_HPP
 
+#include <irrlicht.h>
+
 #include "../System.hpp"
 #include "../WorldManager.hpp"
 
@@ -20,6 +22,9 @@ class Motion : public System {
 
   public:
     void update() override;
+
+  private:
+    irr::u32 _then;
 };
 
 }

@@ -46,6 +46,7 @@ set(SRCS
         src/ecs/system/Animation.cpp
         src/ecs/system/Button.cpp
         src/ecs/system/Blink.cpp
+        src/ecs/system/Player.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -56,6 +57,7 @@ set(SRCS
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
         src/map_generator/MapGenerator.cpp
+        src/ecs/event/Key.cpp
         )
 
 set(HEADERS
@@ -101,6 +103,7 @@ set(HEADERS
         src/ecs/system/Animation.hpp
         src/ecs/system/Button.hpp
         src/ecs/system/Blink.hpp
+        src/ecs/system/Player.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp
@@ -110,6 +113,7 @@ set(HEADERS
         src/core/Core.hpp
         src/ecs/Universe.hpp
         src/map_generator/MapGenerator.hpp
+        src/ecs/event/Key.hpp
         )
 
 if (DEBUG)

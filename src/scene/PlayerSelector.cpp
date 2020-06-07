@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** helloIRR
+** IndieStudio
 ** File description:
 ** PlayerSelector.cpp
 */
@@ -246,6 +246,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     PlayerSelector::playerKeysIds.pop_back();
     PlayerSelector::playerSkinButtonLeftIds.pop_back();
     PlayerSelector::playerSkinButtonRightIds.pop_back();
+    PlayerSelector::playerComponent.pop_back();
 
     for (auto& skin : playerselector::player::PLAYER_SKINS) {
         if (skin.first == image.pathTexture)

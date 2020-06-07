@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** helloIRR
+** IndieStudio
 ** File description:
 ** Bomberman.hpp
 */
@@ -24,6 +24,9 @@ class Bomberman {
     static void init(ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
     static void reset();
     static void destroy(ecs::Universe *universe);
+
+  public:
+    static std::vector<ecs::Entity> playerIds;
 };
 
 namespace bomberman {
