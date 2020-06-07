@@ -14,7 +14,7 @@ namespace ecs::component {
 
 class Owner {
   public:
-    explicit Owner(const ecs::Entity &ID = 0);
+    Owner(const ecs::Entity &ID = 0);
     Owner(const Owner &owner);
     ~Owner();
 
