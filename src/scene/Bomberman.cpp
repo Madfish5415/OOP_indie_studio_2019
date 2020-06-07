@@ -31,7 +31,7 @@ std::vector<ecs::Entity> Bomberman::playerIds = {};
 
 static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worldManager, irr::scene::ISceneManager *smgr, irr::scene::IAnimatedMeshSceneNode *caracter_mesh)
 {
-    std::vector<ecs::Entity> collisionList; //= FONCTIONMAGIQUE
+    std::vector<ecs::Entity> collisionList = worldManager->getEntities<ecs::component::Collision>();
 
     irr::scene::ITriangleSelector* selector = smgr->createOctreeTriangleSelector(caracter_mesh->getMesh(), caracter_mesh, 128);
     caracter_mesh->setTriangleSelector(selector);
@@ -64,7 +64,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     caracter_mesh->setMaterialTexture(0, driver->getTexture(path.c_str()));
     bomberman::ninja::PLAYER_SKINS[path] = true;
 
-    //caracter_mesh = addCollisions(worldManager, smgr, caracter_mesh);
+    caracter_mesh = addCollisions(worldManager, smgr, caracter_mesh);
 
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::Player>(caracter, player_comp);

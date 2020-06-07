@@ -10,6 +10,7 @@
 
 #include <array>
 #include <queue>
+#include <set>
 
 #ifdef _WIN32
 #include <stdexcept>
@@ -67,6 +68,8 @@ class EntityManager {
         _availableEntities.pop();
         _entitiesCount++;
 
+        _usedEntities.insert(entity);
+
         return entity;
     }
 
@@ -82,7 +85,17 @@ class EntityManager {
 
         _signatures[entity].reset();
         _availableEntities.push(entity);
+        _usedEntities.erase(entity);
         _entitiesCount--;
+    }
+
+    /**
+     * @brief getEntities method
+     * This method returns a list of all entities.
+     */
+    std::set<Entity> getEntities()
+    {
+        return _usedEntities;
     }
 
   public:
@@ -117,6 +130,7 @@ class EntityManager {
   private:
     std::queue<Entity> _availableEntities {}; /** < Queue of available entities. */
     std::array<Signature, MAX_ENTITIES> _signatures {}; /** < Array of singatures*/
+    std::set<Entity> _usedEntities {};
     unsigned int _entitiesCount = 0; /** < Entity counter*/
 };
 } // namespace ecs
