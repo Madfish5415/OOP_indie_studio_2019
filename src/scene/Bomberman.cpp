@@ -37,7 +37,7 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worl
     caracter_mesh->setTriangleSelector(selector);
 
     for (auto it : collisionList) {
-        irr::scene::ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(selector, worldManager->getComponent<ecs::component::Render3d>(it).node, irr::core::vector3df(30,50,30), irr::core::vector3df(0,-10,0), irr::core::vector3df(0,30,0));
+        irr::scene::ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(selector, worldManager->getComponent<ecs::component::Render3d>(it).node, irr::core::vector3df(30,50,30), irr::core::vector3df(0,0,0), irr::core::vector3df(0,0,0));
         caracter_mesh->addAnimator(anim);
         anim->drop();
     }
@@ -253,6 +253,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     }
     worldManager->addComponent<ecs::component::Render3d>(ground, ecs::component::Render3d(ground_mesh));
     worldManager->addComponent<ecs::component::Transform>(ground, ecs::component::Transform(ground_mesh->getPosition()));
+    worldManager->addComponent<ecs::component::Collision>(ground, ecs::component::Collision());
 
     ecs::Entity camera = worldManager->createEntity();
 
