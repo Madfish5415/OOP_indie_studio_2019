@@ -16,6 +16,7 @@ set(SRCS
         src/main.cpp
         src/ecs/component/AI.cpp
         src/ecs/component/Animation.cpp
+        src/ecs/component/Collision.cpp
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
@@ -73,6 +74,7 @@ set(HEADERS
         src/ecs/WorldManager.hpp
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
+        src/ecs/component/Collision.hpp
         src/ecs/component/BombStats.hpp
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp

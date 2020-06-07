@@ -16,6 +16,7 @@
 #include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Animation.hpp"
 #include "../ecs/component/Stats.hpp"
+#include "../ecs/component/Collision.hpp"
 #include "../ecs/system/Render.hpp"
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Motion.hpp"
@@ -27,6 +28,22 @@
 using namespace scene;
 
 std::vector<ecs::Entity> Bomberman::playerIds = {};
+
+static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worldManager, irr::scene::ISceneManager *smgr, irr::scene::IAnimatedMeshSceneNode *caracter_mesh)
+{
+    std::vector<ecs::Entity> collisionList; //= FONCTIONMAGIQUE
+
+    irr::scene::ITriangleSelector* selector = smgr->createOctreeTriangleSelector(caracter_mesh->getMesh(), caracter_mesh, 128);
+    caracter_mesh->setTriangleSelector(selector);
+
+    for (auto it : collisionList) {
+        irr::scene::ISceneNodeAnimator* anim = smgr->createCollisionResponseAnimator(selector, worldManager->getComponent<ecs::component::Render3d>(it).node, irr::core::vector3df(30,50,30), irr::core::vector3df(0,-10,0), irr::core::vector3df(0,30,0));
+        caracter_mesh->addAnimator(anim);
+        anim->drop();
+    }
+    selector->drop();
+    return (caracter_mesh);
+}
 
 static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::Player& player_comp, const irr::core::vector3df& pos, size_t charNbr, const std::string& path)
 {
@@ -47,12 +64,15 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     caracter_mesh->setMaterialTexture(0, driver->getTexture(path.c_str()));
     bomberman::ninja::PLAYER_SKINS[path] = true;
 
+    //caracter_mesh = addCollisions(worldManager, smgr, caracter_mesh);
+
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::Player>(caracter, player_comp);
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
     worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
+    worldManager->addComponent<ecs::component::Collision>(caracter, ecs::component::Collision());
 
     Bomberman::playerIds.push_back(caracter);
 }
@@ -90,12 +110,15 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
 
     caracter_mesh->setMaterialTexture(0, driver->getTexture(getUnusedSkin().c_str()));
 
+    //caracter_mesh = addCollisions(worldManager, smgr, caracter_mesh);
+
     worldManager->addComponent<ecs::component::Render3d>(caracter, ecs::component::Render3d(caracter_mesh));
     worldManager->addComponent<ecs::component::AI>(caracter, ecs::component::AI());
     worldManager->addComponent<ecs::component::Motion>(caracter, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(caracter, ecs::component::Transform(caracter_mesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(caracter, ecs::component::Stats());
-    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALK", {0, 13}}})));
+    worldManager->addComponent<ecs::component::Animation>(caracter, ecs::component::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
+    worldManager->addComponent<ecs::component::Collision>(caracter, ecs::component::Collision());
 }
 
 static void createCaracters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
@@ -135,6 +158,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     wall_mesh->setPosition(irr::core::vector3df((x * tileSize) + (tileSize / 2), tileSize / 2, (y * tileSize) + (tileSize / 2)));
                     worldManager->addComponent<ecs::component::Render3d>(wall, ecs::component::Render3d(wall_mesh));
                     worldManager->addComponent<ecs::component::Unbreakable>(wall, ecs::component::Unbreakable());
+                    worldManager->addComponent<ecs::component::Collision>(wall, ecs::component::Collision());
                 }
             }
             else if (tileMap[y][x] == '*') {
@@ -145,6 +169,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     wall_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
                     wall_mesh->setPosition(irr::core::vector3df((x * tileSize) + (tileSize / 2), tileSize / 2, (y * tileSize) + (tileSize / 2)));
                     worldManager->addComponent<ecs::component::Render3d>(wall, ecs::component::Render3d(wall_mesh));
+                    worldManager->addComponent<ecs::component::Collision>(wall, ecs::component::Collision());
                 }
             }
         }
@@ -168,6 +193,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     worldManager->registerComponent<ecs::component::Motion>();
     worldManager->registerComponent<ecs::component::Animation>();
     worldManager->registerComponent<ecs::component::Stats>();
+    worldManager->registerComponent<ecs::component::Collision>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
