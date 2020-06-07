@@ -21,7 +21,8 @@
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Animation.hpp"
-#include "../map_generator/MapGenerator.hpp"
+#include "../map-generator/MapGenerator.hpp"
+
 
 using namespace scene;
 
