@@ -42,7 +42,7 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(
     irr::core::vector3df radius = box.MaxEdge - box.getCenter();
 
     irr::scene::ISceneNodeAnimator *anim = smgr->createCollisionResponseAnimator(Bomberman::metaTriangleSelector,
-        characterMesh, radius, irr::core::vector3df(0, -10, 0), irr::core::vector3df(0, 0, 0));
+        characterMesh, radius, irr::core::vector3df(0, -10, 0), irr::core::vector3df(0, -5, 0));
     characterMesh->addAnimator(anim);
     anim->drop();
     selector->drop();
@@ -139,10 +139,10 @@ static void createCharacters(ecs::WorldManager *worldManager, irr::u32 tileSize,
 {
     irr::f32 offset = tileSize / 2;
     std::vector<irr::core::vector3df> characterPositions = {
-        irr::core::vector3df(tileSize + offset, 5.0, tileSize + offset),
-        irr::core::vector3df(tileSize + offset, 5.0, tileSize * (nbTile - 2) + offset),
-        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 5.0, tileSize + offset),
-        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 5.0, tileSize * (nbTile - 2) + offset)};
+        irr::core::vector3df(tileSize + offset, 0.0, tileSize + offset),
+        irr::core::vector3df(tileSize + offset, 0.0, tileSize * (nbTile - 2) + offset),
+        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
+        irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
     for (size_t i = 0; i < 4; i++) {
         if (i < players.size()) {

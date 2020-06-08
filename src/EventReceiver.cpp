@@ -88,7 +88,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 scene::Pause::init(_universe);
                 _universe->setCurrentWorldManager("Pause");
             }
-            return true;
+            return false;
         }
         if (_universe->hasWorldManager("Pause") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("Pause")) {
