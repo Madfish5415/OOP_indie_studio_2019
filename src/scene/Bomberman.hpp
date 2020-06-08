@@ -45,6 +45,11 @@ static const std::string YELLOW = "media/ninja/yellow.jpg";
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
                                                          {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
 }
+
+namespace bomb {
+static const std::string  BOMB = "media/bomb/Bomb.obj";
+}
+
 namespace map {
 static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";

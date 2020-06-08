@@ -77,7 +77,8 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Motion>(character, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(
         character, ecs::component::Transform(characterMesh->getPosition()));
-    worldManager->addComponent<ecs::component::Stats>(character, ecs::component::Stats((std::rand() % 9 + 1), (std::rand() % 9 + 1), (std::rand() % 9 + 1)));
+    worldManager->addComponent<ecs::component::Stats>(
+        character, ecs::component::Stats((std::rand() % 9 + 1), (std::rand() % 9 + 1), (std::rand() % 9 + 1)));
     worldManager->addComponent<ecs::component::Animation>(character,
         ecs::component::Animation(
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
