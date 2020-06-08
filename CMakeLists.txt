@@ -41,6 +41,7 @@ set(SRCS
         src/ecs/component/StatRender.cpp
         src/ecs/component/Timer.cpp
         src/ecs/component/TimerRender.cpp
+        src/ecs/component/PowerUp.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -54,6 +55,7 @@ set(SRCS
         src/ecs/system/StatRender.cpp
         src/ecs/system/Timer.cpp
         src/ecs/system/TimerRender.cpp
+        src/ecs/system/PowerUp.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -107,6 +109,7 @@ set(HEADERS
         src/ecs/component/StatRender.hpp
         src/ecs/component/Timer.hpp
         src/ecs/component/TimerRender.hpp
+        src/ecs/component/PowerUp.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
@@ -120,6 +123,7 @@ set(HEADERS
         src/ecs/system/StatRender.hpp
         src/ecs/system/Timer.hpp
         src/ecs/system/TimerRender.hpp
+        src/ecs/system/PowerUp.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp

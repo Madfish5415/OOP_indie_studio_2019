@@ -24,6 +24,7 @@ class Bomberman {
     static void init(ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
     static void reset();
     static void destroy(ecs::Universe *universe);
+    static void createPowerUp(ecs::Universe *universe, irr::core::vector3df position);
 
   public:
     static std::vector<ecs::Entity> playerIds;
@@ -50,8 +51,10 @@ static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
 }
+namespace powerUp {
+static const std::string SPEED = "media/power-up/speed.png";
 }
-
+}
 }
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP
