@@ -12,8 +12,11 @@
 
 #include "../ecs/component/AI.hpp"
 #include "../ecs/component/Animation.hpp"
+#include "../ecs/component/BombStats.hpp"
+#include "../ecs/component/BombTimer.hpp"
 #include "../ecs/component/Collision.hpp"
 #include "../ecs/component/Motion.hpp"
+#include "../ecs/component/Owner.hpp"
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/Transform.hpp"
@@ -38,7 +41,7 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(
         smgr->createOctreeTriangleSelector(characterMesh->getMesh(), characterMesh, 128);
     characterMesh->setTriangleSelector(selector);
 
-    irr::core::aabbox3d<irr::f32> box(0, 0, 0, 9.5, 9.5, 9.5);
+    irr::core::aabbox3d<irr::f32> box(0, 0, 0, 9.5, 10, 9.5);
     irr::core::vector3df radius = box.MaxEdge - box.getCenter();
 
     irr::scene::ISceneNodeAnimator *anim = smgr->createCollisionResponseAnimator(Bomberman::metaTriangleSelector,
@@ -121,7 +124,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
 
     characterMesh->setMaterialTexture(0, driver->getTexture(getUnusedSkin().c_str()));
 
-    // characterMesh = addCollisions(worldManager, smgr, characterMesh);
+    characterMesh = addCollisions(worldManager, smgr, characterMesh);
 
     worldManager->addComponent<ecs::component::Render3d>(character, ecs::component::Render3d(characterMesh));
     worldManager->addComponent<ecs::component::AI>(character, ecs::component::AI());
@@ -190,7 +193,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     irr::scene::ITriangleSelector *selector =
                         smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
                     wallMesh->setTriangleSelector(selector);
-                    //Bomberman::metaTriangleSelector->addTriangleSelector(selector);
+                    // Bomberman::metaTriangleSelector->addTriangleSelector(selector);
                     selector->drop();
 
                     wallMesh->setMaterialTexture(0, driver->getTexture(bomberman::map::BOX.c_str()));
@@ -202,6 +205,62 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                 }
             }
         }
+    }
+}
+
+void scene::Bomberman::createBomb(
+    ecs::WorldManager *worldManager, ecs::Entity playerId, size_t bombRadius, const irr::core::vector3d<irr::f32> &pos)
+{
+    auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+    auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
+
+    ecs::Entity bomb = worldManager->createEntity();
+    irr::scene::IAnimatedMeshSceneNode *bombMesh =
+        smgr->addAnimatedMeshSceneNode(smgr->getMesh(bomberman::bomb::BOMB.c_str()));
+    bombMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    bombMesh->setMaterialTexture(0, driver->getTexture("media/bomb/Albedo.png"));
+
+    /*irr::scene::IMeshSceneNode *bombMesh = smgr->addCubeSceneNode(10);
+    bombMesh->setMaterialTexture(0, driver->getTexture(bomberman::map::WALL.c_str()));
+    bombMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);*/
+    auto newPos = pos;
+    newPos.X = static_cast<int>(pos.X / 5.f) * 5 + 1.5;
+    newPos.Y = 4;
+    newPos.Z = static_cast<int>(pos.Z / 5.f) * 5 + 1.5;
+    bombMesh->setPosition(newPos);
+
+    bombMesh->setScale(irr::core::vector3df(25, 25, 25));
+
+    irr::scene::ITriangleSelector *selector = smgr->createOctreeTriangleSelector(bombMesh->getMesh(), bombMesh, 128);
+    bombMesh->setTriangleSelector(selector);
+    Bomberman::metaTriangleSelector->addTriangleSelector(selector);
+    Bomberman::updateCollision(worldManager);
+    selector->drop();
+
+    worldManager->addComponent<ecs::component::Render3d>(bomb, ecs::component::Render3d(bombMesh));
+    worldManager->addComponent<ecs::component::BombStats>(bomb, ecs::component::BombStats(bombRadius, false));
+    worldManager->addComponent<ecs::component::BombTimer>(bomb, ecs::component::BombTimer(2));
+    worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
+
+}
+
+void Bomberman::updateCollision(ecs::WorldManager *worldManager)
+{
+    std::vector<ecs::Entity> entities = worldManager->getEntities<ecs::component::Motion>();
+
+    for (auto &entity : entities) {
+        auto &render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+
+        irr::core::aabbox3d<irr::f32> box(0, 0, 0, 9.5, 10, 9.5);
+        irr::core::vector3df radius = box.MaxEdge - box.getCenter();
+        auto &characterMesh = render3d.node;
+
+        irr::scene::ISceneNodeAnimator *anim =
+            worldManager->getUniverse()->getDevice()->getSceneManager()->createCollisionResponseAnimator(
+                metaTriangleSelector, characterMesh, radius, irr::core::vector3df(0, -10, 0),
+                irr::core::vector3df(0, -5, 0));
+        characterMesh->addAnimator(anim);
+        anim->drop();
     }
 }
 
@@ -226,6 +285,9 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Animation>();
     worldManager->registerComponent<ecs::component::Stats>();
     worldManager->registerComponent<ecs::component::Collision>();
+    worldManager->registerComponent<ecs::component::BombTimer>();
+    worldManager->registerComponent<ecs::component::BombStats>();
+    worldManager->registerComponent<ecs::component::Owner>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -314,6 +376,7 @@ void scene::Bomberman::init(
 
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
+
     GameHud::init(universe, paths);
 }
 

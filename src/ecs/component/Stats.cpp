@@ -14,6 +14,9 @@ Stats::Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &ma
 {
 }
 
-Stats::Stats(const Stats &stat) = default;
+Stats::Stats(const Stats &stat)
+    : moveSpeed(stat.moveSpeed), bombRadius(stat.bombRadius), maxBomb(stat.maxBomb), wallPass(stat.wallPass)
+{
+}
 
 Stats::~Stats() = default;

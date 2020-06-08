@@ -6,13 +6,19 @@
 */
 
 #include "Player.hpp"
-#include "../WorldManager.hpp"
-#include "../component/Render3d.hpp"
-#include "../component/Player.hpp"
-#include "../component/Motion.hpp"
-#include "../component/Stats.hpp"
-#include "../component/Animation.hpp"
+
 #include <iostream>
+
+#include "../../scene/Bomberman.hpp"
+#include "../WorldManager.hpp"
+#include "../component/Animation.hpp"
+#include "../component/BombStats.hpp"
+#include "../component/BombTimer.hpp"
+#include "../component/Motion.hpp"
+#include "../component/Owner.hpp"
+#include "../component/Player.hpp"
+#include "../component/Render3d.hpp"
+#include "../component/Stats.hpp"
 
 using namespace ecs::system;
 
@@ -95,7 +101,22 @@ void Player::receiveKeyEvent(event::Key& event)
                 }
             }
         } else if (event.keycode == player.keys["bomb"]) {
-            //plant a bomb and do some magic
+            std::vector<ecs::Entity> bombs = worldManager->getEntities<ecs::component::BombStats,
+                ecs::component::BombTimer, ecs::component::Owner>();
+            int bombNbr = 0;
+
+            for (const auto& bomb : bombs) {
+                auto& owner = worldManager->getComponent<ecs::component::Owner>(bomb);
+                if (owner.entity == entity)
+                    bombNbr++;
+            }
+
+            auto& stat = worldManager->getComponent<ecs::component::Stats>(entity);
+            auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+
+            if (bombNbr < stat.maxBomb) {
+                scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, render3d.node->getPosition());
+            }
         }
     }
 }

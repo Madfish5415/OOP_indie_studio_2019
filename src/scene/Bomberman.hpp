@@ -21,9 +21,13 @@ class Bomberman {
     ~Bomberman() = delete;
 
   public:
-    static void init(ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
+    static void init(
+        ecs::Universe* universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
     static void reset();
-    static void destroy(ecs::Universe *universe);
+    static void destroy(ecs::Universe* universe);
+    static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius,
+        const irr::core::vector3d<irr::f32>& pos);
+    static void updateCollision(ecs::WorldManager* worldManager);
 
   public:
     static std::vector<ecs::Entity> playerIds;
@@ -43,20 +47,20 @@ static const std::string WHITE = "media/ninja/white.png";
 static const std::string YELLOW = "media/ninja/yellow.jpg";
 
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
-                                                         {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
-}
+    {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
+} // namespace ninja
 
 namespace bomb {
-static const std::string  BOMB = "media/bomb/Bomb.obj";
+static const std::string BOMB = "media/bomb/Bomb.obj";
 }
 
 namespace map {
 static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
-}
-}
+} // namespace map
+} // namespace bomberman
 
-}
+} // namespace scene
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP
