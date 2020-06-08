@@ -7,6 +7,7 @@
 
 #include "Bomberman.hpp"
 
+#include <cstdlib>
 #include <ctime>
 
 #include "../ecs/component/AI.hpp"
@@ -23,6 +24,7 @@
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Render.hpp"
 #include "../map-generator/MapGenerator.hpp"
+#include "GameHud.hpp"
 
 using namespace scene;
 
@@ -75,7 +77,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Motion>(character, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(
         character, ecs::component::Transform(characterMesh->getPosition()));
-    worldManager->addComponent<ecs::component::Stats>(character, ecs::component::Stats());
+    worldManager->addComponent<ecs::component::Stats>(character, ecs::component::Stats((std::rand() % 9 + 1), (std::rand() % 9 + 1), (std::rand() % 9 + 1)));
     worldManager->addComponent<ecs::component::Animation>(character,
         ecs::component::Animation(
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
@@ -311,12 +313,14 @@ void scene::Bomberman::init(
 
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
+    GameHud::init(universe, paths);
 }
 
 void scene::Bomberman::destroy(ecs::Universe *universe)
 {
-    universe->deleteWorldManager("PlayerSelector");
-    universe->getDevice()->getGUIEnvironment()->clear();
+    GameHud::destroy(universe);
+    universe->getDevice()->getSceneManager()->clear();
+    universe->deleteWorldManager("Bomberman");
     Bomberman::playerIds.clear();
     for (auto &skin : bomberman::ninja::PLAYER_SKINS) {
         skin.second = false;

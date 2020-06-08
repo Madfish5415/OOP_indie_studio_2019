@@ -5,9 +5,9 @@
 ** EventReceiver.cpp
 */
 
-#include <vector>
-
 #include "EventReceiver.hpp"
+
+#include <vector>
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
@@ -18,6 +18,7 @@
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
+#include "scene/Pause.hpp"
 #include "scene/PlayerSelector.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
@@ -83,6 +84,19 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         _universe->getCurrentWorldManager() == _universe->getWorldManager("Bomberman")) {
             ecs::event::Key keyEvent(event.KeyInput.Key, event.KeyInput.PressedDown);
             _universe->getWorldManager("Bomberman")->publish(keyEvent);
+            if (event.KeyInput.Key == irr::KEY_ESCAPE && !event.KeyInput.PressedDown) {
+                scene::Pause::init(_universe);
+                _universe->setCurrentWorldManager("Pause");
+            }
+            return true;
+        }
+        if (_universe->hasWorldManager("Pause") &&
+            _universe->getCurrentWorldManager() == _universe->getWorldManager("Pause")) {
+            if (event.KeyInput.Key == irr::KEY_ESCAPE && !event.KeyInput.PressedDown) {
+                scene::Pause::destroy(_universe);
+                _universe->setCurrentWorldManager("Bomberman");
+            }
+            return true;
         }
     }
     if (event.EventType == irr::EET_MOUSE_INPUT_EVENT) {
@@ -187,6 +201,22 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                             _universe->setCurrentWorldManager("Bomberman");
                     }
                     return true;
+                } else if (id == GUI_GAME_PAUSE) {
+                    scene::Pause::init(_universe);
+                    _universe->setCurrentWorldManager("Pause");
+                    return true;
+                } else if (id == GUI_PAUSE_RESUME) {
+                    scene::Pause::destroy(_universe);
+                    _universe->setCurrentWorldManager("Bomberman");
+                    return true;
+                } else if (id == GUI_PAUSE_MENU) {
+                    scene::Pause::destroy(_universe);
+                    scene::Bomberman::destroy(_universe);
+                    scene::Menu::init(_universe);
+                    if (_universe->hasWorldManager("Menu"))
+                        _universe->setCurrentWorldManager("Menu");
+                    return true;
+
                 }
             default:
                 break;
