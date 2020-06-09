@@ -31,7 +31,7 @@ class Bomberman {
 
   public:
     static std::vector<ecs::Entity> playerIds;
-    static irr::scene::IMetaTriangleSelector* metaTriangleSelector;
+    static std::array<irr::scene::IMetaTriangleSelector*, 4> metaTriangleSelector;
 };
 
 namespace bomberman {
@@ -52,12 +52,14 @@ static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, 
 
 namespace bomb {
 static const std::string BOMB = "media/bomb/Bomb.obj";
-}
+static const std::string TEXTURE = "media/bomb/bomb-neon.png";
+} // namespace bomb
 
 namespace map {
 static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
+static const std::string BOUNDING_BOX = "media/map/boundingBox.png";
 } // namespace map
 } // namespace bomberman
 

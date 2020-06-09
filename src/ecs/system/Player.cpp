@@ -100,7 +100,7 @@ void Player::receiveKeyEvent(event::Key& event)
                     animation.currentAnimation = "IDLE";
                 }
             }
-        } else if (event.keycode == player.keys["bomb"]) {
+        } else if (event.keycode == player.keys["bomb"] && event.pressed) {
             std::vector<ecs::Entity> bombs = worldManager->getEntities<ecs::component::BombStats,
                 ecs::component::BombTimer, ecs::component::Owner>();
             int bombNbr = 0;
@@ -113,6 +113,9 @@ void Player::receiveKeyEvent(event::Key& event)
 
             auto& stat = worldManager->getComponent<ecs::component::Stats>(entity);
             auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+
+            std::cout << bombNbr << std::endl;
+            std::cout << stat.maxBomb << std::endl;
 
             if (bombNbr < stat.maxBomb) {
                 scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, render3d.node->getPosition());
