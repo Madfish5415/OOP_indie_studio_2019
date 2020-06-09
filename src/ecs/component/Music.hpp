@@ -20,7 +20,8 @@ class Music {
     ~Music();
 
   public:
-    sf::Music *music;
+    sf::Music* music;
+    std::string musicPath;
 };
 
 } // namespace ecs::component

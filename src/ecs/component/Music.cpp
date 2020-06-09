@@ -9,13 +9,22 @@
 
 using namespace ecs::component;
 
-Music::Music(const std::string &musicPath) : music(new sf::Music())
+Music::Music(const std::string &musicPath) : music(nullptr)
 {
-    music->openFromFile(musicPath);
+    if (!musicPath.empty()) {
+        music = new sf::Music();
+        music->openFromFile(musicPath);
+        this->musicPath = musicPath;
+    }
 }
 
-Music::Music(const Music& music) : music(music.music)
+Music::Music(const Music& music) : musicPath(music.musicPath)
 {
+    if (!musicPath.empty()) {
+        this->music = new sf::Music();
+        this->music->openFromFile(musicPath);
+    }
 }
 
-Music::~Music() = default;
+Music::~Music() {
+}
