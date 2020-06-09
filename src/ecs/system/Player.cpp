@@ -114,12 +114,27 @@ void Player::receiveKeyEvent(event::Key& event)
             auto& stat = worldManager->getComponent<ecs::component::Stats>(entity);
             auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
-            std::cout << bombNbr << std::endl;
-            std::cout << stat.maxBomb << std::endl;
-
-            if (bombNbr < stat.maxBomb) {
+            if (bombNbr < stat.maxBomb && !alreadyExist(render3d.node->getPosition())) {
                 scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, render3d.node->getPosition());
             }
         }
     }
+}
+
+bool Player::alreadyExist(const irr::core::vector3d<irr::f32>& pos)
+{
+    std::vector<ecs::Entity> bombs = worldManager->getEntities<ecs::component::BombTimer, ecs::component::BombStats, ecs::component::Owner>();
+
+    for (const auto& entity : bombs) {
+        auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+
+        auto newPos = pos;
+        newPos.X = static_cast<int>(pos.X / 10.f) * 10 + 5;
+        newPos.Y = 4;
+        newPos.Z = static_cast<int>(pos.Z / 10.f) * 10 + 5;
+        if (render3d.node->getPosition() == newPos) {
+            return true;
+        }
+    }
+    return false;
 }

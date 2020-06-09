@@ -249,7 +249,7 @@ void scene::Bomberman::createBomb(
 
     worldManager->addComponent<ecs::component::Render3d>(bomb, ecs::component::Render3d(bombMesh));
     worldManager->addComponent<ecs::component::BombStats>(bomb, ecs::component::BombStats(bombRadius, false));
-    worldManager->addComponent<ecs::component::BombTimer>(bomb, ecs::component::BombTimer(5000));
+    worldManager->addComponent<ecs::component::BombTimer>(bomb, ecs::component::BombTimer(3000));
     worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
     worldManager->addComponent<ecs::component::BoundingBox>(bomb, ecs::component::BoundingBox(boxMesh, selector));
 }
