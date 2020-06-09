@@ -23,6 +23,7 @@ set(SRCS
         src/ecs/component/Button.cpp
         src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
+        src/ecs/component/Particle.cpp
         src/ecs/component/LookingView.cpp
         src/ecs/component/Lootable.cpp
         src/ecs/component/MessageBox.cpp
@@ -84,6 +85,7 @@ set(HEADERS
         src/ecs/WorldManager.hpp
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
+        src/ecs/component/Particle.hpp
         src/ecs/component/Collision.hpp
         src/ecs/component/BombStats.hpp
         src/ecs/component/BombTimer.hpp

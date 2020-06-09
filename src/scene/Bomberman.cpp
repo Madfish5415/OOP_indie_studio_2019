@@ -19,6 +19,7 @@
 #include "../ecs/component/Transform.hpp"
 #include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Unbreakable.hpp"
+#include "../ecs/component/Particle.hpp"
 #include "../ecs/system/Animation.hpp"
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Movement.hpp"
@@ -33,21 +34,19 @@ using namespace scene;
 std::vector<ecs::Entity> Bomberman::playerIds = {};
 irr::scene::IMetaTriangleSelector *Bomberman::metaTriangleSelector = nullptr;
 
-static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay)
+static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr::core::vector3df pos)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     ecs::Entity explosion = worldManager->createEntity();
-    // irr::scene::IAnimatedMeshSceneNode *characterMesh = smgr->addAnimatedMeshSceneNode(smgr->addCubeSceneNode());
 
     irr::scene::ISceneNode *explosionMesh = smgr->addCubeSceneNode();
     irr::scene::IParticleSystemSceneNode *particleSystem = smgr->addParticleSystemSceneNode(false);
 
     explosionMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    explosionMesh->setPosition(irr::core::vector3df(25, 5, 15));
+    explosionMesh->setPosition(pos);
     explosionMesh->setScale(irr::core::vector3df(1, 1, 1));
     explosionMesh->setVisible(false);
-    // explosionMesh->setMaterialTexture(0, driver->getTexture("./media/map/mur.jpg"));
 
     irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
         irr::core::aabbox3d<irr::f32>(irr::core::vector3df(28, -15, 12)), // coordonnees de la boite
@@ -63,20 +62,13 @@ static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay)
     particleSystem->setEmitter(emitter);                               // on attache l'emetteur
     emitter->drop();                                                   // plus besoin de ca
     particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false); // insensible a la lumiere
-    // particleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);     // desactive zbuffer pour surfaces derriere
     particleSystem->setMaterialTexture(0, driver->getTexture("./media/map/portal7.bmp"));     // on colle une texture
-    // particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_VERTEX_ALPHA); // application transparence
     particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-    // irr::scene::IParticleAffector* affector =    // creation du modificateur
-    // particleSystem->createFadeOutParticleAffector(
-    // irr::video::SColor(0,0,0,0),             // la couleur finale
-    // 3000);                                   // temps necessaire a la modification
-    // particleSystem->addAffector(affector);       // ajout du modificateur au particle system
-    // affector->drop();                            // plus besoin de ca
 
 
     worldManager->addComponent<ecs::component::Render3d>(explosion, ecs::component::Render3d(explosionMesh));
-    worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay());
+    worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay(delay));
+    worldManager->addComponent<ecs::component::Particle>(explosion, ecs::component::Particle(particleSystem));
 }
 
 static irr::scene::IAnimatedMeshSceneNode *addCollisions(
@@ -274,6 +266,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Stats>();
     worldManager->registerComponent<ecs::component::Collision>();
     worldManager->registerComponent<ecs::component::Delay>();
+    worldManager->registerComponent<ecs::component::Particle>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -370,7 +363,6 @@ void scene::Bomberman::init(
 
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
-    createExplosion(worldManager, 2);
     GameHud::init(universe, paths);
 }
 
