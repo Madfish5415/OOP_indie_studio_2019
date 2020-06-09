@@ -44,24 +44,35 @@ static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay)
     irr::scene::IParticleSystemSceneNode *particleSystem = smgr->addParticleSystemSceneNode(false);
 
     explosionMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    explosionMesh->setPosition(irr::core::vector3df(25, 10, 15));
+    explosionMesh->setPosition(irr::core::vector3df(25, 5, 15));
     explosionMesh->setScale(irr::core::vector3df(1, 1, 1));
+    explosionMesh->setVisible(false);
     // explosionMesh->setMaterialTexture(0, driver->getTexture("./media/map/mur.jpg"));
 
     irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
-        irr::core::aabbox3d<irr::f32>(0,6,0,12,7,12), // coordonnees de la boite
-        irr::core::vector3df(0.6f,0.0f,0.6f),        // direction de diffusion
-        20,50,                                       // nb particules emises a la sec min / max
-        irr::video::SColor(0,0,0,0),                  // couleur la plus sombre
-        irr::video::SColor(0,255,255,255),            // couleur la plus claire
-        100, 200,                                    // duree de vie min / max
-        0,                                            // angle max d'ecart / direction prevue
+        irr::core::aabbox3d<irr::f32>(irr::core::vector3df(28, -15, 12)), // coordonnees de la boite
+        irr::core::vector3df(0.0f,0.05f,0.0f),        // direction de diffusion
+        90,110,                                       // nb particules emises a la sec min / max
+        irr::video::SColor(0,255,255,255),                  // couleur la plus sombre
+        irr::video::SColor(0,225,255,255),            // couleur la plus claire
+        400, 420,                                    // duree de vie min / max
+        20,                                            // angle max d'ecart / direction prevue
         irr::core::dimension2df(6.0f,6.0f),           // taille minimum
-        irr::core::dimension2df(8.0f,8.0f));          // taille maximum
+        irr::core::dimension2df(10.0f,10.0f));          // taille maximum
 
     particleSystem->setEmitter(emitter);                               // on attache l'emetteur
     emitter->drop();                                                   // plus besoin de ca
     particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false); // insensible a la lumiere
+    // particleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);     // desactive zbuffer pour surfaces derriere
+    particleSystem->setMaterialTexture(0, driver->getTexture("./media/map/portal7.bmp"));     // on colle une texture
+    // particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_VERTEX_ALPHA); // application transparence
+    particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+    // irr::scene::IParticleAffector* affector =    // creation du modificateur
+    // particleSystem->createFadeOutParticleAffector(
+    // irr::video::SColor(0,0,0,0),             // la couleur finale
+    // 3000);                                   // temps necessaire a la modification
+    // particleSystem->addAffector(affector);       // ajout du modificateur au particle system
+    // affector->drop();                            // plus besoin de ca
 
 
     worldManager->addComponent<ecs::component::Render3d>(explosion, ecs::component::Render3d(explosionMesh));
