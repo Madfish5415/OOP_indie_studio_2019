@@ -21,8 +21,10 @@ void Music::update()
 {
     for (const auto& entity: entities) {
         auto& music = worldManager->getComponent<ecs::component::Music>(entity);
-        if (music.music) {
+        if (music.music.get()) {
+            auto var = music.music->getPlayingOffset();
             if (music.music->getStatus() == sf::Music::Status::Stopped) {
+                music.music->setPlayingOffset(music.offset);
                 music.music->play();
             }
         }

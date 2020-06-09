@@ -16,7 +16,7 @@
 # Author: Guillaume DEVOILLE <guillaume1.devoille@epitech.eu> (17/05/2019)
 #
 
-IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_LIBRARIES)
+IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_AUDIO_LIBRARY OR NOT SFML_SYSTEM_LIBRARY)
   FIND_PATH(SFML_INCLUDE_DIRS
     NAMES
       SFML/
@@ -35,9 +35,10 @@ IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_LIBRARIES)
     SET(CMAKE_FIND_LIBRARY_SUFFIXES ".so")
   ENDIF(MSVC)
 
-  FIND_LIBRARY(SFML_LIBRARIES
+  FIND_LIBRARY(SFML_AUDIO_LIBRARY
     NAMES
       sfml-audio
+      sfml-audio-d
     PATHS
       /usr/lib64/                   # Default Fedora28 library path
       /usr/lib/                     # Some more Linux library path
@@ -47,13 +48,43 @@ IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_LIBRARIES)
       ${CMAKE_MODULE_PATH}/         # Expected to contain the path to this file for Windows10
       ${SFML_DIR}/                  # SFML root directory (if provided)
   )
-ENDIF (NOT SFML_INCLUDE_DIRS OR NOT SFML_LIBRARIES)
 
-IF (SFML_INCLUDE_DIRS AND SFML_LIBRARIES)
+  FIND_LIBRARY(SFML_SYSTEM_LIBRARY
+    NAMES
+      sfml-system
+      sfml-system-d
+    PATHS
+      /usr/lib64/                   # Default Fedora28 library path
+      /usr/lib/                     # Some more Linux library path
+      /usr/lib/x86_64-linux-gnu/    # Some more Linux library path
+      /usr/local/lib/               # Some more Linux library path
+      /usr/local/lib64/             # Some more Linux library path
+      ${CMAKE_MODULE_PATH}/         # Expected to contain the path to this file for Windows10
+      ${SFML_DIR}/                  # SFML root directory (if provided)
+  )
+
+  FIND_LIBRARY(OPEN_AL
+          NAMES
+          openal
+          openal32
+          openal64
+          PATHS
+          /usr/lib64/                   # Default Fedora28 library path
+          /usr/lib/                     # Some more Linux library path
+          /usr/lib/x86_64-linux-gnu/    # Some more Linux library path
+          /usr/local/lib/               # Some more Linux library path
+          /usr/local/lib64/             # Some more Linux library path
+          ${CMAKE_MODULE_PATH}/         # Expected to contain the path to this file for Windows10
+          ${SFML_DIR}/                  # SFML root directory (if provided)
+          )
+
+ENDIF (NOT SFML_INCLUDE_DIRS OR NOT SFML_AUDIO_LIBRARY OR NOT SFML_SYSTEM_LIBRARY)
+
+IF (SFML_INCLUDE_DIRS AND SFML_AUDIO_LIBRARY AND SFML_SYSTEM_LIBRARY)
   SET(SFML_FOUND TRUE)
-ELSE (SFML_INCLUDE_DIRS AND SFML_LIBRARIES)
+ELSE (SFML_INCLUDE_DIRS AND SFML_AUDIO_LIBRARY AND SFML_SYSTEM_LIBRARY)
   SET(SFML_FOUND FALSE)
-ENDIF (SFML_INCLUDE_DIRS AND SFML_LIBRARIES)
+ENDIF (SFML_INCLUDE_DIRS AND SFML_AUDIO_LIBRARY AND SFML_SYSTEM_LIBRARY)
 
 IF (SFML_FIND_REQUIRED AND NOT SFML_FOUND)
   MESSAGE(FATAL_ERROR

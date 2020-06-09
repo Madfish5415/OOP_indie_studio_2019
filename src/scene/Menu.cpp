@@ -35,7 +35,7 @@ static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironm
     worldManager->addComponent<ecs::component::Button>(button, buttonComp);
 }
 
-void Menu::init(ecs::Universe* universe)
+void Menu::init(ecs::Universe* universe, sf::Time musicTimer)
 {
     auto worldManager = universe->createWorldManager("Menu");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
@@ -74,8 +74,8 @@ void Menu::init(ecs::Universe* universe)
     worldManager->addComponent(background,
         ecs::component::Image(gui, driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
 
-    ecs::Entity backgroundMusic = worldManager->createEntity();
-    worldManager->addComponent(backgroundMusic, ecs::component::Music("assets/music/menu/background.ogg"));
+    ecs::Entity music = worldManager->createEntity();
+    worldManager->addComponent(music, ecs::component::Music(menu::MUSIC, musicTimer));
 
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,

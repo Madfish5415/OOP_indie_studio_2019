@@ -7,11 +7,14 @@
 
 #include "EventReceiver.hpp"
 
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include <vector>
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
 #include "ecs/component/Image.hpp"
+#include "ecs/component/Music.hpp"
 #include "ecs/component/PushButton.hpp"
 #include "ecs/event/Key.hpp"
 #include "scene/Bomberman.hpp"
@@ -33,7 +36,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         if (_universe->hasWorldManager("LoadingMenu") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("LoadingMenu")) {
             scene::LoadingMenu::destroy(_universe);
-            scene::Menu::init(_universe);
+            scene::Menu::init(_universe, sf::Time::Zero);
             _universe->setCurrentWorldManager("Menu");
         }
         if (_universe->hasWorldManager("Keybinding") &&
@@ -133,8 +136,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         switch (event.GUIEvent.EventType) {
             case irr::gui::EGET_BUTTON_CLICKED:
                 if (id == BUTTON_ID::GUI_MENU_PLAY) {
+                    auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::Menu::destroy(_universe);
-                    scene::PlayerSelector::init(_universe);
+                    scene::PlayerSelector::init(_universe, time);
                     if (_universe->hasWorldManager("PlayerSelector"))
                         _universe->setCurrentWorldManager("PlayerSelector");
                     return true;
@@ -148,8 +154,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     _universe->getDevice()->closeDevice();
                     return true;
                 } else if (id == BUTTON_ID::GUI_SELECT_MENU) {
+                    auto entity = _universe->getWorldManager("PlayerSelector")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::PlayerSelector::destroy(_universe);
-                    scene::Menu::init(_universe);
+                    scene::Menu::init(_universe, time);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;
@@ -212,7 +221,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == GUI_PAUSE_MENU) {
                     scene::Pause::destroy(_universe);
                     scene::Bomberman::destroy(_universe);
-                    scene::Menu::init(_universe);
+                    scene::Menu::init(_universe, sf::Time::Zero);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;

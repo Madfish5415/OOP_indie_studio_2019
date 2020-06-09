@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_PLAYERSELECTOR_HPP
 
 #include <irrlicht.h>
+#include <SFML/Audio.hpp>
 
 #include "../ecs/WorldManager.hpp"
 #include "../ecs/component/Player.hpp"
@@ -22,7 +23,7 @@ class PlayerSelector {
     ~PlayerSelector() = delete;
 
   public:
-    static void init(ecs::Universe* universe);
+    static void init(ecs::Universe* universe, sf::Time musicTimer);
     static void reset();
     static void destroy(ecs::Universe* universe);
     static void addPlayer(ecs::Universe* universe);
@@ -101,6 +102,7 @@ static std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, sc
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
 static const std::string WARNING = "assets/img/player-selector/warning.png";
+static const std::string MUSIC = "assets/music/menu/background.ogg";
 } // namespace playerselector
 
 } // namespace scene
