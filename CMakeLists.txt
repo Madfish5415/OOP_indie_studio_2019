@@ -54,6 +54,7 @@ set(SRCS
         src/ecs/system/StatRender.cpp
         src/ecs/system/Timer.cpp
         src/ecs/system/TimerRender.cpp
+        src/ecs/system/AI.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -120,6 +121,7 @@ set(HEADERS
         src/ecs/system/StatRender.hpp
         src/ecs/system/Timer.hpp
         src/ecs/system/TimerRender.hpp
+        src/ecs/system/AI.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp
