@@ -399,6 +399,7 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Delay>());
         worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
+    }
     worldManager->registerSystem<ecs::system::PowerUp>();
     {
         ecs::Signature signature;
