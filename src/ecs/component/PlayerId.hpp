@@ -8,6 +8,8 @@
 #ifndef INDIESTUDIO_PLAYERID_HPP
 #define INDIESTUDIO_PLAYERID_HPP
 
+#include <cstddef>
+
 namespace ecs::component {
 
 class PlayerId {
