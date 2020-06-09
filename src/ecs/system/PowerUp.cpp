@@ -40,7 +40,6 @@ static bool checkIfCollision(ecs::WorldManager *worldManager, const ecs::Entity&
 
             characterStats = characterStats + powerUpStats;
             power_node->remove();
-            worldManager->destroyEntity(entity);
             return true;
         }
     }
@@ -51,12 +50,21 @@ void PowerUp::update()
 {
     auto playerEntities = worldManager->getEntities<ecs::component::Player>();
     auto botEntities = worldManager->getEntities<ecs::component::AI>();
+    std::vector<ecs::Entity> destroyedEntities;
 
     for (const auto& entity : entities) {
         auto& powerUpNode = worldManager->getComponent<ecs::component::Render3d>(entity).node;
 
         if (!checkIfCollision(worldManager, entity, playerEntities)) {
-            checkIfCollision(worldManager, entity, botEntities);
+            if (checkIfCollision(worldManager, entity, botEntities)) {
+                destroyedEntities.push_back(entity);
+            }
         }
+        else {
+            destroyedEntities.push_back(entity);
+        }
+    }
+    for (const auto& entity : destroyedEntities) {
+        worldManager->destroyEntity(entity);
     }
 }
