@@ -21,13 +21,18 @@ class Bomberman {
     ~Bomberman() = delete;
 
   public:
-    static void init(ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
+    static void init(
+        ecs::Universe* universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
     static void reset();
-    static void destroy(ecs::Universe *universe);
+    static void destroy(ecs::Universe* universe);
+    static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius,
+        const irr::core::vector3d<irr::f32>& pos);
+    static void updateCollision(ecs::WorldManager* worldManager);
+    static void createPowerUp(ecs::Universe *universe, irr::core::vector3df position);
 
   public:
     static std::vector<ecs::Entity> playerIds;
-    static irr::scene::IMetaTriangleSelector* metaTriangleSelector;
+    static std::array<irr::scene::IMetaTriangleSelector*, 4> metaTriangleSelector;
 };
 
 namespace bomberman {
@@ -43,19 +48,31 @@ static const std::string WHITE = "media/ninja/white.png";
 static const std::string YELLOW = "media/ninja/yellow.jpg";
 
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
-                                                         {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
-}
+    {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
+} // namespace ninja
+
+namespace bomb {
+static const std::string BOMB = "media/bomb/Bomb.obj";
+static const std::string TEXTURE = "media/bomb/bomb-neon.png";
+} // namespace bomb
+
 namespace map {
 static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
+static const std::string BOUNDING_BOX = "media/map/boundingBox.png";
+} // namespace map
+namespace powerUp {
+static const std::string MAX_SPEED = "media/power-up/max-speed.png";
+static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
+static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
+static const std::string WALL_PASS = "media/power-up/wall-pass.jpeg";
 }
 
 namespace bomb {
   static const std::string EXPLOSION = "./media/map/portal7.bmp";
 }
 }
-
 }
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP

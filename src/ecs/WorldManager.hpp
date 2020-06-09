@@ -93,11 +93,12 @@ class WorldManager {
     Signature createSignature()
     {
         Signature has;
+
         if (typeid(T) != typeid(void))
             has.set(_componentManager->getComponentType<T>());
 
         if (sizeof...(TArgs))
-            has &= this->createSignature<TArgs...>();
+            has |= this->createSignature<TArgs...>();
 
         return has;
     }
