@@ -318,9 +318,9 @@ void scene::Bomberman::init(
 
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
-    // createPowerUp(universe, irr::core::vector3df(15.0, 15.0, 25.0));
-    // createPowerUp(universe, irr::core::vector3df(25.0, 15.0, 15.0));
-    // createPowerUp(universe, irr::core::vector3df(35.0, 15.0, 15.0));
+    createPowerUp(universe, irr::core::vector3df(15.0, 15.0, 25.0));
+    createPowerUp(universe, irr::core::vector3df(25.0, 15.0, 15.0));
+    createPowerUp(universe, irr::core::vector3df(35.0, 15.0, 15.0));
     GameHud::init(universe, paths);
 }
 

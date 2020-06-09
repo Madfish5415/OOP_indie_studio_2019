@@ -5,6 +5,8 @@
 ** PowerUp
 */
 
+#include <iostream>
+
 #include "PowerUp.hpp"
 
 #include "../WorldManager.hpp"
@@ -22,26 +24,16 @@ PowerUp::PowerUp(ecs::WorldManager *worldManager) : System(worldManager)
 
 PowerUp::~PowerUp() = default;
 
-static bool isCollision(irr::scene::ISceneNode* one, irr::scene::ISceneNode* two) {
-   irr::core::aabbox3df b1 = one->getBoundingBox ();
-   irr::core::aabbox3df b2 = two->getBoundingBox ();
-
-   one->getRelativeTransformation().transformBoxEx( b1 );
-   two->getRelativeTransformation().transformBoxEx( b2 );
-   return (b1.intersectsWithBox( b2 ));
-}
-
 static bool checkIfCollision(ecs::WorldManager *worldManager, const ecs::Entity& entity, std::vector<ecs::Entity> characterEntities)
 {
     for (const auto& characterEntity : characterEntities) {
         irr::scene::ISceneNode *character_node = worldManager->getComponent<ecs::component::Render3d>(characterEntity).node;
         irr::scene::ISceneNode *power_node = worldManager->getComponent<ecs::component::Render3d>(entity).node;
-        irr::core::aabbox3df b1 = character_node->getBoundingBox ();
-        irr::core::aabbox3df b2 = power_node->getBoundingBox ();
+        irr::core::vector3df charPos = character_node->getPosition();
+        irr::core::aabbox3df b1 = irr::core::aabbox3df(irr::core::vector3df(charPos.X - 4, charPos.Y, charPos.Z - 4), irr::core::vector3df(charPos.X + 4, charPos.Y + 17, charPos.Z + 4));
+        irr::core::aabbox3df b2 = power_node->getBoundingBox();
 
-        character_node->getRelativeTransformation().transformBoxEx(b1);
         power_node->getRelativeTransformation().transformBoxEx(b2);
-
         if (b1.intersectsWithBox(b2)) {
             auto& characterStats = worldManager->getComponent<ecs::component::Stats>(characterEntity);
             auto& powerUpStats = worldManager->getComponent<ecs::component::Stats>(entity);
