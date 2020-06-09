@@ -28,6 +28,7 @@ class Bomberman {
     static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius,
         const irr::core::vector3d<irr::f32>& pos);
     static void updateCollision(ecs::WorldManager* worldManager);
+    static void createPowerUp(ecs::Universe *universe, irr::core::vector3df position);
 
   public:
     static std::vector<ecs::Entity> playerIds;
@@ -61,8 +62,14 @@ static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
 static const std::string BOUNDING_BOX = "media/map/boundingBox.png";
 } // namespace map
-} // namespace bomberman
-
-} // namespace scene
+}
+namespace powerUp {
+static const std::string MAX_SPEED = "media/power-up/max-speed.png";
+static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
+static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
+static const std::string WALL_PASS = "media/power-up/wall-pass.jpeg";
+}
+}
+}
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP

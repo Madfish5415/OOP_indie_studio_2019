@@ -23,6 +23,7 @@
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/Transform.hpp"
 #include "../ecs/component/Unbreakable.hpp"
+#include "../ecs/component/PowerUp.hpp"
 #include "../ecs/system/Animation.hpp"
 #include "../ecs/system/BombTimer.hpp"
 #include "../ecs/system/BoundingBox.hpp"
@@ -30,6 +31,7 @@
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/PowerUp.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -47,6 +49,7 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worl
     characterMesh->setTriangleSelector(selector);
 
     irr::core::aabbox3d<irr::f32> box(0, 0, 0, 9.5, 10, 9.5);
+
     irr::core::vector3df radius = box.MaxEdge - box.getCenter();
 
     irr::scene::ISceneNodeAnimator *anim =
@@ -54,7 +57,6 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worl
             irr::core::vector3df(0, -10, 0), irr::core::vector3df(0, -5, 0));
     characterMesh->addAnimator(anim);
     anim->drop();
-    selector->drop();
     return (characterMesh);
 }
 
@@ -302,6 +304,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Owner>();
     worldManager->registerComponent<ecs::component::BoundingBox>();
     worldManager->registerComponent<ecs::component::PlayerId>();
+    worldManager->registerComponent<ecs::component::PowerUp>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -341,6 +344,13 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Animation>());
         worldManager->setSystemSignature<ecs::system::Animation>(signature);
+    }
+    worldManager->registerSystem<ecs::system::PowerUp>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::PowerUp>());
+        worldManager->setSystemSignature<ecs::system::PowerUp>(signature);
     }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
@@ -406,6 +416,9 @@ void scene::Bomberman::init(
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
 
+    createPowerUp(universe, irr::core::vector3df(15.0, 15.0, 25.0));
+    createPowerUp(universe, irr::core::vector3df(25.0, 15.0, 15.0));
+    createPowerUp(universe, irr::core::vector3df(35.0, 15.0, 15.0));
     GameHud::init(universe, paths);
 }
 
@@ -417,5 +430,42 @@ void scene::Bomberman::destroy(ecs::Universe *universe)
     Bomberman::playerIds.clear();
     for (auto &skin : bomberman::ninja::PLAYER_SKINS) {
         skin.second = false;
+    }
+}
+
+
+void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3df position)
+{
+    irr::scene::ISceneManager *smgr = universe->getDevice()->getSceneManager();
+    irr::video::IVideoDriver *driver = universe->getDevice()->getVideoDriver();
+    auto worldManager = universe->getWorldManager("Bomberman");
+    ecs::Entity speedPowerUp = worldManager->createEntity();
+    irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(
+        irr::core::dimension2df(10, 10)));
+    size_t powerUpChoice = std::rand() % 10;
+
+    if (powerUpMesh) {
+        powerUpMesh->setPosition(position);
+        powerUpMesh->setRotation(irr::core::vector3df(0.0, -90.0, 0.0));
+        powerUpMesh->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
+        powerUpMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    }
+
+    worldManager->addComponent<ecs::component::Render3d>(speedPowerUp, ecs::component::Render3d(powerUpMesh));
+    worldManager->addComponent<ecs::component::Collision>(speedPowerUp, ecs::component::Collision());
+    worldManager->addComponent<ecs::component::PowerUp>(speedPowerUp, ecs::component::PowerUp());
+
+    if (powerUpChoice < 4) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_SPEED.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(1, 0, 0, false));
+    } else if (powerUpChoice < 6) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::BOMB_RADIUS.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 1, 0, false));
+    } else if (powerUpChoice < 8) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_BOMB.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 1, false));
+    } else {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::WALL_PASS.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 0, true));
     }
 }

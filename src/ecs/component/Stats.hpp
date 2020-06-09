@@ -18,6 +18,8 @@ class Stats {
     Stats(const Stats& stats);
     ~Stats();
 
+    Stats operator+(const Stats& right);
+
   public:
     size_t moveSpeed;
     size_t bombRadius;
