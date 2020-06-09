@@ -50,6 +50,10 @@ static const std::string GROUND = "media/map/neon-ground.png";
 static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
 }
+
+namespace bomb {
+  static const std::string EXPLOSION = "./media/map/portal7.bmp";
+}
 }
 
 }

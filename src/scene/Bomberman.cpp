@@ -62,7 +62,7 @@ static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr
     particleSystem->setEmitter(emitter);
     emitter->drop();
     particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    particleSystem->setMaterialTexture(0, driver->getTexture("./media/map/portal7.bmp"));
+    particleSystem->setMaterialTexture(0, driver->getTexture(bomberman::bomb::EXPLOSION.c_str()));
     particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
     irr::scene::IParticleAffector* affector =
     particleSystem->createFadeOutParticleAffector(
