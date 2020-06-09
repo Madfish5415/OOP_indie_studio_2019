@@ -9,9 +9,11 @@
 
 using namespace ecs::component;
 
-AI::AI() : lastDirection("")
+AI::AI() : lastDirection(""), lastPos(irr::core::vector3d<irr::f32>(1500, 1500, 1500))
 {
 
 }
+
+AI::AI(const AI& ai) = default;
 
 AI::~AI() = default;

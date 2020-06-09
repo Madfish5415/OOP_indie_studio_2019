@@ -66,9 +66,9 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
 
         irr::u32 tmpZ = pos.Z / 5;
         pos.Z = tmpZ * 5;
-        std::cout << "[" << wantedPos.X << "] [" << wantedPos.Z << "]" << std::endl;
-        std::cout << "[" << pos.X << "] [" << pos.Z << "]" << std::endl;
-        std::cout << std::endl;
+//        std::cout << "[" << wantedPos.X << "] [" << wantedPos.Z << "]" << std::endl;
+//        std::cout << "[" << pos.X << "] [" << pos.Z << "]" << std::endl;
+//        std::cout << std::endl;
         if (pos.X == wantedPos.X && pos.Z == wantedPos.Z)
             return false;
     }
@@ -95,164 +95,164 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
     bool possUp = canMoveDirection(wantedPos, worldManager, "UP");
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN");
 
+
     if (aiComp.lastDirection == "LEFT" || aiComp.lastDirection.empty()) {
-        if (oldPos.Z >= wantedPos.Z)
+        if (oldPos.Z >= wantedPos.Z) {
             return "LEFT";
-//        if (possLeft)
-//            return "LEFT";
-//        if (possUp)
-//            return "UP";
-//        if (possDown)
-//            return "DOWN";
-//        if (possRight)
-//            return "RIGHT";
-        if (possLeft && possUp && possDown) {
-            irr::u32 rd = rand() % 3;
-            if (rd == 0)
-                return "LEFT";
-            else if (rd == 1)
-                return "UP";
-            else
-                return "DOWN";
         }
-        if (possLeft && possUp) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "LEFT";
-            else
-                return "UP";
+        if (aiComp.lastPos != wantedPos) {
+            if (possUp && possDown) {
+                irr::u32 rd = rand() % 3;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "UP";
+                } else if (rd == 1) {
+                    aiComp.lastPos = wantedPos;
+                    return "DOWN";
+                }
+            } else if (possUp) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "UP";
+                }
+            } else if (possDown) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "DOWN";
+                }
+            }
         }
-        if (possLeft && possDown) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "LEFT";
-            else
-                return "DOWN";
-        }
-        if (possLeft)
+        if (possLeft) {
+            aiComp.lastPos = wantedPos;
             return "LEFT";
-        if (possRight)
+        }
+        if (possRight) {
+            aiComp.lastPos = wantedPos;
             return "RIGHT";
+        }
     }
 
     if (aiComp.lastDirection == "RIGHT") {
-        if (oldPos.Z <= wantedPos.Z)
+        if (oldPos.Z <= wantedPos.Z) {
             return "RIGHT";
-//        if (possRight)
-//            return "RIGHT";
-//        if (possUp)
-//            return "UP";
-//        if (possDown)
-//            return "DOWN";
-//        if (possLeft)
-//            return "LEFT";
-        if (possRight && possUp && possDown) {
-            irr::u32 rd = rand() % 3;
-            if (rd == 0)
-                return "RIGHT";
-            else if (rd == 1)
-                return "UP";
-            else
-                return "DOWN";
         }
-        if (possRight && possUp) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "RIGHT";
-            else
-                return "UP";
+        if (aiComp.lastPos != wantedPos) {
+            if (possUp && possDown) {
+                irr::u32 rd = rand() % 3;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "UP";
+                } else if (rd == 1) {
+                    aiComp.lastPos = wantedPos;
+                    return "DOWN";
+                }
+            }
+            if (possUp && !possDown) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "UP";
+                }
+            }
+            if (possDown && !possUp) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "DOWN";
+                }
+            }
         }
-        if (possRight && possDown) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "RIGHT";
-            else
-                return "DOWN";
-        }
-        if (possRight)
+        if (possRight) {
+            aiComp.lastPos = wantedPos;
             return "RIGHT";
-        if (possLeft)
+        }
+        if (possLeft) {
+            aiComp.lastPos = wantedPos;
             return "LEFT";
+        }
     }
 
     if (aiComp.lastDirection == "UP") {
-        if (oldPos.X >= wantedPos.X)
+        if (oldPos.X >= wantedPos.X) {
             return "UP";
-//        if (possUp)
-//            return "UP";
-//        if (possLeft)
-//            return "LEFT";
-//        if (possRight)
-//            return "RIGHT";
-//        if (possDown)
-//            return "DOWN";
-        if (possUp && possLeft && possRight) {
-            irr::u32 rd = rand() % 3;
-            if (rd == 0)
-                return "UP";
-            else if (rd == 1)
-                return "LEFT";
-            else
-                return "RIGHT";
         }
-        if (possUp && possRight) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "UP";
-            else
-                return "RIGHT";
+        if (aiComp.lastPos != wantedPos) {
+            if (possRight && possLeft) {
+                irr::u32 rd = rand() % 3;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "RIGHT";
+                } else if (rd == 1) {
+                    aiComp.lastPos = wantedPos;
+                    return "LEFT";
+                }
+            }
+            if (possRight && !possLeft) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "RIGHT";
+                }
+            }
+            if (possLeft && !possRight) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "LEFT";
+                }
+            }
         }
-        if (possUp && possLeft) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "UP";
-            else
-                return "LEFT";
-        }
-        if (possUp)
+        if (possUp) {
+            aiComp.lastPos = wantedPos;
             return "UP";
-        if (possDown)
+        }
+        if (possDown) {
+            aiComp.lastPos = wantedPos;
             return "DOWN";
+        }
     }
 
     if (aiComp.lastDirection == "DOWN") {
-        if (oldPos.X <= wantedPos.X)
+        if (oldPos.X <= wantedPos.X) {
             return "DOWN";
-//        if (possDown)
-//            return "DOWN";
-//        if (possLeft)
-//            return "LEFT";
-//        if (possRight)
-//            return "RIGHT";
-//        if (possUp)
-//            return "UP";
-        if (possDown && possLeft && possRight) {
-            irr::u32 rd = rand() % 3;
-            if (rd == 0)
-                return "DOWN";
-            else if (rd == 1)
-                return "LEFT";
-            else
-                return "RIGHT";
         }
-        if (possDown && possRight) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "DOWN";
-            else
-                return "RIGHT";
+        if (aiComp.lastPos != wantedPos) {
+            if (possLeft && possRight) {
+                irr::u32 rd = rand() % 3;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "LEFT";
+                }
+                else if (rd == 1) {
+                    aiComp.lastPos = wantedPos;
+                    return "RIGHT";
+                }
+            }
+            if (possLeft && !possRight) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "LEFT";
+                }
+            }
+            if (possRight && !possLeft) {
+                irr::u32 rd = rand() % 2;
+                if (rd == 0) {
+                    aiComp.lastPos = wantedPos;
+                    return "RIGHT";
+                }
+            }
         }
-        if (possDown && possLeft) {
-            irr::u32 rd = rand() % 2;
-            if (rd == 0)
-                return "DOWN";
-            else
-                return "LEFT";
-        }
-        if (possDown)
+        if (possDown) {
+            aiComp.lastPos = wantedPos;
             return "DOWN";
-        if (possUp)
+        }
+        if (possUp) {
+            aiComp.lastPos = wantedPos;
             return "UP";
+        }
     }
     return "";
 }

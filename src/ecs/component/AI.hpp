@@ -8,6 +8,7 @@
 #ifndef OOP_INDIE_STUDIO_2019_AI_HPP_
 #define OOP_INDIE_STUDIO_2019_AI_HPP_
 
+#include <irrlicht.h>
 #include <string>
 
 namespace ecs::component {
@@ -15,10 +16,12 @@ namespace ecs::component {
 class AI {
   public:
     AI();
+    AI(const AI& ai);
     ~AI();
 
   public:
     std::string lastDirection;
+    irr::core::vector3d<irr::f32> lastPos;
 };
 
 } // namespace ecs::component
