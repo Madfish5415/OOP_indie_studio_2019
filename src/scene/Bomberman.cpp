@@ -23,6 +23,7 @@
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/AI.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -120,7 +121,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
 
     characterMesh->setMaterialTexture(0, driver->getTexture(getUnusedSkin().c_str()));
 
-    // characterMesh = addCollisions(worldManager, smgr, characterMesh);
+    characterMesh = addCollisions(worldManager, smgr, characterMesh);
 
     worldManager->addComponent<ecs::component::Render3d>(character, ecs::component::Render3d(characterMesh));
     worldManager->addComponent<ecs::component::AI>(character, ecs::component::AI());
@@ -144,7 +145,7 @@ static void createCharacters(ecs::WorldManager *worldManager, irr::u32 tileSize,
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
-    for (size_t i = 0; i < 4; i++) {
+    for (size_t i = 0; i < 2; i++) { // TODO Change the value to 4
         if (i < players.size()) {
             createPlayer(worldManager, players[i], characterPositions[i], i, paths[i]);
         } else {
@@ -226,12 +227,12 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Stats>();
     worldManager->registerComponent<ecs::component::Collision>();
 
-    worldManager->registerSystem<ecs::system::Render>();
+    worldManager->registerSystem<ecs::system::AI>();
     {
         ecs::Signature signature;
 
-        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
-        worldManager->setSystemSignature<ecs::system::Render>(signature);
+        signature.set(worldManager->getComponentType<ecs::component::AI>());
+        worldManager->setSystemSignature<ecs::system::AI>(signature);
     }
     worldManager->registerSystem<ecs::system::Motion>();
     {
@@ -257,6 +258,13 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Animation>());
         worldManager->setSystemSignature<ecs::system::Animation>(signature);
+    }
+    worldManager->registerSystem<ecs::system::Render>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        worldManager->setSystemSignature<ecs::system::Render>(signature);
     }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
