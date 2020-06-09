@@ -10,6 +10,7 @@
 
 #include <SFML/Audio.hpp>
 #include <string>
+#include <memory>
 
 namespace ecs::component {
 
@@ -20,7 +21,7 @@ class Music {
     ~Music();
 
   public:
-    sf::Music* music;
+    std::shared_ptr<sf::Music> music;
     std::string musicPath;
 };
 
