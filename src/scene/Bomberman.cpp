@@ -17,12 +17,14 @@
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/Transform.hpp"
+#include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Unbreakable.hpp"
 #include "../ecs/system/Animation.hpp"
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/ExplosionDelay.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -30,6 +32,41 @@ using namespace scene;
 
 std::vector<ecs::Entity> Bomberman::playerIds = {};
 irr::scene::IMetaTriangleSelector *Bomberman::metaTriangleSelector = nullptr;
+
+static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay)
+{
+    irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+    irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
+    ecs::Entity explosion = worldManager->createEntity();
+    // irr::scene::IAnimatedMeshSceneNode *characterMesh = smgr->addAnimatedMeshSceneNode(smgr->addCubeSceneNode());
+
+    irr::scene::ISceneNode *explosionMesh = smgr->addCubeSceneNode();
+    irr::scene::IParticleSystemSceneNode *particleSystem = smgr->addParticleSystemSceneNode(false);
+
+    explosionMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    explosionMesh->setPosition(irr::core::vector3df(25, 10, 15));
+    explosionMesh->setScale(irr::core::vector3df(1, 1, 1));
+    // explosionMesh->setMaterialTexture(0, driver->getTexture("./media/map/mur.jpg"));
+
+    irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
+        irr::core::aabbox3d<irr::f32>(0,6,0,12,7,12), // coordonnees de la boite
+        irr::core::vector3df(0.6f,0.0f,0.6f),        // direction de diffusion
+        20,50,                                       // nb particules emises a la sec min / max
+        irr::video::SColor(0,0,0,0),                  // couleur la plus sombre
+        irr::video::SColor(0,255,255,255),            // couleur la plus claire
+        100, 200,                                    // duree de vie min / max
+        0,                                            // angle max d'ecart / direction prevue
+        irr::core::dimension2df(6.0f,6.0f),           // taille minimum
+        irr::core::dimension2df(8.0f,8.0f));          // taille maximum
+
+    particleSystem->setEmitter(emitter);                               // on attache l'emetteur
+    emitter->drop();                                                   // plus besoin de ca
+    particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false); // insensible a la lumiere
+
+
+    worldManager->addComponent<ecs::component::Render3d>(explosion, ecs::component::Render3d(explosionMesh));
+    worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay());
+}
 
 static irr::scene::IAnimatedMeshSceneNode *addCollisions(
     ecs::WorldManager *worldManager, irr::scene::ISceneManager *smgr, irr::scene::IAnimatedMeshSceneNode *characterMesh)
@@ -225,6 +262,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Animation>();
     worldManager->registerComponent<ecs::component::Stats>();
     worldManager->registerComponent<ecs::component::Collision>();
+    worldManager->registerComponent<ecs::component::Delay>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -257,6 +295,14 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Animation>());
         worldManager->setSystemSignature<ecs::system::Animation>(signature);
+    }
+    worldManager->registerSystem<ecs::system::ExplosionDelay>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        signature.set(worldManager->getComponentType<ecs::component::Delay>());
+        worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
     }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
@@ -313,6 +359,7 @@ void scene::Bomberman::init(
 
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths);
+    createExplosion(worldManager, 2);
     GameHud::init(universe, paths);
 }
 
