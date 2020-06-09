@@ -11,7 +11,7 @@
 
 using namespace ecs::component;
 
-BombTimer::BombTimer(const irr::u32 &delay) : delay(delay), elapsed(0), lastUpdate(0)
+BombTimer::BombTimer(irr::u32 delay) : delay(delay), elapsed(0), lastUpdate(0)
 {
 }
 

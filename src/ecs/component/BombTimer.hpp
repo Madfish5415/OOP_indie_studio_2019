@@ -14,7 +14,7 @@ namespace ecs::component {
 
 class BombTimer {
   public:
-    BombTimer(const irr::u32 &delay = 0);
+    BombTimer(irr::u32 delay = 0);
     BombTimer(const BombTimer &bombTimer);
     ~BombTimer();
 
