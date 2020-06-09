@@ -11,13 +11,12 @@
 
 using namespace ecs::component;
 
-BombTimer::BombTimer(const irr::u32 &duration, irr::IrrlichtDevice *dev)
-    : duration(duration)
+BombTimer::BombTimer(irr::u32 delay) : delay(delay), elapsed(0), lastUpdate(0)
 {
-    timerStart = (dev) ? dev->getTimer()->getTime() : 0;
 }
 
-BombTimer::BombTimer(const BombTimer &bombTimer) : timerStart(bombTimer.duration), duration(bombTimer.duration)
+BombTimer::BombTimer(const BombTimer &bombTimer)
+    : delay(bombTimer.delay), elapsed(bombTimer.elapsed), lastUpdate(bombTimer.lastUpdate)
 {
 }
 

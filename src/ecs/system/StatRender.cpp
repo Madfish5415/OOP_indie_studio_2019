@@ -42,7 +42,7 @@ void ecs::system::StatRender::update()
                 continue;
 
             auto texture =
-                driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(stat.moveSpeed)).c_str());
+                driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(stat.maxBomb)).c_str());
 
             image.pathTexture = scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(stat.maxBomb));
             image.image->setImage(texture);
