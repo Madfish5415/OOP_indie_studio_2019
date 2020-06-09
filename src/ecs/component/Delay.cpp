@@ -10,7 +10,7 @@
 using namespace ecs::component;
 
 
-Delay::Delay(irr::u32 delay) : value(value), lastUpdate(0)
+Delay::Delay(irr::u32 delay) : value(delay), lastUpdate(0)
 {
 }
 

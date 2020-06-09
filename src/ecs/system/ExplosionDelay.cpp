@@ -10,6 +10,7 @@
 #include "../component/Render3d.hpp"
 #include "../component/Delay.hpp"
 #include "../Universe.hpp"
+#include <iostream>
 
 using namespace ecs::system;
 
@@ -33,8 +34,12 @@ void ExplosionDelay::update()
         auto& delay = worldManager->getComponent<ecs::component::Delay>(entity);
         auto& render = worldManager->getComponent<ecs::component::Render3d>(entity);
 
+        if (delay.lastUpdate == 0)
+            delay.lastUpdate = time;
         if (time - delay.lastUpdate > delay.value) {
-            render.node->setScale(irr::core::vector3df(3, 3, 3));
+            render.node->remove();
+            worldManager->destroyEntity(entity);
+            delay.lastUpdate = time;
         }
     }
 }
