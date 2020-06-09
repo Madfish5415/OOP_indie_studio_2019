@@ -29,6 +29,7 @@ class Bomberman {
         const irr::core::vector3d<irr::f32>& pos);
     static void updateCollision(ecs::WorldManager* worldManager);
     static void createPowerUp(ecs::Universe *universe, irr::core::vector3df position);
+    static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, const irr::core::vector3df& pos);
 
   public:
     static std::vector<ecs::Entity> playerIds;

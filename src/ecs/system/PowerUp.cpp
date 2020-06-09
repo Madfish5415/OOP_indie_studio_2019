@@ -39,7 +39,7 @@ static bool checkIfCollision(ecs::WorldManager *worldManager, const ecs::Entity&
             auto& powerUpStats = worldManager->getComponent<ecs::component::Stats>(entity);
 
             characterStats = characterStats + powerUpStats;
-            power_node->remove();
+            worldManager->getUniverse()->getDevice()->getSceneManager()->addToDeletionQueue(power_node);
             return true;
         }
     }

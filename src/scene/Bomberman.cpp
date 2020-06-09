@@ -15,26 +15,28 @@
 #include "../ecs/component/BombStats.hpp"
 #include "../ecs/component/BombTimer.hpp"
 #include "../ecs/component/BoundingBox.hpp"
+#include "../ecs/component/Breakable.hpp"
 #include "../ecs/component/Collision.hpp"
+#include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Owner.hpp"
+#include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PlayerId.hpp"
+#include "../ecs/component/PowerUp.hpp"
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Stats.hpp"
+#include "../ecs/component/ToDelete.hpp"
 #include "../ecs/component/Transform.hpp"
-#include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Unbreakable.hpp"
-#include "../ecs/component/Particle.hpp"
-#include "../ecs/component/PowerUp.hpp"
 #include "../ecs/system/Animation.hpp"
 #include "../ecs/system/BombTimer.hpp"
 #include "../ecs/system/BoundingBox.hpp"
+#include "../ecs/system/ExplosionDelay.hpp"
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Player.hpp"
-#include "../ecs/system/Render.hpp"
-#include "../ecs/system/ExplosionDelay.hpp"
 #include "../ecs/system/PowerUp.hpp"
+#include "../ecs/system/Render.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -44,7 +46,7 @@ std::vector<ecs::Entity> Bomberman::playerIds = {};
 std::array<irr::scene::IMetaTriangleSelector *, 4> Bomberman::metaTriangleSelector = {
     nullptr, nullptr, nullptr, nullptr};
 
-static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr::core::vector3df pos)
+void Bomberman::createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, const irr::core::vector3df& pos)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -61,13 +63,13 @@ static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr
     irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
         irr::core::aabbox3d<irr::f32>(irr::core::vector3df(pos.X + 3, pos.Y - 20, pos.Z - 3)),
         irr::core::vector3df(0.0f,0.05f,0.0f),
-        350,400,
+        1000,1000,
         irr::video::SColor(0,0,255,255),
         irr::video::SColor(0,0,0,255),
         500, 500,
         20,
-        irr::core::dimension2df(6.0f,6.0f),
-        irr::core::dimension2df(10.0f,10.0f));
+        irr::core::dimension2df(10.0f,10.0f),
+        irr::core::dimension2df(15.0f,15.0f));
 
     particleSystem->setEmitter(emitter);
     emitter->drop();
@@ -249,8 +251,8 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     irr::scene::ITriangleSelector *selector =
                         smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
                     wallMesh->setTriangleSelector(selector);
-                    /*for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
-                        metaSelector->addTriangleSelector(selector);*/
+                    for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
+                        metaSelector->addTriangleSelector(selector);
                     selector->drop();
 
                     wallMesh->setMaterialTexture(0, driver->getTexture(bomberman::map::BOX.c_str()));
@@ -259,6 +261,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                         (x * tileSize) + (tileSize / 2), tileSize / 2, (y * tileSize) + (tileSize / 2)));
                     worldManager->addComponent<ecs::component::Render3d>(wall, ecs::component::Render3d(wallMesh));
                     worldManager->addComponent<ecs::component::Collision>(wall, ecs::component::Collision());
+                    worldManager->addComponent<ecs::component::Breakable>(wall, ecs::component::Breakable());
                 }
             }
         }
@@ -299,6 +302,7 @@ void scene::Bomberman::createBomb(
     worldManager->addComponent<ecs::component::BombTimer>(bomb, ecs::component::BombTimer(3000));
     worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
     worldManager->addComponent<ecs::component::BoundingBox>(bomb, ecs::component::BoundingBox(boxMesh, selector));
+    worldManager->addComponent<ecs::component::Breakable>(bomb, ecs::component::Breakable());
 }
 
 void Bomberman::updateCollision(ecs::WorldManager *worldManager)
@@ -352,6 +356,8 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::BoundingBox>();
     worldManager->registerComponent<ecs::component::PlayerId>();
     worldManager->registerComponent<ecs::component::PowerUp>();
+    worldManager->registerComponent<ecs::component::Breakable>();
+    worldManager->registerComponent<ecs::component::ToDelete>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {

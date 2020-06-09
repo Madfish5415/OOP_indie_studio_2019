@@ -46,6 +46,8 @@ set(SRCS
         src/ecs/component/BoundingBox.cpp
         src/ecs/component/PlayerId.cpp
         src/ecs/component/PowerUp.cpp
+        src/ecs/component/Breakable.cpp
+        src/ecs/component/ToDelete.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -121,6 +123,8 @@ set(HEADERS
         src/ecs/component/BoundingBox.hpp
         src/ecs/component/PlayerId.hpp
         src/ecs/component/PowerUp.hpp
+        src/ecs/component/Breakable.hpp
+        src/ecs/component/ToDelete.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
