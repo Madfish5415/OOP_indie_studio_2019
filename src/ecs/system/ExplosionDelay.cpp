@@ -42,7 +42,6 @@ void ExplosionDelay::update()
             render.node->remove();
             particle.particleSystem->remove();
             worldManager->destroyEntity(entity);
-            delay.lastUpdate = time;
         }
     }
 }

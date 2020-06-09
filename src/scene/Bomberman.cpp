@@ -49,22 +49,26 @@ static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr
     explosionMesh->setVisible(false);
 
     irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
-        irr::core::aabbox3d<irr::f32>(irr::core::vector3df(28, -15, 12)), // coordonnees de la boite
-        irr::core::vector3df(0.0f,0.05f,0.0f),        // direction de diffusion
-        90,110,                                       // nb particules emises a la sec min / max
-        irr::video::SColor(0,255,255,255),                  // couleur la plus sombre
-        irr::video::SColor(0,225,255,255),            // couleur la plus claire
-        400, 420,                                    // duree de vie min / max
-        20,                                            // angle max d'ecart / direction prevue
-        irr::core::dimension2df(6.0f,6.0f),           // taille minimum
-        irr::core::dimension2df(10.0f,10.0f));          // taille maximum
+        irr::core::aabbox3d<irr::f32>(irr::core::vector3df(pos.X + 3, pos.Y - 20, pos.Z - 3)),
+        irr::core::vector3df(0.0f,0.05f,0.0f),
+        350,400,
+        irr::video::SColor(0,0,255,255),
+        irr::video::SColor(0,0,0,255),
+        500, 500,
+        20,
+        irr::core::dimension2df(6.0f,6.0f),
+        irr::core::dimension2df(10.0f,10.0f));
 
-    particleSystem->setEmitter(emitter);                               // on attache l'emetteur
-    emitter->drop();                                                   // plus besoin de ca
-    particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false); // insensible a la lumiere
-    particleSystem->setMaterialTexture(0, driver->getTexture("./media/map/portal7.bmp"));     // on colle une texture
+    particleSystem->setEmitter(emitter);
+    emitter->drop();
+    particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    particleSystem->setMaterialTexture(0, driver->getTexture("./media/map/portal7.bmp"));
     particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-
+    irr::scene::IParticleAffector* affector =
+    particleSystem->createFadeOutParticleAffector(
+    irr::video::SColor(0,0,0,0), 100);
+    particleSystem->addAffector(affector);
+    affector->drop();
 
     worldManager->addComponent<ecs::component::Render3d>(explosion, ecs::component::Render3d(explosionMesh));
     worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay(delay));
