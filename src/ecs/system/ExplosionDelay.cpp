@@ -9,6 +9,7 @@
 
 #include "../component/Render3d.hpp"
 #include "../component/Delay.hpp"
+#include "../component/Particle.hpp"
 #include "../Universe.hpp"
 #include <iostream>
 
@@ -33,11 +34,13 @@ void ExplosionDelay::update()
     for (const auto& entity : entities) {
         auto& delay = worldManager->getComponent<ecs::component::Delay>(entity);
         auto& render = worldManager->getComponent<ecs::component::Render3d>(entity);
+        auto& particle = worldManager->getComponent<ecs::component::Particle>(entity);
 
         if (delay.lastUpdate == 0)
             delay.lastUpdate = time;
         if (time - delay.lastUpdate > delay.value) {
             render.node->remove();
+            particle.particleSystem->remove();
             worldManager->destroyEntity(entity);
             delay.lastUpdate = time;
         }
