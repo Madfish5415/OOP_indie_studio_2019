@@ -145,7 +145,7 @@ static void createCharacters(ecs::WorldManager *worldManager, irr::u32 tileSize,
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
-    for (size_t i = 0; i < 2; i++) { // TODO Change the value to 4
+    for (size_t i = 0; i < 4; i++) {
         if (i < players.size()) {
             createPlayer(worldManager, players[i], characterPositions[i], i, paths[i]);
         } else {
