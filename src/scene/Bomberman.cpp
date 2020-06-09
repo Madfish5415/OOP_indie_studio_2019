@@ -343,17 +343,30 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     ecs::Entity speedPowerUp = worldManager->createEntity();
     irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(
         irr::core::dimension2df(10, 10)));
+    size_t powerUpChoice = std::rand() % 10;
 
     if (powerUpMesh) {
         powerUpMesh->setPosition(position);
         powerUpMesh->setRotation(irr::core::vector3df(0.0, -90.0, 0.0));
         powerUpMesh->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::SPEED.c_str()));
         powerUpMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     }
 
     worldManager->addComponent<ecs::component::Render3d>(speedPowerUp, ecs::component::Render3d(powerUpMesh));
-    worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(1, 0, 0, false));
     worldManager->addComponent<ecs::component::Collision>(speedPowerUp, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PowerUp>(speedPowerUp, ecs::component::PowerUp());
+
+    if (powerUpChoice < 4) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_SPEED.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(1, 0, 0, false));
+    } else if (powerUpChoice < 6) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::BOMB_RADIUS.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 1, 0, false));
+    } else if (powerUpChoice < 8) {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_BOMB.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 1, false));
+    } else {
+        powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::WALL_PASS.c_str()));
+        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 0, true));
+    }
 }

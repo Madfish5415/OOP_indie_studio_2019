@@ -52,7 +52,10 @@ static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
 }
 namespace powerUp {
-static const std::string SPEED = "media/power-up/speed.png";
+static const std::string MAX_SPEED = "media/power-up/max-speed.png";
+static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
+static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
+static const std::string WALL_PASS = "media/power-up/wall-pass.jpeg";
 }
 }
 }
