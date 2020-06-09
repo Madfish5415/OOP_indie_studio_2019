@@ -9,6 +9,9 @@
 
 using namespace ecs::component;
 
-AI::AI() = default;
+AI::AI() : lastDirection("")
+{
+
+}
 
 AI::~AI() = default;
