@@ -27,16 +27,24 @@ AI::AI(ecs::WorldManager* worldManager) : ecs::System(worldManager)
 
 AI::~AI() = default;
 
-static bool canMoveDirection(const irr::core::vector3d<irr::f32>& wantedPos, ecs::WorldManager *worldManager)
+static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::WorldManager *worldManager, std::string direction)
 {
-    if (wantedPos.X < 0 || wantedPos.Z < 0) {
+    if (wantedPos.X < 0 || wantedPos.Z < 0)
         return false;
-    }
     auto entities = worldManager->getEntities<ecs::component::Render3d>();
 
     auto player = worldManager->getEntities<ecs::component::Player>();
     bool stop = false;
 
+
+    if (direction == "LEFT")
+        wantedPos.Z -= 10;
+    else if (direction == "RIGHT")
+        wantedPos.Z += 10;
+    else if (direction == "UP")
+        wantedPos.X -= 10;
+    else if (direction == "DOWN")
+        wantedPos.X += 10;
     for (auto ent : entities) {
         for (auto p : player)
             if (p == ent)
@@ -70,9 +78,10 @@ static bool canMoveDirection(const irr::core::vector3d<irr::f32>& wantedPos, ecs
 
 static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldManager)
 {
-    irr::core::vector3d<irr::f32> wantedPos = worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
+    irr::core::vector3d<irr::f32> wantedPos =
+        worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
     auto& aiComp = worldManager->getComponent<ecs::component::AI>(ent);
-
+    irr::core::vector3d<irr::f32> oldPos = wantedPos;
     irr::u32 tmpX = wantedPos.X / 10;
     wantedPos.X = tmpX * 10;
     wantedPos.X += 5;
@@ -81,106 +90,170 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
     wantedPos.Z = tmpZ * 10;
     wantedPos.Z += 5;
 
+    bool possLeft = canMoveDirection(wantedPos, worldManager, "LEFT");
+    bool possRight = canMoveDirection(wantedPos, worldManager, "RIGHT");
+    bool possUp = canMoveDirection(wantedPos, worldManager, "UP");
+    bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN");
+
     if (aiComp.lastDirection == "LEFT" || aiComp.lastDirection.empty()) {
-        wantedPos.Z -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
+        if (oldPos.Z >= wantedPos.Z)
             return "LEFT";
-        wantedPos.Z += 10;
-        wantedPos.X -= 10;
-        if (canMoveDirection(wantedPos, worldManager)) {
-            return "UP";
+//        if (possLeft)
+//            return "LEFT";
+//        if (possUp)
+//            return "UP";
+//        if (possDown)
+//            return "DOWN";
+//        if (possRight)
+//            return "RIGHT";
+        if (possLeft && possUp && possDown) {
+            irr::u32 rd = rand() % 3;
+            if (rd == 0)
+                return "LEFT";
+            else if (rd == 1)
+                return "UP";
+            else
+                return "DOWN";
         }
-        wantedPos.X += 10;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "DOWN";
-        else
-            std::cout << "Can'to go down from left move" << std::endl;
-        wantedPos.X -= 10;
-        wantedPos.Z += 10;
-        if (canMoveDirection(wantedPos, worldManager))
+        if (possLeft && possUp) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "LEFT";
+            else
+                return "UP";
+        }
+        if (possLeft && possDown) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "LEFT";
+            else
+                return "DOWN";
+        }
+        if (possLeft)
+            return "LEFT";
+        if (possRight)
             return "RIGHT";
     }
+
     if (aiComp.lastDirection == "RIGHT") {
-        wantedPos.Z += 10;
-        if (canMoveDirection(wantedPos, worldManager))
+        if (oldPos.Z <= wantedPos.Z)
             return "RIGHT";
-        wantedPos.Z -= 10;
-        wantedPos.X -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "UP";
-        wantedPos.X += 20;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "DOWN";
-        else
-            std::cout << "Can't go down from right" << std::endl;
-        wantedPos.X -= 10;
-        wantedPos.Z -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
+//        if (possRight)
+//            return "RIGHT";
+//        if (possUp)
+//            return "UP";
+//        if (possDown)
+//            return "DOWN";
+//        if (possLeft)
+//            return "LEFT";
+        if (possRight && possUp && possDown) {
+            irr::u32 rd = rand() % 3;
+            if (rd == 0)
+                return "RIGHT";
+            else if (rd == 1)
+                return "UP";
+            else
+                return "DOWN";
+        }
+        if (possRight && possUp) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "RIGHT";
+            else
+                return "UP";
+        }
+        if (possRight && possDown) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "RIGHT";
+            else
+                return "DOWN";
+        }
+        if (possRight)
+            return "RIGHT";
+        if (possLeft)
             return "LEFT";
     }
 
     if (aiComp.lastDirection == "UP") {
-        wantedPos.X -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
+        if (oldPos.X >= wantedPos.X)
             return "UP";
-        wantedPos.X += 10;
-        wantedPos.Z -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "LEFT";
-        wantedPos.Z += 20;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "RIGHT";
-        wantedPos.Z -= 10;
-        wantedPos.X += 10;
-        if (canMoveDirection(wantedPos, worldManager))
+//        if (possUp)
+//            return "UP";
+//        if (possLeft)
+//            return "LEFT";
+//        if (possRight)
+//            return "RIGHT";
+//        if (possDown)
+//            return "DOWN";
+        if (possUp && possLeft && possRight) {
+            irr::u32 rd = rand() % 3;
+            if (rd == 0)
+                return "UP";
+            else if (rd == 1)
+                return "LEFT";
+            else
+                return "RIGHT";
+        }
+        if (possUp && possRight) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "UP";
+            else
+                return "RIGHT";
+        }
+        if (possUp && possLeft) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "UP";
+            else
+                return "LEFT";
+        }
+        if (possUp)
+            return "UP";
+        if (possDown)
             return "DOWN";
     }
 
     if (aiComp.lastDirection == "DOWN") {
-        wantedPos.X += 10;
-        if (canMoveDirection(wantedPos, worldManager))
+        if (oldPos.X <= wantedPos.X)
             return "DOWN";
-        wantedPos.X -= 10;
-        wantedPos.Z -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "LEFT";
-        wantedPos.Z += 20;
-        if (canMoveDirection(wantedPos, worldManager))
-            return "RIGHT";
-        wantedPos.Z -= 10;
-        wantedPos.X -= 10;
-        if (canMoveDirection(wantedPos, worldManager))
+//        if (possDown)
+//            return "DOWN";
+//        if (possLeft)
+//            return "LEFT";
+//        if (possRight)
+//            return "RIGHT";
+//        if (possUp)
+//            return "UP";
+        if (possDown && possLeft && possRight) {
+            irr::u32 rd = rand() % 3;
+            if (rd == 0)
+                return "DOWN";
+            else if (rd == 1)
+                return "LEFT";
+            else
+                return "RIGHT";
+        }
+        if (possDown && possRight) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "DOWN";
+            else
+                return "RIGHT";
+        }
+        if (possDown && possLeft) {
+            irr::u32 rd = rand() % 2;
+            if (rd == 0)
+                return "DOWN";
+            else
+                return "LEFT";
+        }
+        if (possDown)
+            return "DOWN";
+        if (possUp)
             return "UP";
-
-
     }
-
-
-
-//    wantedPos.Z -= 10;
-//
-//    if (canMoveDirection(wantedPos, worldManager)) {
-//        std::cout << "JE PEUX GAUCHE" << std::endl;
-//        return "LEFT";
-//    }
-//    else
-//        std::cout << "NON PAS A GAUCHE BG" << std::endl;
-//    wantedPos.Z += 20;
-//    if (canMoveDirection(wantedPos, worldManager)) {
-//        std::cout << "JE PEUX DROITE" << std::endl;
-//        return "RIGHT";
-//    }
-//    wantedPos.Z -= 10;
-//    wantedPos.X -= 10;
-//    if (canMoveDirection(wantedPos, worldManager)) {
-//        std::cout << "JE PEUX HAUT" << std::endl;
-//        return "UP";
-//    }
-//    wantedPos.X += 20;
-//    if (canMoveDirection(wantedPos, worldManager)) {
-//        std::cout << "JE PEUX BAS" << std::endl;
-//        return "DOWN";
-//    }
     return "";
 }
 
