@@ -22,7 +22,9 @@
 #include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/Transform.hpp"
+#include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Unbreakable.hpp"
+#include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PowerUp.hpp"
 #include "../ecs/system/Animation.hpp"
 #include "../ecs/system/BombTimer.hpp"
@@ -31,6 +33,7 @@
 #include "../ecs/system/Movement.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/ExplosionDelay.hpp"
 #include "../ecs/system/PowerUp.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
@@ -40,6 +43,48 @@ using namespace scene;
 std::vector<ecs::Entity> Bomberman::playerIds = {};
 std::array<irr::scene::IMetaTriangleSelector *, 4> Bomberman::metaTriangleSelector = {
     nullptr, nullptr, nullptr, nullptr};
+
+static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, irr::core::vector3df pos)
+{
+    irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+    irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
+    ecs::Entity explosion = worldManager->createEntity();
+
+    irr::scene::ISceneNode *explosionMesh = smgr->addCubeSceneNode();
+    irr::scene::IParticleSystemSceneNode *particleSystem = smgr->addParticleSystemSceneNode(false);
+
+    explosionMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    explosionMesh->setPosition(pos);
+    explosionMesh->setScale(irr::core::vector3df(1, 1, 1));
+    explosionMesh->setVisible(false);
+
+    irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
+        irr::core::aabbox3d<irr::f32>(irr::core::vector3df(pos.X + 3, pos.Y - 20, pos.Z - 3)),
+        irr::core::vector3df(0.0f,0.05f,0.0f),
+        350,400,
+        irr::video::SColor(0,0,255,255),
+        irr::video::SColor(0,0,0,255),
+        500, 500,
+        20,
+        irr::core::dimension2df(6.0f,6.0f),
+        irr::core::dimension2df(10.0f,10.0f));
+
+    particleSystem->setEmitter(emitter);
+    emitter->drop();
+    particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    particleSystem->setMaterialTexture(0, driver->getTexture(bomberman::bomb::EXPLOSION.c_str()));
+    particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+    irr::scene::IParticleAffector* affector =
+    particleSystem->createFadeOutParticleAffector(
+    irr::video::SColor(0,0,0,0), 100);
+    particleSystem->addAffector(affector);
+    affector->drop();
+
+    worldManager->addComponent<ecs::component::Render3d>(explosion, ecs::component::Render3d(explosionMesh));
+    worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay(delay));
+    worldManager->addComponent<ecs::component::Particle>(explosion, ecs::component::Particle(particleSystem));
+}
+
 
 static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worldManager,
     irr::scene::ISceneManager *smgr, irr::scene::IAnimatedMeshSceneNode *characterMesh, size_t charNbr)
@@ -299,6 +344,8 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Animation>();
     worldManager->registerComponent<ecs::component::Stats>();
     worldManager->registerComponent<ecs::component::Collision>();
+    worldManager->registerComponent<ecs::component::Delay>();
+    worldManager->registerComponent<ecs::component::Particle>();
     worldManager->registerComponent<ecs::component::BombTimer>();
     worldManager->registerComponent<ecs::component::BombStats>();
     worldManager->registerComponent<ecs::component::Owner>();
@@ -345,6 +392,13 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Animation>());
         worldManager->setSystemSignature<ecs::system::Animation>(signature);
     }
+    worldManager->registerSystem<ecs::system::ExplosionDelay>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        signature.set(worldManager->getComponentType<ecs::component::Delay>());
+        worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
     worldManager->registerSystem<ecs::system::PowerUp>();
     {
         ecs::Signature signature;

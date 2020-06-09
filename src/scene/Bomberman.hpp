@@ -68,6 +68,10 @@ static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
 static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
 static const std::string WALL_PASS = "media/power-up/wall-pass.jpeg";
 }
+
+namespace bomb {
+  static const std::string EXPLOSION = "./media/map/portal7.bmp";
+}
 }
 }
 

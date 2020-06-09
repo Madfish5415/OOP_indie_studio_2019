@@ -17,11 +17,13 @@ set(SRCS
         src/ecs/component/AI.cpp
         src/ecs/component/Animation.cpp
         src/ecs/component/Collision.cpp
+        src/ecs/component/Delay.cpp
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
         src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
+        src/ecs/component/Particle.cpp
         src/ecs/component/LookingView.cpp
         src/ecs/component/Lootable.cpp
         src/ecs/component/MessageBox.cpp
@@ -47,6 +49,7 @@ set(SRCS
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
+        src/ecs/system/ExplosionDelay.cpp
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
@@ -88,10 +91,12 @@ set(HEADERS
         src/ecs/WorldManager.hpp
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
+        src/ecs/component/Particle.hpp
         src/ecs/component/Collision.hpp
         src/ecs/component/BombStats.hpp
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
+        src/ecs/component/Delay.hpp
         src/ecs/component/HitboxDetection.hpp
         src/ecs/component/Image.hpp
         src/ecs/component/LookingView.hpp
@@ -119,6 +124,7 @@ set(HEADERS
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
+        src/ecs/system/ExplosionDelay.hpp
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
