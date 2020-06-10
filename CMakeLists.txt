@@ -17,11 +17,13 @@ set(SRCS
         src/ecs/component/AI.cpp
         src/ecs/component/Animation.cpp
         src/ecs/component/Collision.cpp
+        src/ecs/component/Delay.cpp
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
         src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
+        src/ecs/component/Particle.cpp
         src/ecs/component/LookingView.cpp
         src/ecs/component/Lootable.cpp
         src/ecs/component/MessageBox.cpp
@@ -41,9 +43,16 @@ set(SRCS
         src/ecs/component/StatRender.cpp
         src/ecs/component/Timer.cpp
         src/ecs/component/TimerRender.cpp
+        src/ecs/component/BoundingBox.cpp
+        src/ecs/component/PlayerId.cpp
+        src/ecs/component/PowerUp.cpp
+        src/ecs/component/Breakable.cpp
+        src/ecs/component/ToDelete.cpp
+        src/ecs/component/Spinner.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
+        src/ecs/system/ExplosionDelay.cpp
         src/ecs/system/Sound.cpp
         src/ecs/system/Render.cpp
         src/ecs/system/Size.cpp
@@ -54,6 +63,10 @@ set(SRCS
         src/ecs/system/StatRender.cpp
         src/ecs/system/Timer.cpp
         src/ecs/system/TimerRender.cpp
+        src/ecs/system/BoundingBox.cpp
+        src/ecs/system/BombTimer.cpp
+        src/ecs/system/PowerUp.cpp
+        src/ecs/system/Spinner.cpp
         src/ecs/system/AI.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
@@ -83,10 +96,12 @@ set(HEADERS
         src/ecs/WorldManager.hpp
         src/ecs/component/AI.hpp
         src/ecs/component/Animation.hpp
+        src/ecs/component/Particle.hpp
         src/ecs/component/Collision.hpp
         src/ecs/component/BombStats.hpp
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
+        src/ecs/component/Delay.hpp
         src/ecs/component/HitboxDetection.hpp
         src/ecs/component/Image.hpp
         src/ecs/component/LookingView.hpp
@@ -108,9 +123,16 @@ set(HEADERS
         src/ecs/component/StatRender.hpp
         src/ecs/component/Timer.hpp
         src/ecs/component/TimerRender.hpp
+        src/ecs/component/BoundingBox.hpp
+        src/ecs/component/PlayerId.hpp
+        src/ecs/component/PowerUp.hpp
+        src/ecs/component/Breakable.hpp
+        src/ecs/component/ToDelete.hpp
+        src/ecs/component/Spinner.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
+        src/ecs/system/ExplosionDelay.hpp
         src/ecs/system/Sound.hpp
         src/ecs/system/Render.hpp
         src/ecs/system/Size.hpp
@@ -121,6 +143,10 @@ set(HEADERS
         src/ecs/system/StatRender.hpp
         src/ecs/system/Timer.hpp
         src/ecs/system/TimerRender.hpp
+        src/ecs/system/BoundingBox.hpp
+        src/ecs/system/BombTimer.hpp
+        src/ecs/system/PowerUp.hpp
+        src/ecs/system/Spinner.hpp
         src/ecs/system/AI.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
