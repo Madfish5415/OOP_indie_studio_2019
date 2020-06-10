@@ -63,21 +63,6 @@ IF (NOT SFML_INCLUDE_DIRS OR NOT SFML_AUDIO_LIBRARY OR NOT SFML_SYSTEM_LIBRARY)
       ${SFML_DIR}/                  # SFML root directory (if provided)
   )
 
-  FIND_LIBRARY(OPEN_AL
-          NAMES
-          openal
-          openal32
-          openal64
-          PATHS
-          /usr/lib64/                   # Default Fedora28 library path
-          /usr/lib/                     # Some more Linux library path
-          /usr/lib/x86_64-linux-gnu/    # Some more Linux library path
-          /usr/local/lib/               # Some more Linux library path
-          /usr/local/lib64/             # Some more Linux library path
-          ${CMAKE_MODULE_PATH}/         # Expected to contain the path to this file for Windows10
-          ${SFML_DIR}/                  # SFML root directory (if provided)
-          )
-
 ENDIF (NOT SFML_INCLUDE_DIRS OR NOT SFML_AUDIO_LIBRARY OR NOT SFML_SYSTEM_LIBRARY)
 
 IF (SFML_INCLUDE_DIRS AND SFML_AUDIO_LIBRARY AND SFML_SYSTEM_LIBRARY)

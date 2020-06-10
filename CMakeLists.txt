@@ -148,6 +148,9 @@ add_executable(bomberman ${SRCS} ${HEADERS})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
+set(Irrlicht_DIR libs/)
+set(SFML_DIR libs/)
+
 find_package (Irrlicht)
 
 
