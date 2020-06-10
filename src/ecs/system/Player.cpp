@@ -7,8 +7,6 @@
 
 #include "Player.hpp"
 
-#include <iostream>
-
 #include "../../scene/Bomberman.hpp"
 #include "../WorldManager.hpp"
 #include "../component/Animation.hpp"
@@ -129,9 +127,9 @@ bool Player::alreadyExist(const irr::core::vector3d<irr::f32>& pos)
         auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
         auto newPos = pos;
-        newPos.X = static_cast<int>(pos.X / 10.f) * 10 + 5;
+        newPos.X = static_cast<irr::f32>(pos.X / 10.f) * 10 + 5;
         newPos.Y = 4;
-        newPos.Z = static_cast<int>(pos.Z / 10.f) * 10 + 5;
+        newPos.Z = static_cast<irr::f32>(pos.Z / 10.f) * 10 + 5;
         if (render3d.node->getPosition() == newPos) {
             return true;
         }

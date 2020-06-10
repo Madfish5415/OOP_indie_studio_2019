@@ -10,8 +10,6 @@
 #include "../component/Render3d.hpp"
 #include "../component/Transform.hpp"
 
-#include <iostream>
-
 using namespace ecs::system;
 
 Movement::Movement(ecs::WorldManager* worldManager) : System(worldManager)

@@ -109,10 +109,7 @@ static void limitToFirstBreakable(
     for (const auto& entity : breakableBoxes) {
         auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
-        if (!render3d.node)
-            continue;
-
-        if (render3d.node->isDebugObject())
+        if (!render3d.node || render3d.node->isDebugObject())
             continue;
 
         auto boxPos = render3d.node->getPosition();
@@ -141,12 +138,6 @@ static void limitToFirstBreakable(
                 radius[3] = (radius[3] < i) ? radius[3] : i;
         }
     }
-}
-
-static void explodeObjects(ecs::WorldManager* worldManager, std::array<int, 4>& radius,
-    const irr::core::vector3d<irr::f32>& pos, bool wallPass)
-{
-
 }
 
 void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& entity)
