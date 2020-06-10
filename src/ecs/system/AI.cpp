@@ -9,6 +9,9 @@
 
 #include <irrlicht.h>
 
+#include "../system/Player.hpp"
+#include "../../scene/Bomberman.hpp"
+
 #include "../component/Stats.hpp"
 #include "../component/AI.hpp"
 #include "../component/Player.hpp"
@@ -16,6 +19,9 @@
 #include "../component/Motion.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Animation.hpp"
+#include "../component/BombTimer.hpp"
+#include "../component/Owner.hpp"
+#include "../component/Breakable.hpp"
 
 #include "AI.hpp"
 
@@ -26,6 +32,44 @@ AI::AI(ecs::WorldManager* worldManager) : ecs::System(worldManager)
 }
 
 AI::~AI() = default;
+
+bool AI::alreadyExist(const irr::core::vector3d<irr::f32>& pos)
+{
+    std::vector<ecs::Entity> bombs = worldManager->getEntities<ecs::component::BombTimer, ecs::component::BombStats, ecs::component::Owner>();
+
+    for (const auto& entity : bombs) {
+        auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+
+        auto newPos = pos;
+        newPos.X = static_cast<irr::f32>(pos.X / 10.f) * 10 + 5;
+        newPos.Y = 4;
+        newPos.Z = static_cast<irr::f32>(pos.Z / 10.f) * 10 + 5;
+        if (render3d.node->getPosition() == newPos) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void AI::plantBomb(ecs::Entity ai, ecs::WorldManager *worldManager)
+{
+    std::vector<ecs::Entity> bombs = worldManager->getEntities<ecs::component::BombStats,
+        ecs::component::BombTimer, ecs::component::Owner>();
+    int bombNbr = 0;
+
+    for (const auto& bomb : bombs) {
+        auto& owner = worldManager->getComponent<ecs::component::Owner>(bomb);
+        if (owner.entity == ai)
+            bombNbr++;
+    }
+
+    auto& stat = worldManager->getComponent<ecs::component::Stats>(ai);
+    auto& render3d = worldManager->getComponent<ecs::component::Render3d>(ai);
+
+    if (bombNbr < stat.maxBomb && !alreadyExist(render3d.node->getPosition())) {
+        scene::Bomberman::createBomb(worldManager, ai, stat.bombRadius, stat.wallPass, render3d.node->getPosition());
+    }
+}
 
 static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::WorldManager *worldManager, std::string direction)
 {
@@ -56,7 +100,8 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
         auto render = worldManager->getComponent<ecs::component::Render3d>(ent);
         try {
             auto ai = worldManager->getComponent<ecs::component::AI>(ent);
-            continue;
+            auto stats = worldManager->getComponent<ecs::component::Stats>(ent);
+            return true;
         } catch (std::exception &e) {}
         auto pos = render.node->getPosition();
 
@@ -66,13 +111,9 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
 
         irr::u32 tmpZ = pos.Z / 5;
         pos.Z = tmpZ * 5;
-//        std::cout << "[" << wantedPos.X << "] [" << wantedPos.Z << "]" << std::endl;
-//        std::cout << "[" << pos.X << "] [" << pos.Z << "]" << std::endl;
-//        std::cout << std::endl;
         if (pos.X == wantedPos.X && pos.Z == wantedPos.Z)
             return false;
     }
-    std::cout << "FIN BOUCLE" << std::endl;
     return true;
 }
 
@@ -94,7 +135,6 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
     bool possRight = canMoveDirection(wantedPos, worldManager, "RIGHT");
     bool possUp = canMoveDirection(wantedPos, worldManager, "UP");
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN");
-
 
     if (aiComp.lastDirection == "LEFT" || aiComp.lastDirection.empty()) {
         if (oldPos.Z >= wantedPos.Z) {
@@ -257,19 +297,61 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
     return "";
 }
 
-#include <iostream>
+static bool isBreakable(irr::core::vector3d<irr::f32> wantedPos, ecs::WorldManager *worldManager, const std::string& direction)
+{
+    if (direction == "LEFT")
+        wantedPos.Z -= 10;
+    else if (direction == "RIGHT")
+        wantedPos.Z += 10;
+    else if (direction == "UP")
+        wantedPos.X -= 10;
+    else if (direction == "DOWN")
+        wantedPos.X += 10;
+
+    auto entities = worldManager->getEntities<ecs::component::Breakable>();
+    for (auto ent : entities) {
+        auto render = worldManager->getComponent<ecs::component::Render3d>(ent);
+        auto pos = render.node->getPosition();
+
+        irr::u32 tmpX = pos.X / 5;
+        pos.X = tmpX * 5;
+
+        irr::u32 tmpZ = pos.Z / 5;
+        pos.Z = tmpZ * 5;
+        if (pos.X == wantedPos.X && pos.Z == wantedPos.Z) {
+           return true;
+        }
+    }
+    return false;
+}
+
+static bool nearBox(ecs::Entity ai, ecs::WorldManager *worldManager)
+{
+    irr::core::vector3d<irr::f32> wantedPos =
+        worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
+    auto& aiComp = worldManager->getComponent<ecs::component::AI>(ai);
+    irr::u32 tmpX = wantedPos.X / 10;
+    wantedPos.X = tmpX * 10;
+    wantedPos.X += 5;
+
+    irr::u32 tmpZ = wantedPos.Z / 10;
+    wantedPos.Z = tmpZ * 10;
+    wantedPos.Z += 5;
+
+    bool ret = isBreakable(wantedPos, worldManager, "LEFT") || isBreakable(wantedPos, worldManager, "RIGHT") || isBreakable(wantedPos, worldManager, "UP") || isBreakable(wantedPos, worldManager, "DOWN");
+    return ret;
+}
 
 void AI::update()
 {
     if (entities.empty())
         return;
 
-    //auto bombs = worldManager->getEntities<ecs::component::BombStats>();
     irr::f32 tileSize = 10.0;
     float baseSpeed = 20;
     float multiplicator = baseSpeed / 4;
 
-    for (auto &ai : entities) {
+    for (auto ai : entities) {
         auto& motion = worldManager->getComponent<ecs::component::Motion>(ai);
         auto& node = worldManager->getComponent<ecs::component::Render3d>(ai).node;
         auto& stats = worldManager->getComponent<ecs::component::Stats>(ai);
@@ -278,6 +360,8 @@ void AI::update()
         std::string dir = chooseDirection(ai, worldManager);
 
         if (dir == "UP") {
+            if (aiComp.lastDirection != "UP" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
             motion.direction.X = -1;
             motion.direction.Y = 0;
             motion.direction.Z = 0;
@@ -287,6 +371,8 @@ void AI::update()
             animation.currentAnimation = "WALKING";
         }
         else if (dir == "DOWN") {
+            if (aiComp.lastDirection != "DOWN" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
             motion.direction.X = 1;
             motion.direction.Y = 0;
             motion.direction.Z = 0;
@@ -296,6 +382,8 @@ void AI::update()
             animation.currentAnimation = "WALKING";
         }
         else if (dir == "LEFT") {
+            if (aiComp.lastDirection != "LEFT" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
             motion.direction.X = 0;
             motion.direction.Y = 0;
             motion.direction.Z = -1;
@@ -305,6 +393,8 @@ void AI::update()
             animation.currentAnimation = "WALKING";
         }
         else if (dir == "RIGHT") {
+            if (aiComp.lastDirection != "RIGHT" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
             motion.direction.X = 0;
             motion.direction.Y = 0;
             motion.direction.Z = 1;
@@ -321,6 +411,5 @@ void AI::update()
             node->setRotation(irr::core::vector3df(0, 90, 0));
             animation.currentAnimation = "IDLE";
         }
-
     }
 }

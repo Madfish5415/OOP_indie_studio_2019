@@ -22,6 +22,10 @@ class AI : public ecs::System {
 
   public:
     void update();
+
+  private:
+    void plantBomb(ecs::Entity ai, ecs::WorldManager *worldManager);
+    bool alreadyExist(const irr::core::vector3d<irr::f32>& pos);
 };
 }
 #endif // INDIESTUDIO_AI_HPP
