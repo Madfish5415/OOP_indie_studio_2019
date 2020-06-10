@@ -21,7 +21,7 @@ using namespace scene;
 
 static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
     irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
-                         const std::string& hoverImage, const std::string& setPressedImage)
+    const std::string& hoverImage, const std::string& setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -66,14 +66,17 @@ void Menu::init(ecs::Universe* universe)
 
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
-        ecs::component::Image(gui, driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0)));
+        ecs::component::Image(
+            gui, driver, scene::menu::BOMBERMAN_LOGO, new irr::core::position2d<irr::s32>(960 - 640, 0)));
     worldManager->addComponent(bombermanLogo, ecs::component::Blink(500));
 
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(400 - 150, 800, 400 + 150, 800 + 150), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(294 - 150, 800, 294 + 150, 800 + 150), nullptr,
         GUI_MENU_PLAY, menu::button::play::NORMAL, menu::button::play::HOVER, menu::button::play::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 150, 800, 960 + 150, 800 + 150), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(738 - 150, 800, 738 + 150, 800 + 150), nullptr,
         GUI_MENU_HTP, menu::button::htp::NORMAL, menu::button::htp::HOVER, menu::button::htp::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 150, 800, 1520 + 150, 800 + 150), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1182 - 150, 800, 1182 + 150, 800 + 150), nullptr,
+        GUI_MENU_OPT, menu::button::option::NORMAL, menu::button::option::HOVER, menu::button::option::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1626 - 150, 800, 1626 + 150, 800 + 150), nullptr,
         GUI_MENU_QUIT, menu::button::quit::NORMAL, menu::button::quit::HOVER, menu::button::quit::PRESSED);
 }
 

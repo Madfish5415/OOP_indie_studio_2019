@@ -37,6 +37,11 @@ static const std::string NORMAL = "assets/img/menu/button/button-htp-normal.png"
 static const std::string HOVER = "assets/img/menu/button/button-htp-hover.png";
 static const std::string PRESSED = "assets/img/menu/button/button-htp-pressed.png";
 } // namespace htp
+namespace option {
+static const std::string NORMAL = "assets/img/menu/button/button-htp-normal.png";
+static const std::string HOVER = "assets/img/menu/button/button-htp-hover.png";
+static const std::string PRESSED = "assets/img/menu/button/button-htp-pressed.png";
+} // namespace htp
 namespace quit {
 static const std::string NORMAL = "assets/img/menu/button/button-quit-normal.png";
 static const std::string HOVER = "assets/img/menu/button/button-quit-hover.png";
