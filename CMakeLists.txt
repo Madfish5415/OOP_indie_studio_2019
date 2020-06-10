@@ -65,11 +65,14 @@ set(SRCS
         src/ecs/system/TimerRender.cpp
         src/ecs/system/BoundingBox.cpp
         src/ecs/system/BombTimer.cpp
+        src/ecs/system/WinChecking.cpp
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
+        src/scene/DrawScreen.cpp
+        src/scene/WinScreen.cpp
         src/scene/PlayerSelector.cpp
         src/scene/Keybinding.cpp
         src/scene/GameHud.cpp
@@ -129,6 +132,7 @@ set(HEADERS
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
         src/ecs/system/Music.hpp
+        src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
         src/ecs/system/ExplosionDelay.hpp
@@ -148,6 +152,8 @@ set(HEADERS
         src/ecs/system/Spinner.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
+        src/scene/DrawScreen.hpp
+        src/scene/WinScreen.hpp
         src/scene/LoadingMenu.hpp
         src/scene/PlayerSelector.hpp
         src/scene/Keybinding.hpp

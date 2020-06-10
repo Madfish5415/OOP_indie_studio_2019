@@ -20,6 +20,7 @@
 #include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Owner.hpp"
+#include "../ecs/component/SkinColor.hpp"
 #include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PlayerId.hpp"
 #include "../ecs/component/PowerUp.hpp"
@@ -39,6 +40,7 @@
 #include "../ecs/system/PowerUp.hpp"
 #include "../ecs/system/Render.hpp"
 #include "../ecs/system/Spinner.hpp"
+#include "../ecs/system/WinChecking.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -348,6 +350,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Breakable>();
     worldManager->registerComponent<ecs::component::ToDelete>();
     worldManager->registerComponent<ecs::component::Spinner>();
+    worldManager->registerComponent<ecs::component::SkinColor>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -429,6 +432,14 @@ void scene::Bomberman::init(
 
         signature.set(worldManager->getComponentType<ecs::component::BombTimer>());
         worldManager->setSystemSignature<ecs::system::BombTimer>(signature);
+    }
+    worldManager->registerSystem<ecs::system::WinChecking>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::PlayerId>());
+        signature.set(worldManager->getComponentType<ecs::component::Stats>());
+        worldManager->setSystemSignature<ecs::system::WinChecking>(signature);
     }
 
     ecs::Entity ground = worldManager->createEntity();

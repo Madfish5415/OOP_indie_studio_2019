@@ -8,9 +8,13 @@
 #include "WinChecking.hpp"
 
 #include "../Universe.hpp"
-#include "scene/Bomberman.hpp"
-#include "../component/Player.hpp"
-#include "../component/AI.hpp"
+#include "../../scene/Bomberman.hpp"
+#include "../../scene/WinScreen.hpp"
+#include "../../scene/DrawScreen.hpp"
+#include "../component/PlayerId.hpp"
+#include "../component/Stats.hpp"
+
+#include <iostream>
 
 using namespace ecs::system;
 
@@ -22,13 +26,17 @@ WinChecking::~WinChecking() = default;
 
 void WinChecking::update()
 {
-    std::vector<ecs::Entity> entities = worldManager->getEntities<ecs::component::Player, ecs::component::AI>();
     ecs::Universe *universe = worldManager->getUniverse();
 
     if (entities.size() <= 1) {
+        std::cout << entities.size() << std::endl;
         if (entities.size() == 0) {
-            //Draw screen
+            scene::DrawScreen::init(universe);
+            universe->setCurrentWorldManager("DrawScreen");
         }
-        //Win screen
+        else {
+            scene::WinScreen::init(universe);
+            universe->setCurrentWorldManager("WinScreen");
+        }
     }
 }
