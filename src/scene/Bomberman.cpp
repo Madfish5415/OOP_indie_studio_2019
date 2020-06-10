@@ -24,6 +24,7 @@
 #include "../ecs/component/PlayerId.hpp"
 #include "../ecs/component/PowerUp.hpp"
 #include "../ecs/component/Render3d.hpp"
+#include "../ecs/component/Spinner.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/ToDelete.hpp"
 #include "../ecs/component/Transform.hpp"
@@ -37,6 +38,7 @@
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/PowerUp.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/Spinner.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -256,7 +258,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
 }
 
 void scene::Bomberman::createBomb(
-    ecs::WorldManager *worldManager, ecs::Entity playerId, size_t bombRadius, const irr::core::vector3d<irr::f32> &pos)
+    ecs::WorldManager *worldManager, ecs::Entity playerId, size_t bombRadius, bool wallPass, const irr::core::vector3d<irr::f32> &pos)
 {
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -285,7 +287,7 @@ void scene::Bomberman::createBomb(
     boxMesh->setTriangleSelector(selector);
 
     worldManager->addComponent<ecs::component::Render3d>(bomb, ecs::component::Render3d(bombMesh));
-    worldManager->addComponent<ecs::component::BombStats>(bomb, ecs::component::BombStats(bombRadius, false));
+    worldManager->addComponent<ecs::component::BombStats>(bomb, ecs::component::BombStats(bombRadius, wallPass));
     worldManager->addComponent<ecs::component::BombTimer>(bomb, ecs::component::BombTimer(3000));
     worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
     worldManager->addComponent<ecs::component::BoundingBox>(bomb, ecs::component::BoundingBox(boxMesh, selector));
@@ -345,6 +347,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::PowerUp>();
     worldManager->registerComponent<ecs::component::Breakable>();
     worldManager->registerComponent<ecs::component::ToDelete>();
+    worldManager->registerComponent<ecs::component::Spinner>();
 
     worldManager->registerSystem<ecs::system::Render>();
     {
@@ -352,6 +355,21 @@ void scene::Bomberman::init(
 
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         worldManager->setSystemSignature<ecs::system::Render>(signature);
+    }
+    worldManager->registerSystem<ecs::system::PowerUp>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::PowerUp>());
+        worldManager->setSystemSignature<ecs::system::PowerUp>(signature);
+    }
+    worldManager->registerSystem<ecs::system::Spinner>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Spinner>());
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        worldManager->setSystemSignature<ecs::system::Spinner>(signature);
     }
     worldManager->registerSystem<ecs::system::BoundingBox>();
     {
@@ -392,13 +410,6 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         signature.set(worldManager->getComponentType<ecs::component::Delay>());
         worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
-    }
-    worldManager->registerSystem<ecs::system::PowerUp>();
-    {
-        ecs::Signature signature;
-
-        signature.set(worldManager->getComponentType<ecs::component::PowerUp>());
-        worldManager->setSystemSignature<ecs::system::PowerUp>(signature);
     }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
@@ -464,9 +475,6 @@ void scene::Bomberman::init(
     createMap(worldManager, tileSize);
     createCharacters(worldManager, tileSize, nbTile, players, paths, playerType);
 
-    createPowerUp(universe, irr::core::vector3df(15.0, 15.0, 25.0));
-    createPowerUp(universe, irr::core::vector3df(25.0, 15.0, 15.0));
-    createPowerUp(universe, irr::core::vector3df(35.0, 15.0, 15.0));
     GameHud::init(universe, paths);
 }
 
@@ -488,13 +496,13 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     irr::video::IVideoDriver *driver = universe->getDevice()->getVideoDriver();
     auto worldManager = universe->getWorldManager("Bomberman");
     ecs::Entity speedPowerUp = worldManager->createEntity();
-    irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(
-        irr::core::dimension2df(10, 10)));
+    irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createCubeMesh(
+        irr::core::vector3d<irr::f32>(0.1, 10, 10)));
     size_t powerUpChoice = std::rand() % 10;
 
     if (powerUpMesh) {
         powerUpMesh->setPosition(position);
-        powerUpMesh->setRotation(irr::core::vector3df(0.0, -90.0, 0.0));
+        powerUpMesh->setRotation(irr::core::vector3df(0.0, 0.0, 45.0));
         powerUpMesh->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
         powerUpMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     }
@@ -502,6 +510,7 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     worldManager->addComponent<ecs::component::Render3d>(speedPowerUp, ecs::component::Render3d(powerUpMesh));
     worldManager->addComponent<ecs::component::Collision>(speedPowerUp, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PowerUp>(speedPowerUp, ecs::component::PowerUp());
+    worldManager->addComponent<ecs::component::Spinner>(speedPowerUp, ecs::component::Spinner(irr::core::vector3d<irr::f32>(0, 5, 0), 100));
 
     if (powerUpChoice < 4) {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_SPEED.c_str()));

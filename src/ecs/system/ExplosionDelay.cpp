@@ -60,6 +60,10 @@ static void explodeObjects(ecs::WorldManager* worldManager, ecs::component::Rend
                     metaTriangleSelector->removeTriangleSelector(boundingBox.selector);
                 smgr->addToDeletionQueue(boundingBox.mesh);
             } catch (std::exception& e) {
+                if (rand() % 3 == 0) {
+                    scene::Bomberman::createPowerUp(
+                        worldManager->getUniverse(), pos);
+                }
             }
             for (auto& metaTriangleSelector : scene::Bomberman::metaTriangleSelector)
                 metaTriangleSelector->removeTriangleSelector(boxRender.node->getTriangleSelector());

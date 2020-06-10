@@ -159,10 +159,7 @@ void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& enti
 
     limitToUnbreakable(worldManager, radius, pos, static_cast<int>(stat.bombRadius));
 
-    auto& owner = worldManager->getComponent<ecs::component::Owner>(entity);
-    auto& ownerStats = worldManager->getComponent<ecs::component::Stats>(owner.entity);
-
-    if (!ownerStats.wallPass)
+    if (!stat.wallPass)
         limitToFirstBreakable(worldManager, radius, pos);
 
     for (int i = 0; i <= radius[0]; i++) {

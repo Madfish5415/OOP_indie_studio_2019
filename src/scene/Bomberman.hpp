@@ -21,15 +21,15 @@ class Bomberman {
     ~Bomberman() = delete;
 
   public:
-    static void init(
-        ecs::Universe* universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths, std::vector<bool> playerType);
+    static void init(ecs::Universe* universe, std::vector<ecs::component::Player> players,
+        std::vector<std::string> paths, std::vector<bool> playerType);
     static void reset();
     static void destroy(ecs::Universe* universe);
-    static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius,
+    static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius, bool wallPass,
         const irr::core::vector3d<irr::f32>& pos);
     static void updateCollision(ecs::WorldManager* worldManager);
-    static void createPowerUp(ecs::Universe *universe, irr::core::vector3df position);
-    static void createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, const irr::core::vector3df& pos);
+    static void createPowerUp(ecs::Universe* universe, irr::core::vector3df position);
+    static void createExplosion(ecs::WorldManager* worldManager, irr::u32 delay, const irr::core::vector3df& pos);
 
   public:
     static std::vector<ecs::Entity> playerIds;
@@ -63,17 +63,18 @@ static const std::string WALL = "media/map/neon-brick.png";
 static const std::string BOX = "media/map/neon-crate.png";
 static const std::string BOUNDING_BOX = "media/map/boundingBox.png";
 } // namespace map
+
 namespace powerUp {
 static const std::string MAX_SPEED = "media/power-up/max-speed.png";
 static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
 static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
-static const std::string WALL_PASS = "media/power-up/wall-pass.jpeg";
-}
+static const std::string WALL_PASS = "media/power-up/wall-pass.png";
+} // namespace powerUp
 
 namespace bomb {
-  static const std::string EXPLOSION = "./media/map/portal7.bmp";
-}
-}
-}
+static const std::string EXPLOSION = "media/map/portal7.bmp";
+} // namespace bomb
+} // namespace bomberman
+} // namespace scene
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP

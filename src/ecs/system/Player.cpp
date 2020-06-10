@@ -115,7 +115,7 @@ void Player::receiveKeyEvent(event::Key& event)
             auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
             if (bombNbr < stat.maxBomb && !alreadyExist(render3d.node->getPosition())) {
-                scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, render3d.node->getPosition());
+                scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, stat.wallPass, render3d.node->getPosition());
             }
         }
     }

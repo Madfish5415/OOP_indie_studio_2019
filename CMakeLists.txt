@@ -48,6 +48,7 @@ set(SRCS
         src/ecs/component/PowerUp.cpp
         src/ecs/component/Breakable.cpp
         src/ecs/component/ToDelete.cpp
+        src/ecs/component/Spinner.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -65,6 +66,7 @@ set(SRCS
         src/ecs/system/BoundingBox.cpp
         src/ecs/system/BombTimer.cpp
         src/ecs/system/PowerUp.cpp
+        src/ecs/system/Spinner.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -125,6 +127,7 @@ set(HEADERS
         src/ecs/component/PowerUp.hpp
         src/ecs/component/Breakable.hpp
         src/ecs/component/ToDelete.hpp
+        src/ecs/component/Spinner.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
@@ -142,6 +145,7 @@ set(HEADERS
         src/ecs/system/BoundingBox.hpp
         src/ecs/system/BombTimer.hpp
         src/ecs/system/PowerUp.hpp
+        src/ecs/system/Spinner.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp

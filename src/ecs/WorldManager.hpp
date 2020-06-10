@@ -185,7 +185,11 @@ class WorldManager {
     template<typename T>
     T& getComponent(Entity entity)
     {
-        return _componentManager->getComponent<T>(entity);
+        try {
+            return _componentManager->getComponent<T>(entity);
+        } catch (std::runtime_error &e) {
+            throw e;
+        }
     }
 
     /**
