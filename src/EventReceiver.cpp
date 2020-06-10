@@ -16,6 +16,7 @@
 #include "ecs/component/PushButton.hpp"
 #include "ecs/event/Key.hpp"
 #include "scene/Bomberman.hpp"
+#include "scene/HowToPlay.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
@@ -140,10 +141,16 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         _universe->setCurrentWorldManager("PlayerSelector");
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_HTP) {
-                    if (_universe->hasWorldManager("HowToPlay")) {
-                        scene::Menu::destroy(_universe);
+                    scene::Menu::destroy(_universe);
+                    scene::HowToPlay::init(_universe);
+                    if (_universe->hasWorldManager("HowToPlay"))
                         _universe->setCurrentWorldManager("HowToPlay");
-                    }
+                    return true;
+                } else if (id == BUTTON_ID::GUI_HTP_MENU) {
+                    scene::HowToPlay::destroy(_universe);
+                    scene::Menu::init(_universe);
+                    if (_universe->hasWorldManager("Menu"))
+                        _universe->setCurrentWorldManager("Menu");
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_QUIT) {
                     _universe->getDevice()->closeDevice();
@@ -170,10 +177,10 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     id == BUTTON_ID::GUI_SELECT_KB_P3 || id == BUTTON_ID::GUI_SELECT_KB_P4) {
                     if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
                         auto &image = _universe->getWorldManager("PlayerSelector")
-                            ->getComponent<ecs::component::Image>(
-                                scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                                          ->getComponent<ecs::component::Image>(
+                                              scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
                         scene::Keybinding::init(_universe, image.pathTexture,
-                                                &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                            &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
                         _universe->setCurrentWorldManager("Keybinding");
                     }
                 } else if (id == GUI_SELECT_KB_BACK) {

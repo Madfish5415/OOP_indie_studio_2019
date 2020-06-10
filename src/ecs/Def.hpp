@@ -75,13 +75,15 @@ enum BUTTON_ID {
     GUI_SELECT_KB_LEFT, /** < Change LEFT Key code.*/
     GUI_SELECT_KB_RIGHT, /** < Change RIGHT Key code.*/
     GUI_SELECT_KB_ACTION, /** < Change BOMB Key code.*/
-    GUI_SELECT_KB_BACK, /** < Back to the player selector */
+    GUI_SELECT_KB_BACK, /** < Back to the player selector.*/
 
-    GUI_GAME_PAUSE, /** < Open the menu pause */
+    GUI_GAME_PAUSE, /** < Open the menu pause.*/
 
-    GUI_PAUSE_RESUME, /** < Resume the party */
-    GUI_PAUSE_SETTINGS, /** < Resume the party */
-    GUI_PAUSE_MENU, /** < Back to the menu */
+    GUI_PAUSE_RESUME, /** < Resume the party.*/
+    GUI_PAUSE_SETTINGS, /** < Resume the party.*/
+    GUI_PAUSE_MENU, /** < Back to the menu.*/
+
+    GUI_HTP_MENU /** < Back to the menu.*/
 };
 
 #endif // OOP_INDIE_STUDIO_2019_DEF_HPP
