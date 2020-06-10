@@ -39,6 +39,7 @@ set(SRCS
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
         src/ecs/component/PushButton.cpp
+        src/ecs/component/SkinColor.cpp
         src/ecs/component/Blink.cpp
         src/ecs/component/StatRender.cpp
         src/ecs/component/Timer.cpp
@@ -116,6 +117,7 @@ set(HEADERS
         src/ecs/component/Render3d.hpp
         src/ecs/component/Size.hpp
         src/ecs/component/Sound.hpp
+        src/ecs/component/SkinColor.hpp
         src/ecs/component/Stats.hpp
         src/ecs/component/Text.hpp
         src/ecs/component/Transform.hpp
