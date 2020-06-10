@@ -277,6 +277,8 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
         button.button->setRelativePosition(*button.rect);
         idx++;
     }
+
+    PlayerSelector::changeType(universe, GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2);
 }
 
 void PlayerSelector::removePlayer(ecs::Universe* universe)
