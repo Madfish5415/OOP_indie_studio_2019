@@ -138,7 +138,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Transform>(
         character, ecs::component::Transform(characterMesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(
-        character, ecs::component::Stats((9), (9), (9), true));
+        character, ecs::component::Stats());
     worldManager->addComponent<ecs::component::Animation>(character,
         ecs::component::Animation(
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
