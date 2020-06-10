@@ -77,6 +77,7 @@ static const std::string MUSIC = "assets/music/game/background.ogg";
 namespace sound {
 static const std::string EXPLOSION = "assets/music/game/sound/explosion.ogg";
 static const std::string POWERUP = "assets/music/game/sound/powerup.ogg";
+static const std::string DEATH = "assets/music/game/sound/death.wav";
 }
 } // namespace bomberman
 } // namespace scene

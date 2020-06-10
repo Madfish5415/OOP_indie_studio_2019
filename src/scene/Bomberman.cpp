@@ -481,7 +481,7 @@ void scene::Bomberman::init(
     worldManager->addComponent<ecs::component::Music>(music, ecs::component::Music(scene::bomberman::MUSIC));
 
     auto sfx = worldManager->createEntity();
-    worldManager->addComponent<ecs::component::Sound>(sfx, ecs::component::Sound({{"powerup", scene::bomberman::sound::POWERUP}}));
+    worldManager->addComponent<ecs::component::Sound>(sfx, ecs::component::Sound({{"powerup", scene::bomberman::sound::POWERUP}, {"death", scene::bomberman::sound::DEATH}}));
     worldManager->addComponent<ecs::component::ToDelete>(sfx, ecs::component::ToDelete());
 
     ecs::Entity camera = worldManager->createEntity();
