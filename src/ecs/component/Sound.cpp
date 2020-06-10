@@ -13,7 +13,7 @@ Sound::Sound(const std::unordered_map<std::string, std::string>& paths)
 {
     for (const auto& i : paths) {
         sounds[i.first].reset(new sf::Music());
-        sounds[i.first]->openFromFile(i.first);
+        sounds[i.first]->openFromFile(i.second);
     }
 }
 

@@ -18,6 +18,7 @@
 #include "../component/Stats.hpp"
 #include "../component/ToDelete.hpp"
 #include "../component/Unbreakable.hpp"
+#include "../component/Sound.hpp"
 
 using namespace ecs::system;
 
@@ -144,12 +145,12 @@ void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& enti
 {
     auto& stat = worldManager->getComponent<ecs::component::BombStats>(entity);
     auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+    auto& sound = worldManager->getComponent<ecs::component::Sound>(entity);
     const auto& pos = render3d.node->getPosition();
     std::array<int, 4> radius = {static_cast<int>(stat.bombRadius), static_cast<int>(stat.bombRadius),
         static_cast<int>(stat.bombRadius), static_cast<int>(stat.bombRadius)};
 
     limitToUnbreakable(worldManager, radius, pos, static_cast<int>(stat.bombRadius));
-
     if (!stat.wallPass)
         limitToFirstBreakable(worldManager, radius, pos);
 
@@ -169,4 +170,5 @@ void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& enti
         scene::Bomberman::createExplosion(
             worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z - 10.f * static_cast<float>(i)));
     }
+    sound.soundsToPlay.emplace_back("explosion");
 }
