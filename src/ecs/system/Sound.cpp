@@ -21,9 +21,10 @@ void Sound::update()
 {
     for (const auto& entity: entities) {
         auto& sounds = worldManager->getComponent<ecs::component::Sound>(entity);
-        for (size_t i = 0; i < sounds.soundsToPlay.size(); i++) {
-            sounds.sounds[sounds.soundsToPlay[i]]->play();
-            sounds.soundsToPlay.erase(sounds.soundsToPlay.begin() + i);
+        for (auto& sound : sounds.soundsToPlay) {
+            sounds.sounds[sound]->setPlayingOffset(sf::Time::Zero);
+            sounds.sounds[sound]->play();
+            sounds.soundsToPlay.erase(std::find(sounds.soundsToPlay.begin(), sounds.soundsToPlay.end(), sound));
         }
     }
 }

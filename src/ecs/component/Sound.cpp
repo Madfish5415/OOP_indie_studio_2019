@@ -12,8 +12,8 @@ using namespace ecs::component;
 Sound::Sound(const std::unordered_map<std::string, std::string>& paths)
 {
     for (const auto& i : paths) {
-        sounds[i.first] = new sf::Music();
-        sounds[i.first]->openFromFile(i.first);
+        sounds[i.first].reset(new sf::Music());
+        sounds[i.first]->openFromFile(i.second);
     }
 }
 

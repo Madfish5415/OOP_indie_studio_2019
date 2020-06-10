@@ -11,6 +11,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 namespace ecs::component {
 
@@ -21,7 +22,7 @@ class Sound {
     ~Sound();
 
   public:
-    std::unordered_map<std::string, sf::Music *> sounds;
+    std::unordered_map<std::string, std::shared_ptr<sf::Music>> sounds;
     std::vector<std::string> soundsToPlay;
 };
 

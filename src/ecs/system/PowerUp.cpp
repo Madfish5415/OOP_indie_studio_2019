@@ -15,7 +15,9 @@
 #include "../component/Player.hpp"
 #include "../component/PlayerId.hpp"
 #include "../component/Render3d.hpp"
+#include "../component/Sound.hpp"
 #include "../component/Stats.hpp"
+#include "../component/ToDelete.hpp"
 
 using namespace ecs::system;
 
@@ -64,6 +66,9 @@ void PowerUp::update()
         auto& powerUpNode = worldManager->getComponent<ecs::component::Render3d>(entity).node;
 
         if (checkIfCollision(worldManager, entity, characters)) {
+            auto sounds = worldManager->getEntities<ecs::component::Sound, ecs::component::ToDelete>();
+            auto& sound = worldManager->getComponent<ecs::component::Sound>(sounds[0]);
+            sound.soundsToPlay.emplace_back("powerup");
             destroyedEntities.push_back(entity);
         }
     }
