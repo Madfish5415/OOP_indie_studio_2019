@@ -28,6 +28,7 @@ class PlayerSelector {
     static void addPlayer(ecs::Universe* universe);
     static void removePlayer(ecs::Universe* universe);
     static void changeSkin(ecs::Universe* universe, irr::s32 id);
+    static void changeType(ecs::Universe* universe, irr::s32 id);
     static bool checkKeybinding(ecs::Universe* universe);
     static void invalidKeybinding(ecs::Universe* universe);
 
@@ -36,7 +37,11 @@ class PlayerSelector {
     static std::vector<ecs::Entity> playerKeysIds;
     static std::vector<ecs::Entity> playerSkinButtonLeftIds;
     static std::vector<ecs::Entity> playerSkinButtonRightIds;
+    static std::vector<ecs::Entity> playerTypeButtonLeftIds;
+    static std::vector<ecs::Entity> playerTypeButtonRightIds;
+    static std::vector<ecs::Entity> playerType;
     static std::vector<ecs::component::Player> playerComponent;
+    static std::vector<bool> typeList;
 };
 
 namespace playerselector {
@@ -65,6 +70,7 @@ namespace keys {
 static const std::string NORMAL = "assets/img/player-selector/button/button-keys-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-keys-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-keys-pressed.png";
+static const std::string BLOCKED = "assets/img/player-selector/button/button-keys-blocked.png";
 } // namespace keys
 namespace skin {
 namespace left {
@@ -76,6 +82,16 @@ namespace right {
 static const std::string NORMAL = "assets/img/player-selector/button/button-right-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-right-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-right-pressed.png";
+} // namespace right
+namespace left2 {
+static const std::string NORMAL = "assets/img/player-selector/button/button-left2-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-left2-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-left2-pressed.png";
+} // namespace left
+namespace right2 {
+static const std::string NORMAL = "assets/img/player-selector/button/button-right2-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-right2-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-right2-pressed.png";
 } // namespace right
 } // namespace skin
 } // namespace button
@@ -101,6 +117,8 @@ static std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, sc
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
 static const std::string WARNING = "assets/img/player-selector/warning.png";
+static const std::string SELECT_PLAYER = "assets/img/player-selector/select-player.png";
+static const std::string SELECT_AI = "assets/img/player-selector/select-ai.png";
 } // namespace playerselector
 
 } // namespace scene

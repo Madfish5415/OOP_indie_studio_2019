@@ -21,6 +21,7 @@ class BombStats {
   public:
     size_t bombRadius;
     bool wallPass;
+    bool explode;
 };
 
 } // namespace ecs::component

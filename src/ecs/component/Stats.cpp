@@ -16,4 +16,24 @@ Stats::Stats(const size_t &moveSpeed, const size_t &bombRadius, const size_t &ma
 
 Stats::Stats(const Stats &stat) = default;
 
+Stats Stats::operator+(const Stats& right)
+{
+    Stats newStats(*this);
+
+    newStats.moveSpeed += right.moveSpeed;
+    if (newStats.moveSpeed > 9) {
+        newStats.moveSpeed = 9;
+    }
+    newStats.bombRadius += right.bombRadius;
+    if (newStats.bombRadius > 9) {
+        newStats.bombRadius = 9;
+    }
+    newStats.maxBomb += right.maxBomb;
+    if (newStats.maxBomb > 9) {
+        newStats.maxBomb = 9;
+    }
+    newStats.wallPass = newStats.wallPass || right.wallPass;
+    return newStats;
+}
+
 Stats::~Stats() = default;

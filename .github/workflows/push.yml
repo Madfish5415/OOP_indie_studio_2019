@@ -36,7 +36,7 @@ jobs:
       run: cmake -B build && cmake --build build
 
   push:
-    needs: [fedora, ubuntu]
+    needs: [fedora, ubuntu, windows]
 
     runs-on: [ubuntu-latest]
 

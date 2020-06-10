@@ -23,8 +23,8 @@ Render::~Render() = default;
 
 void Render::update()
 {
-    if (gui)
-        gui->drawAll();
     if (smgr)
         smgr->drawAll();
+    if (gui)
+        gui->drawAll();
 }

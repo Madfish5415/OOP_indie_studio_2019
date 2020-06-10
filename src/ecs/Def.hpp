@@ -27,7 +27,7 @@ using Entity = unsigned int; /** < Using Entity as unsigned int.*/
 const Entity MAX_ENTITIES = 1000; /** < Defined the max number of entities for the project.*/
 
 using ComponentType = unsigned int; /** < Using ComponentType as unsigned int.*/
-const ComponentType MAX_COMPONENTS = 32; /** < Defined the max number of components for an entity for the project.*/
+const ComponentType MAX_COMPONENTS = 64; /** < Defined the max number of components for an entity for the project.*/
 
 using Signature = std::bitset<MAX_COMPONENTS>; /** < Using Signature as std::bitset<MAX_COMPONENTS>.*/
 } // namespace ecs
@@ -56,11 +56,19 @@ enum BUTTON_ID {
     GUI_SELECT_SKIN_P4_LEFT, /** < Button skin change left Player 4.*/
     GUI_SELECT_SKIN_P4_RIGHT, /** < Button skin change right Player 4.*/
 
+    GUI_SELECT_TYPE_P1_LEFT, /** < Button skin change left Player 1.*/
+    GUI_SELECT_TYPE_P1_RIGHT, /** < Button skin change right Player 1.*/
+    GUI_SELECT_TYPE_P2_LEFT, /** < Button skin change left Player 2.*/
+    GUI_SELECT_TYPE_P2_RIGHT, /** < Button skin change right Player 2.*/
+    GUI_SELECT_TYPE_P3_LEFT, /** < Button skin change left Player 3.*/
+    GUI_SELECT_TYPE_P3_RIGHT, /** < Button skin change right Player 3.*/
+    GUI_SELECT_TYPE_P4_LEFT, /** < Button skin change left Player 4.*/
+    GUI_SELECT_TYPE_P4_RIGHT, /** < Button skin change right Player 4.*/
+
     GUI_SELECT_KB_P1, /** < Open Player 1 keybinding window */
     GUI_SELECT_KB_P2, /** < Open Player 2 keybinding window */
     GUI_SELECT_KB_P3, /** < Open Player 3 keybinding window */
     GUI_SELECT_KB_P4, /** < Open Player 4 keybinding window */
-
 
     GUI_SELECT_KB_UP, /** < Change UP Key code.*/
     GUI_SELECT_KB_DOWN, /** < Change DOWN Key code.*/
@@ -69,9 +77,11 @@ enum BUTTON_ID {
     GUI_SELECT_KB_ACTION, /** < Change BOMB Key code.*/
     GUI_SELECT_KB_BACK, /** < Back to the player selector */
 
+    GUI_GAME_PAUSE, /** < Open the menu pause */
+
     GUI_PAUSE_RESUME, /** < Resume the party */
+    GUI_PAUSE_SETTINGS, /** < Resume the party */
     GUI_PAUSE_MENU, /** < Back to the menu */
-    GUI_PAUSE_QUIT, /** < Quit the game */
 };
 
 #endif // OOP_INDIE_STUDIO_2019_DEF_HPP
