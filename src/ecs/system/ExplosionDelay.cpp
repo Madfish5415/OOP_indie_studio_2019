@@ -15,14 +15,17 @@
 #include "../component/BoundingBox.hpp"
 #include "../component/Breakable.hpp"
 #include "../component/Delay.hpp"
+#include "../component/Image.hpp"
+#include "../component/Owner.hpp"
 #include "../component/Particle.hpp"
+#include "../component/PlayerId.hpp"
 #include "../component/Render3d.hpp"
+#include "../component/StatRender.hpp"
 #include "BombTimer.hpp"
 
 using namespace ecs::system;
 
-
-ExplosionDelay::ExplosionDelay(ecs::WorldManager *worldManager) : System(worldManager)
+ExplosionDelay::ExplosionDelay(ecs::WorldManager* worldManager) : System(worldManager)
 {
     auto timer = worldManager->getUniverse()->getDevice()->getTimer();
 
@@ -30,7 +33,6 @@ ExplosionDelay::ExplosionDelay(ecs::WorldManager *worldManager) : System(worldMa
 }
 
 ExplosionDelay::~ExplosionDelay() = default;
-
 
 static void explodeObjects(ecs::WorldManager* worldManager, ecs::component::Render3d& render)
 {
@@ -67,6 +69,44 @@ static void explodeObjects(ecs::WorldManager* worldManager, ecs::component::Rend
     }
 }
 
+static void explodePlayers(ecs::WorldManager* worldManager, ecs::component::Render3d& render)
+{
+    std::vector<ecs::Entity> players = worldManager->getEntities<ecs::component::PlayerId>();
+
+    const auto& pos = render.node->getPosition();
+    auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+
+    int idx = 0;
+    for (const auto& entity : players) {
+        auto& playerRender = worldManager->getComponent<ecs::component::Render3d>(entity);
+        const auto& playerPos = playerRender.node->getPosition();
+
+        irr::core::vector3d<irr::f32> ajustedPos = playerPos;
+        ajustedPos.X = static_cast<int>(playerPos.X / 10.f) * 10 + 5;
+        ajustedPos.Y = playerPos.Y;
+        ajustedPos.Z = static_cast<int>(playerPos.Z / 10.f) * 10 + 5;
+
+        if (pos.X == ajustedPos.X && pos.Z == ajustedPos.Z) {
+            std::vector<ecs::Entity> imageEntities =
+                worldManager->getEntities<ecs::component::Image, ecs::component::Owner>();
+
+            for (const auto& imageEnt : imageEntities) {
+                auto& owner = worldManager->getComponent<ecs::component::Owner>(imageEnt);
+
+                if (owner.entity == idx) {
+                    auto& image = worldManager->getComponent<ecs::component::Image>(imageEnt);
+
+                    image.image->remove();
+                    worldManager->destroyEntity(imageEnt);
+                }
+            }
+            smgr->addToDeletionQueue(playerRender.node);
+            worldManager->destroyEntity(entity);
+        }
+        idx++;
+    }
+}
+
 void ExplosionDelay::update()
 {
     auto timer = worldManager->getUniverse()->getDevice()->getTimer();
@@ -80,6 +120,7 @@ void ExplosionDelay::update()
         auto& particle = worldManager->getComponent<ecs::component::Particle>(entity);
 
         explodeObjects(worldManager, render);
+        explodePlayers(worldManager, render);
 
         if (delay.lastUpdate == 0)
             delay.lastUpdate = time;

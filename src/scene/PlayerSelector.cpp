@@ -82,43 +82,43 @@ void PlayerSelector::init(ecs::Universe* universe)
     ecs::Entity frame = worldManager->createEntity();
     worldManager->addComponent(frame,
         ecs::component::Image(
-            gui, driver, scene::playerselector::FRAME, new irr::core::position2d<irr::s32> {110, 215}));
+            gui, driver, scene::playerselector::FRAME, new irr::core::position2d<irr::s32> {110, 160}));
 
     ecs::Entity defaultPlayer = worldManager->createEntity();
     worldManager->addComponent(defaultPlayer,
-        ecs::component::Image(gui, driver, getUnusedSkin(), new irr::core::position2d<irr::s32> {960 - 150, 245}));
+        ecs::component::Image(gui, driver, getUnusedSkin(), new irr::core::position2d<irr::s32> {960 - 150, 265}));
     playerIds.emplace_back(defaultPlayer);
 
     ecs::Entity defaultPlayerKeys =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 725, 960 + 125, 725 + 100), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 745, 960 + 125, 745 + 100), nullptr,
             GUI_SELECT_KB_P1, playerselector::button::keys::NORMAL, playerselector::button::keys::HOVER,
             playerselector::button::keys::PRESSED);
     playerKeysIds.emplace_back(defaultPlayerKeys);
 
     ecs::Entity defaultPlayerSkinButtonLeft =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 600, 835 + 40, 600 + 40), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 620, 835 + 40, 620 + 40), nullptr,
             GUI_SELECT_SKIN_P1_LEFT, playerselector::button::skin::left::NORMAL,
             playerselector::button::skin::left::HOVER, playerselector::button::skin::left::PRESSED);
     playerSkinButtonLeftIds.emplace_back(defaultPlayerSkinButtonLeft);
 
     ecs::Entity defaultPlayerSkinButtonRight =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 600, 1045 + 40, 600 + 40), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 620, 1045 + 40, 620 + 40), nullptr,
             GUI_SELECT_SKIN_P1_RIGHT, playerselector::button::skin::right::NORMAL,
             playerselector::button::skin::right::HOVER, playerselector::button::skin::right::PRESSED);
     playerSkinButtonRightIds.emplace_back(defaultPlayerSkinButtonRight);
 
     PlayerSelector::playerComponent.push_back(ecs::component::Player());
 
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(175 - 125, 50, 175 + 125, 50 + 100), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(175 - 125, 40, 175 + 125, 40 + 100), nullptr,
         GUI_SELECT_MENU, playerselector::button::back::NORMAL, playerselector::button::back::HOVER,
         playerselector::button::back::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1745 - 125, 50, 1745 + 125, 50 + 100), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1745 - 125, 40, 1745 + 125, 40 + 100), nullptr,
         GUI_SELECT_FIGHT, playerselector::button::fight::NORMAL, playerselector::button::fight::HOVER,
         playerselector::button::fight::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(785 - 125, 910, 785 + 125, 910 + 100), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(785 - 125, 930, 785 + 125, 930 + 100), nullptr,
         GUI_SELECT_REMOVE_PLAYER, playerselector::button::remove::NORMAL, playerselector::button::remove::HOVER,
         playerselector::button::remove::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1135 - 125, 910, 1135 + 125, 910 + 100), nullptr,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1135 - 125, 930, 1135 + 125, 930 + 100), nullptr,
         GUI_SELECT_ADD_PLAYER, playerselector::button::add::NORMAL, playerselector::button::add::HOVER,
         playerselector::button::add::PRESSED);
 }
@@ -152,24 +152,24 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
 
     ecs::Entity player = worldManager->createEntity();
     worldManager->addComponent(player,
-        ecs::component::Image(gui, driver, getUnusedSkin(), new irr::core::position2d<irr::s32> {960 - 150, 245}));
+        ecs::component::Image(gui, driver, getUnusedSkin(), new irr::core::position2d<irr::s32> {960 - 150, 265}));
     playerIds.emplace_back(player);
 
     ecs::Entity playerKeys =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 725, 960 + 125, 725 + 100), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 745, 960 + 125, 745 + 100), nullptr,
             GUI_SELECT_KB_P1 + (PlayerSelector::playerIds.size() - 1), playerselector::button::keys::NORMAL,
             playerselector::button::keys::HOVER, playerselector::button::keys::PRESSED);
     playerKeysIds.emplace_back(playerKeys);
 
     ecs::Entity playerSkinButtonLeft =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 600, 835 + 40, 600 + 40), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 620, 835 + 40, 620 + 40), nullptr,
             GUI_SELECT_SKIN_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2,
             playerselector::button::skin::left::NORMAL, playerselector::button::skin::left::HOVER,
             playerselector::button::skin::left::PRESSED);
     playerSkinButtonLeftIds.emplace_back(playerSkinButtonLeft);
 
     ecs::Entity playerSkinButtonRight =
-        createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 600, 1045 + 40, 600 + 40), nullptr,
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 620, 1045 + 40, 620 + 40), nullptr,
             GUI_SELECT_SKIN_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2,
             playerselector::button::skin::right::NORMAL, playerselector::button::skin::right::HOVER,
             playerselector::button::skin::right::PRESSED);
