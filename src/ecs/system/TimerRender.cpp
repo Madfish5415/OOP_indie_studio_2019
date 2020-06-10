@@ -38,7 +38,7 @@ void TimerRender::update()
 
         auto diff = timer.delay - timer.elapsed;
         int seconds = static_cast<int>(static_cast<float>(diff) / 1000.f);
-        int minutes = static_cast<int>(static_cast<float>(seconds) / 60.f);
+        int minutes = static_cast<int>(seconds / 60);
         seconds = seconds % 60;
 
         if (diff <= 10000) {
@@ -57,7 +57,7 @@ void TimerRender::update()
 
         if (timerRender.position == 0) {
             auto texture = driver->getTexture(
-                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(static_cast<float>(minutes) / 10.f) % 10)
+                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(minutes / 10) % 10)
                     .c_str());
             image.image->setImage(texture);
         } else if (timerRender.position == 1) {
@@ -65,7 +65,7 @@ void TimerRender::update()
             image.image->setImage(texture);
         } else if (timerRender.position == 2) {
             auto texture = driver->getTexture(
-                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(static_cast<float>(seconds) / 10.f) % 10)
+                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(seconds / 10) % 10)
                     .c_str());
             image.image->setImage(texture);
         } else if (timerRender.position == 3) {

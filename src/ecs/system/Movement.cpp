@@ -22,8 +22,8 @@ void Movement::update()
 {
     for (const auto& entity : entities) {
         auto& node = worldManager->getComponent<ecs::component::Render3d>(entity).node;
-        auto& tranform = worldManager->getComponent<ecs::component::Transform>(entity);
+        auto& transform = worldManager->getComponent<ecs::component::Transform>(entity);
 
-        node->setPosition(tranform.position);
+        node->setPosition(transform.position);
     }
 }
