@@ -167,18 +167,18 @@ void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& enti
 
     for (int i = 0; i <= radius[0]; i++) {
         scene::Bomberman::createExplosion(
-            worldManager, 2000, irr::core::vector3d<irr::f32>(pos.X + 10.f * static_cast<float>(i), 5.f, pos.Z));
+            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X + 10.f * static_cast<float>(i), 5.f, pos.Z));
     }
     for (int i = 0; i <= radius[1]; i++) {
         scene::Bomberman::createExplosion(
-            worldManager, 2000, irr::core::vector3d<irr::f32>(pos.X - 10.f * static_cast<float>(i), 5.f, pos.Z));
+            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X - 10.f * static_cast<float>(i), 5.f, pos.Z));
     }
     for (int i = 0; i <= radius[2]; i++) {
         scene::Bomberman::createExplosion(
-            worldManager, 2000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z + 10.f * static_cast<float>(i)));
+            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z + 10.f * static_cast<float>(i)));
     }
     for (int i = 0; i <= radius[3]; i++) {
         scene::Bomberman::createExplosion(
-            worldManager, 2000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z - 10.f * static_cast<float>(i)));
+            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z - 10.f * static_cast<float>(i)));
     }
 }

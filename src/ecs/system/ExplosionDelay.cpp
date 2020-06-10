@@ -93,7 +93,7 @@ static void explodePlayers(ecs::WorldManager* worldManager, ecs::component::Rend
             for (const auto& imageEnt : imageEntities) {
                 auto& owner = worldManager->getComponent<ecs::component::Owner>(imageEnt);
 
-                if (owner.entity == idx) {
+                if (owner.entity == entity) {
                     auto& image = worldManager->getComponent<ecs::component::Image>(imageEnt);
 
                     image.image->remove();

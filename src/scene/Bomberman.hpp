@@ -22,7 +22,7 @@ class Bomberman {
 
   public:
     static void init(
-        ecs::Universe* universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths);
+        ecs::Universe* universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths, std::vector<bool> playerType);
     static void reset();
     static void destroy(ecs::Universe* universe);
     static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius,

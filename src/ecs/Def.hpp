@@ -27,7 +27,7 @@ using Entity = unsigned int; /** < Using Entity as unsigned int.*/
 const Entity MAX_ENTITIES = 1000; /** < Defined the max number of entities for the project.*/
 
 using ComponentType = unsigned int; /** < Using ComponentType as unsigned int.*/
-const ComponentType MAX_COMPONENTS = 32; /** < Defined the max number of components for an entity for the project.*/
+const ComponentType MAX_COMPONENTS = 64; /** < Defined the max number of components for an entity for the project.*/
 
 using Signature = std::bitset<MAX_COMPONENTS>; /** < Using Signature as std::bitset<MAX_COMPONENTS>.*/
 } // namespace ecs
@@ -55,6 +55,15 @@ enum BUTTON_ID {
     GUI_SELECT_SKIN_P3_RIGHT, /** < Button skin change right Player 3.*/
     GUI_SELECT_SKIN_P4_LEFT, /** < Button skin change left Player 4.*/
     GUI_SELECT_SKIN_P4_RIGHT, /** < Button skin change right Player 4.*/
+
+    GUI_SELECT_TYPE_P1_LEFT, /** < Button skin change left Player 1.*/
+    GUI_SELECT_TYPE_P1_RIGHT, /** < Button skin change right Player 1.*/
+    GUI_SELECT_TYPE_P2_LEFT, /** < Button skin change left Player 2.*/
+    GUI_SELECT_TYPE_P2_RIGHT, /** < Button skin change right Player 2.*/
+    GUI_SELECT_TYPE_P3_LEFT, /** < Button skin change left Player 3.*/
+    GUI_SELECT_TYPE_P3_RIGHT, /** < Button skin change right Player 3.*/
+    GUI_SELECT_TYPE_P4_LEFT, /** < Button skin change left Player 4.*/
+    GUI_SELECT_TYPE_P4_RIGHT, /** < Button skin change right Player 4.*/
 
     GUI_SELECT_KB_P1, /** < Open Player 1 keybinding window */
     GUI_SELECT_KB_P2, /** < Open Player 2 keybinding window */

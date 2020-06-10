@@ -10,8 +10,11 @@
 #include "../ecs/component/Blink.hpp"
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
+#include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Owner.hpp"
 #include "../ecs/component/Player.hpp"
+#include "../ecs/component/PlayerId.hpp"
+#include "../ecs/component/Render3d.hpp"
 #include "../ecs/component/StatRender.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/Timer.hpp"
@@ -33,7 +36,7 @@ static std::string getIcon(const std::string &path)
 }
 
 static void createIcon(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
-    irr::video::IVideoDriver *driver, const std::string &path, int x, int y, int playerId)
+    irr::video::IVideoDriver *driver, const std::string &path, int x, int y, ecs::Entity playerId)
 {
     ecs::Entity icon = worldManager->createEntity();
 
@@ -43,7 +46,7 @@ static void createIcon(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironmen
 }
 
 static void createBoost(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
-    irr::video::IVideoDriver *driver, const std::string &path, int x, int y, int playerId)
+    irr::video::IVideoDriver *driver, const std::string &path, int x, int y, ecs::Entity playerId)
 {
     ecs::Entity boost = worldManager->createEntity();
 
@@ -53,13 +56,13 @@ static void createBoost(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironme
 }
 
 static void createNumber(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
-    irr::video::IVideoDriver *driver, ecs::Entity owner, const std::string &type, int x, int y, int playerId)
+    irr::video::IVideoDriver *driver, const std::string &type, int x, int y, ecs::Entity playerId)
 {
     ecs::Entity number = worldManager->createEntity();
 
     worldManager->addComponent(number,
         ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32> {x, y}));
-    worldManager->addComponent<ecs::component::StatRender>(number, ecs::component::StatRender(owner, type));
+    worldManager->addComponent<ecs::component::StatRender>(number, ecs::component::StatRender(playerId, type));
     worldManager->addComponent<ecs::component::Owner>(number, ecs::component::Owner(playerId));
 
 }
@@ -67,50 +70,50 @@ static void createNumber(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironm
 static void createIcons(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
     irr::video::IVideoDriver *driver, const std::vector<std::string> &paths)
 {
-    auto players = worldManager->getEntities<ecs::component::Stats>();
+    auto players = worldManager->getEntities<ecs::component::PlayerId, ecs::component::Render3d, ecs::component::Motion, ecs::component::Stats>();
 
     int idx = 0;
     for (const auto &path : paths) {
         if (idx == 0) {
-            createIcon(worldManager, gui, driver, path, 150, 180, idx);
+            createIcon(worldManager, gui, driver, path, 150, 180, players[idx]);
 
-            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 125, 440, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 225, 440, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 325, 440, idx);
+            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 125, 440, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 225, 440, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 325, 440, players[idx]);
 
-            createNumber(worldManager, gui, driver, players[idx], "bombRadius", 125 + 20, 440 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "maxBomb", 225 + 20, 440 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "moveSpeed", 325 + 20, 440 + 75, idx);
+            createNumber(worldManager, gui, driver, "bombRadius", 125 + 20, 440 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "maxBomb", 225 + 20, 440 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "moveSpeed", 325 + 20, 440 + 75, players[idx]);
         } else if (idx == 1) {
-            createIcon(worldManager, gui, driver, path, 1920 - 150 - 250, 180, idx);
+            createIcon(worldManager, gui, driver, path, 1920 - 150 - 250, 180, players[idx]);
 
-            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 1920 - 325 - 100, 440, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 1920 - 225 - 100, 440, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 1920 - 125 - 100, 440, idx);
+            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 1920 - 325 - 100, 440, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 1920 - 225 - 100, 440, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 1920 - 125 - 100, 440, players[idx]);
 
-            createNumber(worldManager, gui, driver, players[idx], "bombRadius", 1920 - 325 - 100 + 20, 440 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "maxBomb", 1920 - 225 - 100 + 20, 440 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "moveSpeed", 1920 - 125 - 100 + 20, 440 + 75, idx);
+            createNumber(worldManager, gui, driver, "bombRadius", 1920 - 325 - 100 + 20, 440 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "maxBomb", 1920 - 225 - 100 + 20, 440 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "moveSpeed", 1920 - 125 - 100 + 20, 440 + 75, players[idx]);
         } else if (idx == 2) {
-            createIcon(worldManager, gui, driver, path, 150, 760, idx);
+            createIcon(worldManager, gui, driver, path, 150, 760, players[idx]);
 
-            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 410, 810, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 510, 810, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 610, 810, idx);
+            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 410, 810, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 510, 810, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 610, 810, players[idx]);
 
-            createNumber(worldManager, gui, driver, players[idx], "bombRadius", 410 + 20, 810 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "maxBomb", 510 + 20, 810 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "moveSpeed", 610 + 20, 810 + 75, idx);
+            createNumber(worldManager, gui, driver, "bombRadius", 410 + 20, 810 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "maxBomb", 510 + 20, 810 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "moveSpeed", 610 + 20, 810 + 75, players[idx]);
         } else if (idx == 3) {
-            createIcon(worldManager, gui, driver, path, 1920 - 150 - 250, 760, idx);
+            createIcon(worldManager, gui, driver, path, 1920 - 150 - 250, 760, players[idx]);
 
-            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 1920 - 610 - 100, 810, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 1920 - 510 - 100, 810, idx);
-            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 1920 - 410 - 100, 810, idx);
+            createBoost(worldManager, gui, driver, gamehud::boost::BOMB_RADIUS, 1920 - 610 - 100, 810, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MAX_BOMB, 1920 - 510 - 100, 810, players[idx]);
+            createBoost(worldManager, gui, driver, gamehud::boost::MOVE_SPEED, 1920 - 410 - 100, 810, players[idx]);
 
-            createNumber(worldManager, gui, driver, players[idx], "bombRadius", 1920 - 610 - 100 + 20, 810 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "maxBomb", 1920 - 510 - 100 + 20, 810 + 75, idx);
-            createNumber(worldManager, gui, driver, players[idx], "moveSpeed", 1920 - 410 - 100 + 20, 810 + 75, idx);
+            createNumber(worldManager, gui, driver, "bombRadius", 1920 - 610 - 100 + 20, 810 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "maxBomb", 1920 - 510 - 100 + 20, 810 + 75, players[idx]);
+            createNumber(worldManager, gui, driver, "moveSpeed", 1920 - 410 - 100 + 20, 810 + 75, players[idx]);
         }
         idx++;
     }

@@ -11,6 +11,7 @@
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
+#include "ecs/component/Button.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/PushButton.hpp"
 #include "ecs/event/Key.hpp"
@@ -81,7 +82,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
             }
         }
         if (_universe->hasWorldManager("Bomberman") &&
-        _universe->getCurrentWorldManager() == _universe->getWorldManager("Bomberman")) {
+            _universe->getCurrentWorldManager() == _universe->getWorldManager("Bomberman")) {
             ecs::event::Key keyEvent(event.KeyInput.Key, event.KeyInput.PressedDown);
             _universe->getWorldManager("Bomberman")->publish(keyEvent);
             if (event.KeyInput.Key == irr::KEY_ESCAPE && !event.KeyInput.PressedDown) {
@@ -159,20 +160,22 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == BUTTON_ID::GUI_SELECT_REMOVE_PLAYER) {
                     scene::PlayerSelector::removePlayer(_universe);
                     return true;
-                } else if (id == BUTTON_ID::GUI_SELECT_SKIN_P1_LEFT || id == BUTTON_ID::GUI_SELECT_SKIN_P1_RIGHT ||
-                    id == BUTTON_ID::GUI_SELECT_SKIN_P2_LEFT || id == BUTTON_ID::GUI_SELECT_SKIN_P2_RIGHT ||
-                    id == BUTTON_ID::GUI_SELECT_SKIN_P3_LEFT || id == BUTTON_ID::GUI_SELECT_SKIN_P3_RIGHT ||
-                    id == BUTTON_ID::GUI_SELECT_SKIN_P4_LEFT || id == BUTTON_ID::GUI_SELECT_SKIN_P4_RIGHT) {
+                } else if (id >= BUTTON_ID::GUI_SELECT_SKIN_P1_LEFT && id <= BUTTON_ID::GUI_SELECT_SKIN_P4_RIGHT) {
                     scene::PlayerSelector::changeSkin(_universe, id);
+                    return true;
+                } else if (id >= BUTTON_ID::GUI_SELECT_TYPE_P1_LEFT && id <= BUTTON_ID::GUI_SELECT_TYPE_P4_RIGHT) {
+                    scene::PlayerSelector::changeType(_universe, id);
                     return true;
                 } else if (id == BUTTON_ID::GUI_SELECT_KB_P1 || id == BUTTON_ID::GUI_SELECT_KB_P2 ||
                     id == BUTTON_ID::GUI_SELECT_KB_P3 || id == BUTTON_ID::GUI_SELECT_KB_P4) {
-                    auto &image = _universe->getWorldManager("PlayerSelector")
-                                      ->getComponent<ecs::component::Image>(
-                                          scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
-                    scene::Keybinding::init(_universe, image.pathTexture,
-                        &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
-                    _universe->setCurrentWorldManager("Keybinding");
+                    if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
+                        auto &image = _universe->getWorldManager("PlayerSelector")
+                            ->getComponent<ecs::component::Image>(
+                                scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                        scene::Keybinding::init(_universe, image.pathTexture,
+                                                &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                        _universe->setCurrentWorldManager("Keybinding");
+                    }
                 } else if (id == GUI_SELECT_KB_BACK) {
                     scene::Keybinding::destroy(_universe);
                     _universe->setCurrentWorldManager("PlayerSelector");
@@ -189,14 +192,16 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         scene::PlayerSelector::invalidKeybinding(_universe);
                     } else {
                         std::vector<std::string> pathTextureList;
-                        for (const auto& entity : scene::PlayerSelector::playerIds) {
-                            auto& image = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(entity);
+                        for (const auto &entity : scene::PlayerSelector::playerIds) {
+                            auto &image = _universe->getWorldManager("PlayerSelector")
+                                              ->getComponent<ecs::component::Image>(entity);
                             std::string path = scene::playerselector::player::SKIN_TO_MODEL[image.pathTexture];
                             pathTextureList.push_back(path);
                         }
-                        std::vector<ecs::component::Player> tmp = scene::PlayerSelector::playerComponent;
+                        std::vector<ecs::component::Player> tmpCmp = scene::PlayerSelector::playerComponent;
+                        std::vector<bool> tmpType = scene::PlayerSelector::typeList;
                         scene::PlayerSelector::destroy(_universe);
-                        scene::Bomberman::init(_universe, tmp, pathTextureList);
+                        scene::Bomberman::init(_universe, tmpCmp, pathTextureList, tmpType);
                         if (_universe->hasWorldManager("Bomberman"))
                             _universe->setCurrentWorldManager("Bomberman");
                     }
@@ -216,7 +221,6 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;
-
                 }
             default:
                 break;

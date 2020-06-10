@@ -63,7 +63,7 @@ void Bomberman::createExplosion(ecs::WorldManager *worldManager, irr::u32 delay,
     irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
         irr::core::aabbox3d<irr::f32>(irr::core::vector3df(pos.X + 3, pos.Y - 20, pos.Z - 3)),
         irr::core::vector3df(0.0f,0.05f,0.0f),
-        1000,1000,
+        400,400,
         irr::video::SColor(0,0,255,255),
         irr::video::SColor(0,0,0,255),
         500, 500,
@@ -146,22 +146,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     Bomberman::playerIds.push_back(character);
 }
 
-static const std::string getUnusedSkin()
-{
-    auto item = bomberman::ninja::PLAYER_SKINS.begin();
-
-    std::srand(std::time(nullptr));
-    while (true) {
-        item = bomberman::ninja::PLAYER_SKINS.begin();
-        std::advance(item, std::rand() % bomberman::ninja::PLAYER_SKINS.size());
-        if (!item->second) {
-            item->second = true;
-            return item->first;
-        }
-    }
-}
-
-static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr)
+static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr, const std::string &path)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -178,7 +163,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     characterMesh->setScale(irr::core::vector3df(1.9, 1.9, 1.9));
     characterMesh->setFrameLoop(183, 204);
 
-    characterMesh->setMaterialTexture(0, driver->getTexture(getUnusedSkin().c_str()));
+    characterMesh->setMaterialTexture(0, driver->getTexture(path.c_str()));
 
     characterMesh = addCollisions(worldManager, smgr, characterMesh, charNbr);
 
@@ -193,10 +178,12 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+
+    Bomberman::playerIds.push_back(character);
 }
 
 static void createCharacters(ecs::WorldManager *worldManager, irr::u32 tileSize, irr::u32 nbTile,
-    std::vector<ecs::component::Player> players, std::vector<std::string> paths)
+    std::vector<ecs::component::Player> players, std::vector<std::string> paths, std::vector<bool> playerType)
 {
     irr::f32 offset = tileSize / 2;
     std::vector<irr::core::vector3df> characterPositions = {
@@ -205,11 +192,11 @@ static void createCharacters(ecs::WorldManager *worldManager, irr::u32 tileSize,
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize + offset),
         irr::core::vector3df(tileSize * (nbTile - 2) + offset, 0.0, tileSize * (nbTile - 2) + offset)};
 
-    for (size_t i = 0; i < 4; i++) {
-        if (i < players.size()) {
+    for (size_t i = 0; i < playerType.size(); i++) {
+        if (!playerType[i]) {
             createPlayer(worldManager, players[i], characterPositions[i], i, paths[i]);
         } else {
-            createBot(worldManager, characterPositions[i], i);
+            createBot(worldManager, characterPositions[i], i, paths[i]);
         }
     }
 }
@@ -327,7 +314,7 @@ void Bomberman::updateCollision(ecs::WorldManager *worldManager)
 }
 
 void scene::Bomberman::init(
-    ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths)
+    ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths, std::vector<bool> playerType)
 {
     auto worldManager = universe->createWorldManager("Bomberman");
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
@@ -475,7 +462,7 @@ void scene::Bomberman::init(
     worldManager->addComponent<ecs::component::Render3d>(camera, ecs::component::Render3d(cameraNode));
 
     createMap(worldManager, tileSize);
-    createCharacters(worldManager, tileSize, nbTile, players, paths);
+    createCharacters(worldManager, tileSize, nbTile, players, paths, playerType);
 
     createPowerUp(universe, irr::core::vector3df(15.0, 15.0, 25.0));
     createPowerUp(universe, irr::core::vector3df(25.0, 15.0, 15.0));
