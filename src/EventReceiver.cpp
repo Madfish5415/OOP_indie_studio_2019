@@ -153,7 +153,9 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     }
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_SETTINGS) {
-                    scene::Settings::init(_universe);
+                    auto musics = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
                     if (_universe->hasWorldManager("Settings")) {
                         _universe->setCurrentWorldManager("Settings");
                     }
@@ -239,7 +241,9 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         _universe->setCurrentWorldManager("Menu");
                     return true;
                 } else if (id == GUI_PAUSE_SETTINGS) {
-                    scene::Settings::init(_universe);
+                    auto musics = _universe->getWorldManager("Bomberman")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Bomberman")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
                     if (_universe->hasWorldManager("Settings"))
                         _universe->setCurrentWorldManager("Settings");
                     return true;
@@ -251,16 +255,28 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         _universe->setCurrentWorldManager("Menu");
                     return true;
                 } else if (id == GUI_SETTINGS_MUSIC_VOL_MINUS) {
-                    scene::Settings::musicVolume += -10;
+                    scene::Settings::musicVolume -= 10;
+                    if (scene::Settings::musicVolume < 0)
+                        scene::Settings::musicVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 } else if (id == GUI_SETTINGS_MUSIC_VOL_PLUS) {
                     scene::Settings::musicVolume += 10;
+                    if (scene::Settings::musicVolume > 100)
+                        scene::Settings::musicVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 } else if (id == GUI_SETTINGS_SOUND_VOL_MINUS) {
-                    scene::Settings::soundVolume += -10;
+                    scene::Settings::soundVolume -= 10;
+                    if (scene::Settings::soundVolume < 0)
+                        scene::Settings::soundVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 } else if (id == GUI_SETTINGS_SOUND_VOL_PLUS) {
                     scene::Settings::soundVolume += 10;
+                    if (scene::Settings::soundVolume > 100)
+                        scene::Settings::soundVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 }
             default:

@@ -11,7 +11,6 @@
 #include "../ecs/component/Image.hpp"
 #include "../ecs/component/Music.hpp"
 #include "../ecs/component/PushButton.hpp"
-#include "../ecs/component/Sound.hpp"
 #include "../ecs/system/Button.hpp"
 #include "../ecs/system/Music.hpp"
 #include "../ecs/system/Render.hpp"
@@ -22,6 +21,7 @@ std::vector<ecs::Entity> scene::Settings::images = {};
 
 float scene::Settings::soundVolume = 50;
 float scene::Settings::musicVolume = 50;
+sf::Music* scene::Settings::currentMusic = nullptr;
 
 static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
     irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
@@ -39,8 +39,8 @@ static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironm
 }
 
 static ecs::Entity createPushButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
-                                    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
-                                    const std::string& setPressedImage)
+    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
+    const std::string& setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -54,12 +54,13 @@ static ecs::Entity createPushButton(ecs::WorldManager* worldManager, irr::gui::I
     return button;
 }
 
-void scene::Settings::init(ecs::Universe* universe)
+void scene::Settings::init(ecs::Universe* universe, std::shared_ptr<sf::Music> currentMusic)
 {
     auto worldManager = universe->createWorldManager("Settings");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
 
+    scene::Settings::currentMusic = currentMusic.get();
     worldManager->registerComponent<ecs::component::Button>();
     worldManager->registerComponent<ecs::component::PushButton>();
     worldManager->registerComponent<ecs::component::Image>();
@@ -85,16 +86,45 @@ void scene::Settings::init(ecs::Universe* universe)
         ecs::component::Image(gui, driver, settings::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
     images.push_back(background);
 
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 630, 835 + 250, 630 + 100), nullptr, BUTTON_ID::GUI_SETTINGS_BACK, settings::button::back::NORMAL,
-        settings::button::back::HOVER, settings::button::back::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(0, 0, 0, 0), nullptr, BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_MINUS, settings::button::minus::NORMAL,
-                 settings::button::minus::HOVER, settings::button::minus::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(0, 0, 0, 0), nullptr, BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_PLUS, settings::button::plus::NORMAL,
-                 settings::button::plus::HOVER, settings::button::plus::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(0, 0, 0, 0), nullptr, BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_MINUS, settings::button::minus::NORMAL,
-                 settings::button::minus::HOVER, settings::button::minus::PRESSED);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(0, 0, 0, 0), nullptr, BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_PLUS, settings::button::plus::NORMAL,
-                 settings::button::plus::HOVER, settings::button::plus::PRESSED);
+    ecs::Entity musicSoundbar = worldManager->createEntity();
+    worldManager->addComponent(musicSoundbar,
+        ecs::component::Image(gui, driver, scene::settings::SOUNDBAR.at(scene::Settings::musicVolume),
+            new irr::core::position2d<irr::s32> {960 - 125, 350}));
+    images.push_back(musicSoundbar);
+
+    ecs::Entity soundSoundbar = worldManager->createEntity();
+    worldManager->addComponent(soundSoundbar,
+        ecs::component::Image(gui, driver, scene::settings::SOUNDBAR.at(scene::Settings::soundVolume),
+            new irr::core::position2d<irr::s32> {960 - 125, 520}));
+    images.push_back(soundSoundbar);
+
+    ecs::Entity musicText = worldManager->createEntity();
+    worldManager->addComponent(musicText,
+        ecs::component::Image(
+            gui, driver, scene::settings::MUSICTEXT, new irr::core::position2d<irr::s32> {960 - 125, 300}));
+    images.push_back(musicText);
+
+    ecs::Entity soundText = worldManager->createEntity();
+    worldManager->addComponent(soundText,
+        ecs::component::Image(
+            gui, driver, scene::settings::SOUNDTEXT, new irr::core::position2d<irr::s32> {960 - 125, 470}));
+    images.push_back(soundText);
+
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 630, 835 + 250, 630 + 100), nullptr,
+        BUTTON_ID::GUI_SETTINGS_BACK, settings::button::back::NORMAL, settings::button::back::HOVER,
+        settings::button::back::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 350 + 30, 960 - 85, 350 + 70), nullptr,
+        BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_MINUS, settings::button::minus::NORMAL, settings::button::minus::HOVER,
+        settings::button::minus::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 + 85, 350 + 30, 960 + 125, 350 + 70), nullptr,
+        BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_PLUS, settings::button::plus::NORMAL, settings::button::plus::HOVER,
+        settings::button::plus::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 520 + 30, 960 - 85, 520 + 70), nullptr,
+        BUTTON_ID::GUI_SETTINGS_SOUND_VOL_MINUS, settings::button::minus::NORMAL, settings::button::minus::HOVER,
+        settings::button::minus::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 + 85, 520 + 30, 960 + 125, 520 + 70), nullptr,
+        BUTTON_ID::GUI_SETTINGS_SOUND_VOL_PLUS, settings::button::plus::NORMAL, settings::button::plus::HOVER,
+        settings::button::plus::PRESSED);
 }
 
 void scene::Settings::destroy(ecs::Universe* universe)
@@ -116,4 +146,21 @@ void scene::Settings::destroy(ecs::Universe* universe)
     images.clear();
     buttons.clear();
     pushButtons.clear();
+    scene::Settings::currentMusic = nullptr;
+}
+
+void scene::Settings::updateSoundBar(ecs::Universe* universe)
+{
+    auto imagesEnt = universe->getWorldManager("Settings")->getEntities<ecs::component::Image>();
+    {
+        auto soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[1]);
+        soundbar.image->setImage(universe->getDevice()->getVideoDriver()->getTexture(
+            scene::settings::SOUNDBAR.at(scene::Settings::musicVolume).c_str()));
+    }
+    {
+        auto soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[2]);
+        soundbar.image->setImage(universe->getDevice()->getVideoDriver()->getTexture(
+            scene::settings::SOUNDBAR.at(scene::Settings::soundVolume).c_str()));
+    }
+    currentMusic->setVolume(scene::Settings::musicVolume);
 }
