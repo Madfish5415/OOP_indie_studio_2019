@@ -70,10 +70,15 @@ static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
 static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
 static const std::string WALL_PASS = "media/power-up/wall-pass.png";
 } // namespace powerUp
-
 namespace bomb {
 static const std::string EXPLOSION = "media/map/portal7.bmp";
 } // namespace bomb
+static const std::string MUSIC = "assets/music/game/background.ogg";
+namespace sound {
+static const std::string EXPLOSION = "assets/music/game/sound/explosion.ogg";
+static const std::string POWERUP = "assets/music/game/sound/powerup.ogg";
+static const std::string DEATH = "assets/music/game/sound/death.wav";
+}
 } // namespace bomberman
 } // namespace scene
 

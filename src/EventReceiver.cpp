@@ -7,20 +7,27 @@
 
 #include "EventReceiver.hpp"
 
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include <vector>
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
 #include "ecs/component/Button.hpp"
 #include "ecs/component/Image.hpp"
+#include "ecs/component/Music.hpp"
 #include "ecs/component/PushButton.hpp"
+#include "ecs/component/Sliding.hpp"
 #include "ecs/event/Key.hpp"
 #include "scene/Bomberman.hpp"
+#include "scene/HowToPlay.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
 #include "scene/Menu.hpp"
 #include "scene/Pause.hpp"
 #include "scene/PlayerSelector.hpp"
+#include "scene/Settings.hpp"
+#include "scene/WinScreen.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -34,8 +41,28 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         if (_universe->hasWorldManager("LoadingMenu") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("LoadingMenu")) {
             scene::LoadingMenu::destroy(_universe);
-            scene::Menu::init(_universe);
+            scene::Menu::init(_universe, sf::Time::Zero);
             _universe->setCurrentWorldManager("Menu");
+        }
+        if (_universe->hasWorldManager("WinScreen") &&
+            _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
+            auto imgEntities = _universe->getCurrentWorldManager()->getEntities<ecs::component::Sliding>();
+            bool moving = false;
+
+            for (const auto& entity : imgEntities) {
+                auto& sliding = _universe->getCurrentWorldManager()->getComponent<ecs::component::Sliding>(entity);
+                const auto& pos = _universe->getCurrentWorldManager()->getComponent<ecs::component::Image>(entity).image->getRelativePosition();
+
+                if (pos.UpperLeftCorner != sliding.endPosition) {
+                    moving = true;
+                }
+            }
+            if (!moving) {
+                scene::WinScreen::destroy(_universe);
+                scene::Bomberman::destroy(_universe);
+                scene::Menu::init(_universe, sf::Time::Zero);
+                _universe->setCurrentWorldManager("Menu");
+            }
         }
         if (_universe->hasWorldManager("Keybinding") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("Keybinding")) {
@@ -134,23 +161,49 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         switch (event.GUIEvent.EventType) {
             case irr::gui::EGET_BUTTON_CLICKED:
                 if (id == BUTTON_ID::GUI_MENU_PLAY) {
+                    auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::Menu::destroy(_universe);
-                    scene::PlayerSelector::init(_universe);
+                    scene::PlayerSelector::init(_universe, time);
                     if (_universe->hasWorldManager("PlayerSelector"))
                         _universe->setCurrentWorldManager("PlayerSelector");
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_HTP) {
-                    if (_universe->hasWorldManager("HowToPlay")) {
-                        scene::Menu::destroy(_universe);
+                    auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
+                    scene::Menu::destroy(_universe);
+                    scene::HowToPlay::init(_universe, time);
+                    if (_universe->hasWorldManager("HowToPlay"))
                         _universe->setCurrentWorldManager("HowToPlay");
+                    return true;
+                } else if (id == BUTTON_ID::GUI_HTP_MENU) {
+                    auto entity = _universe->getWorldManager("HowToPlay")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("HowToPlay")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
+                    scene::HowToPlay::destroy(_universe);
+                    scene::Menu::init(_universe, time);
+                    if (_universe->hasWorldManager("Menu"))
+                        _universe->setCurrentWorldManager("Menu");
+                    return true;
+                } else if (id == BUTTON_ID::GUI_MENU_SETTINGS) {
+                    auto musics = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
+                    if (_universe->hasWorldManager("Settings")) {
+                        _universe->setCurrentWorldManager("Settings");
                     }
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_QUIT) {
                     _universe->getDevice()->closeDevice();
                     return true;
                 } else if (id == BUTTON_ID::GUI_SELECT_MENU) {
+                    auto entity = _universe->getWorldManager("PlayerSelector")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::PlayerSelector::destroy(_universe);
-                    scene::Menu::init(_universe);
+                    scene::Menu::init(_universe, time);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;
@@ -170,15 +223,16 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     id == BUTTON_ID::GUI_SELECT_KB_P3 || id == BUTTON_ID::GUI_SELECT_KB_P4) {
                     if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
                         auto &image = _universe->getWorldManager("PlayerSelector")
-                            ->getComponent<ecs::component::Image>(
-                                scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                                          ->getComponent<ecs::component::Image>(
+                                              scene::PlayerSelector::playerIds[id - BUTTON_ID::GUI_SELECT_KB_P1]);
                         scene::Keybinding::init(_universe, image.pathTexture,
-                                                &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
+                            &scene::PlayerSelector::playerComponent[id - BUTTON_ID::GUI_SELECT_KB_P1]);
                         _universe->setCurrentWorldManager("Keybinding");
                     }
                 } else if (id == GUI_SELECT_KB_BACK) {
                     scene::Keybinding::destroy(_universe);
                     _universe->setCurrentWorldManager("PlayerSelector");
+                    return true;
                 } else if (id == GUI_SELECT_KB_UP || id == GUI_SELECT_KB_DOWN || id == GUI_SELECT_KB_LEFT ||
                     id == GUI_SELECT_KB_RIGHT || id == GUI_SELECT_KB_ACTION) {
                     auto &btn = _universe->getWorldManager("Keybinding")
@@ -217,9 +271,47 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == GUI_PAUSE_MENU) {
                     scene::Pause::destroy(_universe);
                     scene::Bomberman::destroy(_universe);
-                    scene::Menu::init(_universe);
+                    scene::Menu::init(_universe, sf::Time::Zero);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
+                    return true;
+                } else if (id == GUI_PAUSE_SETTINGS) {
+                    auto musics = _universe->getWorldManager("Bomberman")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Bomberman")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
+                    if (_universe->hasWorldManager("Settings"))
+                        _universe->setCurrentWorldManager("Settings");
+                    return true;
+                } else if (id == GUI_SETTINGS_BACK) {
+                    scene::Settings::destroy(_universe);
+                    if (_universe->hasWorldManager("Pause"))
+                        _universe->setCurrentWorldManager("Pause");
+                    else
+                        _universe->setCurrentWorldManager("Menu");
+                    return true;
+                } else if (id == GUI_SETTINGS_MUSIC_VOL_MINUS) {
+                    scene::Settings::musicVolume -= 10;
+                    if (scene::Settings::musicVolume < 0)
+                        scene::Settings::musicVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_MUSIC_VOL_PLUS) {
+                    scene::Settings::musicVolume += 10;
+                    if (scene::Settings::musicVolume > 100)
+                        scene::Settings::musicVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_SOUND_VOL_MINUS) {
+                    scene::Settings::soundVolume -= 10;
+                    if (scene::Settings::soundVolume < 0)
+                        scene::Settings::soundVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_SOUND_VOL_PLUS) {
+                    scene::Settings::soundVolume += 10;
+                    if (scene::Settings::soundVolume > 100)
+                        scene::Settings::soundVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 }
             default:

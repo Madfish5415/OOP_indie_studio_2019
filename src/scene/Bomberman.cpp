@@ -19,11 +19,14 @@
 #include "../ecs/component/Collision.hpp"
 #include "../ecs/component/Delay.hpp"
 #include "../ecs/component/Motion.hpp"
+#include "../ecs/component/Music.hpp"
 #include "../ecs/component/Owner.hpp"
+#include "../ecs/component/SkinColor.hpp"
 #include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PlayerId.hpp"
 #include "../ecs/component/PowerUp.hpp"
 #include "../ecs/component/Render3d.hpp"
+#include "../ecs/component/Sound.hpp"
 #include "../ecs/component/Spinner.hpp"
 #include "../ecs/component/Stats.hpp"
 #include "../ecs/component/ToDelete.hpp"
@@ -35,11 +38,15 @@
 #include "../ecs/system/ExplosionDelay.hpp"
 #include "../ecs/system/Motion.hpp"
 #include "../ecs/system/Movement.hpp"
+#include "../ecs/system/Music.hpp"
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/PowerUp.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/Shrink.hpp"
+#include "../ecs/system/Sound.hpp"
 #include "../ecs/system/Spinner.hpp"
 #include "../ecs/system/AI.hpp"
+#include "../ecs/system/WinChecking.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -140,12 +147,13 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Transform>(
         character, ecs::component::Transform(characterMesh->getPosition()));
     worldManager->addComponent<ecs::component::Stats>(
-        character, ecs::component::Stats((9), (9), (9), true));
+        character, ecs::component::Stats());
     worldManager->addComponent<ecs::component::Animation>(character,
         ecs::component::Animation(
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -182,6 +190,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -294,6 +303,7 @@ void scene::Bomberman::createBomb(
     worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
     worldManager->addComponent<ecs::component::BoundingBox>(bomb, ecs::component::BoundingBox(boxMesh, selector));
     worldManager->addComponent<ecs::component::Breakable>(bomb, ecs::component::Breakable());
+    worldManager->addComponent<ecs::component::Sound>(bomb, ecs::component::Sound({{"explosion", scene::bomberman::sound::EXPLOSION}}));
 }
 
 void Bomberman::updateCollision(ecs::WorldManager *worldManager)
@@ -350,8 +360,26 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Breakable>();
     worldManager->registerComponent<ecs::component::ToDelete>();
     worldManager->registerComponent<ecs::component::Spinner>();
+    worldManager->registerComponent<ecs::component::Music>();
+    worldManager->registerComponent<ecs::component::Sound>();
+    worldManager->registerComponent<ecs::component::SkinColor>();
+
+    worldManager->registerSystem<ecs::system::Sound>();
+    {
+        ecs::Signature signature;
 
     worldManager->registerSystem<ecs::system::AI>();
+        signature.set(worldManager->getComponentType<ecs::component::Sound>());
+        worldManager->setSystemSignature<ecs::system::Sound>(signature);
+    }
+    worldManager->registerSystem<ecs::system::Music>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Music>());
+        worldManager->setSystemSignature<ecs::system::Music>(signature);
+    }
+    worldManager->registerSystem<ecs::system::Render>();
     {
         ecs::Signature signature;
 
@@ -413,6 +441,8 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Delay>());
         worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
     }
+    std::shared_ptr<ecs::system::Shrink> shrinkSystem = worldManager->registerSystem<ecs::system::Shrink>();
+    worldManager->subscribe(*(shrinkSystem.get()), &ecs::system::Shrink::startShrinking);
     worldManager->registerSystem<ecs::system::Render>();
     {
         ecs::Signature signature;
@@ -439,6 +469,16 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::BombTimer>());
         worldManager->setSystemSignature<ecs::system::BombTimer>(signature);
     }
+    worldManager->registerSystem<ecs::system::WinChecking>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::PlayerId>());
+        signature.set(worldManager->getComponentType<ecs::component::Stats>());
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        worldManager->setSystemSignature<ecs::system::WinChecking>(signature);
+    }
 
     ecs::Entity ground = worldManager->createEntity();
     irr::scene::IMeshSceneNode *groundMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(
@@ -464,6 +504,13 @@ void scene::Bomberman::init(
     worldManager->addComponent<ecs::component::Render3d>(ground, ecs::component::Render3d(groundMesh));
     worldManager->addComponent<ecs::component::Transform>(ground, ecs::component::Transform(groundMesh->getPosition()));
     worldManager->addComponent<ecs::component::Collision>(ground, ecs::component::Collision());
+
+    ecs::Entity music = worldManager->createEntity();
+    worldManager->addComponent<ecs::component::Music>(music, ecs::component::Music(scene::bomberman::MUSIC));
+
+    auto sfx = worldManager->createEntity();
+    worldManager->addComponent<ecs::component::Sound>(sfx, ecs::component::Sound({{"powerup", scene::bomberman::sound::POWERUP}, {"death", scene::bomberman::sound::DEATH}}));
+    worldManager->addComponent<ecs::component::ToDelete>(sfx, ecs::component::ToDelete());
 
     ecs::Entity camera = worldManager->createEntity();
 
@@ -504,7 +551,7 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     irr::scene::ISceneManager *smgr = universe->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = universe->getDevice()->getVideoDriver();
     auto worldManager = universe->getWorldManager("Bomberman");
-    ecs::Entity speedPowerUp = worldManager->createEntity();
+    ecs::Entity powerUp = worldManager->createEntity();
     irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createCubeMesh(
         irr::core::vector3d<irr::f32>(0.1, 10, 10)));
     size_t powerUpChoice = std::rand() % 10;
@@ -516,22 +563,22 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
         powerUpMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     }
 
-    worldManager->addComponent<ecs::component::Render3d>(speedPowerUp, ecs::component::Render3d(powerUpMesh));
-    worldManager->addComponent<ecs::component::Collision>(speedPowerUp, ecs::component::Collision());
-    worldManager->addComponent<ecs::component::PowerUp>(speedPowerUp, ecs::component::PowerUp());
-    worldManager->addComponent<ecs::component::Spinner>(speedPowerUp, ecs::component::Spinner(irr::core::vector3d<irr::f32>(0, 5, 0), 100));
+    worldManager->addComponent<ecs::component::Render3d>(powerUp, ecs::component::Render3d(powerUpMesh));
+    worldManager->addComponent<ecs::component::Collision>(powerUp, ecs::component::Collision());
+    worldManager->addComponent<ecs::component::PowerUp>(powerUp, ecs::component::PowerUp());
+    worldManager->addComponent<ecs::component::Spinner>(powerUp, ecs::component::Spinner(irr::core::vector3d<irr::f32>(0, 5, 0), 100));
 
     if (powerUpChoice < 4) {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_SPEED.c_str()));
-        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(1, 0, 0, false));
+        worldManager->addComponent<ecs::component::Stats>(powerUp, ecs::component::Stats(1, 0, 0, false));
     } else if (powerUpChoice < 6) {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::BOMB_RADIUS.c_str()));
-        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 1, 0, false));
+        worldManager->addComponent<ecs::component::Stats>(powerUp, ecs::component::Stats(0, 1, 0, false));
     } else if (powerUpChoice < 8) {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_BOMB.c_str()));
-        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 1, false));
+        worldManager->addComponent<ecs::component::Stats>(powerUp, ecs::component::Stats(0, 0, 1, false));
     } else {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::WALL_PASS.c_str()));
-        worldManager->addComponent<ecs::component::Stats>(speedPowerUp, ecs::component::Stats(0, 0, 0, true));
+        worldManager->addComponent<ecs::component::Stats>(powerUp, ecs::component::Stats(0, 0, 0, true));
     }
 }

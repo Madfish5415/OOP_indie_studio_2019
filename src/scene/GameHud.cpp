@@ -131,7 +131,7 @@ static void createTimer(
     worldManager->addComponent(dot, ecs::component::Blink(1000));
 
     ecs::Entity timer = worldManager->createEntity();
-    worldManager->addComponent(timer, ecs::component::Timer(30000));
+    worldManager->addComponent(timer, ecs::component::Timer(180000));
 
     ecs::Entity numberOne = worldManager->createEntity();
     worldManager->addComponent(numberOne, ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(848, 905)));
