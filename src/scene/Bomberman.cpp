@@ -21,6 +21,7 @@
 #include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Music.hpp"
 #include "../ecs/component/Owner.hpp"
+#include "../ecs/component/SkinColor.hpp"
 #include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PlayerId.hpp"
 #include "../ecs/component/PowerUp.hpp"
@@ -44,6 +45,7 @@
 #include "../ecs/system/Shrink.hpp"
 #include "../ecs/system/Sound.hpp"
 #include "../ecs/system/Spinner.hpp"
+#include "../ecs/system/WinChecking.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 
@@ -149,6 +151,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -185,6 +188,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -356,6 +360,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Spinner>();
     worldManager->registerComponent<ecs::component::Music>();
     worldManager->registerComponent<ecs::component::Sound>();
+    worldManager->registerComponent<ecs::component::SkinColor>();
 
     worldManager->registerSystem<ecs::system::Sound>();
     {
@@ -453,6 +458,16 @@ void scene::Bomberman::init(
 
         signature.set(worldManager->getComponentType<ecs::component::BombTimer>());
         worldManager->setSystemSignature<ecs::system::BombTimer>(signature);
+    }
+    worldManager->registerSystem<ecs::system::WinChecking>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::PlayerId>());
+        signature.set(worldManager->getComponentType<ecs::component::Stats>());
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        worldManager->setSystemSignature<ecs::system::WinChecking>(signature);
     }
 
     ecs::Entity ground = worldManager->createEntity();
