@@ -75,7 +75,7 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
 {
     if (wantedPos.X < 0 || wantedPos.Z < 0)
         return false;
-    auto entities = worldManager->getEntities<ecs::component::Render3d>();
+    auto ents = worldManager->getEntities<ecs::component::Render3d>();
 
     auto player = worldManager->getEntities<ecs::component::Player>();
     bool stop = false;
@@ -89,30 +89,93 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
         wantedPos.X -= 10;
     else if (direction == "DOWN")
         wantedPos.X += 10;
-    for (auto ent : entities) {
-        for (auto p : player)
+    auto bombs = worldManager->getEntities<ecs::component::BombStats>();
+    for (const auto& bomb : bombs) {
+        auto& rdr = worldManager->getComponent<ecs::component::Render3d>(bomb);
+        std::cout << "bombe ici " << std::endl;
+    }
+    for (const auto& ent : ents) {
+        auto& render = worldManager->getComponent<ecs::component::Render3d>(ent);
+        auto& pos = render.node->getPosition();
+        try {
+            auto& bomb = worldManager->getComponent<ecs::component::BombStats>(ent);
+            std::cout << "LA" << std::endl;
+            std::cout << pos.X << " " << pos.Z << std::endl;
+        }
+        catch (std::exception &e){}
+        for (const auto& p : player)
             if (p == ent)
                stop = true;
         if (stop) {
             stop = false;
             continue;
         }
-        auto render = worldManager->getComponent<ecs::component::Render3d>(ent);
         try {
-            auto ai = worldManager->getComponent<ecs::component::AI>(ent);
-            auto stats = worldManager->getComponent<ecs::component::Stats>(ent);
+            auto& ai = worldManager->getComponent<ecs::component::AI>(ent);
+            auto& stats = worldManager->getComponent<ecs::component::Stats>(ent);
             return true;
         } catch (std::exception &e) {}
-        auto pos = render.node->getPosition();
 
 
-        irr::u32 tmpX = pos.X / 5;
-        pos.X = tmpX * 5;
-
-        irr::u32 tmpZ = pos.Z / 5;
-        pos.Z = tmpZ * 5;
         if (pos.X == wantedPos.X && pos.Z == wantedPos.Z)
             return false;
+    }
+    return true;
+}
+
+static bool escape(ecs::Entity ai, ecs::WorldManager *worldManager, std::string direction)
+{
+    return true;
+    irr::core::vector3d<irr::f32> wantedPos =
+        worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
+    auto& aiComp = worldManager->getComponent<ecs::component::AI>(ai);
+    irr::u32 tmpX = wantedPos.X / 10;
+    wantedPos.X = tmpX * 10;
+    wantedPos.X += 5;
+
+    irr::u32 tmpZ = wantedPos.Z / 10;
+    wantedPos.Z = tmpZ * 10;
+    wantedPos.Z += 5;
+
+    if (direction == "LEFT")
+        wantedPos.Z -= 10;
+    else if (direction == "RIGHT")
+        wantedPos.Z += 10;
+    else if (direction == "UP")
+        wantedPos.X -= 10;
+    else if (direction == "DOWN")
+        wantedPos.X += 10;
+
+    auto entities = worldManager->getEntities<ecs::component::BombStats>();
+
+    for (auto bomb : entities) {
+        auto& bombPos = worldManager->getComponent<ecs::component::Render3d>(bomb).node->getPosition();
+        if (bombPos.Z != wantedPos.Z && bombPos.X != wantedPos.X)
+            continue;
+        auto& stat = worldManager->getComponent<ecs::component::BombStats>(bomb);
+        if (stat.wallPass) {
+            if (bombPos.X < wantedPos.X && ((bombPos.X + 10) * stat.bombRadius) > wantedPos.X)
+                return false;
+            else
+                return !(bombPos.Z < wantedPos.Z && ((bombPos.Z + 10) * stat.bombRadius) > wantedPos.Z);
+        } else {
+            auto breakable = worldManager->getEntities<ecs::component::Breakable>();
+            for (auto entBrk : breakable) {
+                if (bomb == entBrk)
+                    continue;
+                auto& entPos = worldManager->getComponent<ecs::component::Render3d>(entBrk).node->getPosition();
+                if (entPos.X == wantedPos.X) {
+                    if ((entPos.Z > ((bombPos.Z + 10) * stat.bombRadius) && entPos.Z < wantedPos.Z) ||
+                        (entPos.Z < ((bombPos.Z + 10) * stat.bombRadius) && entPos.Z > wantedPos.Z))
+                        return true;
+                }
+                if (entPos.Z == wantedPos.Z) {
+                    if ((entPos.X > ((bombPos.X + 10) * stat.bombRadius) && entPos.X < wantedPos.X) ||
+                        (entPos.X < ((bombPos.X + 10) * stat.bombRadius) && entPos.X > wantedPos.X))
+                        return true;
+                }
+            }
+        }
     }
     return true;
 }
@@ -137,26 +200,26 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN");
 
     if (aiComp.lastDirection == "LEFT" || aiComp.lastDirection.empty()) {
-        if (oldPos.Z >= wantedPos.Z) {
+        if (oldPos.Z >= wantedPos.Z && escape(ent, worldManager, "LEFT")) {
             return "LEFT";
         }
         if (aiComp.lastPos != wantedPos) {
             if (possUp && possDown) {
                 irr::u32 rd = rand() % 3;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "UP")) {
                     aiComp.lastPos = wantedPos;
                     return "UP";
-                } else if (rd == 1) {
+                } else if (rd == 1 && escape(ent, worldManager, "DOWN")) {
                     aiComp.lastPos = wantedPos;
                     return "DOWN";
                 }
-            } else if (possUp) {
+            } else if (possUp && escape(ent, worldManager, "UP")) {
                 irr::u32 rd = rand() % 2;
                 if (rd == 0) {
                     aiComp.lastPos = wantedPos;
                     return "UP";
                 }
-            } else if (possDown) {
+            } else if (possDown && escape(ent, worldManager, "DOWN")) {
                 irr::u32 rd = rand() % 2;
                 if (rd == 0) {
                     aiComp.lastPos = wantedPos;
@@ -164,135 +227,139 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager *worldMana
                 }
             }
         }
-        if (possLeft) {
+        if (possLeft && escape(ent, worldManager, "LEFT")) {
             aiComp.lastPos = wantedPos;
             return "LEFT";
         }
-        if (possRight) {
+        if (possRight && escape(ent, worldManager, "RIGHT")) {
             aiComp.lastPos = wantedPos;
             return "RIGHT";
         }
+        return "";
     }
 
     if (aiComp.lastDirection == "RIGHT") {
-        if (oldPos.Z <= wantedPos.Z) {
+        if (oldPos.Z <= wantedPos.Z && escape(ent, worldManager, "RIGHT")) {
             return "RIGHT";
         }
         if (aiComp.lastPos != wantedPos) {
             if (possUp && possDown) {
                 irr::u32 rd = rand() % 3;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "UP")) {
                     aiComp.lastPos = wantedPos;
                     return "UP";
-                } else if (rd == 1) {
+                } else if (rd == 1 && escape(ent, worldManager, "DOWN")) {
                     aiComp.lastPos = wantedPos;
                     return "DOWN";
                 }
             }
             if (possUp && !possDown) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "UP")) {
                     aiComp.lastPos = wantedPos;
                     return "UP";
                 }
             }
             if (possDown && !possUp) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "DOWN")) {
                     aiComp.lastPos = wantedPos;
                     return "DOWN";
                 }
             }
         }
-        if (possRight) {
+        if (possRight && escape(ent, worldManager, "RIGHT")) {
             aiComp.lastPos = wantedPos;
             return "RIGHT";
         }
-        if (possLeft) {
+        if (possLeft && escape(ent, worldManager, "LEFT")) {
             aiComp.lastPos = wantedPos;
             return "LEFT";
         }
+        return "";
     }
 
     if (aiComp.lastDirection == "UP") {
-        if (oldPos.X >= wantedPos.X) {
+        if (oldPos.X >= wantedPos.X && escape(ent, worldManager, "UP")) {
             return "UP";
         }
         if (aiComp.lastPos != wantedPos) {
             if (possRight && possLeft) {
                 irr::u32 rd = rand() % 3;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "RIGHT")) {
                     aiComp.lastPos = wantedPos;
                     return "RIGHT";
-                } else if (rd == 1) {
+                } else if (rd == 1 && escape(ent, worldManager, "LEFT")) {
                     aiComp.lastPos = wantedPos;
                     return "LEFT";
                 }
             }
             if (possRight && !possLeft) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "RIGHT")) {
                     aiComp.lastPos = wantedPos;
                     return "RIGHT";
                 }
             }
             if (possLeft && !possRight) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "LEFT")) {
                     aiComp.lastPos = wantedPos;
                     return "LEFT";
                 }
             }
         }
-        if (possUp) {
+        if (possUp && escape(ent, worldManager, "UP")) {
             aiComp.lastPos = wantedPos;
             return "UP";
         }
-        if (possDown) {
+        if (possDown && escape(ent, worldManager, "DOWN")) {
             aiComp.lastPos = wantedPos;
             return "DOWN";
         }
+        return "";
     }
 
     if (aiComp.lastDirection == "DOWN") {
-        if (oldPos.X <= wantedPos.X) {
+        if (oldPos.X <= wantedPos.X && escape(ent, worldManager, "DOWN")) {
             return "DOWN";
         }
         if (aiComp.lastPos != wantedPos) {
             if (possLeft && possRight) {
                 irr::u32 rd = rand() % 3;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "LEFT")) {
                     aiComp.lastPos = wantedPos;
                     return "LEFT";
                 }
-                else if (rd == 1) {
+                else if (rd == 1 && escape(ent, worldManager, "RIGHT")) {
                     aiComp.lastPos = wantedPos;
                     return "RIGHT";
                 }
             }
             if (possLeft && !possRight) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "LEFT")) {
                     aiComp.lastPos = wantedPos;
                     return "LEFT";
                 }
             }
             if (possRight && !possLeft) {
                 irr::u32 rd = rand() % 2;
-                if (rd == 0) {
+                if (rd == 0 && escape(ent, worldManager, "RIGHT")) {
                     aiComp.lastPos = wantedPos;
                     return "RIGHT";
                 }
             }
         }
-        if (possDown) {
+        if (possDown && escape(ent, worldManager, "DOWN")) {
             aiComp.lastPos = wantedPos;
             return "DOWN";
         }
-        if (possUp) {
+        if (possUp && escape(ent, worldManager, "UP")) {
             aiComp.lastPos = wantedPos;
             return "UP";
         }
+        return "";
     }
     return "";
 }
@@ -309,8 +376,8 @@ static bool isBreakable(irr::core::vector3d<irr::f32> wantedPos, ecs::WorldManag
         wantedPos.X += 10;
 
     auto entities = worldManager->getEntities<ecs::component::Breakable>();
-    for (auto ent : entities) {
-        auto render = worldManager->getComponent<ecs::component::Render3d>(ent);
+    for (const auto& ent : entities) {
+        auto& render = worldManager->getComponent<ecs::component::Render3d>(ent);
         auto pos = render.node->getPosition();
 
         irr::u32 tmpX = pos.X / 5;
@@ -360,48 +427,48 @@ void AI::update()
         std::string dir = chooseDirection(ai, worldManager);
 
         if (dir == "UP") {
-            if (aiComp.lastDirection != "UP" && nearBox(ai, worldManager))
-                plantBomb(ai, worldManager);
             motion.direction.X = -1;
             motion.direction.Y = 0;
             motion.direction.Z = 0;
             motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
-            aiComp.lastDirection = "UP";
             node->setRotation(irr::core::vector3df(0, -90, 0));
             animation.currentAnimation = "WALKING";
+            if (aiComp.lastDirection != "UP" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
+            aiComp.lastDirection = "UP";
         }
         else if (dir == "DOWN") {
-            if (aiComp.lastDirection != "DOWN" && nearBox(ai, worldManager))
-                plantBomb(ai, worldManager);
             motion.direction.X = 1;
             motion.direction.Y = 0;
             motion.direction.Z = 0;
             motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
-            aiComp.lastDirection = "DOWN";
             node->setRotation(irr::core::vector3df(0, 90, 0));
             animation.currentAnimation = "WALKING";
+            if (aiComp.lastDirection != "DOWN" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
+            aiComp.lastDirection = "DOWN";
         }
         else if (dir == "LEFT") {
-            if (aiComp.lastDirection != "LEFT" && nearBox(ai, worldManager))
-                plantBomb(ai, worldManager);
             motion.direction.X = 0;
             motion.direction.Y = 0;
             motion.direction.Z = -1;
             motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
-            aiComp.lastDirection = "LEFT";
             node->setRotation(irr::core::vector3df(0, 180, 0));
             animation.currentAnimation = "WALKING";
+            if (aiComp.lastDirection != "LEFT" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
+            aiComp.lastDirection = "LEFT";
         }
         else if (dir == "RIGHT") {
-            if (aiComp.lastDirection != "RIGHT" && nearBox(ai, worldManager))
-                plantBomb(ai, worldManager);
             motion.direction.X = 0;
             motion.direction.Y = 0;
             motion.direction.Z = 1;
             motion.movementSpeed = baseSpeed + (multiplicator * stats.moveSpeed);
-            aiComp.lastDirection = "RIGHT";
             node->setRotation(irr::core::vector3df(0, 0, 0));
             animation.currentAnimation = "WALKING";
+            if (aiComp.lastDirection != "RIGHT" && nearBox(ai, worldManager))
+                plantBomb(ai, worldManager);
+            aiComp.lastDirection = "RIGHT";
         }
         else {
             motion.direction.X = 0;

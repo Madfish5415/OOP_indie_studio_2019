@@ -368,9 +368,15 @@ void scene::Bomberman::init(
     {
         ecs::Signature signature;
 
-    worldManager->registerSystem<ecs::system::AI>();
         signature.set(worldManager->getComponentType<ecs::component::Sound>());
         worldManager->setSystemSignature<ecs::system::Sound>(signature);
+    }
+    worldManager->registerSystem<ecs::system::AI>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::AI>());
+        worldManager->setSystemSignature<ecs::system::AI>(signature);
     }
     worldManager->registerSystem<ecs::system::Music>();
     {
@@ -378,13 +384,6 @@ void scene::Bomberman::init(
 
         signature.set(worldManager->getComponentType<ecs::component::Music>());
         worldManager->setSystemSignature<ecs::system::Music>(signature);
-    }
-    worldManager->registerSystem<ecs::system::Render>();
-    {
-        ecs::Signature signature;
-
-        signature.set(worldManager->getComponentType<ecs::component::AI>());
-        worldManager->setSystemSignature<ecs::system::AI>(signature);
     }
     worldManager->registerSystem<ecs::system::PowerUp>();
     {
