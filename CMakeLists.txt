@@ -72,6 +72,7 @@ set(SRCS
         src/ecs/system/Spinner.cpp
         src/ecs/system/Shrink.cpp
         src/ecs/system/Sliding.cpp
+        src/ecs/system/Countdown.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -140,6 +141,7 @@ set(HEADERS
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
         src/ecs/component/Sliding.hpp
+        src/ecs/system/Countdown.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
