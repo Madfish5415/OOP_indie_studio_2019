@@ -41,6 +41,7 @@
 #include "../ecs/system/Player.hpp"
 #include "../ecs/system/PowerUp.hpp"
 #include "../ecs/system/Render.hpp"
+#include "../ecs/system/Shrink.hpp"
 #include "../ecs/system/Sound.hpp"
 #include "../ecs/system/Spinner.hpp"
 #include "../map-generator/MapGenerator.hpp"
@@ -432,6 +433,8 @@ void scene::Bomberman::init(
         signature.set(worldManager->getComponentType<ecs::component::Delay>());
         worldManager->setSystemSignature<ecs::system::ExplosionDelay>(signature);
     }
+    std::shared_ptr<ecs::system::Shrink> shrinkSystem = worldManager->registerSystem<ecs::system::Shrink>();
+    worldManager->subscribe(*(shrinkSystem.get()), &ecs::system::Shrink::startShrinking);
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
         ecs::Signature signature;
