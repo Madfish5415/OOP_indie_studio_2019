@@ -29,40 +29,40 @@ static void createSlidingScreen(ecs::WorldManager* worldManager, const std::stri
         ecs::component::Image(
             gui, driver, scene::winscreen::slide::BACK, new irr::core::position2d<irr::s32>(1920, 0)));
     worldManager->addComponent(
-        back, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-680, 0), irr::core::vector2d<irr::s32>(-2, 0)));
+        back, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-680, 0), irr::core::vector2d<irr::s32>(-2000, 0)));
 
     ecs::Entity middle = worldManager->createEntity();
     worldManager->addComponent(middle,
         ecs::component::Image(
             gui, driver, scene::winscreen::slide::MIDDLE, new irr::core::position2d<irr::s32>(1920, 0)));
     worldManager->addComponent(middle,
-        ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-680, 0), irr::core::vector2d<irr::s32>(-2, 0)));
+        ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-680, 0), irr::core::vector2d<irr::s32>(-2000, 0)));
 
     ecs::Entity front = worldManager->createEntity();
     worldManager->addComponent(front,
         ecs::component::Image(
             gui, driver, scene::winscreen::slide::FRONT, new irr::core::position2d<irr::s32>(3840, 0)));
     worldManager->addComponent(front,
-        ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-660, 0), irr::core::vector2d<irr::s32>(-3, 0)));
+        ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(-660, 0), irr::core::vector2d<irr::s32>(-3000, 0)));
 
     if (playerPath != "draw") {
         ecs::Entity player = worldManager->createEntity();
         worldManager->addComponent(
             player, ecs::component::Image(gui, driver, playerPath, new irr::core::position2d<irr::s32>(2600, -150)));
         worldManager->addComponent(
-            player, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2, 0)));
+            player, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2000, 0)));
     } else {
         ecs::Entity left = worldManager->createEntity();
         worldManager->addComponent(
             left, ecs::component::Image(gui, driver, scene::winscreen::win::draw::PLAYERS_LEFT, new irr::core::position2d<irr::s32>(2600, -150)));
         worldManager->addComponent(
-            left, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2, 0)));
+            left, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2000, 0)));
 
         ecs::Entity right = worldManager->createEntity();
         worldManager->addComponent(
             right, ecs::component::Image(gui, driver, scene::winscreen::win::draw::PLAYERS_RIGHT, new irr::core::position2d<irr::s32>(2600, -150)));
         worldManager->addComponent(
-            right, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2, 0)));
+            right, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2000, 0)));
 
     }
 
@@ -70,20 +70,20 @@ static void createSlidingScreen(ecs::WorldManager* worldManager, const std::stri
     worldManager->addComponent(
         text, ecs::component::Image(gui, driver, textPath, new irr::core::position2d<irr::s32>(3900, 0)));
     worldManager->addComponent(
-        text, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, 0), irr::core::vector2d<irr::s32>(-3, 0)));
+        text, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, 0), irr::core::vector2d<irr::s32>(-3000, 0)));
 
     ecs::Entity won = worldManager->createEntity();
     worldManager->addComponent(
         won, ecs::component::Image(gui, driver, wonPath, new irr::core::position2d<irr::s32>(3840, 0)));
     worldManager->addComponent(
-        won, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, 0), irr::core::vector2d<irr::s32>(-2, 0)));
+        won, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, 0), irr::core::vector2d<irr::s32>(-2000, 0)));
 
     auto blinkingText = worldManager->createEntity();
     worldManager->addComponent(blinkingText,
                                ecs::component::Image(gui, driver, scene::loadingmenu::TEXT, new irr::core::position2d<irr::s32> {4250, 960}));
     worldManager->addComponent(blinkingText, ecs::component::Blink(600));
     worldManager->addComponent(
-        blinkingText, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(410, 960), irr::core::vector2d<irr::s32>(-2, 0)));
+        blinkingText, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(410, 960), irr::core::vector2d<irr::s32>(-2000, 0)));
 }
 
 void scene::WinScreen::init(ecs::Universe* universe, const std::string& skinPath)
