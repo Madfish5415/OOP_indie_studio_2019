@@ -67,6 +67,7 @@ set(SRCS
         src/ecs/system/BombTimer.cpp
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
+        src/ecs/system/Shrink.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -80,6 +81,7 @@ set(SRCS
         src/irrlicht/vector3df.cpp
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
+        src/ecs/event/TimerEnd.cpp
         )
 
 set(HEADERS
@@ -146,6 +148,7 @@ set(HEADERS
         src/ecs/system/BombTimer.hpp
         src/ecs/system/PowerUp.hpp
         src/ecs/system/Spinner.hpp
+        src/ecs/system/Shrink.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp
@@ -158,6 +161,7 @@ set(HEADERS
         src/ecs/Universe.hpp
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
+        src/ecs/event/TimerEnd.hpp
         )
 
 if (DEBUG)
