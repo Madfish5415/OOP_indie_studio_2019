@@ -172,6 +172,9 @@ add_executable(bomberman ${SRCS} ${HEADERS})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
+set(Irrlicht_DIR libs/)
+set(SFML_DIR libs/)
+
 find_package (Irrlicht)
 
 
@@ -181,8 +184,8 @@ if (Irrlicht_FOUND AND SFML_FOUND)
     # Une fois la dépendance trouvée, nous l'incluons au projet
     target_include_directories(bomberman PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
     message(SUCCESS_MESSAGE: " This is the irrlicht include path ${Irrlicht_INCLUDE_DIRS}\n And this is the sfml include path ${SFML_INCLUDE_DIRS}")
-    target_link_libraries (bomberman ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
-    message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml libraries path ${SFML_LIBRARIES}")
+    target_link_libraries (bomberman ${Irrlicht_LIBRARIES} ${SFML_AUDIO_LIBRARY} ${SFML_SYSTEM_LIBRARY})
+    message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml audio library path ${SFML_AUDIO_LIBRARY}\n And this is the sfml system library path ${SFML_SYSTEM_LIBRARY}")
 else ()
     if (NOT Irrlicht_FOUND)
         # Sinon, nous affichons un message

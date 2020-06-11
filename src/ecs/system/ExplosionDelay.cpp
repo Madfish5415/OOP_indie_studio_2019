@@ -21,6 +21,8 @@
 #include "../component/PlayerId.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/StatRender.hpp"
+#include "../component/Sound.hpp"
+#include "../component/ToDelete.hpp"
 #include "BombTimer.hpp"
 
 using namespace ecs::system;
@@ -93,6 +95,10 @@ static void explodePlayers(ecs::WorldManager* worldManager, ecs::component::Rend
         if (pos.X == ajustedPos.X && pos.Z == ajustedPos.Z) {
             std::vector<ecs::Entity> imageEntities =
                 worldManager->getEntities<ecs::component::Image, ecs::component::Owner>();
+            auto sounds = worldManager->getEntities<ecs::component::Sound, ecs::component::ToDelete>();
+            auto& sound = worldManager->getComponent<ecs::component::Sound>(sounds[0]);
+
+            sound.soundsToPlay.emplace_back("death");
 
             for (const auto& imageEnt : imageEntities) {
                 auto& owner = worldManager->getComponent<ecs::component::Owner>(imageEnt);

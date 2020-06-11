@@ -13,8 +13,10 @@
 #include "../ecs/component/Blink.hpp"
 #include "../ecs/component/Button.hpp"
 #include "../ecs/component/Image.hpp"
+#include "../ecs/component/Music.hpp"
 #include "../ecs/system/Blink.hpp"
 #include "../ecs/system/Button.hpp"
+#include "../ecs/system/Music.hpp"
 #include "../ecs/system/Render.hpp"
 
 using namespace scene;
@@ -33,7 +35,7 @@ static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironm
     worldManager->addComponent<ecs::component::Button>(button, buttonComp);
 }
 
-void Menu::init(ecs::Universe* universe)
+void Menu::init(ecs::Universe* universe, sf::Time musicTimer)
 {
     auto worldManager = universe->createWorldManager("Menu");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
@@ -42,8 +44,16 @@ void Menu::init(ecs::Universe* universe)
     worldManager->registerComponent<ecs::component::Button>();
     worldManager->registerComponent<ecs::component::Image>();
     worldManager->registerComponent<ecs::component::Blink>();
+    worldManager->registerComponent<ecs::component::Music>();
 
     worldManager->registerSystem<ecs::system::Render>();
+    worldManager->registerSystem<ecs::system::Music>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Music>());
+        worldManager->setSystemSignature<ecs::system::Music>(signature);
+    }
     worldManager->registerSystem<ecs::system::Button>();
     {
         ecs::Signature signature;
@@ -63,6 +73,9 @@ void Menu::init(ecs::Universe* universe)
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
         ecs::component::Image(gui, driver, scene::menu::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
+
+    ecs::Entity music = worldManager->createEntity();
+    worldManager->addComponent(music, ecs::component::Music(menu::MUSIC, musicTimer));
 
     ecs::Entity bombermanLogo = worldManager->createEntity();
     worldManager->addComponent(bombermanLogo,
