@@ -21,11 +21,12 @@
 #include "../ecs/component/Motion.hpp"
 #include "../ecs/component/Music.hpp"
 #include "../ecs/component/Owner.hpp"
-#include "../ecs/component/SkinColor.hpp"
 #include "../ecs/component/Particle.hpp"
 #include "../ecs/component/PlayerId.hpp"
+#include "../ecs/component/PlayerIndex.hpp"
 #include "../ecs/component/PowerUp.hpp"
 #include "../ecs/component/Render3d.hpp"
+#include "../ecs/component/SkinColor.hpp"
 #include "../ecs/component/Sound.hpp"
 #include "../ecs/component/Spinner.hpp"
 #include "../ecs/component/Stats.hpp"
@@ -48,6 +49,7 @@
 #include "../ecs/system/WinChecking.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
+#include "PlayerSelector.hpp"
 #include "CountDown.hpp"
 
 using namespace scene;
@@ -56,7 +58,8 @@ std::vector<ecs::Entity> Bomberman::playerIds = {};
 std::array<irr::scene::IMetaTriangleSelector *, 4> Bomberman::metaTriangleSelector = {
     nullptr, nullptr, nullptr, nullptr};
 
-void Bomberman::createExplosion(ecs::WorldManager *worldManager, irr::u32 delay, const irr::core::vector3df& pos)
+void Bomberman::createExplosion(
+    ecs::WorldManager *worldManager, irr::u32 delay, const irr::core::vector3df &pos, int idx)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -70,25 +73,22 @@ void Bomberman::createExplosion(ecs::WorldManager *worldManager, irr::u32 delay,
     explosionMesh->setScale(irr::core::vector3df(1, 1, 1));
     explosionMesh->setVisible(false);
 
-    irr::scene::IParticleEmitter* emitter = particleSystem->createBoxEmitter(
+    irr::scene::IParticleEmitter *emitter = particleSystem->createBoxEmitter(
         irr::core::aabbox3d<irr::f32>(irr::core::vector3df(pos.X + 3, pos.Y - 20, pos.Z - 3)),
-        irr::core::vector3df(0.0f,0.05f,0.0f),
-        400,400,
-        irr::video::SColor(0,0,255,255),
-        irr::video::SColor(0,0,255,255),
-        500, 500,
-        20,
-        irr::core::dimension2df(10.0f,10.0f),
-        irr::core::dimension2df(15.0f,15.0f));
+        irr::core::vector3df(0.0f, 0.05f, 0.0f), 400, 400,
+        irr::video::SColor(0, scene::PlayerSelector::bombColors[idx].getRed(),
+            scene::PlayerSelector::bombColors[idx].getGreen(), scene::PlayerSelector::bombColors[idx].getBlue()),
+        irr::video::SColor(0, scene::PlayerSelector::bombColors[idx].getRed(),
+            scene::PlayerSelector::bombColors[idx].getGreen(), scene::PlayerSelector::bombColors[idx].getBlue()),
+        500, 500, 20, irr::core::dimension2df(10.0f, 10.0f), irr::core::dimension2df(15.0f, 15.0f));
 
     particleSystem->setEmitter(emitter);
     emitter->drop();
     particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     particleSystem->setMaterialTexture(0, driver->getTexture(bomberman::bomb::EXPLOSION.c_str()));
     particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-    irr::scene::IParticleAffector* affector =
-    particleSystem->createFadeOutParticleAffector(
-    irr::video::SColor(0,0,0,0), 100);
+    irr::scene::IParticleAffector *affector =
+        particleSystem->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 100);
     particleSystem->addAffector(affector);
     affector->drop();
 
@@ -96,7 +96,6 @@ void Bomberman::createExplosion(ecs::WorldManager *worldManager, irr::u32 delay,
     worldManager->addComponent<ecs::component::Delay>(explosion, ecs::component::Delay(delay));
     worldManager->addComponent<ecs::component::Particle>(explosion, ecs::component::Particle(particleSystem));
 }
-
 
 static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worldManager,
     irr::scene::ISceneManager *smgr, irr::scene::IAnimatedMeshSceneNode *characterMesh, size_t charNbr)
@@ -145,19 +144,20 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Motion>(character, ecs::component::Motion());
     worldManager->addComponent<ecs::component::Transform>(
         character, ecs::component::Transform(characterMesh->getPosition()));
-    worldManager->addComponent<ecs::component::Stats>(
-        character, ecs::component::Stats());
+    worldManager->addComponent<ecs::component::Stats>(character, ecs::component::Stats());
     worldManager->addComponent<ecs::component::Animation>(character,
         ecs::component::Animation(
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
     worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
+    worldManager->addComponent<ecs::component::PlayerIndex>(character, ecs::component::PlayerIndex(charNbr));
 
     Bomberman::playerIds.push_back(character);
 }
 
-static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr, const std::string &path)
+static void createBot(
+    ecs::WorldManager *worldManager, irr::core::vector3df pos, size_t charNbr, const std::string &path)
 {
     irr::scene::ISceneManager *smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -190,6 +190,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
     worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
+    worldManager->addComponent<ecs::component::PlayerIndex>(character, ecs::component::PlayerIndex(charNbr));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -230,7 +231,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     irr::scene::ITriangleSelector *selector =
                         smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
                     wallMesh->setTriangleSelector(selector);
-                    for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
+                    for (auto &metaSelector : scene::Bomberman::metaTriangleSelector)
                         metaSelector->addTriangleSelector(selector);
                     selector->drop();
 
@@ -250,7 +251,7 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
                     irr::scene::ITriangleSelector *selector =
                         smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
                     wallMesh->setTriangleSelector(selector);
-                    for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
+                    for (auto &metaSelector : scene::Bomberman::metaTriangleSelector)
                         metaSelector->addTriangleSelector(selector);
                     selector->drop();
 
@@ -267,8 +268,8 @@ static void createMap(ecs::WorldManager *worldManager, irr::u32 tileSize)
     }
 }
 
-void scene::Bomberman::createBomb(
-    ecs::WorldManager *worldManager, ecs::Entity playerId, size_t bombRadius, bool wallPass, const irr::core::vector3d<irr::f32> &pos)
+void scene::Bomberman::createBomb(ecs::WorldManager *worldManager, ecs::Entity playerId, size_t bombRadius,
+    bool wallPass, const irr::core::vector3d<irr::f32> &pos, int idx)
 {
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -277,7 +278,37 @@ void scene::Bomberman::createBomb(
     irr::scene::IAnimatedMeshSceneNode *bombMesh =
         smgr->addAnimatedMeshSceneNode(smgr->getMesh(bomberman::bomb::BOMB.c_str()));
     bombMesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    bombMesh->setMaterialTexture(0, driver->getTexture(bomberman::bomb::TEXTURE.c_str()));
+
+    irr::video::ITexture *texture = nullptr;
+    if (idx == 0)
+        texture = driver->getTexture(bomberman::bomb::TEXTURE1.c_str());
+    else if (idx == 1)
+        texture = driver->getTexture(bomberman::bomb::TEXTURE2.c_str());
+    else if (idx == 2)
+        texture = driver->getTexture(bomberman::bomb::TEXTURE3.c_str());
+    else if (idx == 3)
+        texture = driver->getTexture(bomberman::bomb::TEXTURE4.c_str());
+
+    auto *buffer = static_cast<unsigned char *>(texture->lock());
+
+    auto r = static_cast<unsigned char>(scene::PlayerSelector::bombColors[idx].getRed());
+    auto g = static_cast<unsigned char>(scene::PlayerSelector::bombColors[idx].getGreen());
+    auto b = static_cast<unsigned char>(scene::PlayerSelector::bombColors[idx].getBlue());
+    auto a = static_cast<unsigned char>(scene::PlayerSelector::bombColors[idx].getAlpha());
+
+    if (buffer) {
+        for (int y = 0; y < 1024; y++) {
+            for (int x = 0; x < 1024; x++) {
+                *(buffer++) = b;
+                *(buffer++) = g;
+                *(buffer++) = r;
+                *(buffer++) = a;
+            }
+        }
+        texture->unlock();
+    }
+
+    bombMesh->setMaterialTexture(0, texture);
     auto newPos = pos;
     newPos.X = static_cast<int>(pos.X / 10.f) * 10 + 5;
     newPos.Y = 4;
@@ -302,7 +333,9 @@ void scene::Bomberman::createBomb(
     worldManager->addComponent<ecs::component::Owner>(bomb, ecs::component::Owner(playerId));
     worldManager->addComponent<ecs::component::BoundingBox>(bomb, ecs::component::BoundingBox(boxMesh, selector));
     worldManager->addComponent<ecs::component::Breakable>(bomb, ecs::component::Breakable());
-    worldManager->addComponent<ecs::component::Sound>(bomb, ecs::component::Sound({{"explosion", scene::bomberman::sound::EXPLOSION}}));
+    worldManager->addComponent<ecs::component::Sound>(
+        bomb, ecs::component::Sound({{"explosion", scene::bomberman::sound::EXPLOSION}}));
+    worldManager->addComponent<ecs::component::PlayerIndex>(bomb, ecs::component::PlayerIndex(idx));
 }
 
 void Bomberman::updateCollision(ecs::WorldManager *worldManager)
@@ -326,8 +359,8 @@ void Bomberman::updateCollision(ecs::WorldManager *worldManager)
     }
 }
 
-void scene::Bomberman::init(
-    ecs::Universe *universe, std::vector<ecs::component::Player> players, std::vector<std::string> paths, std::vector<bool> playerType)
+void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component::Player> players,
+    std::vector<std::string> paths, std::vector<bool> playerType)
 {
     auto worldManager = universe->createWorldManager("Bomberman");
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
@@ -336,7 +369,7 @@ void scene::Bomberman::init(
     irr::f32 tileSize = 10.0;
     irr::u32 nbTile = 13;
 
-    for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
+    for (auto &metaSelector : scene::Bomberman::metaTriangleSelector)
         metaSelector = smgr->createMetaTriangleSelector();
 
     worldManager->registerComponent<ecs::component::Render3d>();
@@ -362,6 +395,7 @@ void scene::Bomberman::init(
     worldManager->registerComponent<ecs::component::Music>();
     worldManager->registerComponent<ecs::component::Sound>();
     worldManager->registerComponent<ecs::component::SkinColor>();
+    worldManager->registerComponent<ecs::component::PlayerIndex>();
 
     worldManager->registerSystem<ecs::system::Sound>();
     {
@@ -488,7 +522,7 @@ void scene::Bomberman::init(
     irr::scene::ITriangleSelector *selector =
         smgr->createOctreeTriangleSelector(groundMesh->getMesh(), groundMesh, 128);
     groundMesh->setTriangleSelector(selector);
-    for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
+    for (auto &metaSelector : scene::Bomberman::metaTriangleSelector)
         metaSelector->addTriangleSelector(selector);
     selector->drop();
 
@@ -501,7 +535,9 @@ void scene::Bomberman::init(
     worldManager->getComponent<ecs::component::Music>(music).music->play();
 
     auto sfx = worldManager->createEntity();
-    worldManager->addComponent<ecs::component::Sound>(sfx, ecs::component::Sound({{"powerup", scene::bomberman::sound::POWERUP}, {"death", scene::bomberman::sound::DEATH}}));
+    worldManager->addComponent<ecs::component::Sound>(sfx,
+        ecs::component::Sound(
+            {{"powerup", scene::bomberman::sound::POWERUP}, {"death", scene::bomberman::sound::DEATH}}));
     worldManager->addComponent<ecs::component::ToDelete>(sfx, ecs::component::ToDelete());
 
     ecs::Entity camera = worldManager->createEntity();
@@ -538,15 +574,14 @@ void scene::Bomberman::destroy(ecs::Universe *universe)
     }
 }
 
-
 void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3df position)
 {
     irr::scene::ISceneManager *smgr = universe->getDevice()->getSceneManager();
     irr::video::IVideoDriver *driver = universe->getDevice()->getVideoDriver();
     auto worldManager = universe->getWorldManager("Bomberman");
     ecs::Entity powerUp = worldManager->createEntity();
-    irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createCubeMesh(
-        irr::core::vector3d<irr::f32>(0.1, 10, 10)));
+    irr::scene::IMeshSceneNode *powerUpMesh =
+        smgr->addMeshSceneNode(smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3d<irr::f32>(0.1, 10, 10)));
     size_t powerUpChoice = std::rand() % 10;
 
     if (powerUpMesh) {
@@ -559,7 +594,8 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     worldManager->addComponent<ecs::component::Render3d>(powerUp, ecs::component::Render3d(powerUpMesh));
     worldManager->addComponent<ecs::component::Collision>(powerUp, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PowerUp>(powerUp, ecs::component::PowerUp());
-    worldManager->addComponent<ecs::component::Spinner>(powerUp, ecs::component::Spinner(irr::core::vector3d<irr::f32>(0, 5, 0), 100));
+    worldManager->addComponent<ecs::component::Spinner>(
+        powerUp, ecs::component::Spinner(irr::core::vector3d<irr::f32>(0, 5, 0), 100));
 
     if (powerUpChoice < 4) {
         powerUpMesh->setMaterialTexture(0, driver->getTexture(bomberman::powerUp::MAX_SPEED.c_str()));

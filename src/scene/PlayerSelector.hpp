@@ -24,7 +24,6 @@ class PlayerSelector {
 
   public:
     static void init(ecs::Universe* universe, sf::Time musicTimer);
-    static void reset();
     static void destroy(ecs::Universe* universe);
     static void addPlayer(ecs::Universe* universe);
     static void removePlayer(ecs::Universe* universe);
@@ -40,9 +39,12 @@ class PlayerSelector {
     static std::vector<ecs::Entity> playerSkinButtonRightIds;
     static std::vector<ecs::Entity> playerTypeButtonLeftIds;
     static std::vector<ecs::Entity> playerTypeButtonRightIds;
+    static std::vector<ecs::Entity> playerCustomButtonIds;
     static std::vector<ecs::Entity> playerType;
     static std::vector<ecs::component::Player> playerComponent;
     static std::vector<bool> typeList;
+    static std::array<irr::video::SColor, 4> bombColors;
+    static irr::gui::IGUIElement* modal;
 };
 
 namespace playerselector {
@@ -95,6 +97,11 @@ static const std::string HOVER = "assets/img/player-selector/button/button-right
 static const std::string PRESSED = "assets/img/player-selector/button/button-right2-pressed.png";
 } // namespace right
 } // namespace skin
+namespace custom {
+static const std::string NORMAL = "assets/img/player-selector/button/button-custom-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-custom-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-custom-pressed.png";
+}
 } // namespace button
 namespace player {
 static const std::string AQUA = "assets/img/player-selector/player/player-aqua.png";
