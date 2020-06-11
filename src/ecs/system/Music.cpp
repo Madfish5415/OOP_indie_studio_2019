@@ -8,6 +8,7 @@
 #include "Music.hpp"
 
 #include "../component/Music.hpp"
+#include "../../scene/Settings.hpp"
 
 using namespace ecs::system;
 
@@ -26,6 +27,7 @@ void Music::update()
             if (music.music->getStatus() == sf::Music::Status::Stopped) {
                 music.music->setPlayingOffset(music.offset);
                 music.music->play();
+                music.music->setVolume(scene::Settings::musicVolume);
             }
         }
     }
