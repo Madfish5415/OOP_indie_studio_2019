@@ -67,6 +67,7 @@ set(SRCS
         src/ecs/system/BombTimer.cpp
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
+        src/ecs/system/Shrink.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -75,12 +76,14 @@ set(SRCS
         src/scene/GameHud.cpp
         src/scene/Pause.cpp
         src/scene/Settings.cpp
+        src/scene/HowToPlay.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
+        src/ecs/event/TimerEnd.cpp
         )
 
 set(HEADERS
@@ -147,6 +150,7 @@ set(HEADERS
         src/ecs/system/BombTimer.hpp
         src/ecs/system/PowerUp.hpp
         src/ecs/system/Spinner.hpp
+        src/ecs/system/Shrink.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/LoadingMenu.hpp
@@ -155,11 +159,13 @@ set(HEADERS
         src/scene/GameHud.hpp
         src/scene/Pause.hpp
         src/scene/Settings.hpp
+        src/scene/HowToPlay.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
+        src/ecs/event/TimerEnd.hpp
         )
 
 if (DEBUG)
