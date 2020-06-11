@@ -8,6 +8,8 @@
 #ifndef INDIESTUDIO_HOWTOPLAY_HPP
 #define INDIESTUDIO_HOWTOPLAY_HPP
 
+#include <SFML/Audio.hpp>
+
 #include "../ecs/Universe.hpp"
 
 namespace scene {
@@ -17,7 +19,7 @@ class HowToPlay {
     ~HowToPlay() = delete;
 
   public:
-    static void init(ecs::Universe *universe);
+    static void init(ecs::Universe *universe, sf::Time musicTimer);
     static void destroy(ecs::Universe *universe);
 };
 

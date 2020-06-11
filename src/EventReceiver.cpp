@@ -147,14 +147,20 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         _universe->setCurrentWorldManager("PlayerSelector");
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_HTP) {
+                    auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::Menu::destroy(_universe);
-                    scene::HowToPlay::init(_universe);
+                    scene::HowToPlay::init(_universe, time);
                     if (_universe->hasWorldManager("HowToPlay"))
                         _universe->setCurrentWorldManager("HowToPlay");
                     return true;
                 } else if (id == BUTTON_ID::GUI_HTP_MENU) {
+                    auto entity = _universe->getWorldManager("HowToPlay")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("HowToPlay")->getComponent<ecs::component::Music>(entity[0]);
+                    sf::Time time = music.music->getPlayingOffset();
                     scene::HowToPlay::destroy(_universe);
-                    scene::Menu::init(_universe);
+                    scene::Menu::init(_universe, time);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;
