@@ -75,6 +75,7 @@ set(SRCS
         src/scene/Keybinding.cpp
         src/scene/GameHud.cpp
         src/scene/Pause.cpp
+        src/scene/HowToPlay.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -156,6 +157,7 @@ set(HEADERS
         src/scene/Keybinding.hpp
         src/scene/GameHud.hpp
         src/scene/Pause.hpp
+        src/scene/HowToPlay.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
