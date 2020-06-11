@@ -27,8 +27,9 @@ class LoadingMenu {
 }
 
 namespace loadingmenu {
-const std::string LOGO = "assets/img/loading-menu/logo.png";
-const std::string TEXT = "assets/img/loading-menu/press-key.png";
+static const std::string LOGO = "assets/img/loading-menu/logo.png";
+static const std::string TEXT = "assets/img/loading-menu/press-key.png";
+static const std::string MUSIC = "assets/music/loading-menu/background.ogg";
 }
 
 #endif // INDIESTUDIO_LOADINGMENU_HPP

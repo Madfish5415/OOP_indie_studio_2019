@@ -17,6 +17,7 @@
 #include "../component/Image.hpp"
 #include "../component/Timer.hpp"
 #include "../component/TimerRender.hpp"
+#include "../event/TimerEnd.hpp"
 
 using namespace ecs::system;
 
@@ -53,6 +54,10 @@ void TimerRender::update()
                 }
                 worldManager->addComponent(entity, ecs::component::Blink(500));
             }
+        }
+        if (diff == 0) {
+            ecs::event::TimerEnd timerEnd;
+            worldManager->publish(timerEnd);
         }
 
         if (timerRender.position == 0) {

@@ -9,13 +9,25 @@
 
 using namespace ecs::component;
 
-Music::Music(const std::string &musicPath) : music(new sf::Music())
+Music::Music(const std::string &musicPath, sf::Time offset) : music(std::shared_ptr<sf::Music>())
 {
-    music->openFromFile(musicPath);
+    if (!musicPath.empty()) {
+        music.reset(new sf::Music());
+        music->openFromFile(musicPath);
+        music->setLoop(true);
+        this->offset = offset;
+        this->musicPath = musicPath;
+    }
 }
 
-Music::Music(const Music& music) : music(music.music)
+Music::Music(const Music& music) : musicPath(music.musicPath)
 {
+    if (!musicPath.empty()) {
+        this->music.reset(new sf::Music());
+        this->music->openFromFile(musicPath);
+        this->offset = music.offset;
+    }
 }
 
-Music::~Music() = default;
+Music::~Music() {
+}

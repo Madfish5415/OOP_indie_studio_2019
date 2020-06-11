@@ -69,6 +69,7 @@ set(SRCS
         src/ecs/system/WinChecking.cpp
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
+        src/ecs/system/Shrink.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -78,12 +79,15 @@ set(SRCS
         src/scene/Keybinding.cpp
         src/scene/GameHud.cpp
         src/scene/Pause.cpp
+        src/scene/Settings.cpp
+        src/scene/HowToPlay.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
         src/irrlicht/vector3df.cpp
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
+        src/ecs/event/TimerEnd.cpp
         )
 
 set(HEADERS
@@ -152,6 +156,7 @@ set(HEADERS
         src/ecs/system/BombTimer.hpp
         src/ecs/system/PowerUp.hpp
         src/ecs/system/Spinner.hpp
+        src/ecs/system/Shrink.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/DrawScreen.hpp
@@ -161,11 +166,14 @@ set(HEADERS
         src/scene/Keybinding.hpp
         src/scene/GameHud.hpp
         src/scene/Pause.hpp
+        src/scene/Settings.hpp
+        src/scene/HowToPlay.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
+        src/ecs/event/TimerEnd.hpp
         )
 
 if (DEBUG)
@@ -178,6 +186,9 @@ add_executable(bomberman ${SRCS} ${HEADERS})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
+set(Irrlicht_DIR libs/)
+set(SFML_DIR libs/)
+
 find_package (Irrlicht)
 
 
@@ -187,8 +198,8 @@ if (Irrlicht_FOUND AND SFML_FOUND)
     # Une fois la dépendance trouvée, nous l'incluons au projet
     target_include_directories(bomberman PUBLIC ${Irrlicht_INCLUDE_DIRS} ${SFML_INCLUDE_DIRS})
     message(SUCCESS_MESSAGE: " This is the irrlicht include path ${Irrlicht_INCLUDE_DIRS}\n And this is the sfml include path ${SFML_INCLUDE_DIRS}")
-    target_link_libraries (bomberman ${Irrlicht_LIBRARIES} ${SFML_LIBRARIES})
-    message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml libraries path ${SFML_LIBRARIES}")
+    target_link_libraries (bomberman ${Irrlicht_LIBRARIES} ${SFML_AUDIO_LIBRARY} ${SFML_SYSTEM_LIBRARY})
+    message(SUCCESS_MESSAGE: " This is the irrlicht lib path ${Irrlicht_LIBRARIES}\n And this is the sfml audio library path ${SFML_AUDIO_LIBRARY}\n And this is the sfml system library path ${SFML_SYSTEM_LIBRARY}")
 else ()
     if (NOT Irrlicht_FOUND)
         # Sinon, nous affichons un message

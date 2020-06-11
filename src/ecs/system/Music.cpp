@@ -8,6 +8,7 @@
 #include "Music.hpp"
 
 #include "../component/Music.hpp"
+#include "../../scene/Settings.hpp"
 
 using namespace ecs::system;
 
@@ -21,8 +22,14 @@ void Music::update()
 {
     for (const auto& entity: entities) {
         auto& music = worldManager->getComponent<ecs::component::Music>(entity);
-        if (music.music->getStatus() == sf::Music::Status::Stopped) {
-            music.music->play();
+        if (music.music.get()) {
+            auto var = music.music->getPlayingOffset();
+            if (music.music->getVolume() != scene::Settings::musicVolume)
+                music.music->setVolume(scene::Settings::musicVolume);
+            if (music.music->getStatus() == sf::Music::Status::Stopped) {
+                music.music->setPlayingOffset(music.offset);
+                music.music->play();
+            }
         }
     }
 }

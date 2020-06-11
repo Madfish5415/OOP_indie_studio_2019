@@ -10,17 +10,20 @@
 
 #include <SFML/Audio.hpp>
 #include <string>
+#include <memory>
 
 namespace ecs::component {
 
 class Music {
   public:
-    Music(const std::string &musicPath = "");
+    Music(const std::string &musicPath = "", const sf::Time offset = sf::Time::Zero);
     Music(const Music& music);
     ~Music();
 
   public:
-    sf::Music *music;
+    std::shared_ptr<sf::Music> music;
+    sf::Time offset;
+    std::string musicPath;
 };
 
 } // namespace ecs::component
