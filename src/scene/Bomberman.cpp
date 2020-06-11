@@ -151,6 +151,7 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -187,6 +188,7 @@ static void createBot(ecs::WorldManager *worldManager, irr::core::vector3df pos,
             std::unordered_map<std::string, std::pair<size_t, size_t>>({{"IDLE", {183, 204}}, {"WALKING", {0, 13}}})));
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
+    worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -463,6 +465,8 @@ void scene::Bomberman::init(
 
         signature.set(worldManager->getComponentType<ecs::component::PlayerId>());
         signature.set(worldManager->getComponentType<ecs::component::Stats>());
+        signature.set(worldManager->getComponentType<ecs::component::Motion>());
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
         worldManager->setSystemSignature<ecs::system::WinChecking>(signature);
     }
 

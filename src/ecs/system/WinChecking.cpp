@@ -7,14 +7,9 @@
 
 #include "WinChecking.hpp"
 
-#include "../Universe.hpp"
-#include "../../scene/Bomberman.hpp"
 #include "../../scene/WinScreen.hpp"
-#include "../../scene/DrawScreen.hpp"
-#include "../component/PlayerId.hpp"
-#include "../component/Stats.hpp"
-
-#include <iostream>
+#include "../Universe.hpp"
+#include "../component/SkinColor.hpp"
 
 using namespace ecs::system;
 
@@ -26,16 +21,17 @@ WinChecking::~WinChecking() = default;
 
 void WinChecking::update()
 {
-    ecs::Universe *universe = worldManager->getUniverse();
+    ecs::Universe* universe = worldManager->getUniverse();
 
     if (entities.size() <= 1) {
-        std::cout << entities.size() << std::endl;
-        if (entities.size() == 0) {
-            scene::DrawScreen::init(universe);
-            universe->setCurrentWorldManager("DrawScreen");
-        }
-        else {
-            scene::WinScreen::init(universe);
+        if (entities.empty()) {
+            std::string draw = "draw";
+            scene::WinScreen::init(universe, draw);
+            universe->setCurrentWorldManager("WinScreen");
+        } else {
+            auto& skinColor = worldManager->getComponent<ecs::component::SkinColor>(*entities.begin());
+
+            scene::WinScreen::init(universe, skinColor.color);
             universe->setCurrentWorldManager("WinScreen");
         }
     }

@@ -26,6 +26,7 @@
 #include "scene/Pause.hpp"
 #include "scene/PlayerSelector.hpp"
 #include "scene/Settings.hpp"
+#include "scene/WinScreen.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -39,6 +40,13 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         if (_universe->hasWorldManager("LoadingMenu") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("LoadingMenu")) {
             scene::LoadingMenu::destroy(_universe);
+            scene::Menu::init(_universe, sf::Time::Zero);
+            _universe->setCurrentWorldManager("Menu");
+        }
+        if (_universe->hasWorldManager("WinScreen") &&
+            _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
+            scene::WinScreen::destroy(_universe);
+            scene::Bomberman::destroy(_universe);
             scene::Menu::init(_universe, sf::Time::Zero);
             _universe->setCurrentWorldManager("Menu");
         }

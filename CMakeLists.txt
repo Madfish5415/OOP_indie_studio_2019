@@ -50,6 +50,7 @@ set(SRCS
         src/ecs/component/Breakable.cpp
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
+        src/ecs/component/Sliding.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -70,10 +71,10 @@ set(SRCS
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
         src/ecs/system/Shrink.cpp
+        src/ecs/system/Sliding.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
-        src/scene/DrawScreen.cpp
         src/scene/WinScreen.cpp
         src/scene/PlayerSelector.cpp
         src/scene/Keybinding.cpp
@@ -137,6 +138,7 @@ set(HEADERS
         src/ecs/component/Breakable.hpp
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
+        src/ecs/component/Sliding.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
@@ -157,9 +159,9 @@ set(HEADERS
         src/ecs/system/PowerUp.hpp
         src/ecs/system/Spinner.hpp
         src/ecs/system/Shrink.hpp
+        src/ecs/system/Sliding.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
-        src/scene/DrawScreen.hpp
         src/scene/WinScreen.hpp
         src/scene/LoadingMenu.hpp
         src/scene/PlayerSelector.hpp

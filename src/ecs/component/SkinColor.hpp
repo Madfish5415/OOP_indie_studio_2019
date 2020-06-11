@@ -19,7 +19,7 @@ class SkinColor {
         ~SkinColor();
 
     public:
-        const std::string &color;
+        std::string color;
 };
 
 }
