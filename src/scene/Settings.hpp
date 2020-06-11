@@ -53,7 +53,7 @@ static const std::string HOVER = "";
 static const std::string PRESSED = "";
 } // namespace minus
 } // namespace button
-static const std::string BACKGROUND = "assets/img/settings/background.jpg";
+static const std::string BACKGROUND = "assets/img/settings/background.png";
 } // namespace settings
 } // namespace scene
 #endif // INDIESTUDIO_SETTINGS_HPP
