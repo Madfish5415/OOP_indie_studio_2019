@@ -85,7 +85,7 @@ void scene::Settings::init(ecs::Universe* universe)
         ecs::component::Image(gui, driver, settings::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
     images.push_back(background);
 
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(175 - 125, 40, 175 + 125, 40 + 100), nullptr, BUTTON_ID::GUI_SETTINGS_BACK, settings::button::back::NORMAL,
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 630, 835 + 250, 630 + 100), nullptr, BUTTON_ID::GUI_SETTINGS_BACK, settings::button::back::NORMAL,
         settings::button::back::HOVER, settings::button::back::PRESSED);
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(0, 0, 0, 0), nullptr, BUTTON_ID::GUI_SETTINGS_MUSIC_VOL_MINUS, settings::button::minus::NORMAL,
                  settings::button::minus::HOVER, settings::button::minus::PRESSED);
