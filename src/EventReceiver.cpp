@@ -245,7 +245,10 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == GUI_SETTINGS_BACK) {
                     scene::Settings::destroy(_universe);
-                    _universe->setCurrentWorldManager("Pause");
+                    if (_universe->hasWorldManager("Pause"))
+                        _universe->setCurrentWorldManager("Pause");
+                    else
+                        _universe->setCurrentWorldManager("Menu");
                     return true;
                 } else if (id == GUI_SETTINGS_MUSIC_VOL_MINUS) {
                     scene::Settings::musicVolume += -10;
