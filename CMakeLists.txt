@@ -82,6 +82,7 @@ set(SRCS
         src/scene/Pause.cpp
         src/scene/Settings.cpp
         src/scene/HowToPlay.cpp
+        src/scene/CountDown.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -170,6 +171,7 @@ set(HEADERS
         src/scene/Pause.hpp
         src/scene/Settings.hpp
         src/scene/HowToPlay.hpp
+        src/scene/CountDown.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
