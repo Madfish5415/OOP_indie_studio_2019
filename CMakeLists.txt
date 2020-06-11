@@ -51,6 +51,7 @@ set(SRCS
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
         src/ecs/component/Sliding.cpp
+        src/ecs/system/AI.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
