@@ -87,7 +87,7 @@ enum BUTTON_ID {
     GUI_SETTINGS_MUSIC_VOL_PLUS, /** < Turn up the music volume.*/
     GUI_SETTINGS_SOUND_VOL_MINUS, /** < Lower the sound volume.*/
     GUI_SETTINGS_SOUND_VOL_PLUS, /** < Turn up the sound volume.*/
-    GUI_SETTINGS_BACK /** < Back to the menu.*/
+    GUI_SETTINGS_BACK, /** < Back to the menu.*/
 
     GUI_HTP_MENU /** < Back to the menu.*/
 };
