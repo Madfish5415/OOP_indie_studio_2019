@@ -55,7 +55,9 @@ static void createSlidingScreen(ecs::WorldManager* worldManager, const std::stri
                 1, irr::core::vector2d<irr::s32>(0, -150), irr::core::vector2d<irr::s32>(-2000, 0)));
 
         ecs::Entity music = worldManager->createEntity();
-        worldManager->addComponent<ecs::component::Sound>(music, ecs::component::Sound({{"win", musicPath}, {"", ""}}));
+        auto map = std::unordered_map<std::string, std::string>();
+        map.emplace("win", musicPath);
+        worldManager->addComponent<ecs::component::Sound>(music, ecs::component::Sound(map));
         worldManager->getComponent<ecs::component::Sound>(music).soundsToPlay.emplace_back("win");
     } else {
         ecs::Entity left = worldManager->createEntity();
