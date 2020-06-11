@@ -40,7 +40,7 @@ enum BUTTON_ID {
     GUI_MENU_PLAY = 201, /** < Play menu button id.*/
     GUI_MENU_QUIT, /** < Quit menu button id.*/
     GUI_MENU_HTP, /** < How to play menu button id.*/
-    GUI_MENU_OPT, /** < Option menu button id.*/
+    GUI_MENU_SETTINGS, /** < Option menu button id.*/
 
     GUI_SELECT_MENU, /** < Back to the menu */
     GUI_SELECT_FIGHT, /** < Start the game with selected parameters.*/
@@ -82,6 +82,12 @@ enum BUTTON_ID {
     GUI_PAUSE_RESUME, /** < Resume the party.*/
     GUI_PAUSE_SETTINGS, /** < Resume the party.*/
     GUI_PAUSE_MENU, /** < Back to the menu.*/
+
+    GUI_SETTINGS_MUSIC_VOL_MINUS, /** < Lower the music volume.*/
+    GUI_SETTINGS_MUSIC_VOL_PLUS, /** < Turn up the music volume.*/
+    GUI_SETTINGS_SOUND_VOL_MINUS, /** < Lower the sound volume.*/
+    GUI_SETTINGS_SOUND_VOL_PLUS, /** < Turn up the sound volume.*/
+    GUI_SETTINGS_BACK, /** < Back to the menu.*/
 
     GUI_HTP_MENU /** < Back to the menu.*/
 };

@@ -8,6 +8,7 @@
 #include "Sound.hpp"
 
 #include "../component/Sound.hpp"
+#include "../../scene/Settings.hpp"
 
 using namespace ecs::system;
 
@@ -24,6 +25,7 @@ void Sound::update()
         for (auto& sound : sounds.soundsToPlay) {
             sounds.sounds[sound]->setPlayingOffset(sf::Time::Zero);
             sounds.sounds[sound]->play();
+            sounds.sounds[sound]->setVolume(scene::Settings::soundVolume);
             sounds.soundsToPlay.erase(std::find(sounds.soundsToPlay.begin(), sounds.soundsToPlay.end(), sound));
         }
     }

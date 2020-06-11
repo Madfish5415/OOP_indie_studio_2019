@@ -88,6 +88,8 @@ void Menu::init(ecs::Universe* universe, sf::Time musicTimer)
         GUI_MENU_HTP, menu::button::htp::NORMAL, menu::button::htp::HOVER, menu::button::htp::PRESSED);
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(1520 - 150, 800, 1520 + 150, 800 + 150), nullptr,
         GUI_MENU_QUIT, menu::button::quit::NORMAL, menu::button::quit::HOVER, menu::button::quit::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1785, 35, 1785 + 75, 35 + 75), nullptr, BUTTON_ID::GUI_MENU_SETTINGS, menu::button::settings::NORMAL,
+                 menu::button::settings::HOVER, menu::button::settings::PRESSED);
 }
 
 void Menu::destroy(ecs::Universe* universe)

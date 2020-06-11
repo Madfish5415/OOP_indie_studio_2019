@@ -25,6 +25,7 @@
 #include "scene/Menu.hpp"
 #include "scene/Pause.hpp"
 #include "scene/PlayerSelector.hpp"
+#include "scene/Settings.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -164,6 +165,14 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
                     return true;
+                } else if (id == BUTTON_ID::GUI_MENU_SETTINGS) {
+                    auto musics = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
+                    if (_universe->hasWorldManager("Settings")) {
+                        _universe->setCurrentWorldManager("Settings");
+                    }
+                    return true;
                 } else if (id == BUTTON_ID::GUI_MENU_QUIT) {
                     _universe->getDevice()->closeDevice();
                     return true;
@@ -201,6 +210,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id == GUI_SELECT_KB_BACK) {
                     scene::Keybinding::destroy(_universe);
                     _universe->setCurrentWorldManager("PlayerSelector");
+                    return true;
                 } else if (id == GUI_SELECT_KB_UP || id == GUI_SELECT_KB_DOWN || id == GUI_SELECT_KB_LEFT ||
                     id == GUI_SELECT_KB_RIGHT || id == GUI_SELECT_KB_ACTION) {
                     auto &btn = _universe->getWorldManager("Keybinding")
@@ -242,6 +252,44 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     scene::Menu::init(_universe, sf::Time::Zero);
                     if (_universe->hasWorldManager("Menu"))
                         _universe->setCurrentWorldManager("Menu");
+                    return true;
+                } else if (id == GUI_PAUSE_SETTINGS) {
+                    auto musics = _universe->getWorldManager("Bomberman")->getEntities<ecs::component::Music>();
+                    auto& music = _universe->getWorldManager("Bomberman")->getComponent<ecs::component::Music>(musics[0]);
+                    scene::Settings::init(_universe, music.music);
+                    if (_universe->hasWorldManager("Settings"))
+                        _universe->setCurrentWorldManager("Settings");
+                    return true;
+                } else if (id == GUI_SETTINGS_BACK) {
+                    scene::Settings::destroy(_universe);
+                    if (_universe->hasWorldManager("Pause"))
+                        _universe->setCurrentWorldManager("Pause");
+                    else
+                        _universe->setCurrentWorldManager("Menu");
+                    return true;
+                } else if (id == GUI_SETTINGS_MUSIC_VOL_MINUS) {
+                    scene::Settings::musicVolume -= 10;
+                    if (scene::Settings::musicVolume < 0)
+                        scene::Settings::musicVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_MUSIC_VOL_PLUS) {
+                    scene::Settings::musicVolume += 10;
+                    if (scene::Settings::musicVolume > 100)
+                        scene::Settings::musicVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_SOUND_VOL_MINUS) {
+                    scene::Settings::soundVolume -= 10;
+                    if (scene::Settings::soundVolume < 0)
+                        scene::Settings::soundVolume = 0;
+                    scene::Settings::updateSoundBar(_universe);
+                    return true;
+                } else if (id == GUI_SETTINGS_SOUND_VOL_PLUS) {
+                    scene::Settings::soundVolume += 10;
+                    if (scene::Settings::soundVolume > 100)
+                        scene::Settings::soundVolume = 100;
+                    scene::Settings::updateSoundBar(_universe);
                     return true;
                 }
             default:
