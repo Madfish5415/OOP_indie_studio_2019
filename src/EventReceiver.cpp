@@ -17,6 +17,7 @@
 #include "ecs/component/Image.hpp"
 #include "ecs/component/Music.hpp"
 #include "ecs/component/PushButton.hpp"
+#include "ecs/component/Sliding.hpp"
 #include "ecs/event/Key.hpp"
 #include "scene/Bomberman.hpp"
 #include "scene/HowToPlay.hpp"
@@ -45,10 +46,23 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         }
         if (_universe->hasWorldManager("WinScreen") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
-            scene::WinScreen::destroy(_universe);
-            scene::Bomberman::destroy(_universe);
-            scene::Menu::init(_universe, sf::Time::Zero);
-            _universe->setCurrentWorldManager("Menu");
+            auto imgEntities = _universe->getCurrentWorldManager()->getEntities<ecs::component::Sliding>();
+            bool moving = false;
+
+            for (const auto& entity : imgEntities) {
+                auto& sliding = _universe->getCurrentWorldManager()->getComponent<ecs::component::Sliding>(entity);
+                const auto& pos = _universe->getCurrentWorldManager()->getComponent<ecs::component::Image>(entity).image->getRelativePosition();
+
+                if (pos.UpperLeftCorner != sliding.endPosition) {
+                    moving = true;
+                }
+            }
+            if (!moving) {
+                scene::WinScreen::destroy(_universe);
+                scene::Bomberman::destroy(_universe);
+                scene::Menu::init(_universe, sf::Time::Zero);
+                _universe->setCurrentWorldManager("Menu");
+            }
         }
         if (_universe->hasWorldManager("Keybinding") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("Keybinding")) {
