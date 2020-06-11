@@ -19,6 +19,7 @@
 #include "ecs/component/PushButton.hpp"
 #include "ecs/component/Sliding.hpp"
 #include "ecs/event/Key.hpp"
+#include "irrlicht/GUIColorPicker.hpp"
 #include "scene/Bomberman.hpp"
 #include "scene/HowToPlay.hpp"
 #include "scene/Keybinding.hpp"
@@ -219,8 +220,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id >= BUTTON_ID::GUI_SELECT_TYPE_P1_LEFT && id <= BUTTON_ID::GUI_SELECT_TYPE_P4_RIGHT) {
                     scene::PlayerSelector::changeType(_universe, id);
                     return true;
-                } else if (id == BUTTON_ID::GUI_SELECT_KB_P1 || id == BUTTON_ID::GUI_SELECT_KB_P2 ||
-                    id == BUTTON_ID::GUI_SELECT_KB_P3 || id == BUTTON_ID::GUI_SELECT_KB_P4) {
+                } else if (id >= BUTTON_ID::GUI_SELECT_CUSTOM_P1 && id <= BUTTON_ID::GUI_SELECT_CUSTOM_P4) {
+                    auto gui = _universe->getDevice()->getGUIEnvironment();
+                    scene::PlayerSelector::modal = gui->addModalScreen(nullptr);
+                    auto* colorPicker = new irr::gui::GUIColorPicker(gui, scene::PlayerSelector::modal, 999, id - BUTTON_ID::GUI_SELECT_CUSTOM_P1);
+                } else if (id >= BUTTON_ID::GUI_SELECT_KB_P1 && id <= BUTTON_ID::GUI_SELECT_KB_P4) {
                     if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
                         auto &image = _universe->getWorldManager("PlayerSelector")
                                           ->getComponent<ecs::component::Image>(
@@ -312,6 +316,15 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     if (scene::Settings::soundVolume > 100)
                         scene::Settings::soundVolume = 100;
                     scene::Settings::updateSoundBar(_universe);
+                    return true;
+                }
+            case irr::gui::EGET_FILE_SELECTED:
+                if (scene::PlayerSelector::modal && *scene::PlayerSelector::modal->getChildren().getLast() == event.GUIEvent.Caller) {
+                    auto colorPicker = dynamic_cast<irr::gui::GUIColorPicker *>(event.GUIEvent.Caller);
+
+                    scene::PlayerSelector::bombColors[colorPicker->idx] = colorPicker->getPickedColor();
+                    scene::PlayerSelector::modal->remove();
+                    scene::PlayerSelector::modal = nullptr;
                     return true;
                 }
             default:

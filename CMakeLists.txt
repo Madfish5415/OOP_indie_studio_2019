@@ -51,6 +51,7 @@ set(SRCS
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
         src/ecs/component/Sliding.cpp
+        src/ecs/component/PlayerIndex.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -89,6 +90,7 @@ set(SRCS
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
         src/ecs/event/TimerEnd.cpp
+        src/irrlicht/GUIColorPicker.cpp
         )
 
 set(HEADERS
@@ -139,6 +141,7 @@ set(HEADERS
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
         src/ecs/component/Sliding.hpp
+        src/ecs/component/PlayerIndex.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
@@ -176,6 +179,7 @@ set(HEADERS
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
         src/ecs/event/TimerEnd.hpp
+        src/irrlicht/GUIColorPicker.hpp
         )
 
 if (DEBUG)
