@@ -51,8 +51,18 @@ void Countdown::update()
                     fader->setColor(irr::video::SColor(0,0,0,0));
                     fader->fadeIn(1000);
                     scene::CountDown::images.push_back(newCount);
+                    scene::CountDown::faders.push_back(fader);
                 }
                 else {
+                    for (const auto& image : scene::CountDown::images) {
+                        auto& imageCmp = worldManager->getComponent<ecs::component::Image>(image);
+                        imageCmp.image->remove();
+                    }
+                    for (const auto& fader : scene::CountDown::faders) {
+                        fader->remove();
+                    }
+                    scene::CountDown::images.clear();
+                    scene::CountDown::faders.clear();
                     worldManager->getUniverse()->setCurrentWorldManager("Bomberman");
                 }
             }

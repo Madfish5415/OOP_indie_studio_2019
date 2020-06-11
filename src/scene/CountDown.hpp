@@ -22,6 +22,7 @@ class CountDown {
 
   public:
     static std::vector<ecs::Entity> images;
+    static std::vector<irr::gui::IGUIInOutFader *> faders;
 };
 namespace countdown {
 static const std::string THREE = "assets/img/countdown/three.png";
