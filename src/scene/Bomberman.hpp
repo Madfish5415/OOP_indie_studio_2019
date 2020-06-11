@@ -26,10 +26,11 @@ class Bomberman {
     static void reset();
     static void destroy(ecs::Universe* universe);
     static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius, bool wallPass,
-        const irr::core::vector3d<irr::f32>& pos);
+        const irr::core::vector3d<irr::f32>& pos, int idx);
     static void updateCollision(ecs::WorldManager* worldManager);
     static void createPowerUp(ecs::Universe* universe, irr::core::vector3df position);
-    static void createExplosion(ecs::WorldManager* worldManager, irr::u32 delay, const irr::core::vector3df& pos);
+    static void createExplosion(
+        ecs::WorldManager* worldManager, irr::u32 delay, const irr::core::vector3df& pos, int idx);
 
   public:
     static std::vector<ecs::Entity> playerIds;
@@ -54,7 +55,10 @@ static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, 
 
 namespace bomb {
 static const std::string BOMB = "media/bomb/Bomb.obj";
-static const std::string TEXTURE = "media/bomb/bomb-neon.png";
+static const std::string TEXTURE1 = "media/bomb/bomb-neon1.png";
+static const std::string TEXTURE2 = "media/bomb/bomb-neon2.png";
+static const std::string TEXTURE3 = "media/bomb/bomb-neon3.png";
+static const std::string TEXTURE4 = "media/bomb/bomb-neon4.png";
 } // namespace bomb
 
 namespace map {
@@ -71,14 +75,14 @@ static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
 static const std::string WALL_PASS = "media/power-up/wall-pass.png";
 } // namespace powerUp
 namespace bomb {
-static const std::string EXPLOSION = "media/map/portal7.bmp";
+static const std::string EXPLOSION = "media/map/portal9.png";
 } // namespace bomb
 static const std::string MUSIC = "assets/music/game/background.ogg";
 namespace sound {
 static const std::string EXPLOSION = "assets/music/game/sound/explosion.ogg";
 static const std::string POWERUP = "assets/music/game/sound/powerup.ogg";
 static const std::string DEATH = "assets/music/game/sound/death.wav";
-}
+} // namespace sound
 } // namespace bomberman
 } // namespace scene
 

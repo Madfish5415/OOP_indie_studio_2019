@@ -5,13 +5,9 @@
 ** Core.cpp
 */
 
-
-
 #include "Core.hpp"
 
 #include "../scene/LoadingMenu.hpp"
-#include "../scene/Menu.hpp"
-#include "../scene/PlayerSelector.hpp"
 
 using namespace core;
 

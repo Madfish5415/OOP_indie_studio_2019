@@ -39,6 +39,7 @@ set(SRCS
         src/ecs/component/Transform.cpp
         src/ecs/component/Unbreakable.cpp
         src/ecs/component/PushButton.cpp
+        src/ecs/component/SkinColor.cpp
         src/ecs/component/Blink.cpp
         src/ecs/component/StatRender.cpp
         src/ecs/component/Timer.cpp
@@ -49,6 +50,8 @@ set(SRCS
         src/ecs/component/Breakable.cpp
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
+        src/ecs/component/Sliding.cpp
+        src/ecs/component/PlayerIndex.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -65,18 +68,23 @@ set(SRCS
         src/ecs/system/TimerRender.cpp
         src/ecs/system/BoundingBox.cpp
         src/ecs/system/BombTimer.cpp
+        src/ecs/system/WinChecking.cpp
         src/ecs/system/PowerUp.cpp
         src/ecs/system/Spinner.cpp
         src/ecs/system/Shrink.cpp
+        src/ecs/system/Sliding.cpp
+        src/ecs/system/Countdown.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
+        src/scene/WinScreen.cpp
         src/scene/PlayerSelector.cpp
         src/scene/Keybinding.cpp
         src/scene/GameHud.cpp
         src/scene/Pause.cpp
         src/scene/Settings.cpp
         src/scene/HowToPlay.cpp
+        src/scene/CountDown.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -84,6 +92,7 @@ set(SRCS
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
         src/ecs/event/TimerEnd.cpp
+        src/irrlicht/GUIColorPicker.cpp
         )
 
 set(HEADERS
@@ -117,6 +126,7 @@ set(HEADERS
         src/ecs/component/Render3d.hpp
         src/ecs/component/Size.hpp
         src/ecs/component/Sound.hpp
+        src/ecs/component/SkinColor.hpp
         src/ecs/component/Stats.hpp
         src/ecs/component/Text.hpp
         src/ecs/component/Transform.hpp
@@ -132,7 +142,11 @@ set(HEADERS
         src/ecs/component/Breakable.hpp
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
+        src/ecs/component/Sliding.hpp
+        src/ecs/component/PlayerIndex.hpp
+        src/ecs/system/Countdown.hpp
         src/ecs/system/Music.hpp
+        src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
         src/ecs/system/Motion.hpp
         src/ecs/system/ExplosionDelay.hpp
@@ -151,8 +165,10 @@ set(HEADERS
         src/ecs/system/PowerUp.hpp
         src/ecs/system/Spinner.hpp
         src/ecs/system/Shrink.hpp
+        src/ecs/system/Sliding.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
+        src/scene/WinScreen.hpp
         src/scene/LoadingMenu.hpp
         src/scene/PlayerSelector.hpp
         src/scene/Keybinding.hpp
@@ -160,12 +176,14 @@ set(HEADERS
         src/scene/Pause.hpp
         src/scene/Settings.hpp
         src/scene/HowToPlay.hpp
+        src/scene/CountDown.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
         src/ecs/event/TimerEnd.hpp
+        src/irrlicht/GUIColorPicker.hpp
         )
 
 if (DEBUG)
