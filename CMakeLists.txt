@@ -175,6 +175,7 @@ endif()
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
 
+add_custom_command(TARGET bomberman POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bomberman> ../)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
