@@ -29,6 +29,7 @@
 #include "scene/PlayerSelector.hpp"
 #include "scene/Settings.hpp"
 #include "scene/WinScreen.hpp"
+#include "scene/CountDown.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -47,6 +48,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         }
         if (_universe->hasWorldManager("WinScreen") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
+          
             auto imgEntities = _universe->getCurrentWorldManager()->getEntities<ecs::component::Sliding>();
             bool moving = false;
 
@@ -60,6 +62,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
             }
             if (!moving) {
                 scene::WinScreen::destroy(_universe);
+                scene::CountDown::destroy(_universe);
                 scene::Bomberman::destroy(_universe);
                 scene::Menu::init(_universe, sf::Time::Zero);
                 _universe->setCurrentWorldManager("Menu");
@@ -260,8 +263,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         std::vector<bool> tmpType = scene::PlayerSelector::typeList;
                         scene::PlayerSelector::destroy(_universe);
                         scene::Bomberman::init(_universe, tmpCmp, pathTextureList, tmpType);
-                        if (_universe->hasWorldManager("Bomberman"))
-                            _universe->setCurrentWorldManager("Bomberman");
+                        if (_universe->hasWorldManager("Bomberman") && _universe->hasWorldManager("CountDown"))
+                            _universe->setCurrentWorldManager("CountDown");
                     }
                     return true;
                 } else if (id == GUI_GAME_PAUSE) {
@@ -274,6 +277,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == GUI_PAUSE_MENU) {
                     scene::Pause::destroy(_universe);
+                    scene::CountDown::destroy(_universe);
                     scene::Bomberman::destroy(_universe);
                     scene::Menu::init(_universe, sf::Time::Zero);
                     if (_universe->hasWorldManager("Menu"))

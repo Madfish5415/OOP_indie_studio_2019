@@ -50,6 +50,7 @@
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
 #include "PlayerSelector.hpp"
+#include "CountDown.hpp"
 
 using namespace scene;
 
@@ -531,6 +532,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
 
     ecs::Entity music = worldManager->createEntity();
     worldManager->addComponent<ecs::component::Music>(music, ecs::component::Music(scene::bomberman::MUSIC));
+    worldManager->getComponent<ecs::component::Music>(music).music->play();
 
     auto sfx = worldManager->createEntity();
     worldManager->addComponent<ecs::component::Sound>(sfx,
@@ -558,6 +560,7 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     createCharacters(worldManager, tileSize, nbTile, players, paths, playerType);
 
     GameHud::init(universe, paths);
+    CountDown::init(universe);
 }
 
 void scene::Bomberman::destroy(ecs::Universe *universe)
