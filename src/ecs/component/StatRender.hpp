@@ -23,6 +23,6 @@ class StatRender {
     std::string type;
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_STATRENDER_COMP_HPP

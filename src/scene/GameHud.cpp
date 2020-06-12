@@ -69,8 +69,8 @@ static void createNumber(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironm
 static void createIcons(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
     irr::video::IVideoDriver *driver, const std::vector<std::string> &paths)
 {
-    std::vector<ecs::Entity> players = worldManager->getEntities<ecs::component::PlayerId, ecs::component::Render3d, ecs::component::Motion,
-        ecs::component::Stats>();
+    std::vector<ecs::Entity> players = worldManager->getEntities<ecs::component::PlayerId, ecs::component::Render3d,
+        ecs::component::Motion, ecs::component::Stats>();
 
     int idx = 0;
     for (const auto &path : paths) {

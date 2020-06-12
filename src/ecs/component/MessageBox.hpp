@@ -14,9 +14,9 @@ namespace ecs::component {
 
 class MessageBox {
   public:
-    MessageBox(irr::gui::IGUIEnvironment* gui = nullptr, const wchar_t* caption = nullptr, const wchar_t* text = nullptr, bool modal = true,
-        irr::s32 flags = irr::gui::EMBF_OK, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1,
-        irr::video::ITexture* image = nullptr);
+    MessageBox(irr::gui::IGUIEnvironment* gui = nullptr, const wchar_t* caption = nullptr,
+        const wchar_t* text = nullptr, bool modal = true, irr::s32 flags = irr::gui::EMBF_OK,
+        irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, irr::video::ITexture* image = nullptr);
     MessageBox(const MessageBox& messageBox1);
     virtual ~MessageBox();
 

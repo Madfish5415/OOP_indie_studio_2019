@@ -14,4 +14,3 @@ Unbreakable::Unbreakable() = default;
 Unbreakable::Unbreakable(const Unbreakable& unbreakable) = default;
 
 Unbreakable::~Unbreakable() = default;
-

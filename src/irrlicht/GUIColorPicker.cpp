@@ -8,19 +8,19 @@
 #include "GUIColorPicker.hpp"
 
 #ifndef _WIN32
-#include <irrlicht/IGUIEnvironment.h>
 #include <irrlicht/IGUIButton.h>
+#include <irrlicht/IGUIEnvironment.h>
 #include <irrlicht/IGUIScrollBar.h>
 #include <irrlicht/IVideoDriver.h>
-#include <irrlicht/irrMath.h>
 #include <irrlicht/SColor.h>
+#include <irrlicht/irrMath.h>
 #else
-#include <IGUIEnvironment.h>
 #include <IGUIButton.h>
+#include <IGUIEnvironment.h>
 #include <IGUIScrollBar.h>
 #include <IVideoDriver.h>
-#include <irrMath.h>
 #include <SColor.h>
+#include <irrMath.h>
 #endif
 
 namespace irr {

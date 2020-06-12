@@ -8,12 +8,12 @@
 #ifndef OOP_INDIE_STUDIO_2019_SYSTEM_HPP
 #define OOP_INDIE_STUDIO_2019_SYSTEM_HPP
 
-
 namespace ecs {
 class WorldManager;
 }
 
 #include <set>
+
 #include "Def.hpp"
 
 /**

@@ -91,32 +91,37 @@ void scene::Keybinding::init(ecs::Universe* universe, const std::string& pathTex
     scene::Keybinding::images.push_back(playerImage);
 
     {
-        ecs::Entity entity = createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 350, 1230 + 75, 350 + 75),
-            nullptr, GUI_SELECT_KB_UP, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
+        ecs::Entity entity =
+            createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 350, 1230 + 75, 350 + 75), nullptr,
+                GUI_SELECT_KB_UP, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
         worldManager->getComponent<ecs::component::PushButton>(entity).setText(
             KEYBINDING_MAP[Keybinding::player->keys["up"]]);
     }
     {
-        ecs::Entity entity = createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 427, 1230 + 75, 427 + 75),
-            nullptr, GUI_SELECT_KB_DOWN, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
+        ecs::Entity entity =
+            createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 427, 1230 + 75, 427 + 75), nullptr,
+                GUI_SELECT_KB_DOWN, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
         worldManager->getComponent<ecs::component::PushButton>(entity).setText(
             KEYBINDING_MAP[Keybinding::player->keys["down"]]);
     }
     {
-        ecs::Entity entity = createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1153, 427, 1153 + 75, 427 + 75),
-            nullptr, GUI_SELECT_KB_LEFT, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
+        ecs::Entity entity =
+            createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1153, 427, 1153 + 75, 427 + 75), nullptr,
+                GUI_SELECT_KB_LEFT, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
         worldManager->getComponent<ecs::component::PushButton>(entity).setText(
             KEYBINDING_MAP[Keybinding::player->keys["left"]]);
     }
     {
-        ecs::Entity entity = createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1307, 427, 1307 + 75, 427 + 75),
-            nullptr, GUI_SELECT_KB_RIGHT, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
+        ecs::Entity entity =
+            createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1307, 427, 1307 + 75, 427 + 75), nullptr,
+                GUI_SELECT_KB_RIGHT, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
         worldManager->getComponent<ecs::component::PushButton>(entity).setText(
             KEYBINDING_MAP[Keybinding::player->keys["right"]]);
     }
     {
-        ecs::Entity entity = createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 650, 1230 + 75, 650 + 75),
-            nullptr, GUI_SELECT_KB_ACTION, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
+        ecs::Entity entity =
+            createPushButton(worldManager, gui, new irr::core::rect<irr::s32>(1230, 650, 1230 + 75, 650 + 75), nullptr,
+                GUI_SELECT_KB_ACTION, keybinding::button::key::NORMAL, keybinding::button::key::PRESSED);
         worldManager->getComponent<ecs::component::PushButton>(entity).setText(
             KEYBINDING_MAP[Keybinding::player->keys["bomb"]]);
     }
