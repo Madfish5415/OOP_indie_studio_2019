@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP
 
 #include <string>
+#include <memory>
 
 #include "irrlicht.h"
 
@@ -27,7 +28,7 @@ class Image {
     irr::video::IVideoDriver* driver;
     irr::gui::IGUIImage* image;
     std::string pathTexture;
-    irr::core::position2d<irr::s32>* position;
+    std::shared_ptr<irr::core::position2d<irr::s32>> position;
     bool useAlphaChannelOfTexture;
     irr::gui::IGUIElement* parent;
     irr::s32 id;

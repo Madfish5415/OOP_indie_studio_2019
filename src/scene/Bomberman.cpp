@@ -328,6 +328,7 @@ void scene::Bomberman::createBomb(ecs::WorldManager *worldManager, ecs::Entity p
 
     irr::scene::ITriangleSelector *selector = smgr->createOctreeTriangleSelector(boxMesh->getMesh(), boxMesh, 128);
     boxMesh->setTriangleSelector(selector);
+    selector->drop();
 
     worldManager->addComponent<ecs::component::Render3d>(bomb, ecs::component::Render3d(bombMesh));
     worldManager->addComponent<ecs::component::BombStats>(bomb, ecs::component::BombStats(bombRadius, wallPass));
@@ -515,8 +516,9 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     }
 
     ecs::Entity ground = worldManager->createEntity();
-    irr::scene::IMeshSceneNode *groundMesh = smgr->addMeshSceneNode(smgr->getGeometryCreator()->createPlaneMesh(
-        irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile)));
+    irr::scene::IMesh *planMesh = smgr->getGeometryCreator()->createPlaneMesh(irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile));
+    irr::scene::IMeshSceneNode *groundMesh = smgr->addMeshSceneNode(planMesh);
+    planMesh->drop();
     if (groundMesh) {
         smgr->getMeshManipulator()->makePlanarTextureMapping(
             groundMesh->getMesh(), 0.1f, 0.1f, 1, irr::core::vector3df(0.0, 0.0, 5.0));
@@ -589,8 +591,11 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, irr::core::vector3
     irr::video::IVideoDriver *driver = universe->getDevice()->getVideoDriver();
     auto worldManager = universe->getWorldManager("Bomberman");
     ecs::Entity powerUp = worldManager->createEntity();
-    irr::scene::IMeshSceneNode *powerUpMesh =
-        smgr->addMeshSceneNode(smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3d<irr::f32>(0.1, 10, 10)));
+    irr::scene::IMesh *cubeMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3d<irr::f32>(0.1, 10, 10));
+    irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(cubeMesh);
+
+    cubeMesh->drop();
+
     size_t powerUpChoice = std::rand() % 10;
 
     if (powerUpMesh) {

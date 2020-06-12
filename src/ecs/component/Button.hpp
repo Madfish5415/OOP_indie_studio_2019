@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
 
 #include <string>
+#include <memory>
 
 #include <irrlicht.h>
 
@@ -29,7 +30,7 @@ class Button {
 
   public:
     irr::gui::IGUIEnvironment* gui;
-    irr::core::rect<irr::s32>* rect{};
+    std::shared_ptr<irr::core::rect<irr::s32>> rect;
     irr::gui::IGUIElement* parent;
     irr::s32 id;
     const wchar_t* text;
