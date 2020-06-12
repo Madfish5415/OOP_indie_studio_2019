@@ -19,6 +19,7 @@
 #include "ecs/component/PushButton.hpp"
 #include "ecs/component/Sliding.hpp"
 #include "ecs/event/Key.hpp"
+#include "irrlicht/GUIColorPicker.hpp"
 #include "scene/Bomberman.hpp"
 #include "scene/HowToPlay.hpp"
 #include "scene/Keybinding.hpp"
@@ -28,6 +29,7 @@
 #include "scene/PlayerSelector.hpp"
 #include "scene/Settings.hpp"
 #include "scene/WinScreen.hpp"
+#include "scene/CountDown.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -46,6 +48,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         }
         if (_universe->hasWorldManager("WinScreen") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
+          
             auto imgEntities = _universe->getCurrentWorldManager()->getEntities<ecs::component::Sliding>();
             bool moving = false;
 
@@ -59,6 +62,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
             }
             if (!moving) {
                 scene::WinScreen::destroy(_universe);
+                scene::CountDown::destroy(_universe);
                 scene::Bomberman::destroy(_universe);
                 scene::Menu::init(_universe, sf::Time::Zero);
                 _universe->setCurrentWorldManager("Menu");
@@ -219,8 +223,11 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id >= BUTTON_ID::GUI_SELECT_TYPE_P1_LEFT && id <= BUTTON_ID::GUI_SELECT_TYPE_P4_RIGHT) {
                     scene::PlayerSelector::changeType(_universe, id);
                     return true;
-                } else if (id == BUTTON_ID::GUI_SELECT_KB_P1 || id == BUTTON_ID::GUI_SELECT_KB_P2 ||
-                    id == BUTTON_ID::GUI_SELECT_KB_P3 || id == BUTTON_ID::GUI_SELECT_KB_P4) {
+                } else if (id >= BUTTON_ID::GUI_SELECT_CUSTOM_P1 && id <= BUTTON_ID::GUI_SELECT_CUSTOM_P4) {
+                    auto gui = _universe->getDevice()->getGUIEnvironment();
+                    scene::PlayerSelector::modal = gui->addModalScreen(nullptr);
+                    auto* colorPicker = new irr::gui::GUIColorPicker(gui, scene::PlayerSelector::modal, 999, id - BUTTON_ID::GUI_SELECT_CUSTOM_P1);
+                } else if (id >= BUTTON_ID::GUI_SELECT_KB_P1 && id <= BUTTON_ID::GUI_SELECT_KB_P4) {
                     if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
                         auto &image = _universe->getWorldManager("PlayerSelector")
                                           ->getComponent<ecs::component::Image>(
@@ -256,8 +263,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                         std::vector<bool> tmpType = scene::PlayerSelector::typeList;
                         scene::PlayerSelector::destroy(_universe);
                         scene::Bomberman::init(_universe, tmpCmp, pathTextureList, tmpType);
-                        if (_universe->hasWorldManager("Bomberman"))
-                            _universe->setCurrentWorldManager("Bomberman");
+                        if (_universe->hasWorldManager("Bomberman") && _universe->hasWorldManager("CountDown"))
+                            _universe->setCurrentWorldManager("CountDown");
                     }
                     return true;
                 } else if (id == GUI_GAME_PAUSE) {
@@ -270,6 +277,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == GUI_PAUSE_MENU) {
                     scene::Pause::destroy(_universe);
+                    scene::CountDown::destroy(_universe);
                     scene::Bomberman::destroy(_universe);
                     scene::Menu::init(_universe, sf::Time::Zero);
                     if (_universe->hasWorldManager("Menu"))
@@ -312,6 +320,15 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     if (scene::Settings::soundVolume > 100)
                         scene::Settings::soundVolume = 100;
                     scene::Settings::updateSoundBar(_universe);
+                    return true;
+                }
+            case irr::gui::EGET_FILE_SELECTED:
+                if (scene::PlayerSelector::modal && *scene::PlayerSelector::modal->getChildren().getLast() == event.GUIEvent.Caller) {
+                    auto colorPicker = dynamic_cast<irr::gui::GUIColorPicker *>(event.GUIEvent.Caller);
+
+                    scene::PlayerSelector::bombColors[colorPicker->idx] = colorPicker->getPickedColor();
+                    scene::PlayerSelector::modal->remove();
+                    scene::PlayerSelector::modal = nullptr;
                     return true;
                 }
             default:

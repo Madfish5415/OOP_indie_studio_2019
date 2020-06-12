@@ -15,6 +15,7 @@
 #include "../component/Motion.hpp"
 #include "../component/Owner.hpp"
 #include "../component/Player.hpp"
+#include "../component/PlayerIndex.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Stats.hpp"
 
@@ -111,9 +112,10 @@ void Player::receiveKeyEvent(event::Key& event)
 
             auto& stat = worldManager->getComponent<ecs::component::Stats>(entity);
             auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
+            auto& playerIndex = worldManager->getComponent<ecs::component::PlayerIndex>(entity);
 
             if (bombNbr < stat.maxBomb && !alreadyExist(render3d.node->getPosition())) {
-                scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, stat.wallPass, render3d.node->getPosition());
+                scene::Bomberman::createBomb(worldManager, entity, stat.bombRadius, stat.wallPass, render3d.node->getPosition(), playerIndex.idx);
             }
         }
     }

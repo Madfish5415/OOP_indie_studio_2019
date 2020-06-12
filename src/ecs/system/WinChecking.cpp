@@ -9,6 +9,7 @@
 
 #include "../../scene/WinScreen.hpp"
 #include "../Universe.hpp"
+#include "../component/Music.hpp"
 #include "../component/SkinColor.hpp"
 
 using namespace ecs::system;
@@ -24,6 +25,9 @@ void WinChecking::update()
     ecs::Universe* universe = worldManager->getUniverse();
 
     if (entities.size() <= 1) {
+        auto music = worldManager->getEntities<ecs::component::Music>();
+
+        worldManager->getComponent<ecs::component::Music>(music[0]).music->stop();
         if (entities.empty()) {
             std::string draw = "draw";
             scene::WinScreen::init(universe, draw);

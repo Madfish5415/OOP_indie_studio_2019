@@ -51,6 +51,7 @@ set(SRCS
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
         src/ecs/component/Sliding.cpp
+        src/ecs/component/PlayerIndex.cpp
         src/ecs/system/AI.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
@@ -73,6 +74,7 @@ set(SRCS
         src/ecs/system/Spinner.cpp
         src/ecs/system/Shrink.cpp
         src/ecs/system/Sliding.cpp
+        src/ecs/system/Countdown.cpp
         src/scene/Bomberman.cpp
         src/scene/Menu.cpp
         src/scene/LoadingMenu.cpp
@@ -83,6 +85,7 @@ set(SRCS
         src/scene/Pause.cpp
         src/scene/Settings.cpp
         src/scene/HowToPlay.cpp
+        src/scene/CountDown.cpp
         src/EventReceiver.cpp
         src/core/Core.cpp
         src/ecs/Universe.cpp
@@ -90,6 +93,7 @@ set(SRCS
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
         src/ecs/event/TimerEnd.cpp
+        src/irrlicht/GUIColorPicker.cpp
         )
 
 set(HEADERS
@@ -140,6 +144,8 @@ set(HEADERS
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
         src/ecs/component/Sliding.hpp
+        src/ecs/component/PlayerIndex.hpp
+        src/ecs/system/Countdown.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/WinChecking.hpp
         src/ecs/system/Movement.hpp
@@ -172,12 +178,14 @@ set(HEADERS
         src/scene/Pause.hpp
         src/scene/Settings.hpp
         src/scene/HowToPlay.hpp
+        src/scene/CountDown.hpp
         src/EventReceiver.hpp
         src/core/Core.hpp
         src/ecs/Universe.hpp
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
         src/ecs/event/TimerEnd.hpp
+        src/irrlicht/GUIColorPicker.hpp
         )
 
 if (DEBUG)
@@ -187,6 +195,7 @@ endif()
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
 
+add_custom_command(TARGET bomberman POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bomberman> ../)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
