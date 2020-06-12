@@ -89,7 +89,7 @@ static void createSlidingScreen(ecs::WorldManager* worldManager, const std::stri
     worldManager->addComponent(
         won, ecs::component::Sliding(1, irr::core::vector2d<irr::s32>(0, 0), irr::core::vector2d<irr::s32>(-2000, 0)));
 
-    auto blinkingText = worldManager->createEntity();
+    ecs::Entity blinkingText = worldManager->createEntity();
     worldManager->addComponent(blinkingText,
         ecs::component::Image(gui, driver, scene::loadingmenu::TEXT, new irr::core::position2d<irr::s32> {4250, 960}));
     worldManager->addComponent(blinkingText, ecs::component::Blink(600));
@@ -155,7 +155,8 @@ void scene::WinScreen::init(ecs::Universe* universe, const std::string& skinPath
         createSlidingScreen(worldManager, scene::winscreen::win::yellow::PLAYER, scene::winscreen::win::yellow::TEXT,
             scene::winscreen::win::yellow::WON, scene::winscreen::win::yellow::MUSIC);
     } else if (skinPath == "draw") {
-        createSlidingScreen(worldManager, "draw", scene::winscreen::win::draw::TEXT, scene::winscreen::win::draw::WON, "");
+        createSlidingScreen(
+            worldManager, "draw", scene::winscreen::win::draw::TEXT, scene::winscreen::win::draw::WON, "");
     }
 }
 

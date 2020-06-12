@@ -11,6 +11,6 @@ using namespace ecs::component;
 
 PowerUp::PowerUp() = default;
 
-PowerUp::~PowerUp() = default;
-
 PowerUp::PowerUp(const PowerUp& powerUp) = default;
+
+PowerUp::~PowerUp() = default;

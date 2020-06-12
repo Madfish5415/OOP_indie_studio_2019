@@ -24,12 +24,14 @@ class CountDown {
     static std::vector<ecs::Entity> images;
     static std::vector<irr::gui::IGUIInOutFader *> faders;
 };
+
 namespace countdown {
 static const std::string THREE = "assets/img/countdown/three.png";
 static const std::string TWO = "assets/img/countdown/two.png";
 static const std::string ONE = "assets/img/countdown/one.png";
 static const std::string GO = "assets/img/countdown/go.png";
 static const std::string MUSIC = "assets/music/countdown/countdown.wav";
-}
+} // namespace countdown
+
 } // namespace scene
 #endif // INDIESTUDIO_COUNTDOWN_HPP

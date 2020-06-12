@@ -18,6 +18,6 @@ class TimerEnd : public ecs::Event {
     ~TimerEnd() override;
 };
 
-}
+} // namespace ecs::event
 
 #endif // INDIESTUDIO_TIMEREND_HPP

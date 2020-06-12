@@ -13,14 +13,14 @@
 namespace ecs::system {
 
 class WinChecking : public System {
-    public:
-        WinChecking(WorldManager *worldManager);
-        ~WinChecking() override;
+  public:
+    WinChecking(WorldManager *worldManager);
+    ~WinChecking() override;
 
-    public:
-        void update() override;
+  public:
+    void update() override;
 };
 
-}
+} // namespace ecs::system
 
 #endif /* !WINCHECKING_HPP_ */

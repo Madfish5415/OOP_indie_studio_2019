@@ -11,17 +11,20 @@
 #include "../ecs/Universe.hpp"
 
 namespace core {
-    class Core {
-      public:
-        Core();
-        ~Core();
 
-        void init();
-        void run();
+class Core {
+  public:
+    Core();
+    ~Core();
 
-      private:
-        std::unique_ptr<ecs::Universe> _universe;
-    };
-}
+  public:
+    void init();
+    void run();
+
+  private:
+    std::unique_ptr<ecs::Universe> _universe;
+};
+
+} // namespace core
 
 #endif // OOP_INDIE_STUDIO_2019_CORE_HPP

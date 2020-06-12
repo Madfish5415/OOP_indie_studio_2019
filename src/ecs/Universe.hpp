@@ -62,20 +62,20 @@ class Universe {
      * @param name : Name of the WorldManager.
      * @return True if the WorldManager exists and False otherwise.
      */
-    bool hasWorldManager(const std::string &name) const;
+    [[nodiscard]] bool hasWorldManager(const std::string &name) const;
     /**
      * @brief getWorldManager method
      * This method returns the WorldManager associated with the given name.
      * @param name : Name of the WorldManager.
      * @return The WorldManager if it exists and nullptr otherwise.
      */
-    WorldManager *getWorldManager(const std::string &name) const;
+    [[nodiscard]] WorldManager *getWorldManager(const std::string &name) const;
     /**
      * @brief getWorldManager method
      * This method returns the WorldManager that is currently in use.
      * @return The WorldManager if it exists and nullptr otherwise.
      */
-    WorldManager *getCurrentWorldManager() const;
+    [[nodiscard]] WorldManager *getCurrentWorldManager() const;
     /**
      * @brief setCurrentWorldManager method
      * This method defines the WorldManager to use.
@@ -92,10 +92,11 @@ class Universe {
      * This method return the Irrlicth device.
      * @return The Irrlicht device.
      */
-    irr::IrrlichtDevice *getDevice() const;
+    [[nodiscard]] irr::IrrlichtDevice *getDevice() const;
 
   private:
-    std::unordered_map<std::string, std::unique_ptr<WorldManager>> _worldManagers {}; /** < List of all our WorldManager sorted by name */
+    std::unordered_map<std::string, std::unique_ptr<WorldManager>>
+        _worldManagers {}; /** < List of all our WorldManager sorted by name */
     std::string _currentWorldManager; /** < Name of the current WorldManager */
     EventReceiver _eventReceiver; /** < The EventReceiver Class */
     irr::IrrlichtDevice *_device; /** < The Irrlicht device */

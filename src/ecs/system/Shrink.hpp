@@ -8,8 +8,9 @@
 #ifndef INDIESTUDIO_SHRINK_HPP
 #define INDIESTUDIO_SHRINK_HPP
 
-#include <array>
 #include <irrlicht.h>
+
+#include <array>
 
 #include "../System.hpp"
 #include "../event/TimerEnd.hpp"

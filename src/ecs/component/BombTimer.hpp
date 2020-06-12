@@ -16,7 +16,7 @@ class BombTimer {
   public:
     BombTimer(irr::u32 delay = 0);
     BombTimer(const BombTimer &bombTimer);
-    ~BombTimer();
+    virtual ~BombTimer();
 
   public:
     irr::u32 delay;

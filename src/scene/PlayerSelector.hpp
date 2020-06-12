@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_PLAYERSELECTOR_HPP
 
 #include <irrlicht.h>
+
 #include <SFML/Audio.hpp>
 
 #include "../ecs/WorldManager.hpp"
@@ -48,61 +49,76 @@ class PlayerSelector {
 };
 
 namespace playerselector {
+
 namespace button {
+
 namespace back {
 static const std::string NORMAL = "assets/img/player-selector/button/button-back-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-back-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-back-pressed.png";
 } // namespace back
+
 namespace fight {
 static const std::string NORMAL = "assets/img/player-selector/button/button-fight-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-fight-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-fight-pressed.png";
 } // namespace fight
+
 namespace add {
 static const std::string NORMAL = "assets/img/player-selector/button/button-add-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-add-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-add-pressed.png";
 } // namespace add
+
 namespace remove {
 static const std::string NORMAL = "assets/img/player-selector/button/button-remove-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-remove-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-remove-pressed.png";
 } // namespace remove
+
 namespace keys {
 static const std::string NORMAL = "assets/img/player-selector/button/button-keys-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-keys-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-keys-pressed.png";
 static const std::string BLOCKED = "assets/img/player-selector/button/button-keys-blocked.png";
 } // namespace keys
+
 namespace skin {
+
 namespace left {
 static const std::string NORMAL = "assets/img/player-selector/button/button-left-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-left-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-left-pressed.png";
 } // namespace left
+
 namespace right {
 static const std::string NORMAL = "assets/img/player-selector/button/button-right-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-right-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-right-pressed.png";
 } // namespace right
+
 namespace left2 {
 static const std::string NORMAL = "assets/img/player-selector/button/button-left2-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-left2-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-left2-pressed.png";
-} // namespace left
+} // namespace left2
+
 namespace right2 {
 static const std::string NORMAL = "assets/img/player-selector/button/button-right2-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-right2-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-right2-pressed.png";
-} // namespace right
+} // namespace right2
+
 } // namespace skin
+
 namespace custom {
 static const std::string NORMAL = "assets/img/player-selector/button/button-custom-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-custom-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-custom-pressed.png";
-}
+} // namespace custom
+
 } // namespace button
+
 namespace player {
 static const std::string AQUA = "assets/img/player-selector/player/player-aqua.png";
 static const std::string BLACK = "assets/img/player-selector/player/player-black.png";
@@ -115,13 +131,13 @@ static const std::string YELLOW = "assets/img/player-selector/player/player-yell
 
 static std::map<const std::string, bool> PLAYER_SKINS = {{AQUA, false}, {BLACK, false}, {BLUE, false}, {GREEN, false},
     {PINK, false}, {RED, false}, {WHITE, false}, {YELLOW, false}};
-
 static std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, scene::bomberman::ninja::AQUA},
     {BLACK, scene::bomberman::ninja::BLACK}, {BLUE, scene::bomberman::ninja::BLUE},
     {GREEN, scene::bomberman::ninja::GREEN}, {PINK, scene::bomberman::ninja::PINK}, {RED, scene::bomberman::ninja::RED},
     {WHITE, scene::bomberman::ninja::WHITE}, {YELLOW, scene::bomberman::ninja::YELLOW}};
 
 } // namespace player
+
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
 static const std::string WARNING = "assets/img/player-selector/warning.png";
@@ -131,4 +147,5 @@ static const std::string MUSIC = "assets/music/menu/background.ogg";
 } // namespace playerselector
 
 } // namespace scene
+
 #endif // OOP_INDIE_STUDIO_2019_PLAYERSELECTOR_HPP

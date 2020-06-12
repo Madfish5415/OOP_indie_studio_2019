@@ -7,15 +7,13 @@
 
 #include "Sliding.hpp"
 
-#include <iostream>
-
 #include "../Universe.hpp"
 #include "../component/Image.hpp"
 #include "../component/Sliding.hpp"
 
 using namespace ecs::system;
 
-Sliding::Sliding(ecs::WorldManager *worldManager) : System(worldManager)
+Sliding::Sliding(ecs::WorldManager* worldManager) : System(worldManager)
 {
     time = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
     _then = time;

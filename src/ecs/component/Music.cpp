@@ -9,7 +9,7 @@
 
 using namespace ecs::component;
 
-Music::Music(const std::string &musicPath, sf::Time offset) : music(std::shared_ptr<sf::Music>())
+Music::Music(const std::string& musicPath, sf::Time offset) : music(std::shared_ptr<sf::Music>())
 {
     if (!musicPath.empty()) {
         music.reset(new sf::Music());
@@ -29,5 +29,4 @@ Music::Music(const Music& music) : musicPath(music.musicPath)
     }
 }
 
-Music::~Music() {
-}
+Music::~Music() = default;

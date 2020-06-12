@@ -7,11 +7,13 @@
 
 #include "BoundingBox.hpp"
 
-ecs::component::BoundingBox::BoundingBox(irr::scene::IMeshSceneNode *mesh, irr::scene::ITriangleSelector *selector)
+using namespace ecs::component;
+
+BoundingBox::BoundingBox(irr::scene::IMeshSceneNode *mesh, irr::scene::ITriangleSelector *selector)
     : mesh(mesh), selector(selector), collision({false, false, false, false})
 {
 }
 
-ecs::component::BoundingBox::BoundingBox(const ecs::component::BoundingBox &box) = default;
+BoundingBox::BoundingBox(const BoundingBox &box) = default;
 
-ecs::component::BoundingBox::~BoundingBox() = default;
+BoundingBox::~BoundingBox() = default;

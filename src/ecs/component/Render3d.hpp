@@ -16,7 +16,7 @@ class Render3d {
   public:
     Render3d(irr::scene::ISceneNode *node = nullptr);
     Render3d(const Render3d &render);
-    ~Render3d();
+    virtual ~Render3d();
 
   public:
     irr::scene::ISceneNode *node;

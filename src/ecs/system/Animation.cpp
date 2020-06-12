@@ -6,6 +6,7 @@
 */
 
 #include "Animation.hpp"
+
 #include "../component/Animation.hpp"
 #include "../component/Render3d.hpp"
 
@@ -21,10 +22,13 @@ void Animation::update()
 {
     for (const auto& entity : entities) {
         const auto& animation = worldManager->getComponent<ecs::component::Animation>(entity);
-        const auto& node = (irr::scene::IAnimatedMeshSceneNode *) worldManager->getComponent<ecs::component::Render3d>(entity).node;
-        if (!animation.currentAnimation.empty() && (node->getFrameNr() < animation.animationRange.at(animation.currentAnimation).first ||
-        node->getFrameNr() > animation.animationRange.at(animation.currentAnimation).second)) {
-            node->setFrameLoop(animation.animationRange.at(animation.currentAnimation).first, animation.animationRange.at(animation.currentAnimation).second);
+        const auto& node =
+            (irr::scene::IAnimatedMeshSceneNode*)worldManager->getComponent<ecs::component::Render3d>(entity).node;
+        if (!animation.currentAnimation.empty() &&
+            (node->getFrameNr() < animation.animationRange.at(animation.currentAnimation).first ||
+                node->getFrameNr() > animation.animationRange.at(animation.currentAnimation).second)) {
+            node->setFrameLoop(animation.animationRange.at(animation.currentAnimation).first,
+                animation.animationRange.at(animation.currentAnimation).second);
             node->setCurrentFrame(animation.animationRange.at(animation.currentAnimation).first);
         }
     }

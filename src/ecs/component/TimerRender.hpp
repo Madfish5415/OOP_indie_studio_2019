@@ -16,7 +16,7 @@ class TimerRender {
   public:
     TimerRender(Entity owner = 0, size_t position = 0);
     TimerRender(const TimerRender& timerRender);
-    ~TimerRender();
+    virtual ~TimerRender();
 
   public:
     ecs::Entity owner;

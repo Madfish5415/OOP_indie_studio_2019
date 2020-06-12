@@ -19,12 +19,10 @@
 #include "../component/Motion.hpp"
 #include "../component/Owner.hpp"
 #include "../component/Particle.hpp"
-#include "../component/Player.hpp"
 #include "../component/PlayerIndex.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Stats.hpp"
 #include "../component/Unbreakable.hpp"
-#include "../system/Player.hpp"
 #include "AI.hpp"
 
 using namespace ecs::system;
@@ -68,7 +66,7 @@ void AI::plantBomb(ecs::Entity ai, ecs::WorldManager* worldManager)
 
     auto& stat = worldManager->getComponent<ecs::component::Stats>(ai);
     auto& playerIndex = worldManager->getComponent<ecs::component::PlayerIndex>(ai);
-    auto pos = worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
+    const auto& pos = worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
 
     if (bombNbr < stat.maxBomb && !alreadyExist(pos)) {
         scene::Bomberman::createBomb(worldManager, ai, stat.bombRadius, stat.wallPass, pos, playerIndex.idx);
@@ -257,9 +255,8 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager* worldMana
     bool possUp = canMoveDirection(wantedPos, worldManager, "UP", true);
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN", true);
 
-    std::string dir;
+    std::string dir = escapeFromDie(oldPos, wantedPos, worldManager);
 
-    dir = escapeFromDie(oldPos, wantedPos, worldManager);
     if (!dir.empty())
         return dir;
 
@@ -380,25 +377,8 @@ static bool nearBox(ecs::Entity ai, ecs::WorldManager* worldManager)
     wantedPos.X = static_cast<irr::f32>(static_cast<int>(wantedPos.X / 10.f) * 10 + 5);
     wantedPos.Z = static_cast<irr::f32>(static_cast<int>(wantedPos.Z / 10.f) * 10 + 5);
 
-    bool ret = isBreakable(wantedPos, worldManager, "LEFT") || isBreakable(wantedPos, worldManager, "RIGHT") ||
+    return isBreakable(wantedPos, worldManager, "LEFT") || isBreakable(wantedPos, worldManager, "RIGHT") ||
         isBreakable(wantedPos, worldManager, "UP") || isBreakable(wantedPos, worldManager, "DOWN");
-    return ret;
-}
-
-static bool canMove(ecs::Entity ai, ecs::WorldManager* worldManager)
-{
-    irr::core::vector3d<irr::f32> wantedPos =
-        worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
-    auto& aiComp = worldManager->getComponent<ecs::component::AI>(ai);
-
-    wantedPos.X = static_cast<irr::f32>(static_cast<int>(wantedPos.X / 10.f) * 10 + 5);
-    wantedPos.Z = static_cast<irr::f32>(static_cast<int>(wantedPos.Z / 10.f) * 10 + 5);
-
-    bool ret = canMoveDirection(wantedPos, worldManager, "LEFT", true) ||
-        canMoveDirection(wantedPos, worldManager, "RIGHT", true) ||
-        canMoveDirection(wantedPos, worldManager, "UP", true) ||
-        canMoveDirection(wantedPos, worldManager, "DOWN", true);
-    return ret;
 }
 
 void AI::update()
@@ -409,7 +389,7 @@ void AI::update()
     float baseSpeed = 20;
     float multiplicator = baseSpeed / 4;
 
-    for (auto ai : entities) {
+    for (const auto& ai : entities) {
         auto& motion = worldManager->getComponent<ecs::component::Motion>(ai);
         auto& node = worldManager->getComponent<ecs::component::Render3d>(ai).node;
         auto& stats = worldManager->getComponent<ecs::component::Stats>(ai);

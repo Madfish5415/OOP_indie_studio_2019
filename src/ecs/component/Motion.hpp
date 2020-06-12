@@ -16,7 +16,7 @@ class Motion {
   public:
     Motion(const irr::f32 &movementSpeed = 0.0, const irr::core::vector3df &direction = irr::core::vector3df(0.0));
     Motion(const Motion &motion);
-    ~Motion();
+    virtual ~Motion();
 
   public:
     irr::f32 movementSpeed;

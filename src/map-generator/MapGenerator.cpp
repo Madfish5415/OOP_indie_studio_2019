@@ -17,6 +17,8 @@ MapGenerator::MapGenerator()
     createMap();
 }
 
+MapGenerator::~MapGenerator() = default;
+
 void MapGenerator::initMap()
 {
     for (int i = 0; i < 13; i++) {

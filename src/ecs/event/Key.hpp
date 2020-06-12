@@ -24,6 +24,6 @@ class Key : public ecs::Event {
     bool pressed;
 };
 
-}
+} // namespace ecs::event
 
 #endif /* !KEY_HPP_ */

@@ -22,13 +22,12 @@ class Bomberman {
 
   public:
     static void init(ecs::Universe* universe, std::vector<ecs::component::Player> players,
-        std::vector<std::string> paths, std::vector<bool> playerType);
-    static void reset();
+        const std::vector<std::string>& paths, std::vector<bool> playerType);
     static void destroy(ecs::Universe* universe);
     static void createBomb(ecs::WorldManager* worldManager, ecs::Entity playerId, size_t bombRadius, bool wallPass,
         const irr::core::vector3d<irr::f32>& pos, int idx);
     static void updateCollision(ecs::WorldManager* worldManager);
-    static void createPowerUp(ecs::Universe* universe, irr::core::vector3df position);
+    static void createPowerUp(ecs::Universe* universe, const irr::core::vector3df& position);
     static void createExplosion(
         ecs::WorldManager* worldManager, irr::u32 delay, const irr::core::vector3df& pos, int idx);
 
@@ -38,6 +37,7 @@ class Bomberman {
 };
 
 namespace bomberman {
+
 namespace ninja {
 static const std::string NINJA = "media/ninja/ninja.b3d";
 static const std::string AQUA = "media/ninja/aqua.png";
@@ -74,16 +74,20 @@ static const std::string BOMB_RADIUS = "media/power-up/bomb-radius.png";
 static const std::string MAX_BOMB = "media/power-up/max-bomb.png";
 static const std::string WALL_PASS = "media/power-up/wall-pass.png";
 } // namespace powerUp
+
 namespace bomb {
 static const std::string EXPLOSION = "media/map/portal9.png";
 } // namespace bomb
-static const std::string MUSIC = "assets/music/game/background.ogg";
+
 namespace sound {
 static const std::string EXPLOSION = "assets/music/game/sound/explosion.ogg";
 static const std::string POWERUP = "assets/music/game/sound/powerup.ogg";
 static const std::string DEATH = "assets/music/game/sound/death.wav";
 } // namespace sound
+
+static const std::string MUSIC = "assets/music/game/background.ogg";
 } // namespace bomberman
+
 } // namespace scene
 
 #endif // OOP_INDIE_STUDIO_2019_BOMBERMAN_HPP

@@ -10,9 +10,16 @@
 using namespace ecs::component;
 
 PushButton::PushButton(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent,
-               irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
-    : gui(gui), rect(rect), parent(parent), id(id), text(text), tooltipText(tooltipText), font(nullptr),
-      normalImage(nullptr), hoverImage(nullptr)
+    irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
+    : gui(gui),
+      rect(rect),
+      parent(parent),
+      id(id),
+      text(text),
+      tooltipText(tooltipText),
+      font(nullptr),
+      normalImage(nullptr),
+      hoverImage(nullptr)
 {
     if (gui) {
         button = gui->addButton(*rect, parent, id, text, tooltipText);
@@ -50,7 +57,6 @@ void PushButton::setFont(const irr::io::path& path)
 
 void PushButton::setText(const std::wstring& text)
 {
-
     button->setText(text.c_str());
 }
 
@@ -69,4 +75,3 @@ void PushButton::setPressedImage(irr::video::ITexture* image)
 {
     button->setPressedImage(image);
 }
-

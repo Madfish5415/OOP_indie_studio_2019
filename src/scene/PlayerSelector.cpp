@@ -34,12 +34,10 @@ std::vector<ecs::Entity> PlayerSelector::playerType = {};
 std::vector<ecs::component::Player> PlayerSelector::playerComponent = {};
 std::vector<bool> PlayerSelector::typeList = {};
 std::array<irr::video::SColor, 4> PlayerSelector::bombColors = {irr::video::SColor(255, 0, 255, 255),
-    irr::video::SColor(255, 0, 255, 255), irr::video::SColor(255, 0, 255, 255),
-    irr::video::SColor(255, 0, 255, 255)
-};
+    irr::video::SColor(255, 0, 255, 255), irr::video::SColor(255, 0, 255, 255), irr::video::SColor(255, 0, 255, 255)};
 irr::gui::IGUIElement* PlayerSelector::modal = nullptr;
 
-static const std::string getUnusedSkin()
+static const std::string& getUnusedSkin()
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
@@ -95,6 +93,7 @@ void PlayerSelector::init(ecs::Universe* universe, sf::Time musicTimer)
         signature.set(worldManager->getComponentType<ecs::component::Button>());
         worldManager->setSystemSignature<ecs::system::Button>(signature);
     }
+
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
         ecs::component::Image(
@@ -257,7 +256,7 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     PlayerSelector::typeList.emplace_back(false);
 
     int idx = 0;
-    for (auto& id : PlayerSelector::playerIds) {
+    for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
         int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
@@ -302,7 +301,7 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     }
 
     idx = 0;
-    for (auto& id : PlayerSelector::playerKeysIds) {
+    for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
         int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
@@ -386,7 +385,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     }
 
     int idx = 0;
-    for (auto& id : PlayerSelector::playerIds) {
+    for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
         int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
@@ -431,7 +430,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     }
 
     idx = 0;
-    for (auto& id : PlayerSelector::playerKeysIds) {
+    for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
         int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
@@ -443,7 +442,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     }
 }
 
-static std::string getNextUnusedSkin(const std::string& currentSkin)
+static const std::string& getNextUnusedSkin(const std::string& currentSkin)
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
@@ -465,7 +464,7 @@ static std::string getNextUnusedSkin(const std::string& currentSkin)
     }
 }
 
-static std::string getPrevUnusedSkin(const std::string& currentSkin)
+static const std::string& getPrevUnusedSkin(const std::string& currentSkin)
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 

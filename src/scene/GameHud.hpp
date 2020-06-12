@@ -66,11 +66,13 @@ static const std::map<int, std::string> INT_TO_IMG = {{0, NUMBER0}, {1, NUMBER1}
 } // namespace number
 
 namespace button {
+
 namespace settings {
 const std::string NORMAL = "assets/img/game-hud/button/button-settings-normal.png";
 const std::string HOVER = "assets/img/game-hud/button/button-settings-hover.png";
 const std::string PRESSED = "assets/img/game-hud/button/button-settings-pressed.png";
 } // namespace settings
+
 } // namespace button
 
 static const std::string BACKGROUND = "assets/img/game-hud/background.png";

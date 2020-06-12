@@ -6,12 +6,13 @@
 */
 
 #include "Button.hpp"
+
 #include "../Universe.hpp"
 #include "../component/Button.hpp"
 
 using namespace ecs::system;
 
-Button::Button(ecs::WorldManager *worldManager) : ecs::System(worldManager)
+Button::Button(ecs::WorldManager* worldManager) : ecs::System(worldManager)
 {
     mouse = worldManager->getUniverse()->getDevice()->getCursorControl();
     driver = worldManager->getUniverse()->getDevice()->getVideoDriver();

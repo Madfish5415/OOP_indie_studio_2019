@@ -13,7 +13,8 @@ namespace ecs::component {
 class Unbreakable {
   public:
     Unbreakable();
-    ~Unbreakable();
+    Unbreakable(const Unbreakable& unbreakable);
+    virtual ~Unbreakable();
 };
 
 } // namespace ecs::component

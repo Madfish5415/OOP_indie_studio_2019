@@ -13,15 +13,16 @@
 namespace ecs::component {
 
 class Delay {
-    public:
-        Delay(irr::u32 value = 2000);
-        ~Delay();
+  public:
+    Delay(irr::u32 value = 2000);
+    Delay(const Delay& delay);
+    virtual ~Delay();
 
-    public:
-      size_t value;
-      irr::u32 lastUpdate;
+  public:
+    size_t value;
+    irr::u32 lastUpdate;
 };
 
-}
+} // namespace ecs::component
 
 #endif /* !DELAY_HPP_ */

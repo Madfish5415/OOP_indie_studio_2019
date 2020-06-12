@@ -24,15 +24,20 @@ class HowToPlay {
 };
 
 namespace howtoplay {
+
 namespace button {
+
 namespace back {
 static const std::string NORMAL = "assets/img/how-to-play/button/button-back-normal.png";
 static const std::string HOVER = "assets/img/how-to-play/button/button-back-hover.png";
 static const std::string PRESSED = "assets/img/how-to-play/button/button-back-pressed.png";
-}
-}
-static const std::string BACKGROUND = "assets/img/how-to-play/background.png";
-}
+} // namespace back
 
-}
+} // namespace button
+
+static const std::string BACKGROUND = "assets/img/how-to-play/background.png";
+} // namespace howtoplay
+
+} // namespace scene
+
 #endif // INDIESTUDIO_HOWTOPLAY_HPP

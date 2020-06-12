@@ -27,6 +27,6 @@ class Motion : public System {
     irr::u32 _then;
 };
 
-}
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_MOTION_HPP

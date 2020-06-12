@@ -153,20 +153,20 @@ void BombTimer::explode(ecs::WorldManager* worldManager, const ecs::Entity& enti
         limitToFirstBreakable(worldManager, radius, pos);
 
     for (int i = 0; i <= radius[0]; i++) {
-        scene::Bomberman::createExplosion(
-            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X + 10.f * static_cast<float>(i), 5.f, pos.Z), playerIndex.idx);
+        scene::Bomberman::createExplosion(worldManager, 1000,
+            irr::core::vector3d<irr::f32>(pos.X + 10.f * static_cast<float>(i), 5.f, pos.Z), playerIndex.idx);
     }
     for (int i = 0; i <= radius[1]; i++) {
-        scene::Bomberman::createExplosion(
-            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X - 10.f * static_cast<float>(i), 5.f, pos.Z), playerIndex.idx);
+        scene::Bomberman::createExplosion(worldManager, 1000,
+            irr::core::vector3d<irr::f32>(pos.X - 10.f * static_cast<float>(i), 5.f, pos.Z), playerIndex.idx);
     }
     for (int i = 0; i <= radius[2]; i++) {
-        scene::Bomberman::createExplosion(
-            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z + 10.f * static_cast<float>(i)), playerIndex.idx);
+        scene::Bomberman::createExplosion(worldManager, 1000,
+            irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z + 10.f * static_cast<float>(i)), playerIndex.idx);
     }
     for (int i = 0; i <= radius[3]; i++) {
-        scene::Bomberman::createExplosion(
-            worldManager, 1000, irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z - 10.f * static_cast<float>(i)), playerIndex.idx);
+        scene::Bomberman::createExplosion(worldManager, 1000,
+            irr::core::vector3d<irr::f32>(pos.X, 5.f, pos.Z - 10.f * static_cast<float>(i)), playerIndex.idx);
     }
     sound.soundsToPlay.emplace_back("explosion");
 }

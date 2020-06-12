@@ -15,8 +15,8 @@ namespace ecs::component {
 class LookingView {
   public:
     LookingView(const irr::core::vector3df &direction = irr::core::vector3df(0.0));
-    LookingView(LookingView &lookingView);
-    ~LookingView();
+    LookingView(const LookingView &lookingView);
+    virtual ~LookingView();
 
   public:
     irr::core::vector3df direction;

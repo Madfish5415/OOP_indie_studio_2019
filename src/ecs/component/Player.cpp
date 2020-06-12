@@ -13,8 +13,6 @@ Player::Player(std::unordered_map<std::string, irr::EKEY_CODE> keys) : keys(keys
 {
 }
 
-Player::Player(const Player& player) : keys(player.keys), lastKey(player.lastKey)
-{
-}
+Player::Player(const Player& player) = default;
 
 Player::~Player() = default;

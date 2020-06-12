@@ -18,11 +18,12 @@ class HitboxDetection {
   public:
     HitboxDetection(const std::vector<irr::core::line3df>& rays = std::vector<irr::core::line3df>());
     HitboxDetection(const HitboxDetection& transform);
-    ~HitboxDetection();
+    virtual ~HitboxDetection();
 
   public:
     std::vector<irr::core::line3df> rays;
 };
 
 } // namespace ecs::component
+
 #endif /* !HITBOXDETECTION_HPP_ */

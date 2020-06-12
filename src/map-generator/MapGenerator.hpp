@@ -13,17 +13,21 @@
 class MapGenerator {
   public:
     MapGenerator();
-  public:
+    ~MapGenerator();
+
+  private:
     void initMap();
     int countWallNumber(int x, int y);
     void putWall(int x, int y);
     void generateMap();
     void fillMap();
+
+  public:
     void createMap();
     std::array<std::array<char, 13>, 13> getMap();
-  private:
-    std::array<std::array<char, 13>, 13> _map;
 
+  private:
+    std::array<std::array<char, 13>, 13> _map {};
 };
 
 #endif // OOP_INDIE_STUDIO_2019_MAPGENERATOR_HPP

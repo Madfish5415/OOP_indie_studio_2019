@@ -13,4 +13,6 @@ Blink::Blink(irr::u32 millisecond) : millisecond(millisecond), lastUpdate(0)
 {
 }
 
+Blink::Blink(const Blink& blink) = default;
+
 Blink::~Blink() = default;

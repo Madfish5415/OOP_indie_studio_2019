@@ -14,10 +14,11 @@ namespace ecs::component {
 
 class Sliding {
   public:
-    Sliding(irr::u32 delay = 1000, const irr::core::vector2d<irr::s32>& endPosition = irr::core::vector2d<irr::s32>(0, 0),
+    Sliding(irr::u32 delay = 1000,
+        const irr::core::vector2d<irr::s32>& endPosition = irr::core::vector2d<irr::s32>(0, 0),
         const irr::core::vector2d<irr::s32>& addPosition = irr::core::vector2d<irr::s32>(0, 0));
     Sliding(const Sliding& sliding);
-    ~Sliding();
+    virtual ~Sliding();
 
   public:
     irr::u32 delay;
@@ -26,6 +27,6 @@ class Sliding {
     irr::core::vector2d<irr::s32> addPosition;
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_SLIDING_COMP_HPP

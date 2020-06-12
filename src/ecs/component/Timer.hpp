@@ -16,7 +16,7 @@ class Timer {
   public:
     Timer(irr::u32 delay = 0);
     Timer(const Timer& timer);
-    ~Timer();
+    virtual ~Timer();
 
   public:
     irr::u32 delay;

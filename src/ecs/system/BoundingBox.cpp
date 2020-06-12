@@ -15,13 +15,13 @@
 
 using namespace ecs::system;
 
-BoundingBox::BoundingBox(ecs::WorldManager *worldManager) : System(worldManager)
+BoundingBox::BoundingBox(ecs::WorldManager* worldManager) : System(worldManager)
 {
 }
 
 BoundingBox::~BoundingBox() = default;
 
-bool BoundingBox::isCollide(irr::scene::IMeshSceneNode *mesh, size_t id)
+bool BoundingBox::isCollide(irr::scene::IMeshSceneNode* mesh, size_t id)
 {
     auto entities = worldManager->getEntities<ecs::component::Render3d, ecs::component::PlayerId>();
 
@@ -53,6 +53,5 @@ void BoundingBox::update()
             }
             id++;
         }
-
     }
 }

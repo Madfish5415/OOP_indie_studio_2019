@@ -16,7 +16,7 @@ class BombStats {
   public:
     BombStats(const size_t &bombRadius = 0, const bool &wallPass = false);
     BombStats(const BombStats &bombstat);
-    ~BombStats();
+    virtual ~BombStats();
 
   public:
     size_t bombRadius;

@@ -13,7 +13,8 @@ namespace ecs::component {
 class Breakable {
   public:
     Breakable();
-    ~Breakable();
+    Breakable(const Breakable& breakable);
+    virtual ~Breakable();
 };
 
 } // namespace ecs::component

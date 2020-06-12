@@ -7,12 +7,12 @@
 
 #include "Sound.hpp"
 
-#include "../component/Sound.hpp"
 #include "../../scene/Settings.hpp"
+#include "../component/Sound.hpp"
 
 using namespace ecs::system;
 
-Sound::Sound(ecs::WorldManager *worldManager) : System(worldManager)
+Sound::Sound(ecs::WorldManager* worldManager) : System(worldManager)
 {
 }
 
@@ -20,7 +20,7 @@ Sound::~Sound() = default;
 
 void Sound::update()
 {
-    for (const auto& entity: entities) {
+    for (const auto& entity : entities) {
         auto& sounds = worldManager->getComponent<ecs::component::Sound>(entity);
         for (auto& sound : sounds.soundsToPlay) {
             sounds.sounds[sound]->setPlayingOffset(sf::Time::Zero);

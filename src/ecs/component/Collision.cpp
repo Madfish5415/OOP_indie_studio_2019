@@ -9,10 +9,8 @@
 
 using namespace ecs::component;
 
-Collision::Collision()
-{
-}
+Collision::Collision() = default;
 
-Collision::~Collision()
-{
-}
+Collision::Collision(const Collision& collision) = default;
+
+Collision::~Collision() = default;

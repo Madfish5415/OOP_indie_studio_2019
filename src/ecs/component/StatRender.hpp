@@ -16,7 +16,7 @@ class StatRender {
   public:
     StatRender(ecs::Entity owner = 0, const std::string& type = "");
     StatRender(const StatRender& statRender);
-    ~StatRender();
+    virtual ~StatRender();
 
   public:
     ecs::Entity owner;

@@ -70,11 +70,11 @@ void scene::Pause::init(ecs::Universe *universe)
 
 void scene::Pause::destroy(ecs::Universe *universe)
 {
-    for (auto& entity : scene::Pause::images) {
+    for (const auto& entity : scene::Pause::images) {
         auto& img = universe->getWorldManager("Pause")->getComponent<ecs::component::Image>(entity);
         img.image->remove();
     }
-    for (auto& entity : scene::Pause::buttons) {
+    for (const auto& entity : scene::Pause::buttons) {
         auto& btn = universe->getWorldManager("Pause")->getComponent<ecs::component::Button>(entity);
         btn.button->remove();
     }

@@ -9,16 +9,16 @@
 #define MUSIC_HPP_
 
 #include <SFML/Audio.hpp>
-#include <string>
 #include <memory>
+#include <string>
 
 namespace ecs::component {
 
 class Music {
   public:
-    Music(const std::string &musicPath = "", const sf::Time offset = sf::Time::Zero);
+    Music(const std::string& musicPath = "", const sf::Time offset = sf::Time::Zero);
     Music(const Music& music);
-    ~Music();
+    virtual ~Music();
 
   public:
     std::shared_ptr<sf::Music> music;

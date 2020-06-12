@@ -17,8 +17,8 @@ namespace ecs::system {
 
 class Player : public System {
   public:
-    Player(ecs::WorldManager *worldManager);
-    ~Player();
+    explicit Player(ecs::WorldManager* worldManager);
+    ~Player() override;
 
   public:
     void receiveKeyEvent(event::Key& key);
@@ -27,6 +27,6 @@ class Player : public System {
     bool alreadyExist(const irr::core::vector3d<irr::f32>& pos);
 };
 
-}
+} // namespace ecs::system
 
 #endif /* !PLAYER_HPP_ */

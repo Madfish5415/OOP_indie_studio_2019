@@ -20,7 +20,7 @@ class Image {
         const std::string& pathTexture = "", irr::core::position2d<irr::s32>* position = nullptr,
         bool useAlphaChannelOfTexture = true, irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1);
     Image(const Image& image);
-    ~Image();
+    virtual ~Image();
 
   public:
     irr::gui::IGUIEnvironment* gui;

@@ -14,7 +14,7 @@ class Lootable {
   public:
     Lootable();
     Lootable(const Lootable& lootable);
-    ~Lootable();
+    virtual ~Lootable();
 };
 
 } // namespace ecs::component
