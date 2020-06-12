@@ -46,6 +46,7 @@
 #include "../ecs/system/Shrink.hpp"
 #include "../ecs/system/Sound.hpp"
 #include "../ecs/system/Spinner.hpp"
+#include "../ecs/system/AI.hpp"
 #include "../ecs/system/WinChecking.hpp"
 #include "../map-generator/MapGenerator.hpp"
 #include "GameHud.hpp"
@@ -113,6 +114,7 @@ static irr::scene::IAnimatedMeshSceneNode *addCollisions(ecs::WorldManager *worl
             irr::core::vector3df(0, -10, 0), irr::core::vector3df(0, -5, 0));
     characterMesh->addAnimator(anim);
     anim->drop();
+    selector->drop();
     return (characterMesh);
 }
 
@@ -404,19 +406,19 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         signature.set(worldManager->getComponentType<ecs::component::Sound>());
         worldManager->setSystemSignature<ecs::system::Sound>(signature);
     }
+    worldManager->registerSystem<ecs::system::AI>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::AI>());
+        worldManager->setSystemSignature<ecs::system::AI>(signature);
+    }
     worldManager->registerSystem<ecs::system::Music>();
     {
         ecs::Signature signature;
 
         signature.set(worldManager->getComponentType<ecs::component::Music>());
         worldManager->setSystemSignature<ecs::system::Music>(signature);
-    }
-    worldManager->registerSystem<ecs::system::Render>();
-    {
-        ecs::Signature signature;
-
-        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
-        worldManager->setSystemSignature<ecs::system::Render>(signature);
     }
     worldManager->registerSystem<ecs::system::PowerUp>();
     {
@@ -475,6 +477,13 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     }
     std::shared_ptr<ecs::system::Shrink> shrinkSystem = worldManager->registerSystem<ecs::system::Shrink>();
     worldManager->subscribe(*(shrinkSystem.get()), &ecs::system::Shrink::startShrinking);
+    worldManager->registerSystem<ecs::system::Render>();
+    {
+        ecs::Signature signature;
+
+        signature.set(worldManager->getComponentType<ecs::component::Render3d>());
+        worldManager->setSystemSignature<ecs::system::Render>(signature);
+    }
     std::shared_ptr<ecs::system::Player> playerSystem = worldManager->registerSystem<ecs::system::Player>();
     {
         ecs::Signature signature;

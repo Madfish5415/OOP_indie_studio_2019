@@ -52,6 +52,7 @@ set(SRCS
         src/ecs/component/Spinner.cpp
         src/ecs/component/Sliding.cpp
         src/ecs/component/PlayerIndex.cpp
+        src/ecs/system/AI.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -166,6 +167,7 @@ set(HEADERS
         src/ecs/system/Spinner.hpp
         src/ecs/system/Shrink.hpp
         src/ecs/system/Sliding.hpp
+        src/ecs/system/AI.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/WinScreen.hpp
