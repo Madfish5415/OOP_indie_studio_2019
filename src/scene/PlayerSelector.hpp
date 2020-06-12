@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_PLAYERSELECTOR_HPP
 
 #include <irrlicht.h>
+#include <SFML/Audio.hpp>
 
 #include "../ecs/WorldManager.hpp"
 #include "../ecs/component/Player.hpp"
@@ -22,12 +23,12 @@ class PlayerSelector {
     ~PlayerSelector() = delete;
 
   public:
-    static void init(ecs::Universe* universe);
-    static void reset();
+    static void init(ecs::Universe* universe, sf::Time musicTimer);
     static void destroy(ecs::Universe* universe);
     static void addPlayer(ecs::Universe* universe);
     static void removePlayer(ecs::Universe* universe);
     static void changeSkin(ecs::Universe* universe, irr::s32 id);
+    static void changeType(ecs::Universe* universe, irr::s32 id);
     static bool checkKeybinding(ecs::Universe* universe);
     static void invalidKeybinding(ecs::Universe* universe);
 
@@ -36,7 +37,14 @@ class PlayerSelector {
     static std::vector<ecs::Entity> playerKeysIds;
     static std::vector<ecs::Entity> playerSkinButtonLeftIds;
     static std::vector<ecs::Entity> playerSkinButtonRightIds;
+    static std::vector<ecs::Entity> playerTypeButtonLeftIds;
+    static std::vector<ecs::Entity> playerTypeButtonRightIds;
+    static std::vector<ecs::Entity> playerCustomButtonIds;
+    static std::vector<ecs::Entity> playerType;
     static std::vector<ecs::component::Player> playerComponent;
+    static std::vector<bool> typeList;
+    static std::array<irr::video::SColor, 4> bombColors;
+    static irr::gui::IGUIElement* modal;
 };
 
 namespace playerselector {
@@ -65,6 +73,7 @@ namespace keys {
 static const std::string NORMAL = "assets/img/player-selector/button/button-keys-normal.png";
 static const std::string HOVER = "assets/img/player-selector/button/button-keys-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-keys-pressed.png";
+static const std::string BLOCKED = "assets/img/player-selector/button/button-keys-blocked.png";
 } // namespace keys
 namespace skin {
 namespace left {
@@ -77,7 +86,22 @@ static const std::string NORMAL = "assets/img/player-selector/button/button-righ
 static const std::string HOVER = "assets/img/player-selector/button/button-right-hover.png";
 static const std::string PRESSED = "assets/img/player-selector/button/button-right-pressed.png";
 } // namespace right
+namespace left2 {
+static const std::string NORMAL = "assets/img/player-selector/button/button-left2-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-left2-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-left2-pressed.png";
+} // namespace left
+namespace right2 {
+static const std::string NORMAL = "assets/img/player-selector/button/button-right2-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-right2-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-right2-pressed.png";
+} // namespace right
 } // namespace skin
+namespace custom {
+static const std::string NORMAL = "assets/img/player-selector/button/button-custom-normal.png";
+static const std::string HOVER = "assets/img/player-selector/button/button-custom-hover.png";
+static const std::string PRESSED = "assets/img/player-selector/button/button-custom-pressed.png";
+}
 } // namespace button
 namespace player {
 static const std::string AQUA = "assets/img/player-selector/player/player-aqua.png";
@@ -101,6 +125,9 @@ static std::map<const std::string, const std::string> SKIN_TO_MODEL = {{AQUA, sc
 static const std::string BACKGROUND = "assets/img/player-selector/background.jpg";
 static const std::string FRAME = "assets/img/player-selector/neon-frame.png";
 static const std::string WARNING = "assets/img/player-selector/warning.png";
+static const std::string SELECT_PLAYER = "assets/img/player-selector/select-player.png";
+static const std::string SELECT_AI = "assets/img/player-selector/select-ai.png";
+static const std::string MUSIC = "assets/music/menu/background.ogg";
 } // namespace playerselector
 
 } // namespace scene

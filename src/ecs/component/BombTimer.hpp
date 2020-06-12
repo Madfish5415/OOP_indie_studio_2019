@@ -14,13 +14,14 @@ namespace ecs::component {
 
 class BombTimer {
   public:
-    BombTimer(const irr::u32 &duration = 0, irr::IrrlichtDevice *dev = nullptr);
+    BombTimer(irr::u32 delay = 0);
     BombTimer(const BombTimer &bombTimer);
     ~BombTimer();
 
   public:
-    irr::u32 timerStart;
-    irr::u32 duration;
+    irr::u32 delay;
+    irr::u32 elapsed;
+    irr::u32 lastUpdate;
 };
 
 } // namespace ecs::component
