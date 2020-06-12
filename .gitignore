@@ -5,6 +5,10 @@ bomberman.exe
 bomberman.ilk
 bomberman.pdb
 unit_tests
+Irrlicht.dll
+openal32.dll
+sfml-audio-d-2.dll
+sfml-system-d-2.dll
 
 # Compilation
 Makefile
