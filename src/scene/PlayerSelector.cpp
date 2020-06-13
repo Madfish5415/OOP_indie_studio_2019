@@ -260,13 +260,13 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     int idx = 0;
     for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
-        int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
+        int totalPlayerSize = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
 
         auto& leftSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonLeftIds[idx]);
         auto& rightSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonRightIds[idx]);
 
-        image.position->X = (1920 / 2 - total_player_size / 2) + (idx * 400);
+        image.position->X = (1920 / 2 - totalPlayerSize / 2) + (idx * 400);
         image.image->setRelativePosition(*image.position);
 
         leftSkin.rect->UpperLeftCorner.X = image.position->X + 25;
@@ -305,10 +305,10 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     idx = 0;
     for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
-        int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
+        int totalButtonSize = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
 
-        button.rect->UpperLeftCorner.X = (1920 / 2 - total_button_size / 2) + (idx * 400);
+        button.rect->UpperLeftCorner.X = (1920 / 2 - totalButtonSize / 2) + (idx * 400);
         button.rect->LowerRightCorner.X = button.rect->UpperLeftCorner.X + 250;
         button.button->setRelativePosition(*button.rect);
         idx++;
@@ -390,13 +390,13 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     int idx = 0;
     for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
-        int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
+        int totalPlayerSize = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
 
         auto& leftSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonLeftIds[idx]);
         auto& rightSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonRightIds[idx]);
 
-        image.position->X = (1920 / 2 - total_player_size / 2) + (idx * 400);
+        image.position->X = (1920 / 2 - totalPlayerSize / 2) + (idx * 400);
         image.image->setRelativePosition(*image.position);
 
         leftSkin.rect->UpperLeftCorner.X = image.position->X + 25;
@@ -435,10 +435,10 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     idx = 0;
     for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
-        int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
+        int totalButtonSize = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
 
-        button.rect->UpperLeftCorner.X = (1920 / 2 - total_button_size / 2) + (idx * 400);
+        button.rect->UpperLeftCorner.X = (1920 / 2 - totalButtonSize / 2) + (idx * 400);
         button.rect->LowerRightCorner.X = button.rect->UpperLeftCorner.X + 250;
         button.button->setRelativePosition(*button.rect);
         idx++;

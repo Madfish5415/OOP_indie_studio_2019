@@ -7,8 +7,6 @@
 
 #include "Countdown.hpp"
 
-#include <iostream>
-
 #include "../../scene/CountDown.hpp"
 #include "../component/Image.hpp"
 #include "../component/Timer.hpp"

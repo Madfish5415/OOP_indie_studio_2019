@@ -8,12 +8,10 @@
 #include "EventReceiver.hpp"
 
 #include <SFML/Audio.hpp>
-#include <iostream>
 #include <vector>
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
-#include "ecs/component/Button.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/Music.hpp"
 #include "ecs/component/PushButton.hpp"

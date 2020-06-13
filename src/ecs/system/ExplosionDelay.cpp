@@ -7,8 +7,6 @@
 
 #include "ExplosionDelay.hpp"
 
-#include <iostream>
-
 #include "../../scene/Bomberman.hpp"
 #include "../component/BombStats.hpp"
 #include "../component/BoundingBox.hpp"

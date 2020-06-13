@@ -21,7 +21,6 @@ set(SRCS
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
-        src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
         src/ecs/component/Particle.cpp
         src/ecs/component/LookingView.cpp
@@ -115,7 +114,6 @@ set(HEADERS
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
         src/ecs/component/Delay.hpp
-        src/ecs/component/HitboxDetection.hpp
         src/ecs/component/Image.hpp
         src/ecs/component/LookingView.hpp
         src/ecs/component/Lootable.hpp

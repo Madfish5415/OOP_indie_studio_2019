@@ -9,8 +9,6 @@
 
 #include <irrlicht.h>
 
-#include <iostream>
-
 #include "../../scene/Bomberman.hpp"
 #include "../component/Animation.hpp"
 #include "../component/BombStats.hpp"
