@@ -9,8 +9,6 @@
 
 #include <irrlicht.h>
 
-#include <iostream>
-
 #include "../../scene/Bomberman.hpp"
 #include "../component/Animation.hpp"
 #include "../component/BombStats.hpp"
@@ -19,12 +17,10 @@
 #include "../component/Motion.hpp"
 #include "../component/Owner.hpp"
 #include "../component/Particle.hpp"
-#include "../component/Player.hpp"
 #include "../component/PlayerIndex.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Stats.hpp"
 #include "../component/Unbreakable.hpp"
-#include "../system/Player.hpp"
 #include "AI.hpp"
 
 using namespace ecs::system;
@@ -68,7 +64,7 @@ void AI::plantBomb(ecs::Entity ai, ecs::WorldManager* worldManager)
 
     auto& stat = worldManager->getComponent<ecs::component::Stats>(ai);
     auto& playerIndex = worldManager->getComponent<ecs::component::PlayerIndex>(ai);
-    auto pos = worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
+    const auto& pos = worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
 
     if (bombNbr < stat.maxBomb && !alreadyExist(pos)) {
         scene::Bomberman::createBomb(worldManager, ai, stat.bombRadius, stat.wallPass, pos, playerIndex.idx);
@@ -135,10 +131,8 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
 }
 
 static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
-    const irr::core::vector3d<irr::f32>& wantedPos, ecs::WorldManager* worldManager)
+    const irr::core::vector3d<irr::f32>& wantedPos, ecs::WorldManager* worldManager, ecs::component::AI& aiComp)
 {
-    static irr::core::vector3d<irr::f32> lastEscape = irr::core::vector3d<irr::f32>(-50, 0, -50);
-    static std::string lastChoice;
     std::vector<ecs::Entity> bombEnts =
         worldManager->getEntities<ecs::component::BombStats, ecs::component::Render3d>();
 
@@ -152,22 +146,22 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
         const auto& pos = worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
 
         if (pos.X == wantedPos.X) {
-            if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                return lastChoice;
+            if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                return aiComp.lastChoice;
             if (pos.Z <= wantedPos.Z && pos.Z + (10 * static_cast<float>(bombStats.bombRadius)) >= wantedPos.Z) {
                 if (oldPos.Z <= wantedPos.Z && possRight) {
                     return "RIGHT";
                 } else if (possUp || possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
-                    return lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
+                    return aiComp.lastChoice;
                 } else if (possRight) {
-                    lastEscape = wantedPos;
-                    lastChoice = "RIGHT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "RIGHT";
                     return "RIGHT";
                 } else if (possLeft) {
-                    lastEscape = wantedPos;
-                    lastChoice = "LEFT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "LEFT";
                     return "LEFT";
                 } else {
                     return "";
@@ -176,42 +170,42 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
                 if (oldPos.Z >= wantedPos.Z && possLeft) {
                     return "LEFT";
                 } else if (possUp || possDown) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
+                    return aiComp.lastChoice;
                 } else if (possLeft) {
-                    lastEscape = wantedPos;
-                    lastChoice = "LEFT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "LEFT";
                     return "LEFT";
                 } else if (possRight) {
-                    lastEscape = wantedPos;
-                    lastChoice = "RIGHT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "RIGHT";
                     return "RIGHT";
                 } else {
                     return "";
                 }
             }
         } else if (pos.Z == wantedPos.Z) {
-            if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                return lastChoice;
+            if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                return aiComp.lastChoice;
             if (pos.X <= wantedPos.X && pos.X + (10 * static_cast<float>(bombStats.bombRadius)) >= wantedPos.X) {
                 if (oldPos.X <= wantedPos.X && possDown) {
                     return "DOWN";
                 } else if (possLeft || possRight) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
+                    return aiComp.lastChoice;
                 } else if (possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = "DOWN";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "DOWN";
                     return "DOWN";
                 } else if (possUp) {
-                    lastEscape = wantedPos;
-                    lastChoice = "UP";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "UP";
                     return "UP";
                 } else {
                     return "";
@@ -220,18 +214,18 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
                 if (oldPos.X >= wantedPos.X && possUp) {
                     return "UP";
                 } else if (possLeft || possRight) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
+                    return aiComp.lastChoice;
                 } else if (possUp) {
-                    lastEscape = wantedPos;
-                    lastChoice = "UP";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "UP";
                     return "UP";
                 } else if (possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = "DOWN";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "DOWN";
                     return "DOWN";
                 } else {
                     return "";
@@ -257,9 +251,8 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager* worldMana
     bool possUp = canMoveDirection(wantedPos, worldManager, "UP", true);
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN", true);
 
-    std::string dir;
+    std::string dir = escapeFromDie(oldPos, wantedPos, worldManager, aiComp);
 
-    dir = escapeFromDie(oldPos, wantedPos, worldManager);
     if (!dir.empty())
         return dir;
 
@@ -356,8 +349,8 @@ static bool isBreakable(
     for (const auto& ent : entities) {
         auto pos = worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
 
-        irr::u32 tmpX = pos.X / 5;
-        pos.X = tmpX * 5;
+        auto tmpX = static_cast<irr::u32>(pos.X / 5);
+        pos.X = static_cast<irr::f32>(tmpX * 5);
 
         try {
             auto& bombStats = worldManager->getComponent<ecs::component::BombStats>(ent);
@@ -380,25 +373,8 @@ static bool nearBox(ecs::Entity ai, ecs::WorldManager* worldManager)
     wantedPos.X = static_cast<irr::f32>(static_cast<int>(wantedPos.X / 10.f) * 10 + 5);
     wantedPos.Z = static_cast<irr::f32>(static_cast<int>(wantedPos.Z / 10.f) * 10 + 5);
 
-    bool ret = isBreakable(wantedPos, worldManager, "LEFT") || isBreakable(wantedPos, worldManager, "RIGHT") ||
+    return isBreakable(wantedPos, worldManager, "LEFT") || isBreakable(wantedPos, worldManager, "RIGHT") ||
         isBreakable(wantedPos, worldManager, "UP") || isBreakable(wantedPos, worldManager, "DOWN");
-    return ret;
-}
-
-static bool canMove(ecs::Entity ai, ecs::WorldManager* worldManager)
-{
-    irr::core::vector3d<irr::f32> wantedPos =
-        worldManager->getComponent<ecs::component::Render3d>(ai).node->getPosition();
-    auto& aiComp = worldManager->getComponent<ecs::component::AI>(ai);
-
-    wantedPos.X = static_cast<irr::f32>(static_cast<int>(wantedPos.X / 10.f) * 10 + 5);
-    wantedPos.Z = static_cast<irr::f32>(static_cast<int>(wantedPos.Z / 10.f) * 10 + 5);
-
-    bool ret = canMoveDirection(wantedPos, worldManager, "LEFT", true) ||
-        canMoveDirection(wantedPos, worldManager, "RIGHT", true) ||
-        canMoveDirection(wantedPos, worldManager, "UP", true) ||
-        canMoveDirection(wantedPos, worldManager, "DOWN", true);
-    return ret;
 }
 
 void AI::update()
@@ -409,7 +385,7 @@ void AI::update()
     float baseSpeed = 20;
     float multiplicator = baseSpeed / 4;
 
-    for (auto ai : entities) {
+    for (const auto& ai : entities) {
         auto& motion = worldManager->getComponent<ecs::component::Motion>(ai);
         auto& node = worldManager->getComponent<ecs::component::Render3d>(ai).node;
         auto& stats = worldManager->getComponent<ecs::component::Stats>(ai);

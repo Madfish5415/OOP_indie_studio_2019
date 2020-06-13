@@ -26,6 +26,6 @@ class Spinner : public System {
     irr::u32 time;
 };
 
-}
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_SPINNER_HPP

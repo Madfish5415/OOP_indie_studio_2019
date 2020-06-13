@@ -17,15 +17,17 @@ namespace ecs::system {
 
 class AI : public ecs::System {
   public:
-    AI(ecs::WorldManager* worldManager);
-    ~AI();
+    explicit AI(ecs::WorldManager* worldManager);
+    ~AI() override;
 
   public:
-    void update();
+    void update() override;
 
   private:
-    void plantBomb(ecs::Entity ai, ecs::WorldManager *worldManager);
+    void plantBomb(ecs::Entity ai, ecs::WorldManager* worldManager);
     bool alreadyExist(const irr::core::vector3d<irr::f32>& pos);
 };
-}
+
+} // namespace ecs::system
+
 #endif // INDIESTUDIO_AI_HPP

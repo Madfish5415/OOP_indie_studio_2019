@@ -8,19 +8,20 @@
 #ifndef OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
 #define OOP_INDIE_STUDIO_2019_BUTTON_COMP_HPP
 
-#include <string>
-
 #include <irrlicht.h>
+
+#include <memory>
+#include <string>
 
 namespace ecs::component {
 
 class Button {
   public:
     Button(irr::gui::IGUIEnvironment* gui = nullptr, irr::core::rect<irr::s32>* rect = nullptr,
-           irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
-           const wchar_t* tooltipText = nullptr);
+        irr::gui::IGUIElement* parent = nullptr, irr::s32 id = -1, const wchar_t* text = nullptr,
+        const wchar_t* tooltipText = nullptr);
     Button(const Button& button);
-    ~Button();
+    virtual ~Button();
 
     void setFont(const irr::io::path& path);
     void setImage(irr::video::ITexture* image);
@@ -29,15 +30,15 @@ class Button {
 
   public:
     irr::gui::IGUIEnvironment* gui;
-    irr::core::rect<irr::s32>* rect{};
+    std::shared_ptr<irr::core::rect<irr::s32>> rect;
     irr::gui::IGUIElement* parent;
     irr::s32 id;
     const wchar_t* text;
     const wchar_t* tooltipText;
     irr::gui::IGUIButton* button;
     irr::gui::IGUIFont* font;
-    irr::video::ITexture *normalImage;
-    irr::video::ITexture *hoverImage;
+    irr::video::ITexture* normalImage;
+    irr::video::ITexture* hoverImage;
 };
 
 } // namespace ecs::component

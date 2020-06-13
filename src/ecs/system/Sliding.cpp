@@ -7,15 +7,13 @@
 
 #include "Sliding.hpp"
 
-#include <iostream>
-
 #include "../Universe.hpp"
 #include "../component/Image.hpp"
 #include "../component/Sliding.hpp"
 
 using namespace ecs::system;
 
-Sliding::Sliding(ecs::WorldManager *worldManager) : System(worldManager)
+Sliding::Sliding(ecs::WorldManager* worldManager) : System(worldManager)
 {
     time = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
     _then = time;
@@ -41,8 +39,8 @@ void Sliding::update()
             const auto& pos = image.image->getRelativePosition();
 
             if (pos.UpperLeftCorner != sliding.endPosition) {
-                image.position->X += sliding.addPosition.X * deltaTime;
-                image.position->Y += sliding.addPosition.Y * deltaTime;
+                image.position->X += static_cast<irr::s32>(sliding.addPosition.X * deltaTime);
+                image.position->Y += static_cast<irr::s32>(sliding.addPosition.Y * deltaTime);
             }
             if (sliding.addPosition.X < 0) {
                 if (image.position->X < sliding.endPosition.X)

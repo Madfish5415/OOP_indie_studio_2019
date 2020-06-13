@@ -13,9 +13,10 @@ namespace ecs::component {
 class ToDelete {
   public:
     ToDelete();
-    ~ToDelete();
+    ToDelete(const ToDelete& toDelete);
+    virtual ~ToDelete();
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_TODELETE_HPP

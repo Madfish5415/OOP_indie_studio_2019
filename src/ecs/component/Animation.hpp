@@ -8,16 +8,17 @@
 #ifndef ANIMATION_HPP_
 #define ANIMATION_HPP_
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 namespace ecs::component {
 
 class Animation {
   public:
-    Animation(std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange  = std::unordered_map<std::string, std::pair<size_t, size_t>>());
+    Animation(std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange =
+                  std::unordered_map<std::string, std::pair<size_t, size_t>>());
     Animation(const Animation& Animation);
-    ~Animation();
+    virtual ~Animation();
 
   public:
     std::unordered_map<std::string, std::pair<size_t, size_t>> animationRange;

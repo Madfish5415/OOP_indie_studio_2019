@@ -13,15 +13,15 @@
 namespace ecs::component {
 
 class Particle {
-    public:
-        Particle(irr::scene::IParticleSystemSceneNode *particleSystem = nullptr);
-        Particle(const Particle &particle);
-        ~Particle();
+  public:
+    Particle(irr::scene::IParticleSystemSceneNode *particleSystem = nullptr);
+    Particle(const Particle &particle);
+    virtual ~Particle();
 
-    public:
-        irr::scene::IParticleSystemSceneNode *particleSystem;
+  public:
+    irr::scene::IParticleSystemSceneNode *particleSystem;
 };
 
-}
+} // namespace ecs::component
 
 #endif /* !PARTICLE_HPP_ */

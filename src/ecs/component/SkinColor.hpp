@@ -13,15 +13,15 @@
 namespace ecs::component {
 
 class SkinColor {
-    public:
-        SkinColor(const std::string &color = "");
-        SkinColor(const SkinColor &skinColor);
-        ~SkinColor();
+  public:
+    SkinColor(const std::string &color = "");
+    SkinColor(const SkinColor &skinColor);
+    virtual ~SkinColor();
 
-    public:
-        std::string color;
+  public:
+    std::string color;
 };
 
-}
+} // namespace ecs::component
 
 #endif /* !SKINCOLOR_HPP_ */

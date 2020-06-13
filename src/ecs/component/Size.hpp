@@ -16,7 +16,7 @@ class Size {
   public:
     Size(const irr::core::vector3df &size = irr::core::vector3df(0.0));
     Size(const Size &size);
-    ~Size();
+    virtual ~Size();
 
   public:
     irr::core::vector3df size;

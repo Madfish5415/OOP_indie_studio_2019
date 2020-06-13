@@ -13,9 +13,8 @@ namespace ecs::component {
 class Collision {
   public:
     Collision();
-    ~Collision();
-
-  public:
+    Collision(const Collision& collision);
+    virtual ~Collision();
 };
 
 } // namespace ecs::component

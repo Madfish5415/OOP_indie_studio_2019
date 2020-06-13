@@ -10,15 +10,15 @@
 #include "../ecs/component/Image.hpp"
 #include "../ecs/component/Music.hpp"
 #include "../ecs/component/Timer.hpp"
+#include "../ecs/system/Countdown.hpp"
 #include "../ecs/system/Music.hpp"
 #include "../ecs/system/Render.hpp"
-#include "../ecs/system/Countdown.hpp"
 #include "../ecs/system/Timer.hpp"
 
 std::vector<ecs::Entity> scene::CountDown::images = {};
-std::vector<irr::gui::IGUIInOutFader *> scene::CountDown::faders = {};
+std::vector<irr::gui::IGUIInOutFader*> scene::CountDown::faders = {};
 
-void scene::CountDown::init(ecs::Universe *universe)
+void scene::CountDown::init(ecs::Universe* universe)
 {
     auto worldManager = universe->createWorldManager("CountDown");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
@@ -52,7 +52,8 @@ void scene::CountDown::init(ecs::Universe *universe)
     }
 
     ecs::Entity countDown = worldManager->createEntity();
-    worldManager->addComponent(countDown, ecs::component::Image(gui, driver, countdown::THREE, new irr::core::position2d<irr::s32>(0, 0)));
+    worldManager->addComponent(
+        countDown, ecs::component::Image(gui, driver, countdown::THREE, new irr::core::position2d<irr::s32>(0, 0)));
     worldManager->addComponent(countDown, ecs::component::Timer(1000));
     scene::CountDown::images.push_back(countDown);
 
@@ -60,14 +61,14 @@ void scene::CountDown::init(ecs::Universe *universe)
     worldManager->addComponent(music, ecs::component::Music(scene::countdown::MUSIC));
 
     irr::gui::IGUIInOutFader* fader = universe->getDevice()->getGUIEnvironment()->addInOutFader();
-    fader->setColor(irr::video::SColor(0,0,0,0));
+    fader->setColor(irr::video::SColor(0, 0, 0, 0));
     fader->fadeIn(1000);
     scene::CountDown::faders.push_back(fader);
 }
 
-void scene::CountDown::destroy(ecs::Universe *universe)
+void scene::CountDown::destroy(ecs::Universe* universe)
 {
-    for (auto& entity : scene::CountDown::images) {
+    for (const auto& entity : scene::CountDown::images) {
         auto& img = universe->getWorldManager("CountDown")->getComponent<ecs::component::Image>(entity);
         img.image->remove();
     }
@@ -77,4 +78,5 @@ void scene::CountDown::destroy(ecs::Universe *universe)
 
     universe->deleteWorldManager("CountDown");
     images.clear();
+    faders.clear();
 }

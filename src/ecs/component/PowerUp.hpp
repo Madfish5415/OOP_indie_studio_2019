@@ -11,13 +11,10 @@
 namespace ecs::component {
 
 class PowerUp {
-    public:
-        PowerUp();
-        PowerUp(const PowerUp& powerUp);
-        ~PowerUp();
-
-    protected:
-    private:
+  public:
+    PowerUp();
+    PowerUp(const PowerUp& powerUp);
+    virtual ~PowerUp();
 };
 
 } // namespace ecs::component

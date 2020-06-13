@@ -14,9 +14,10 @@ namespace ecs::component {
 
 class Spinner {
   public:
-    Spinner(const irr::core::vector3d<irr::f32>& rotation = irr::core::vector3d<irr::f32>(0, 0, 0), irr::u32 delay = 2000);
+    Spinner(
+        const irr::core::vector3d<irr::f32>& rotation = irr::core::vector3d<irr::f32>(0, 0, 0), irr::u32 delay = 2000);
     Spinner(const Spinner& spinner);
-    ~Spinner();
+    virtual ~Spinner();
 
   public:
     irr::core::vector3d<irr::f32> rotation;

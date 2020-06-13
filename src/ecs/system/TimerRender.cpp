@@ -12,7 +12,6 @@
 #endif
 
 #include "../../scene/GameHud.hpp"
-#include "../Universe.hpp"
 #include "../component/Blink.hpp"
 #include "../component/Image.hpp"
 #include "../component/Timer.hpp"
@@ -45,10 +44,10 @@ void TimerRender::update()
         if (diff <= 10000) {
             try {
                 worldManager->getComponent<ecs::component::Blink>(entity);
-            } catch (std::exception &e) {
+            } catch (std::exception& e) {
                 auto blinkEntities = worldManager->getEntities<ecs::component::Blink>();
 
-                for(const auto& ent : blinkEntities) {
+                for (const auto& ent : blinkEntities) {
                     auto& blink = worldManager->getComponent<ecs::component::Blink>(ent);
                     blink.millisecond = 500;
                 }
@@ -61,17 +60,15 @@ void TimerRender::update()
         }
 
         if (timerRender.position == 0) {
-            auto texture = driver->getTexture(
-                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(minutes / 10) % 10)
-                    .c_str());
+            auto texture =
+                driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(minutes / 10) % 10).c_str());
             image.image->setImage(texture);
         } else if (timerRender.position == 1) {
             auto texture = driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(minutes % 10).c_str());
             image.image->setImage(texture);
         } else if (timerRender.position == 2) {
-            auto texture = driver->getTexture(
-                scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(seconds / 10) % 10)
-                    .c_str());
+            auto texture =
+                driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(static_cast<int>(seconds / 10) % 10).c_str());
             image.image->setImage(texture);
         } else if (timerRender.position == 3) {
             auto texture = driver->getTexture(scene::gamehud::number::INT_TO_IMG.at(seconds % 10).c_str());

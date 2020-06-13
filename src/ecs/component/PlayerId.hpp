@@ -16,12 +16,12 @@ class PlayerId {
   public:
     PlayerId(size_t id = 0);
     PlayerId(const PlayerId& playerId);
-    ~PlayerId();
+    virtual ~PlayerId();
 
   public:
     size_t id;
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_PLAYERID_HPP

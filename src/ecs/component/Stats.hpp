@@ -14,11 +14,13 @@ namespace ecs::component {
 
 class Stats {
   public:
-    Stats(const size_t &moveSpeed = 1, const size_t &bombRadius = 2, const size_t &maxBomb = 1, const bool &wallPass = false);
-    Stats(const Stats& stats);
-    ~Stats();
+    Stats(const size_t &moveSpeed = 1, const size_t &bombRadius = 2, const size_t &maxBomb = 1,
+        const bool &wallPass = false);
+    Stats(const Stats &stats);
+    virtual ~Stats();
 
-    Stats operator+(const Stats& right);
+  public:
+    Stats operator+(const Stats &right);
 
   public:
     size_t moveSpeed;

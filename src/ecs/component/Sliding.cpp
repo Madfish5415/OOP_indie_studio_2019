@@ -9,8 +9,8 @@
 
 using namespace ecs::component;
 
-Sliding::Sliding(irr::u32 delay, const irr::core::vector2d<irr::s32>& endPosition,
-    const irr::core::vector2d<irr::s32>& addPosition)
+Sliding::Sliding(
+    irr::u32 delay, const irr::core::vector2d<irr::s32>& endPosition, const irr::core::vector2d<irr::s32>& addPosition)
     : delay(delay), lastUpdate(0), endPosition(endPosition), addPosition(addPosition)
 {
 }

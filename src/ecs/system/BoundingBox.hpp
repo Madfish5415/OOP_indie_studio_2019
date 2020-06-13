@@ -26,6 +26,6 @@ class BoundingBox : public System {
     bool isCollide(irr::scene::IMeshSceneNode *mesh, size_t id);
 };
 
-}
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_BOUNDINGBOX_HPP

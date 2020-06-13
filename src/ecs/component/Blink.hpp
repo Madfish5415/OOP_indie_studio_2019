@@ -15,7 +15,8 @@ namespace ecs::component {
 class Blink {
   public:
     Blink(irr::u32 millisecond = 2000);
-    ~Blink();
+    Blink(const Blink& blink);
+    virtual ~Blink();
 
   public:
     size_t millisecond;

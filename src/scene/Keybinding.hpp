@@ -24,8 +24,7 @@ class Keybinding {
     ~Keybinding() = delete;
 
   public:
-    static void init(ecs::Universe* universe, const std::string& pathTexture, ecs::component::Player* player);
-    static void reset(ecs::Universe* universe);
+    static void init(ecs::Universe* universe, const std::string& pathTexture, ecs::component::Player* ply);
     static void destroy(ecs::Universe* universe);
 
   public:
@@ -36,17 +35,22 @@ class Keybinding {
 };
 
 namespace keybinding {
+
 namespace button {
+
 namespace key {
 const std::string NORMAL = "assets/img/keybinding/button/button-key-normal.png";
 const std::string PRESSED = "assets/img/keybinding/button/button-key-pressed.png";
 } // namespace key
-} // namespace button
+
 namespace back {
 const std::string NORMAL = "assets/img/keybinding/button/button-back-normal.png";
 const std::string HOVER = "assets/img/keybinding/button/button-back-hover.png";
 const std::string PRESSED = "assets/img/keybinding/button/button-back-pressed.png";
 } // namespace back
+
+} // namespace button
+
 const std::string BACKGROUND = "assets/img/keybinding/background-keys.png";
 const std::string BLACKFILTER = "assets/img/keybinding/black-filter.png";
 const std::string FONT = "assets/font/keybinding/karmatic_arcadev2.xml";
@@ -74,4 +78,5 @@ static std::map<irr::EKEY_CODE, std::wstring> KEYBINDING_MAP = {{irr::EKEY_CODE:
     {irr::EKEY_CODE::KEY_F8, L"F8"}, {irr::EKEY_CODE::KEY_F9, L"F9"}, {irr::EKEY_CODE::KEY_F10, L"F10"},
     {irr::EKEY_CODE::KEY_F11, L"F11"}, {irr::EKEY_CODE::KEY_F12, L"F12"}};
 } // namespace scene
+
 #endif // INDIESTUDIO_KEBINDING_HPP

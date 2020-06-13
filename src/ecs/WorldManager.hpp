@@ -9,7 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_WORLDMANAGER_HPP
 
 namespace ecs {
-    class Universe;
+class Universe;
 }
 
 #include <memory>
@@ -42,7 +42,7 @@ class WorldManager {
      * @brief Constructor
      * Initializes the four managers and the universe
      */
-    WorldManager(Universe *universe)
+    WorldManager(Universe* universe)
     {
         _entityManager = std::make_unique<EntityManager>();
         _componentManager = std::make_unique<ComponentManager>();
@@ -187,7 +187,7 @@ class WorldManager {
     {
         try {
             return _componentManager->getComponent<T>(entity);
-        } catch (std::runtime_error &e) {
+        } catch (std::runtime_error& e) {
             throw e;
         }
     }
@@ -292,7 +292,7 @@ class WorldManager {
      * This method get the universe of the world manager.
      * @return The universe.
      */
-    Universe *getUniverse() const
+    Universe* getUniverse() const
     {
         return _universe;
     }
@@ -302,7 +302,7 @@ class WorldManager {
     std::unique_ptr<ComponentManager> _componentManager; /** < The component manager. */
     std::unique_ptr<SystemManager> _systemManager; /** < The system manager. */
     std::unique_ptr<EventManager> _eventManager; /** < The event manager. */
-    Universe *_universe; /** < The universe of the world manager. */
+    Universe* _universe; /** < The universe of the world manager. */
 };
 
 } // namespace ecs

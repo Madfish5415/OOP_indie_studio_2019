@@ -16,7 +16,7 @@ class Owner {
   public:
     Owner(const ecs::Entity &ID = 0);
     Owner(const Owner &owner);
-    ~Owner();
+    virtual ~Owner();
 
   public:
     ecs::Entity entity;

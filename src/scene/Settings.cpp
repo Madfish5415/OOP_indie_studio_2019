@@ -81,6 +81,7 @@ void scene::Settings::init(ecs::Universe* universe, std::shared_ptr<sf::Music> c
         signature.set(worldManager->getComponentType<ecs::component::Button>());
         worldManager->setSystemSignature<ecs::system::Button>(signature);
     }
+
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
         ecs::component::Image(gui, driver, settings::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
@@ -129,15 +130,15 @@ void scene::Settings::init(ecs::Universe* universe, std::shared_ptr<sf::Music> c
 
 void scene::Settings::destroy(ecs::Universe* universe)
 {
-    for (auto& entity : scene::Settings::images) {
+    for (const auto& entity : scene::Settings::images) {
         auto& img = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(entity);
         img.image->remove();
     }
-    for (auto& entity : scene::Settings::buttons) {
+    for (const auto& entity : scene::Settings::buttons) {
         auto& btn = universe->getWorldManager("Settings")->getComponent<ecs::component::Button>(entity);
         btn.button->remove();
     }
-    for (auto& entity : scene::Settings::pushButtons) {
+    for (const auto& entity : scene::Settings::pushButtons) {
         auto& btn = universe->getWorldManager("Settings")->getComponent<ecs::component::PushButton>(entity);
         btn.button->remove();
     }
@@ -153,12 +154,12 @@ void scene::Settings::updateSoundBar(ecs::Universe* universe)
 {
     auto imagesEnt = universe->getWorldManager("Settings")->getEntities<ecs::component::Image>();
     {
-        auto soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[1]);
+        auto& soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[1]);
         soundbar.image->setImage(universe->getDevice()->getVideoDriver()->getTexture(
             scene::settings::SOUNDBAR.at(scene::Settings::musicVolume).c_str()));
     }
     {
-        auto soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[2]);
+        auto& soundbar = universe->getWorldManager("Settings")->getComponent<ecs::component::Image>(imagesEnt[2]);
         soundbar.image->setImage(universe->getDevice()->getVideoDriver()->getTexture(
             scene::settings::SOUNDBAR.at(scene::Settings::soundVolume).c_str()));
     }

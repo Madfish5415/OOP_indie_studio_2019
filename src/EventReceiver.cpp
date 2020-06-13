@@ -8,12 +8,10 @@
 #include "EventReceiver.hpp"
 
 #include <SFML/Audio.hpp>
-#include <iostream>
 #include <vector>
 
 #include "ecs/Def.hpp"
 #include "ecs/Universe.hpp"
-#include "ecs/component/Button.hpp"
 #include "ecs/component/Image.hpp"
 #include "ecs/component/Music.hpp"
 #include "ecs/component/PushButton.hpp"
@@ -21,6 +19,7 @@
 #include "ecs/event/Key.hpp"
 #include "irrlicht/GUIColorPicker.hpp"
 #include "scene/Bomberman.hpp"
+#include "scene/CountDown.hpp"
 #include "scene/HowToPlay.hpp"
 #include "scene/Keybinding.hpp"
 #include "scene/LoadingMenu.hpp"
@@ -29,7 +28,6 @@
 #include "scene/PlayerSelector.hpp"
 #include "scene/Settings.hpp"
 #include "scene/WinScreen.hpp"
-#include "scene/CountDown.hpp"
 
 EventReceiver::EventReceiver(ecs::Universe *universe) : _universe(universe)
 {
@@ -48,13 +46,14 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
         }
         if (_universe->hasWorldManager("WinScreen") &&
             _universe->getCurrentWorldManager() == _universe->getWorldManager("WinScreen")) {
-          
             auto imgEntities = _universe->getCurrentWorldManager()->getEntities<ecs::component::Sliding>();
             bool moving = false;
 
-            for (const auto& entity : imgEntities) {
-                auto& sliding = _universe->getCurrentWorldManager()->getComponent<ecs::component::Sliding>(entity);
-                const auto& pos = _universe->getCurrentWorldManager()->getComponent<ecs::component::Image>(entity).image->getRelativePosition();
+            for (const auto &entity : imgEntities) {
+                auto &sliding = _universe->getCurrentWorldManager()->getComponent<ecs::component::Sliding>(entity);
+                const auto &pos = _universe->getCurrentWorldManager()
+                                      ->getComponent<ecs::component::Image>(entity)
+                                      .image->getRelativePosition();
 
                 if (pos.UpperLeftCorner != sliding.endPosition) {
                     moving = true;
@@ -166,7 +165,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
             case irr::gui::EGET_BUTTON_CLICKED:
                 if (id == BUTTON_ID::GUI_MENU_PLAY) {
                     auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    auto &music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
                     sf::Time time = music.music->getPlayingOffset();
                     scene::Menu::destroy(_universe);
                     scene::PlayerSelector::init(_universe, time);
@@ -175,7 +174,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_HTP) {
                     auto entity = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
+                    auto &music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(entity[0]);
                     sf::Time time = music.music->getPlayingOffset();
                     scene::Menu::destroy(_universe);
                     scene::HowToPlay::init(_universe, time);
@@ -184,7 +183,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == BUTTON_ID::GUI_HTP_MENU) {
                     auto entity = _universe->getWorldManager("HowToPlay")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("HowToPlay")->getComponent<ecs::component::Music>(entity[0]);
+                    auto &music =
+                        _universe->getWorldManager("HowToPlay")->getComponent<ecs::component::Music>(entity[0]);
                     sf::Time time = music.music->getPlayingOffset();
                     scene::HowToPlay::destroy(_universe);
                     scene::Menu::init(_universe, time);
@@ -193,7 +193,7 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == BUTTON_ID::GUI_MENU_SETTINGS) {
                     auto musics = _universe->getWorldManager("Menu")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(musics[0]);
+                    auto &music = _universe->getWorldManager("Menu")->getComponent<ecs::component::Music>(musics[0]);
                     scene::Settings::init(_universe, music.music);
                     if (_universe->hasWorldManager("Settings")) {
                         _universe->setCurrentWorldManager("Settings");
@@ -204,7 +204,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == BUTTON_ID::GUI_SELECT_MENU) {
                     auto entity = _universe->getWorldManager("PlayerSelector")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Music>(entity[0]);
+                    auto &music =
+                        _universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Music>(entity[0]);
                     sf::Time time = music.music->getPlayingOffset();
                     scene::PlayerSelector::destroy(_universe);
                     scene::Menu::init(_universe, time);
@@ -226,7 +227,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                 } else if (id >= BUTTON_ID::GUI_SELECT_CUSTOM_P1 && id <= BUTTON_ID::GUI_SELECT_CUSTOM_P4) {
                     auto gui = _universe->getDevice()->getGUIEnvironment();
                     scene::PlayerSelector::modal = gui->addModalScreen(nullptr);
-                    auto* colorPicker = new irr::gui::GUIColorPicker(gui, scene::PlayerSelector::modal, 999, id - BUTTON_ID::GUI_SELECT_CUSTOM_P1);
+                    auto *colorPicker = new irr::gui::GUIColorPicker(
+                        gui, scene::PlayerSelector::modal, 999, id - BUTTON_ID::GUI_SELECT_CUSTOM_P1);
                 } else if (id >= BUTTON_ID::GUI_SELECT_KB_P1 && id <= BUTTON_ID::GUI_SELECT_KB_P4) {
                     if (!scene::PlayerSelector::typeList[id - BUTTON_ID::GUI_SELECT_KB_P1]) {
                         auto &image = _universe->getWorldManager("PlayerSelector")
@@ -285,7 +287,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 } else if (id == GUI_PAUSE_SETTINGS) {
                     auto musics = _universe->getWorldManager("Bomberman")->getEntities<ecs::component::Music>();
-                    auto& music = _universe->getWorldManager("Bomberman")->getComponent<ecs::component::Music>(musics[0]);
+                    auto &music =
+                        _universe->getWorldManager("Bomberman")->getComponent<ecs::component::Music>(musics[0]);
                     scene::Settings::init(_universe, music.music);
                     if (_universe->hasWorldManager("Settings"))
                         _universe->setCurrentWorldManager("Settings");
@@ -323,7 +326,8 @@ bool EventReceiver::OnEvent(const irr::SEvent &event)
                     return true;
                 }
             case irr::gui::EGET_FILE_SELECTED:
-                if (scene::PlayerSelector::modal && *scene::PlayerSelector::modal->getChildren().getLast() == event.GUIEvent.Caller) {
+                if (scene::PlayerSelector::modal &&
+                    *scene::PlayerSelector::modal->getChildren().getLast() == event.GUIEvent.Caller) {
                     auto colorPicker = dynamic_cast<irr::gui::GUIColorPicker *>(event.GUIEvent.Caller);
 
                     scene::PlayerSelector::bombColors[colorPicker->idx] = colorPicker->getPickedColor();

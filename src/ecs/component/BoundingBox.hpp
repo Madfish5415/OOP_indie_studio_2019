@@ -17,8 +17,8 @@ namespace ecs::component {
 class BoundingBox {
   public:
     BoundingBox(irr::scene::IMeshSceneNode *mesh = nullptr, irr::scene::ITriangleSelector *selector = nullptr);
-    BoundingBox(const BoundingBox& box);
-    ~BoundingBox();
+    BoundingBox(const BoundingBox &box);
+    virtual ~BoundingBox();
 
   public:
     irr::scene::IMeshSceneNode *mesh;
@@ -26,6 +26,6 @@ class BoundingBox {
     std::array<bool, 4> collision;
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_BOUNDINGBOX_COMP_HPP

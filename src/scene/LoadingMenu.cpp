@@ -45,18 +45,18 @@ void LoadingMenu::init(ecs::Universe *universe)
         worldManager->setSystemSignature<ecs::system::Music>(signature);
     }
 
-    auto logo = worldManager->createEntity();
-    worldManager->addComponent(logo,
-                               ecs::component::Image(gui, driver, loadingmenu::LOGO, new irr::core::position2d<irr::s32> {720, 100}));
+    ecs::Entity logo = worldManager->createEntity();
+    worldManager->addComponent(
+        logo, ecs::component::Image(gui, driver, loadingmenu::LOGO, new irr::core::position2d<irr::s32> {720, 100}));
     worldManager->addComponent(logo, ecs::component::Music(loadingmenu::MUSIC));
 
-    auto text = worldManager->createEntity();
-    worldManager->addComponent(text,
-                               ecs::component::Image(gui, driver, loadingmenu::TEXT, new irr::core::position2d<irr::s32> {410, 865}));
+    ecs::Entity text = worldManager->createEntity();
+    worldManager->addComponent(
+        text, ecs::component::Image(gui, driver, loadingmenu::TEXT, new irr::core::position2d<irr::s32> {410, 865}));
     worldManager->addComponent(text, ecs::component::Blink(600));
 
-    irr::gui::IGUIInOutFader* fader = universe->getDevice()->getGUIEnvironment()->addInOutFader();
-    fader->setColor(irr::video::SColor(0,0,0,0));
+    irr::gui::IGUIInOutFader *fader = universe->getDevice()->getGUIEnvironment()->addInOutFader();
+    fader->setColor(irr::video::SColor(0, 0, 0, 0));
     fader->fadeIn(10000);
 }
 

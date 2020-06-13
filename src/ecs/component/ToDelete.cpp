@@ -10,4 +10,7 @@
 using namespace ecs::component;
 
 ToDelete::ToDelete() = default;
+
+ToDelete::ToDelete(const ToDelete& toDelete) = default;
+
 ToDelete::~ToDelete() = default;

@@ -14,12 +14,12 @@ class PlayerIndex {
   public:
     PlayerIndex(int idx = 0);
     PlayerIndex(const PlayerIndex& playerIndex);
-    ~PlayerIndex();
+    virtual ~PlayerIndex();
 
   public:
     int idx;
 };
 
-}
+} // namespace ecs::component
 
 #endif // INDIESTUDIO_PLAYERINDEX_HPP

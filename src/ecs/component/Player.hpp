@@ -21,8 +21,7 @@ class Player {
                {"down", irr::EKEY_CODE::KEY_KEY_S}, {"left", irr::EKEY_CODE::KEY_KEY_Q},
                {"right", irr::EKEY_CODE::KEY_KEY_D}, {"bomb", irr::EKEY_CODE::KEY_SPACE}});
     Player(const Player& player);
-    ~Player();
-
+    virtual ~Player();
 
   public:
     std::unordered_map<std::string, irr::EKEY_CODE> keys;

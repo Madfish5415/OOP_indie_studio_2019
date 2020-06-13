@@ -10,4 +10,7 @@
 using namespace ecs::component;
 
 Breakable::Breakable() = default;
+
+Breakable::Breakable(const Breakable& breakable) = default;
+
 Breakable::~Breakable() = default;
