@@ -29,7 +29,7 @@ void Countdown::update()
             auto& timer = worldManager->getComponent<ecs::component::Timer>(entity);
 
             if (timer.elapsed == timer.delay) {
-                irr::u32 idx = scene::CountDown::images.size();
+                auto idx = static_cast<irr::u32>(scene::CountDown::images.size());
 
                 worldManager->removeComponent<ecs::component::Timer>(entity);
                 image.image->setVisible(false);

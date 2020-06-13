@@ -353,8 +353,8 @@ static bool isBreakable(
     for (const auto& ent : entities) {
         auto pos = worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
 
-        irr::u32 tmpX = pos.X / 5;
-        pos.X = tmpX * 5;
+        auto tmpX = static_cast<irr::u32>(pos.X / 5);
+        pos.X = static_cast<irr::f32>(tmpX * 5);
 
         try {
             auto& bombStats = worldManager->getComponent<ecs::component::BombStats>(ent);

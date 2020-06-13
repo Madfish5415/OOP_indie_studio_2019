@@ -27,9 +27,9 @@ void Animation::update()
         if (!animation.currentAnimation.empty() &&
             (node->getFrameNr() < animation.animationRange.at(animation.currentAnimation).first ||
                 node->getFrameNr() > animation.animationRange.at(animation.currentAnimation).second)) {
-            node->setFrameLoop(animation.animationRange.at(animation.currentAnimation).first,
-                animation.animationRange.at(animation.currentAnimation).second);
-            node->setCurrentFrame(animation.animationRange.at(animation.currentAnimation).first);
+            node->setFrameLoop(static_cast<irr::s32>(animation.animationRange.at(animation.currentAnimation).first),
+                static_cast<irr::s32>(animation.animationRange.at(animation.currentAnimation).second));
+            node->setCurrentFrame(static_cast<irr::f32>(animation.animationRange.at(animation.currentAnimation).first));
         }
     }
 }

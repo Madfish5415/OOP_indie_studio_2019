@@ -154,7 +154,8 @@ static void createPlayer(ecs::WorldManager *worldManager, const ecs::component::
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
     worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
-    worldManager->addComponent<ecs::component::PlayerIndex>(character, ecs::component::PlayerIndex(charNbr));
+    worldManager->addComponent<ecs::component::PlayerIndex>(
+        character, ecs::component::PlayerIndex(static_cast<int>(charNbr)));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -193,7 +194,8 @@ static void createBot(
     worldManager->addComponent<ecs::component::Collision>(character, ecs::component::Collision());
     worldManager->addComponent<ecs::component::PlayerId>(character, ecs::component::PlayerId(charNbr));
     worldManager->addComponent<ecs::component::SkinColor>(character, ecs::component::SkinColor(path));
-    worldManager->addComponent<ecs::component::PlayerIndex>(character, ecs::component::PlayerIndex(charNbr));
+    worldManager->addComponent<ecs::component::PlayerIndex>(
+        character, ecs::component::PlayerIndex(static_cast<int>(charNbr)));
 
     Bomberman::playerIds.push_back(character);
 }
@@ -316,18 +318,18 @@ void scene::Bomberman::createBomb(ecs::WorldManager *worldManager, ecs::Entity p
 
     bombMesh->setMaterialTexture(0, texture);
     auto newPos = pos;
-    newPos.X = static_cast<int>(pos.X / 10.f) * 10 + 5;
+    newPos.X = static_cast<irr::f32>(static_cast<int>(pos.X / 10.f) * 10 + 5);
     newPos.Y = 4;
-    newPos.Z = static_cast<int>(pos.Z / 10.f) * 10 + 5;
+    newPos.Z = static_cast<irr::f32>(static_cast<int>(pos.Z / 10.f) * 10 + 5);
     bombMesh->setPosition(newPos);
     bombMesh->setScale(irr::core::vector3df(30, 30, 30));
 
     irr::scene::IMeshSceneNode *boxMesh = smgr->addCubeSceneNode(10);
     boxMesh->setMaterialTexture(0, driver->getTexture(bomberman::map::BOUNDING_BOX.c_str()));
     boxMesh->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-    newPos.X = static_cast<int>(pos.X / 10.f) * 10 + 5;
+    newPos.X = static_cast<irr::f32>(static_cast<int>(pos.X / 10.f) * 10 + 5);
     newPos.Y = 5;
-    newPos.Z = static_cast<int>(pos.Z / 10.f) * 10 + 5;
+    newPos.Z = static_cast<irr::f32>(static_cast<int>(pos.Z / 10.f) * 10 + 5);
     boxMesh->setPosition(newPos);
 
     irr::scene::ITriangleSelector *selector = smgr->createOctreeTriangleSelector(boxMesh->getMesh(), boxMesh, 128);
@@ -568,8 +570,9 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
         worldManager->addComponent<ecs::component::Render3d>(camera, ecs::component::Render3d(cameraNode));
     }
 
-    createMap(worldManager, tileSize);
-    createCharacters(worldManager, tileSize, nbTile, std::move(players), paths, std::move(playerType));
+    createMap(worldManager, static_cast<irr::u32>(tileSize));
+    createCharacters(worldManager, static_cast<irr::u32>(tileSize), static_cast<irr::u32>(nbTile), std::move(players),
+        paths, std::move(playerType));
 
     GameHud::init(universe, paths);
     CountDown::init(universe);

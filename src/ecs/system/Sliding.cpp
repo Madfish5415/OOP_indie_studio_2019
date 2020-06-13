@@ -39,8 +39,8 @@ void Sliding::update()
             const auto& pos = image.image->getRelativePosition();
 
             if (pos.UpperLeftCorner != sliding.endPosition) {
-                image.position->X += sliding.addPosition.X * deltaTime;
-                image.position->Y += sliding.addPosition.Y * deltaTime;
+                image.position->X += static_cast<irr::s32>(sliding.addPosition.X * deltaTime);
+                image.position->Y += static_cast<irr::s32>(sliding.addPosition.Y * deltaTime);
             }
             if (sliding.addPosition.X < 0) {
                 if (image.position->X < sliding.endPosition.X)

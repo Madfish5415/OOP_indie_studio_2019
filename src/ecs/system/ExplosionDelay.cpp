@@ -85,9 +85,9 @@ static void explodePlayers(ecs::WorldManager* worldManager, ecs::component::Rend
         const auto& playerPos = playerRender.node->getPosition();
 
         irr::core::vector3d<irr::f32> ajustedPos = playerPos;
-        ajustedPos.X = static_cast<int>(playerPos.X / 10.f) * 10 + 5;
+        ajustedPos.X = static_cast<irr::f32>(static_cast<int>(playerPos.X / 10.f) * 10 + 5);
         ajustedPos.Y = playerPos.Y;
-        ajustedPos.Z = static_cast<int>(playerPos.Z / 10.f) * 10 + 5;
+        ajustedPos.Z = static_cast<irr::f32>(static_cast<int>(playerPos.Z / 10.f) * 10 + 5);
 
         if (pos.X == ajustedPos.X && pos.Z == ajustedPos.Z) {
             std::vector<ecs::Entity> imageEntities =

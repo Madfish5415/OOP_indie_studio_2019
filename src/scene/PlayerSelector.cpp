@@ -41,7 +41,7 @@ static const std::string& getUnusedSkin()
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
-    std::srand(std::time(nullptr));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     while (true) {
         item = playerselector::player::PLAYER_SKINS.begin();
         std::advance(item, std::rand() % playerselector::player::PLAYER_SKINS.size());
@@ -208,42 +208,43 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
 
     ecs::Entity playerKeys =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 745, 960 + 125, 745 + 100), nullptr,
-            GUI_SELECT_KB_P1 + (PlayerSelector::playerIds.size() - 1), playerselector::button::keys::NORMAL,
+                     static_cast<irr::s32>(GUI_SELECT_KB_P1 + (PlayerSelector::playerIds.size() - 1)), playerselector::button::keys::NORMAL,
             playerselector::button::keys::HOVER, playerselector::button::keys::PRESSED);
     playerKeysIds.emplace_back(playerKeys);
 
     ecs::Entity playerSkinButtonLeft =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 620, 835 + 40, 620 + 40), nullptr,
-            GUI_SELECT_SKIN_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2,
+                     static_cast<irr::s32>(GUI_SELECT_SKIN_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::left::NORMAL, playerselector::button::skin::left::HOVER,
             playerselector::button::skin::left::PRESSED);
     playerSkinButtonLeftIds.emplace_back(playerSkinButtonLeft);
 
     ecs::Entity playerSkinButtonRight =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 620, 1045 + 40, 620 + 40), nullptr,
-            GUI_SELECT_SKIN_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2,
+                     static_cast<irr::s32>(GUI_SELECT_SKIN_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::right::NORMAL, playerselector::button::skin::right::HOVER,
             playerselector::button::skin::right::PRESSED);
     playerSkinButtonRightIds.emplace_back(playerSkinButtonRight);
 
     ecs::Entity playerTypeButtonLeft =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 220, 835 + 40, 220 + 40), nullptr,
-            GUI_SELECT_TYPE_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2,
+                     static_cast<irr::s32>(GUI_SELECT_TYPE_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::left::NORMAL, playerselector::button::skin::left::HOVER,
             playerselector::button::skin::left::PRESSED);
     playerTypeButtonLeftIds.emplace_back(playerTypeButtonLeft);
 
     ecs::Entity playerTypeButtonRight =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 220, 1045 + 40, 220 + 40), nullptr,
-            GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2,
+            static_cast<irr::s32>(GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::right::NORMAL, playerselector::button::skin::right::HOVER,
             playerselector::button::skin::right::PRESSED);
     playerTypeButtonRightIds.emplace_back(playerTypeButtonRight);
 
     ecs::Entity defaultPlayerCustomButton =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 + 80, 285, 960 + 80 + 50, 285 + 50), nullptr,
-            GUI_SELECT_CUSTOM_P1 + (PlayerSelector::playerIds.size() - 1), playerselector::button::custom::NORMAL,
-            playerselector::button::custom::HOVER, playerselector::button::custom::PRESSED);
+            static_cast<irr::s32>(GUI_SELECT_CUSTOM_P1 + (PlayerSelector::playerIds.size() - 1)),
+            playerselector::button::custom::NORMAL, playerselector::button::custom::HOVER,
+            playerselector::button::custom::PRESSED);
     playerCustomButtonIds.emplace_back(defaultPlayerCustomButton);
 
     ecs::Entity type = worldManager->createEntity();
@@ -312,7 +313,8 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
         idx++;
     }
 
-    PlayerSelector::changeType(universe, GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2);
+    PlayerSelector::changeType(
+        universe, static_cast<irr::s32>(GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2));
 }
 
 void PlayerSelector::removePlayer(ecs::Universe* universe)

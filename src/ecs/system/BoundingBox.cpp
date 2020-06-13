@@ -31,7 +31,13 @@ bool BoundingBox::isCollide(irr::scene::IMeshSceneNode* mesh, size_t id)
         if (playerId.id == id) {
             auto& render3d = worldManager->getComponent<ecs::component::Render3d>(entity);
 
-            return mesh->getTransformedBoundingBox().intersectsWithBox(render3d.node->getTransformedBoundingBox());
+            auto pos = mesh->getPosition();
+            auto playerPos = render3d.node->getPosition();
+
+            playerPos.X = static_cast<irr::f32>(static_cast<int>(playerPos.X / 10.f) * 10 + 5);
+            playerPos.Z = static_cast<irr::f32>(static_cast<int>(playerPos.Z / 10.f) * 10 + 5);
+
+            return pos.X == playerPos.X && pos.Z == playerPos.Z;
         }
     }
     return false;

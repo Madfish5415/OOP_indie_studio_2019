@@ -228,9 +228,9 @@ void GUIColorPicker::setPickedColor(const video::SColor &c) noexcept
     core::vector3df hsv =
         RGBftoHSV({c.getRed() / 255.f, c.getGreen() / 255.f, c.getBlue() / 255.f, c.getAlpha() / 255.f});
 
-    colorpos = 150 - hsv.X / 360.f * 150.f;
-    pickpos.X = hsv.Y * 80.f;
-    pickpos.Y = 80 - (hsv.Z) * 80.f;
+    colorpos = static_cast<int>(150 - hsv.X / 360.f * 150.f);
+    pickpos.X = static_cast<int>(hsv.Y * 80.f);
+    pickpos.Y = static_cast<int>(80 - (hsv.Z) * 80.f);
 
     u32 *tmp = (u32 *)img[1]->lock();
     color.set(tmp[colorpos * img[1]->getOriginalSize().Width]);
