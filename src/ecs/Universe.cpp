@@ -17,7 +17,13 @@ Universe::Universe()
 {
 }
 
-Universe::~Universe() = default;
+Universe::~Universe()
+{
+    _device->getGUIEnvironment()->clear();
+    _device->getSceneManager()->clear();
+    _device->getVideoDriver()->removeAllTextures();
+    _device->drop();
+}
 
 WorldManager* Universe::createWorldManager(const std::string& name)
 {

@@ -11,6 +11,7 @@
 #include <irrlicht.h>
 
 #include <string>
+#include <memory>
 
 namespace ecs::component {
 
@@ -29,7 +30,7 @@ class Button {
 
   public:
     irr::gui::IGUIEnvironment* gui;
-    irr::core::rect<irr::s32>* rect {};
+    std::shared_ptr<irr::core::rect<irr::s32>> rect;
     irr::gui::IGUIElement* parent;
     irr::s32 id;
     const wchar_t* text;

@@ -8,9 +8,10 @@
 #ifndef INDIESTUDIO_PUSHPushButton_HPP
 #define INDIESTUDIO_PUSHPushButton_HPP
 
-#include <irrlicht.h>
-
 #include <string>
+#include <memory>
+
+#include <irrlicht.h>
 
 namespace ecs::component {
 
@@ -30,7 +31,7 @@ class PushButton {
 
   public:
     irr::gui::IGUIEnvironment* gui;
-    irr::core::rect<irr::s32>* rect {};
+    std::shared_ptr<irr::core::rect<irr::s32>> rect;
     irr::gui::IGUIElement* parent;
     irr::s32 id;
     const wchar_t* text;

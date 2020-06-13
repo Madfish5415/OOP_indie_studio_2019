@@ -33,7 +33,7 @@ PushButton::PushButton(const PushButton& btn)
 {
     gui = btn.gui;
     if (btn.rect)
-        rect = new irr::core::rect<irr::s32>(btn.rect->UpperLeftCorner, btn.rect->LowerRightCorner);
+        rect.reset(new irr::core::rect<irr::s32>(btn.rect->UpperLeftCorner, btn.rect->LowerRightCorner));
     else
         rect = nullptr;
     parent = btn.parent;
