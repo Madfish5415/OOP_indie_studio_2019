@@ -8,8 +8,8 @@
 #ifndef OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP
 #define OOP_INDIE_STUDIO_2019_IMAGE_COMP_HPP
 
-#include <string>
 #include <memory>
+#include <string>
 
 #include "irrlicht.h"
 

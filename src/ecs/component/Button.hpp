@@ -10,8 +10,8 @@
 
 #include <irrlicht.h>
 
-#include <string>
 #include <memory>
+#include <string>
 
 namespace ecs::component {
 

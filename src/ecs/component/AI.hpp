@@ -23,6 +23,8 @@ class AI {
   public:
     std::string lastDirection;
     irr::core::vector3d<irr::f32> lastPos;
+    irr::core::vector3d<irr::f32> lastEscape;
+    std::string lastChoice;
 };
 
 } // namespace ecs::component

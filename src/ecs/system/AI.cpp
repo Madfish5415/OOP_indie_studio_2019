@@ -133,10 +133,8 @@ static bool canMoveDirection(irr::core::vector3d<irr::f32> wantedPos, ecs::World
 }
 
 static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
-    const irr::core::vector3d<irr::f32>& wantedPos, ecs::WorldManager* worldManager)
+    const irr::core::vector3d<irr::f32>& wantedPos, ecs::WorldManager* worldManager, ecs::component::AI& aiComp)
 {
-    static irr::core::vector3d<irr::f32> lastEscape = irr::core::vector3d<irr::f32>(-50, 0, -50);
-    static std::string lastChoice;
     std::vector<ecs::Entity> bombEnts =
         worldManager->getEntities<ecs::component::BombStats, ecs::component::Render3d>();
 
@@ -150,22 +148,22 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
         const auto& pos = worldManager->getComponent<ecs::component::Render3d>(ent).node->getPosition();
 
         if (pos.X == wantedPos.X) {
-            if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                return lastChoice;
+            if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                return aiComp.lastChoice;
             if (pos.Z <= wantedPos.Z && pos.Z + (10 * static_cast<float>(bombStats.bombRadius)) >= wantedPos.Z) {
                 if (oldPos.Z <= wantedPos.Z && possRight) {
                     return "RIGHT";
                 } else if (possUp || possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
-                    return lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
+                    return aiComp.lastChoice;
                 } else if (possRight) {
-                    lastEscape = wantedPos;
-                    lastChoice = "RIGHT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "RIGHT";
                     return "RIGHT";
                 } else if (possLeft) {
-                    lastEscape = wantedPos;
-                    lastChoice = "LEFT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "LEFT";
                     return "LEFT";
                 } else {
                     return "";
@@ -174,42 +172,42 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
                 if (oldPos.Z >= wantedPos.Z && possLeft) {
                     return "LEFT";
                 } else if (possUp || possDown) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possUp && std::rand() % 2 == 0) ? "UP" : ((possDown) ? "DOWN" : "UP");
+                    return aiComp.lastChoice;
                 } else if (possLeft) {
-                    lastEscape = wantedPos;
-                    lastChoice = "LEFT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "LEFT";
                     return "LEFT";
                 } else if (possRight) {
-                    lastEscape = wantedPos;
-                    lastChoice = "RIGHT";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "RIGHT";
                     return "RIGHT";
                 } else {
                     return "";
                 }
             }
         } else if (pos.Z == wantedPos.Z) {
-            if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                return lastChoice;
+            if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                return aiComp.lastChoice;
             if (pos.X <= wantedPos.X && pos.X + (10 * static_cast<float>(bombStats.bombRadius)) >= wantedPos.X) {
                 if (oldPos.X <= wantedPos.X && possDown) {
                     return "DOWN";
                 } else if (possLeft || possRight) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
+                    return aiComp.lastChoice;
                 } else if (possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = "DOWN";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "DOWN";
                     return "DOWN";
                 } else if (possUp) {
-                    lastEscape = wantedPos;
-                    lastChoice = "UP";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "UP";
                     return "UP";
                 } else {
                     return "";
@@ -218,18 +216,18 @@ static std::string escapeFromDie(const irr::core::vector3d<irr::f32>& oldPos,
                 if (oldPos.X >= wantedPos.X && possUp) {
                     return "UP";
                 } else if (possLeft || possRight) {
-                    if (lastEscape.X == wantedPos.X && lastEscape.Z == wantedPos.Z)
-                        return lastChoice;
-                    lastEscape = wantedPos;
-                    lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
-                    return lastChoice;
+                    if (aiComp.lastEscape.X == wantedPos.X && aiComp.lastEscape.Z == wantedPos.Z)
+                        return aiComp.lastChoice;
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = (possLeft && std::rand() % 2 == 0) ? "LEFT" : ((possRight) ? "RIGHT" : "LEFT");
+                    return aiComp.lastChoice;
                 } else if (possUp) {
-                    lastEscape = wantedPos;
-                    lastChoice = "UP";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "UP";
                     return "UP";
                 } else if (possDown) {
-                    lastEscape = wantedPos;
-                    lastChoice = "DOWN";
+                    aiComp.lastEscape = wantedPos;
+                    aiComp.lastChoice = "DOWN";
                     return "DOWN";
                 } else {
                     return "";
@@ -255,7 +253,7 @@ static std::string chooseDirection(ecs::Entity ent, ecs::WorldManager* worldMana
     bool possUp = canMoveDirection(wantedPos, worldManager, "UP", true);
     bool possDown = canMoveDirection(wantedPos, worldManager, "DOWN", true);
 
-    std::string dir = escapeFromDie(oldPos, wantedPos, worldManager);
+    std::string dir = escapeFromDie(oldPos, wantedPos, worldManager, aiComp);
 
     if (!dir.empty())
         return dir;

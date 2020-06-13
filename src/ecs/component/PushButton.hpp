@@ -8,10 +8,10 @@
 #ifndef INDIESTUDIO_PUSHPushButton_HPP
 #define INDIESTUDIO_PUSHPushButton_HPP
 
-#include <string>
-#include <memory>
-
 #include <irrlicht.h>
+
+#include <memory>
+#include <string>
 
 namespace ecs::component {
 

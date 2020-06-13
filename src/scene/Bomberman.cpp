@@ -522,7 +522,8 @@ void scene::Bomberman::init(ecs::Universe *universe, std::vector<ecs::component:
     }
 
     ecs::Entity ground = worldManager->createEntity();
-    irr::scene::IMesh *planMesh = smgr->getGeometryCreator()->createPlaneMesh(irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile));
+    irr::scene::IMesh *planMesh = smgr->getGeometryCreator()->createPlaneMesh(
+        irr::core::dimension2df(tileSize, tileSize), irr::core::dimension2du(nbTile, nbTile));
     irr::scene::IMeshSceneNode *groundMesh = smgr->addMeshSceneNode(planMesh);
     planMesh->drop();
     if (groundMesh) {
@@ -599,12 +600,10 @@ void scene::Bomberman::createPowerUp(ecs::Universe *universe, const irr::core::v
     size_t powerUpChoice = std::rand() % 10;
 
     ecs::Entity powerUp = worldManager->createEntity();
-    irr::scene::IMesh *cubeMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3d<irr::f32>(0.1, 10, 10));
+    irr::scene::IMesh *cubeMesh =
+        smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3d<irr::f32>(0.1, 10, 10));
     irr::scene::IMeshSceneNode *powerUpMesh = smgr->addMeshSceneNode(cubeMesh);
-
     cubeMesh->drop();
-
-    size_t powerUpChoice = std::rand() % 10;
 
     if (!powerUpMesh)
         return;
