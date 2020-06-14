@@ -58,9 +58,10 @@ To build the project, you must install [CMake](https://cmake.org/download/).
 
 ---
 ### Build
-Run this command at the root of the project:
+Run these commands at the root of the project:
 ```
-cmake -B build && cmake --build build
+cmake -B build
+cmake --build build
 ```
 
 ---
