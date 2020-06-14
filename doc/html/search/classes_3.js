@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['system_91',['System',['../classecs_1_1System.html',1,'ecs']]],
-  ['systemmanager_92',['SystemManager',['../classecs_1_1SystemManager.html',1,'ecs']]]
+  ['delay_343',['Delay',['../classecs_1_1component_1_1Delay.html',1,'ecs::component']]]
 ];
