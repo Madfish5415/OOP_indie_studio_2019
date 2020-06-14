@@ -29,15 +29,19 @@ std::vector<ecs::Entity> PlayerSelector::playerSkinButtonLeftIds = {};
 std::vector<ecs::Entity> PlayerSelector::playerSkinButtonRightIds = {};
 std::vector<ecs::Entity> PlayerSelector::playerTypeButtonLeftIds = {};
 std::vector<ecs::Entity> PlayerSelector::playerTypeButtonRightIds = {};
+std::vector<ecs::Entity> PlayerSelector::playerCustomButtonIds = {};
 std::vector<ecs::Entity> PlayerSelector::playerType = {};
 std::vector<ecs::component::Player> PlayerSelector::playerComponent = {};
 std::vector<bool> PlayerSelector::typeList = {};
+std::array<irr::video::SColor, 4> PlayerSelector::bombColors = {irr::video::SColor(255, 0, 255, 255),
+    irr::video::SColor(255, 0, 255, 255), irr::video::SColor(255, 0, 255, 255), irr::video::SColor(255, 0, 255, 255)};
+irr::gui::IGUIElement* PlayerSelector::modal = nullptr;
 
-static const std::string getUnusedSkin()
+static const std::string& getUnusedSkin()
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
-    std::srand(std::time(nullptr));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     while (true) {
         item = playerselector::player::PLAYER_SKINS.begin();
         std::advance(item, std::rand() % playerselector::player::PLAYER_SKINS.size());
@@ -89,6 +93,7 @@ void PlayerSelector::init(ecs::Universe* universe, sf::Time musicTimer)
         signature.set(worldManager->getComponentType<ecs::component::Button>());
         worldManager->setSystemSignature<ecs::system::Button>(signature);
     }
+
     ecs::Entity background = worldManager->createEntity();
     worldManager->addComponent(background,
         ecs::component::Image(
@@ -137,6 +142,12 @@ void PlayerSelector::init(ecs::Universe* universe, sf::Time musicTimer)
             playerselector::button::skin::right::HOVER, playerselector::button::skin::right::PRESSED);
     playerTypeButtonRightIds.emplace_back(defaultPlayerTypeButtonRight);
 
+    ecs::Entity defaultPlayerCustomButton =
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 + 80, 285, 960 + 80 + 50, 285 + 50), nullptr,
+            GUI_SELECT_CUSTOM_P1, playerselector::button::custom::NORMAL, playerselector::button::custom::HOVER,
+            playerselector::button::custom::PRESSED);
+    playerCustomButtonIds.emplace_back(defaultPlayerCustomButton);
+
     ecs::Entity type = worldManager->createEntity();
     worldManager->addComponent(type,
         ecs::component::Image(
@@ -162,10 +173,6 @@ void PlayerSelector::init(ecs::Universe* universe, sf::Time musicTimer)
     addPlayer(universe);
 }
 
-void PlayerSelector::reset()
-{
-}
-
 void PlayerSelector::destroy(ecs::Universe* universe)
 {
     universe->deleteWorldManager("PlayerSelector");
@@ -176,6 +183,7 @@ void PlayerSelector::destroy(ecs::Universe* universe)
     PlayerSelector::playerSkinButtonRightIds.clear();
     PlayerSelector::playerTypeButtonLeftIds.clear();
     PlayerSelector::playerTypeButtonRightIds.clear();
+    PlayerSelector::playerCustomButtonIds.clear();
     PlayerSelector::playerType.clear();
     PlayerSelector::playerComponent.clear();
     PlayerSelector::typeList.clear();
@@ -200,37 +208,45 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
 
     ecs::Entity playerKeys =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 - 125, 745, 960 + 125, 745 + 100), nullptr,
-            GUI_SELECT_KB_P1 + (PlayerSelector::playerIds.size() - 1), playerselector::button::keys::NORMAL,
-            playerselector::button::keys::HOVER, playerselector::button::keys::PRESSED);
+            static_cast<irr::s32>(GUI_SELECT_KB_P1 + (PlayerSelector::playerIds.size() - 1)),
+            playerselector::button::keys::NORMAL, playerselector::button::keys::HOVER,
+            playerselector::button::keys::PRESSED);
     playerKeysIds.emplace_back(playerKeys);
 
     ecs::Entity playerSkinButtonLeft =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 620, 835 + 40, 620 + 40), nullptr,
-            GUI_SELECT_SKIN_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2,
+            static_cast<irr::s32>(GUI_SELECT_SKIN_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::left::NORMAL, playerselector::button::skin::left::HOVER,
             playerselector::button::skin::left::PRESSED);
     playerSkinButtonLeftIds.emplace_back(playerSkinButtonLeft);
 
     ecs::Entity playerSkinButtonRight =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 620, 1045 + 40, 620 + 40), nullptr,
-            GUI_SELECT_SKIN_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2,
+            static_cast<irr::s32>(GUI_SELECT_SKIN_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::right::NORMAL, playerselector::button::skin::right::HOVER,
             playerselector::button::skin::right::PRESSED);
     playerSkinButtonRightIds.emplace_back(playerSkinButtonRight);
 
     ecs::Entity playerTypeButtonLeft =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(835, 220, 835 + 40, 220 + 40), nullptr,
-            GUI_SELECT_TYPE_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2,
+            static_cast<irr::s32>(GUI_SELECT_TYPE_P1_LEFT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::left::NORMAL, playerselector::button::skin::left::HOVER,
             playerselector::button::skin::left::PRESSED);
     playerTypeButtonLeftIds.emplace_back(playerTypeButtonLeft);
 
     ecs::Entity playerTypeButtonRight =
         createButton(worldManager, gui, new irr::core::rect<irr::s32>(1045, 220, 1045 + 40, 220 + 40), nullptr,
-            GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2,
+            static_cast<irr::s32>(GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2),
             playerselector::button::skin::right::NORMAL, playerselector::button::skin::right::HOVER,
             playerselector::button::skin::right::PRESSED);
     playerTypeButtonRightIds.emplace_back(playerTypeButtonRight);
+
+    ecs::Entity defaultPlayerCustomButton =
+        createButton(worldManager, gui, new irr::core::rect<irr::s32>(960 + 80, 285, 960 + 80 + 50, 285 + 50), nullptr,
+            static_cast<irr::s32>(GUI_SELECT_CUSTOM_P1 + (PlayerSelector::playerIds.size() - 1)),
+            playerselector::button::custom::NORMAL, playerselector::button::custom::HOVER,
+            playerselector::button::custom::PRESSED);
+    playerCustomButtonIds.emplace_back(defaultPlayerCustomButton);
 
     ecs::Entity type = worldManager->createEntity();
     worldManager->addComponent(type,
@@ -242,15 +258,15 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     PlayerSelector::typeList.emplace_back(false);
 
     int idx = 0;
-    for (auto& id : PlayerSelector::playerIds) {
+    for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
-        int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
+        int totalPlayerSize = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
 
         auto& leftSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonLeftIds[idx]);
         auto& rightSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonRightIds[idx]);
 
-        image.position->X = (1920 / 2 - total_player_size / 2) + (idx * 400);
+        image.position->X = (1920 / 2 - totalPlayerSize / 2) + (idx * 400);
         image.image->setRelativePosition(*image.position);
 
         leftSkin.rect->UpperLeftCorner.X = image.position->X + 25;
@@ -272,6 +288,12 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
         rightType.rect->LowerRightCorner.X = rightType.rect->UpperLeftCorner.X + 40;
         rightType.button->setRelativePosition(*rightType.rect);
 
+        auto& custom = worldManager->getComponent<ecs::component::Button>(playerCustomButtonIds[idx]);
+
+        custom.rect->UpperLeftCorner.X = image.position->X + 300 - 50 - 20;
+        custom.rect->LowerRightCorner.X = custom.rect->UpperLeftCorner.X + 50;
+        custom.button->setRelativePosition(*custom.rect);
+
         auto& typeImage = worldManager->getComponent<ecs::component::Image>(playerType[idx]);
 
         typeImage.position->X = image.position->X + 75;
@@ -281,18 +303,19 @@ void PlayerSelector::addPlayer(ecs::Universe* universe)
     }
 
     idx = 0;
-    for (auto& id : PlayerSelector::playerKeysIds) {
+    for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
-        int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
+        int totalButtonSize = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
 
-        button.rect->UpperLeftCorner.X = (1920 / 2 - total_button_size / 2) + (idx * 400);
+        button.rect->UpperLeftCorner.X = (1920 / 2 - totalButtonSize / 2) + (idx * 400);
         button.rect->LowerRightCorner.X = button.rect->UpperLeftCorner.X + 250;
         button.button->setRelativePosition(*button.rect);
         idx++;
     }
 
-    PlayerSelector::changeType(universe, GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2);
+    PlayerSelector::changeType(
+        universe, static_cast<irr::s32>(GUI_SELECT_TYPE_P1_RIGHT + (PlayerSelector::playerIds.size() - 1) * 2));
 }
 
 void PlayerSelector::removePlayer(ecs::Universe* universe)
@@ -326,6 +349,11 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
         button.button->remove();
     }
     {
+        auto& button = universe->getWorldManager("PlayerSelector")
+                           ->getComponent<ecs::component::Button>(PlayerSelector::playerCustomButtonIds.back());
+        button.button->remove();
+    }
+    {
         auto& image = universe->getWorldManager("PlayerSelector")
                           ->getComponent<ecs::component::Image>(PlayerSelector::playerType.back());
         image.image->remove();
@@ -340,6 +368,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     universe->getWorldManager("PlayerSelector")->destroyEntity(PlayerSelector::playerSkinButtonRightIds.back());
     universe->getWorldManager("PlayerSelector")->destroyEntity(PlayerSelector::playerTypeButtonLeftIds.back());
     universe->getWorldManager("PlayerSelector")->destroyEntity(PlayerSelector::playerTypeButtonRightIds.back());
+    universe->getWorldManager("PlayerSelector")->destroyEntity(PlayerSelector::playerCustomButtonIds.back());
     universe->getWorldManager("PlayerSelector")->destroyEntity(PlayerSelector::playerType.back());
 
     PlayerSelector::playerIds.pop_back();
@@ -348,6 +377,7 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     PlayerSelector::playerSkinButtonRightIds.pop_back();
     PlayerSelector::playerTypeButtonLeftIds.pop_back();
     PlayerSelector::playerTypeButtonRightIds.pop_back();
+    PlayerSelector::playerCustomButtonIds.pop_back();
     PlayerSelector::playerType.pop_back();
     PlayerSelector::playerComponent.pop_back();
     PlayerSelector::typeList.pop_back();
@@ -358,15 +388,15 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     }
 
     int idx = 0;
-    for (auto& id : PlayerSelector::playerIds) {
+    for (const auto& id : PlayerSelector::playerIds) {
         auto& image = worldManager->getComponent<ecs::component::Image>(id);
-        int total_player_size = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
+        int totalPlayerSize = (static_cast<int>(PlayerSelector::playerIds.size())) * 300 +
             (100 * (static_cast<int>(PlayerSelector::playerIds.size()) - 1));
 
         auto& leftSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonLeftIds[idx]);
         auto& rightSkin = worldManager->getComponent<ecs::component::Button>(playerSkinButtonRightIds[idx]);
 
-        image.position->X = (1920 / 2 - total_player_size / 2) + (idx * 400);
+        image.position->X = (1920 / 2 - totalPlayerSize / 2) + (idx * 400);
         image.image->setRelativePosition(*image.position);
 
         leftSkin.rect->UpperLeftCorner.X = image.position->X + 25;
@@ -388,6 +418,12 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
         rightType.rect->LowerRightCorner.X = rightType.rect->UpperLeftCorner.X + 40;
         rightType.button->setRelativePosition(*rightType.rect);
 
+        auto& custom = worldManager->getComponent<ecs::component::Button>(playerCustomButtonIds[idx]);
+
+        custom.rect->UpperLeftCorner.X = image.position->X + 300 - 50 - 20;
+        custom.rect->LowerRightCorner.X = custom.rect->UpperLeftCorner.X + 50;
+        custom.button->setRelativePosition(*custom.rect);
+
         auto& typeImage = worldManager->getComponent<ecs::component::Image>(playerType[idx]);
 
         typeImage.position->X = image.position->X + 75;
@@ -397,19 +433,19 @@ void PlayerSelector::removePlayer(ecs::Universe* universe)
     }
 
     idx = 0;
-    for (auto& id : PlayerSelector::playerKeysIds) {
+    for (const auto& id : PlayerSelector::playerKeysIds) {
         auto& button = worldManager->getComponent<ecs::component::Button>(id);
-        int total_button_size = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
+        int totalButtonSize = (static_cast<int>(PlayerSelector::playerKeysIds.size())) * 250 +
             (150 * (static_cast<int>(PlayerSelector::playerKeysIds.size()) - 1));
 
-        button.rect->UpperLeftCorner.X = (1920 / 2 - total_button_size / 2) + (idx * 400);
+        button.rect->UpperLeftCorner.X = (1920 / 2 - totalButtonSize / 2) + (idx * 400);
         button.rect->LowerRightCorner.X = button.rect->UpperLeftCorner.X + 250;
         button.button->setRelativePosition(*button.rect);
         idx++;
     }
 }
 
-static std::string getNextUnusedSkin(const std::string& currentSkin)
+static const std::string& getNextUnusedSkin(const std::string& currentSkin)
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
@@ -431,7 +467,7 @@ static std::string getNextUnusedSkin(const std::string& currentSkin)
     }
 }
 
-static std::string getPrevUnusedSkin(const std::string& currentSkin)
+static const std::string& getPrevUnusedSkin(const std::string& currentSkin)
 {
     auto item = playerselector::player::PLAYER_SKINS.begin();
 
@@ -526,10 +562,14 @@ void PlayerSelector::changeType(ecs::Universe* universe, irr::s32 id)
     switch (id) {
         case GUI_SELECT_TYPE_P1_LEFT:
         case GUI_SELECT_TYPE_P1_RIGHT: {
-            auto& image = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[0]);
-            auto& left = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[0]);
-            auto& right = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonRightIds[0]);
-            auto& keys = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[0]);
+            auto& image =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[0]);
+            auto& left = universe->getWorldManager("PlayerSelector")
+                             ->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[0]);
+            auto& right = universe->getWorldManager("PlayerSelector")
+                              ->getComponent<ecs::component::Button>(playerTypeButtonRightIds[0]);
+            auto& keys =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[0]);
 
             if (image.pathTexture == playerselector::SELECT_PLAYER) {
                 image.image->setImage(driver->getTexture(playerselector::SELECT_AI.c_str()));
@@ -569,10 +609,14 @@ void PlayerSelector::changeType(ecs::Universe* universe, irr::s32 id)
         } break;
         case GUI_SELECT_TYPE_P2_LEFT:
         case GUI_SELECT_TYPE_P2_RIGHT: {
-            auto& image = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[1]);
-            auto& left = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[1]);
-            auto& right = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonRightIds[1]);
-            auto& keys = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[1]);
+            auto& image =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[1]);
+            auto& left = universe->getWorldManager("PlayerSelector")
+                             ->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[1]);
+            auto& right = universe->getWorldManager("PlayerSelector")
+                              ->getComponent<ecs::component::Button>(playerTypeButtonRightIds[1]);
+            auto& keys =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[1]);
 
             if (image.pathTexture == playerselector::SELECT_PLAYER) {
                 image.image->setImage(driver->getTexture(playerselector::SELECT_AI.c_str()));
@@ -612,10 +656,14 @@ void PlayerSelector::changeType(ecs::Universe* universe, irr::s32 id)
         } break;
         case GUI_SELECT_TYPE_P3_LEFT:
         case GUI_SELECT_TYPE_P3_RIGHT: {
-            auto& image = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[2]);
-            auto& left = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[2]);
-            auto& right = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonRightIds[2]);
-            auto& keys = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[2]);
+            auto& image =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[2]);
+            auto& left = universe->getWorldManager("PlayerSelector")
+                             ->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[2]);
+            auto& right = universe->getWorldManager("PlayerSelector")
+                              ->getComponent<ecs::component::Button>(playerTypeButtonRightIds[2]);
+            auto& keys =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[2]);
 
             if (image.pathTexture == playerselector::SELECT_PLAYER) {
                 image.image->setImage(driver->getTexture(playerselector::SELECT_AI.c_str()));
@@ -655,10 +703,14 @@ void PlayerSelector::changeType(ecs::Universe* universe, irr::s32 id)
         } break;
         case GUI_SELECT_TYPE_P4_LEFT:
         case GUI_SELECT_TYPE_P4_RIGHT: {
-            auto& image = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[3]);
-            auto& left = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[3]);
-            auto& right = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerTypeButtonRightIds[3]);
-            auto& keys = universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[3]);
+            auto& image =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Image>(playerType[3]);
+            auto& left = universe->getWorldManager("PlayerSelector")
+                             ->getComponent<ecs::component::Button>(playerTypeButtonLeftIds[3]);
+            auto& right = universe->getWorldManager("PlayerSelector")
+                              ->getComponent<ecs::component::Button>(playerTypeButtonRightIds[3]);
+            auto& keys =
+                universe->getWorldManager("PlayerSelector")->getComponent<ecs::component::Button>(playerKeysIds[3]);
 
             if (image.pathTexture == playerselector::SELECT_PLAYER) {
                 image.image->setImage(driver->getTexture(playerselector::SELECT_AI.c_str()));

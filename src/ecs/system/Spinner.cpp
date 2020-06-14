@@ -13,7 +13,7 @@
 
 using namespace ecs::system;
 
-Spinner::Spinner(ecs::WorldManager *worldManager) : System(worldManager)
+Spinner::Spinner(ecs::WorldManager* worldManager) : System(worldManager)
 {
     time = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
 }

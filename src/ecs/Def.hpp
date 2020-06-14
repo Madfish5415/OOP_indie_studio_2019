@@ -47,28 +47,33 @@ enum BUTTON_ID {
     GUI_SELECT_ADD_PLAYER, /** < Add player.*/
     GUI_SELECT_REMOVE_PLAYER, /** < Remove player.*/
 
-    GUI_SELECT_SKIN_P1_LEFT, /** < Button skin change left Player 1.*/
-    GUI_SELECT_SKIN_P1_RIGHT, /** < Button skin change right Player 1.*/
-    GUI_SELECT_SKIN_P2_LEFT, /** < Button skin change left Player 2.*/
-    GUI_SELECT_SKIN_P2_RIGHT, /** < Button skin change right Player 2.*/
-    GUI_SELECT_SKIN_P3_LEFT, /** < Button skin change left Player 3.*/
-    GUI_SELECT_SKIN_P3_RIGHT, /** < Button skin change right Player 3.*/
-    GUI_SELECT_SKIN_P4_LEFT, /** < Button skin change left Player 4.*/
-    GUI_SELECT_SKIN_P4_RIGHT, /** < Button skin change right Player 4.*/
+    GUI_SELECT_SKIN_P1_LEFT, /** < Button type change left Player 1.*/
+    GUI_SELECT_SKIN_P1_RIGHT, /** < Button type change right Player 1.*/
+    GUI_SELECT_SKIN_P2_LEFT, /** < Button type change left Player 2.*/
+    GUI_SELECT_SKIN_P2_RIGHT, /** < Button type change right Player 2.*/
+    GUI_SELECT_SKIN_P3_LEFT, /** < Button type change left Player 3.*/
+    GUI_SELECT_SKIN_P3_RIGHT, /** < Button type change right Player 3.*/
+    GUI_SELECT_SKIN_P4_LEFT, /** < Button type change left Player 4.*/
+    GUI_SELECT_SKIN_P4_RIGHT, /** < Button type change right Player 4.*/
 
-    GUI_SELECT_TYPE_P1_LEFT, /** < Button skin change left Player 1.*/
-    GUI_SELECT_TYPE_P1_RIGHT, /** < Button skin change right Player 1.*/
-    GUI_SELECT_TYPE_P2_LEFT, /** < Button skin change left Player 2.*/
-    GUI_SELECT_TYPE_P2_RIGHT, /** < Button skin change right Player 2.*/
-    GUI_SELECT_TYPE_P3_LEFT, /** < Button skin change left Player 3.*/
-    GUI_SELECT_TYPE_P3_RIGHT, /** < Button skin change right Player 3.*/
-    GUI_SELECT_TYPE_P4_LEFT, /** < Button skin change left Player 4.*/
-    GUI_SELECT_TYPE_P4_RIGHT, /** < Button skin change right Player 4.*/
+    GUI_SELECT_TYPE_P1_LEFT, /** < Button type change left Player 1.*/
+    GUI_SELECT_TYPE_P1_RIGHT, /** < Button type change right Player 1.*/
+    GUI_SELECT_TYPE_P2_LEFT, /** < Button type change left Player 2.*/
+    GUI_SELECT_TYPE_P2_RIGHT, /** < Button type change right Player 2.*/
+    GUI_SELECT_TYPE_P3_LEFT, /** < Button type change left Player 3.*/
+    GUI_SELECT_TYPE_P3_RIGHT, /** < Button type change right Player 3.*/
+    GUI_SELECT_TYPE_P4_LEFT, /** < Button type change left Player 4.*/
+    GUI_SELECT_TYPE_P4_RIGHT, /** < Button type change right Player 4.*/
 
     GUI_SELECT_KB_P1, /** < Open Player 1 keybinding window */
     GUI_SELECT_KB_P2, /** < Open Player 2 keybinding window */
     GUI_SELECT_KB_P3, /** < Open Player 3 keybinding window */
     GUI_SELECT_KB_P4, /** < Open Player 4 keybinding window */
+
+    GUI_SELECT_CUSTOM_P1, /** < Open Player 1 custom window */
+    GUI_SELECT_CUSTOM_P2, /** < Open Player 2 custom window */
+    GUI_SELECT_CUSTOM_P3, /** < Open Player 3 custom window */
+    GUI_SELECT_CUSTOM_P4, /** < Open Player 4 custom window */
 
     GUI_SELECT_KB_UP, /** < Change UP Key code.*/
     GUI_SELECT_KB_DOWN, /** < Change DOWN Key code.*/

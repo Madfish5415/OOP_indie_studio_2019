@@ -13,14 +13,14 @@
 namespace ecs::system {
 
 class PowerUp : public System {
-    public:
-        explicit PowerUp(ecs::WorldManager *worldManager);
-        ~PowerUp() override;
+  public:
+    explicit PowerUp(ecs::WorldManager *worldManager);
+    ~PowerUp() override;
 
-    public:
-        void update() override;
+  public:
+    void update() override;
 };
 
-}
+} // namespace ecs::system
 
 #endif /* !INDIESTUDIO_POWERUP_HPP_ */

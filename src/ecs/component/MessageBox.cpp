@@ -16,5 +16,6 @@ MessageBox::MessageBox(irr::gui::IGUIEnvironment* gui, const wchar_t* caption, c
     if (gui)
         messageBox = gui->addMessageBox(caption, text, modal, flags, parent, id, image);
 }
+MessageBox::MessageBox(const MessageBox& messageBox1) = default;
 
 MessageBox::~MessageBox() = default;

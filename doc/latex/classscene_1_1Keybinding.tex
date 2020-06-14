@@ -1,0 +1,115 @@
+\hypertarget{classscene_1_1Keybinding}{}\doxysection{scene\+::Keybinding Class Reference}
+\label{classscene_1_1Keybinding}\index{scene::Keybinding@{scene::Keybinding}}
+
+
+Handle the \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene.  
+
+
+
+
+{\ttfamily \#include $<$Keybinding.\+hpp$>$}
+
+
+
+Collaboration diagram for scene\+::Keybinding\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{classscene_1_1Keybinding__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Keybinding_ab62297aa2b87c4a77fb4fd85dd346b95}\label{classscene_1_1Keybinding_ab62297aa2b87c4a77fb4fd85dd346b95}} 
+\mbox{\hyperlink{classscene_1_1Keybinding_ab62297aa2b87c4a77fb4fd85dd346b95}{Keybinding}} ()=delete
+\begin{DoxyCompactList}\small\item\em Constructor Delete to avoid the construction of the class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classscene_1_1Keybinding_a4cf9bce0a87815de663fc59a3282a059}\label{classscene_1_1Keybinding_a4cf9bce0a87815de663fc59a3282a059}} 
+\mbox{\hyperlink{classscene_1_1Keybinding_a4cf9bce0a87815de663fc59a3282a059}{$\sim$\+Keybinding}} ()=delete
+\begin{DoxyCompactList}\small\item\em Destructor Delete to avoid the destruction of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classscene_1_1Keybinding_a9d8fb53d887e51ca60ebf4dc245776c9}{init}} (ecs\+::\+Universe $\ast$universe, const std\+::string \&path\+Texture, \mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $\ast$ply)
+\begin{DoxyCompactList}\small\item\em init method This method create the whole \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Keybinding_a85f36ae96895e6706a0e801ee5708822}{destroy}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Keybinding_a563c7ede66e756b810368c9fd23f3ef1}\label{classscene_1_1Keybinding_a563c7ede66e756b810368c9fd23f3ef1}} 
+static \mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $\ast$ {\bfseries player}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1Keybinding_aa7b044123162b88e9cba65afb4883ebe}{buttons}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1Keybinding_a1e08723d6a6ba24ab26fae3227370cfe}{push\+Buttons}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1Keybinding_a5945d586cb5dafd6f7cf8ba68b804766}{images}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handle the \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classscene_1_1Keybinding_a85f36ae96895e6706a0e801ee5708822}\label{classscene_1_1Keybinding_a85f36ae96895e6706a0e801ee5708822}} 
+\index{scene::Keybinding@{scene::Keybinding}!destroy@{destroy}}
+\index{destroy@{destroy}!scene::Keybinding@{scene::Keybinding}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily static void scene\+::\+Keybinding\+::destroy (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Keybinding_a9d8fb53d887e51ca60ebf4dc245776c9}\label{classscene_1_1Keybinding_a9d8fb53d887e51ca60ebf4dc245776c9}} 
+\index{scene::Keybinding@{scene::Keybinding}!init@{init}}
+\index{init@{init}!scene::Keybinding@{scene::Keybinding}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static void scene\+::\+Keybinding\+::init (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{const std\+::string \&}]{path\+Texture,  }\item[{\mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $\ast$}]{ply }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+init method This method create the whole \mbox{\hyperlink{classscene_1_1Keybinding}{Keybinding}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+{\em path\+Texture} & \+: The current skin of the player. \\
+\hline
+{\em ply} & \+: A pointer to a player component that contains the last player\textquotesingle{}s key assignment. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classscene_1_1Keybinding_aa7b044123162b88e9cba65afb4883ebe}\label{classscene_1_1Keybinding_aa7b044123162b88e9cba65afb4883ebe}} 
+\index{scene::Keybinding@{scene::Keybinding}!buttons@{buttons}}
+\index{buttons@{buttons}!scene::Keybinding@{scene::Keybinding}}
+\doxysubsubsection{\texorpdfstring{buttons}{buttons}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Keybinding\+::buttons\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ A pointer to a player component that contains the last player\textquotesingle{}s key assignment. \mbox{\Hypertarget{classscene_1_1Keybinding_a5945d586cb5dafd6f7cf8ba68b804766}\label{classscene_1_1Keybinding_a5945d586cb5dafd6f7cf8ba68b804766}} 
+\index{scene::Keybinding@{scene::Keybinding}!images@{images}}
+\index{images@{images}!scene::Keybinding@{scene::Keybinding}}
+\doxysubsubsection{\texorpdfstring{images}{images}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Keybinding\+::images\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of all used push buttons on this scene. \mbox{\Hypertarget{classscene_1_1Keybinding_a1e08723d6a6ba24ab26fae3227370cfe}\label{classscene_1_1Keybinding_a1e08723d6a6ba24ab26fae3227370cfe}} 
+\index{scene::Keybinding@{scene::Keybinding}!pushButtons@{pushButtons}}
+\index{pushButtons@{pushButtons}!scene::Keybinding@{scene::Keybinding}}
+\doxysubsubsection{\texorpdfstring{pushButtons}{pushButtons}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Keybinding\+::push\+Buttons\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of all used buttons on this scene. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/scene/\mbox{\hyperlink{Keybinding_8hpp}{Keybinding.\+hpp}}\end{DoxyCompactItemize}

@@ -6,21 +6,20 @@
 */
 
 #include "Size.hpp"
+
 #include "../Universe.hpp"
-
-#include "../component/Size.hpp"
 #include "../component/Render3d.hpp"
-
+#include "../component/Size.hpp"
 
 using namespace ecs::system;
 
-Size::Size(WorldManager *worldManager) : ecs::System(worldManager)
+Size::Size(WorldManager* worldManager) : ecs::System(worldManager)
 {
 }
 
 Size::~Size() = default;
 
-void Size::update() 
+void Size::update()
 {
     for (const auto& entity : entities) {
         auto& node = worldManager->getComponent<ecs::component::Render3d>(entity).node;

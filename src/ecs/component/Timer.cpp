@@ -9,8 +9,7 @@
 
 using namespace ecs::component;
 
-Timer::Timer(irr::u32 delay)
-    : delay(delay), elapsed(0), lastUpdate(0)
+Timer::Timer(irr::u32 delay) : delay(delay), elapsed(0), lastUpdate(0)
 {
 }
 

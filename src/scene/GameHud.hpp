@@ -13,15 +13,49 @@
 #include "../ecs/Universe.hpp"
 #include "Bomberman.hpp"
 
+/**
+ * @file GameHud.hpp
+ * @brief GameHud Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class GameHud
+ * @brief Handle the GameHud scene.
+ */
 class GameHud {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     GameHud() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~GameHud() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole GameHud scene.
+     * @param universe : A pointer on the universe.
+     * @param paths : List of players skins.
+     */
     static void init(ecs::Universe* universe, const std::vector<std::string>& paths);
+    /**
+     * @brief destroy method
+     * This method destroy the whole GameHud scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 };
 
@@ -66,11 +100,13 @@ static const std::map<int, std::string> INT_TO_IMG = {{0, NUMBER0}, {1, NUMBER1}
 } // namespace number
 
 namespace button {
+
 namespace settings {
 const std::string NORMAL = "assets/img/game-hud/button/button-settings-normal.png";
 const std::string HOVER = "assets/img/game-hud/button/button-settings-hover.png";
 const std::string PRESSED = "assets/img/game-hud/button/button-settings-pressed.png";
 } // namespace settings
+
 } // namespace button
 
 static const std::string BACKGROUND = "assets/img/game-hud/background.png";

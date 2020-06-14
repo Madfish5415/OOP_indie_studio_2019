@@ -16,13 +16,14 @@
 namespace ecs::system {
 
 class Animation : public ecs::System {
-    public:
-        Animation(ecs::WorldManager* worldManager);
-        ~Animation();
+  public:
+    explicit Animation(ecs::WorldManager* worldManager);
+    ~Animation() override;
 
-    public:
-        void update();
+  public:
+    void update() override;
 };
-}
+
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_ANIMATION_HPP_

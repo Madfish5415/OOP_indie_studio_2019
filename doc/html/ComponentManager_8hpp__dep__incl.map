@@ -1,4 +1,8 @@
 <map id="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/ComponentManager.hpp" name="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/ecs/ComponentManager.hpp">
-<area shape="rect" id="node1" title="ComponentManager Class." alt="" coords="5,5,216,76"/>
-<area shape="rect" id="node2" href="$WorldManager_8hpp.html" title="WorldManager Class." alt="" coords="24,124,197,195"/>
+<area shape="rect" id="node1" title="ComponentManager Class." alt="" coords="281,5,492,76"/>
+<area shape="rect" id="node2" href="$WorldManager_8hpp.html" title="WorldManager Class." alt="" coords="300,124,473,195"/>
+<area shape="rect" id="node3" href="$Menu_8hpp.html" title="Menu Class." alt="" coords="5,243,176,313"/>
+<area shape="rect" id="node4" href="$Pause_8hpp.html" title="Pause Class." alt="" coords="200,243,371,313"/>
+<area shape="rect" id="node5" href="$PlayerSelector_8hpp.html" title="PlayerSelector Class." alt="" coords="395,243,584,313"/>
+<area shape="rect" id="node6" href="$WinScreen_8hpp.html" title="WinScreen Class." alt="" coords="608,243,779,313"/>
 </map>

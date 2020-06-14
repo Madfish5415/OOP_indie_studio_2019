@@ -1,0 +1,88 @@
+\hypertarget{classEventReceiver}{}\doxysection{Event\+Receiver Class Reference}
+\label{classEventReceiver}\index{EventReceiver@{EventReceiver}}
+
+
+Daughter class that collects events from the Irrlicht library.  
+
+
+
+
+{\ttfamily \#include $<$Event\+Receiver.\+hpp$>$}
+
+
+
+Inheritance diagram for Event\+Receiver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classEventReceiver__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Event\+Receiver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classEventReceiver__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEventReceiver_a8ea6785780311feb1b7ff6608051a659}{Event\+Receiver}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em Constructor Store a pointer on the universe. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEventReceiver_a9644c76c74a5d5cdc38e730db30efaee}\label{classEventReceiver_a9644c76c74a5d5cdc38e730db30efaee}} 
+\mbox{\hyperlink{classEventReceiver_a9644c76c74a5d5cdc38e730db30efaee}{$\sim$\+Event\+Receiver}} () override
+\begin{DoxyCompactList}\small\item\em Destructor It\textquotesingle{}s a default destructor because the garbage collector will take care of the rest. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classEventReceiver_a3a037c7588606c749e11c88be60a1f3a}{On\+Event}} (const irr\+::\+S\+Event \&event) override
+\begin{DoxyCompactList}\small\item\em On\+Event method This method was called by Irrlicht when it receive an event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Daughter class that collects events from the Irrlicht library. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEventReceiver_a8ea6785780311feb1b7ff6608051a659}\label{classEventReceiver_a8ea6785780311feb1b7ff6608051a659}} 
+\index{EventReceiver@{EventReceiver}!EventReceiver@{EventReceiver}}
+\index{EventReceiver@{EventReceiver}!EventReceiver@{EventReceiver}}
+\doxysubsubsection{\texorpdfstring{EventReceiver()}{EventReceiver()}}
+{\footnotesize\ttfamily Event\+Receiver\+::\+Event\+Receiver (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor Store a pointer on the universe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: Pointer on Universe. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEventReceiver_a3a037c7588606c749e11c88be60a1f3a}\label{classEventReceiver_a3a037c7588606c749e11c88be60a1f3a}} 
+\index{EventReceiver@{EventReceiver}!OnEvent@{OnEvent}}
+\index{OnEvent@{OnEvent}!EventReceiver@{EventReceiver}}
+\doxysubsubsection{\texorpdfstring{OnEvent()}{OnEvent()}}
+{\footnotesize\ttfamily bool Event\+Receiver\+::\+On\+Event (\begin{DoxyParamCaption}\item[{const irr\+::\+S\+Event \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+On\+Event method This method was called by Irrlicht when it receive an event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \+: Irrlicht event. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the event is totally handled and False otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/\mbox{\hyperlink{EventReceiver_8hpp}{Event\+Receiver.\+hpp}}\end{DoxyCompactItemize}

@@ -11,6 +11,6 @@ using namespace ecs::component;
 
 Lootable::Lootable() = default;
 
-Lootable::~Lootable() = default;
-
 Lootable::Lootable(const Lootable& lootable) = default;
+
+Lootable::~Lootable() = default;

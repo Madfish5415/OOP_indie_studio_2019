@@ -16,37 +16,77 @@
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Player.hpp"
 
+/**
+ * @file Keybinding.hpp
+ * @brief Keybinding Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class Keybinding
+ * @brief Handle the Keybinding scene.
+ */
 class Keybinding {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     Keybinding() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~Keybinding() = delete;
 
   public:
-    static void init(ecs::Universe* universe, const std::string& pathTexture, ecs::component::Player* player);
-    static void reset(ecs::Universe* universe);
+    /**
+     * @brief init method
+     * This method create the whole Keybinding scene.
+     * @param universe : A pointer on the universe.
+     * @param pathTexture : The current skin of the player.
+     * @param ply : A pointer to a player component that contains the last player's key assignment.
+     */
+    static void init(ecs::Universe* universe, const std::string& pathTexture, ecs::component::Player* ply);
+    /**
+     * @brief destroy method
+     * This method destroy the whole Keybinding scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 
   public:
-    static ecs::component::Player* player;
-    static std::vector<ecs::Entity> buttons;
-    static std::vector<ecs::Entity> pushButtons;
-    static std::vector<ecs::Entity> images;
+    static ecs::component::Player*
+        player; /** < A pointer to a player component that contains the last player's key assignment. */
+    static std::vector<ecs::Entity> buttons; /** < List of all used buttons on this scene. */
+    static std::vector<ecs::Entity> pushButtons; /** < List of all used push buttons on this scene. */
+    static std::vector<ecs::Entity> images; /** < List of all used images on this scene. */
 };
 
 namespace keybinding {
+
 namespace button {
+
 namespace key {
 const std::string NORMAL = "assets/img/keybinding/button/button-key-normal.png";
 const std::string PRESSED = "assets/img/keybinding/button/button-key-pressed.png";
 } // namespace key
-} // namespace button
+
 namespace back {
 const std::string NORMAL = "assets/img/keybinding/button/button-back-normal.png";
 const std::string HOVER = "assets/img/keybinding/button/button-back-hover.png";
 const std::string PRESSED = "assets/img/keybinding/button/button-back-pressed.png";
 } // namespace back
+
+} // namespace button
+
 const std::string BACKGROUND = "assets/img/keybinding/background-keys.png";
 const std::string BLACKFILTER = "assets/img/keybinding/black-filter.png";
 const std::string FONT = "assets/font/keybinding/karmatic_arcadev2.xml";
@@ -74,4 +114,5 @@ static std::map<irr::EKEY_CODE, std::wstring> KEYBINDING_MAP = {{irr::EKEY_CODE:
     {irr::EKEY_CODE::KEY_F8, L"F8"}, {irr::EKEY_CODE::KEY_F9, L"F9"}, {irr::EKEY_CODE::KEY_F10, L"F10"},
     {irr::EKEY_CODE::KEY_F11, L"F11"}, {irr::EKEY_CODE::KEY_F12, L"F12"}};
 } // namespace scene
+
 #endif // INDIESTUDIO_KEBINDING_HPP

@@ -1,0 +1,276 @@
+\hypertarget{classscene_1_1PlayerSelector}{}\doxysection{scene\+::Player\+Selector Class Reference}
+\label{classscene_1_1PlayerSelector}\index{scene::PlayerSelector@{scene::PlayerSelector}}
+
+
+Handle the \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene.  
+
+
+
+
+{\ttfamily \#include $<$Player\+Selector.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a65e71bf824441d21d2adaab25bb1cabb}\label{classscene_1_1PlayerSelector_a65e71bf824441d21d2adaab25bb1cabb}} 
+\mbox{\hyperlink{classscene_1_1PlayerSelector_a65e71bf824441d21d2adaab25bb1cabb}{Player\+Selector}} ()=delete
+\begin{DoxyCompactList}\small\item\em Constructor Delete to avoid the construction of the class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_afd49fa7bab04d3a98c31f99b5873569a}\label{classscene_1_1PlayerSelector_afd49fa7bab04d3a98c31f99b5873569a}} 
+\mbox{\hyperlink{classscene_1_1PlayerSelector_afd49fa7bab04d3a98c31f99b5873569a}{$\sim$\+Player\+Selector}} ()=delete
+\begin{DoxyCompactList}\small\item\em Destructor Delete to avoid the destruction of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_a1dc5e75c413416c9c0a96e45e4325056}{init}} (ecs\+::\+Universe $\ast$universe, sf\+::\+Time music\+Timer)
+\begin{DoxyCompactList}\small\item\em init method This method create the whole \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_aceff3a85b8112e6511bca9798859f119}{destroy}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_a099ff08dc58be97a9ccae276e54efa79}{add\+Player}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em add\+Player method This method add a new player on the screen. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_a37943c80e9626e0423383a319b864436}{remove\+Player}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em remove\+Player method This method remove the last player on the screen. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_aa1c68fe5176dff537fdb530a04c638fd}{change\+Skin}} (ecs\+::\+Universe $\ast$universe, irr\+::s32 id)
+\begin{DoxyCompactList}\small\item\em change\+Skin method This method change the skin of a player. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_a5ff960fc12e221d007a4f0bd2c173d75}{change\+Type}} (ecs\+::\+Universe $\ast$universe, irr\+::s32 id)
+\begin{DoxyCompactList}\small\item\em change\+Type method This method change the type of a player. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classscene_1_1PlayerSelector_a8f16a83cd21be1aafca1e9cd3386d199}{check\+Keybinding}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em check\+Keybinding method This method check if a key is already used. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1PlayerSelector_a3c53231678ad1c30a02137ac5f8532e6}{invalid\+Keybinding}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em invalid\+Keybinding method This method create a pop-\/up to notify the user that a key is used more than once. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a04b01e96d6c8a82570b2d7f18cbd064d}\label{classscene_1_1PlayerSelector_a04b01e96d6c8a82570b2d7f18cbd064d}} 
+static std\+::vector$<$ ecs\+::\+Entity $>$ {\bfseries player\+Ids}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_a683a0e4c4a16739f2ccc7d0d23b7d34b}{player\+Keys\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_afd809a129cb6b0fe55fc08e79299447e}{player\+Skin\+Button\+Left\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_ab19da75ae7813e76489fb25f9e161729}{player\+Skin\+Button\+Right\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_ac35ecebad4bce9134ae092fb46c70a1c}{player\+Type\+Button\+Left\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_a81938c48ad2b2995c9b7d57f07a79ac3}{player\+Type\+Button\+Right\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_adcdb7b708c38c4a7c1229a59ae8e628d}{player\+Custom\+Button\+Ids}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_a8224b5b7c36e545f4d088e2e96b9f7ec}{player\+Type}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_a022e64ad3e999ecf0e1df84f6eda40c2}{player\+Component}}
+\item 
+static std\+::vector$<$ bool $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_a86facc38d81b93fd625ac8301c80dae8}{type\+List}}
+\item 
+static std\+::array$<$ irr\+::video\+::\+S\+Color, 4 $>$ \mbox{\hyperlink{classscene_1_1PlayerSelector_ac1f98b8c863c2f398b9e0e868e6a5156}{bomb\+Colors}}
+\item 
+static irr\+::gui\+::\+I\+G\+U\+I\+Element $\ast$ \mbox{\hyperlink{classscene_1_1PlayerSelector_acc7b7f822099b396adce657d8cd92b41}{modal}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handle the \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a099ff08dc58be97a9ccae276e54efa79}\label{classscene_1_1PlayerSelector_a099ff08dc58be97a9ccae276e54efa79}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!addPlayer@{addPlayer}}
+\index{addPlayer@{addPlayer}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{addPlayer()}{addPlayer()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::add\+Player (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+add\+Player method This method add a new player on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_aa1c68fe5176dff537fdb530a04c638fd}\label{classscene_1_1PlayerSelector_aa1c68fe5176dff537fdb530a04c638fd}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!changeSkin@{changeSkin}}
+\index{changeSkin@{changeSkin}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{changeSkin()}{changeSkin()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::change\+Skin (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{irr\+::s32}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+change\+Skin method This method change the skin of a player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+{\em id} & \+: The id of the player that has to change. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a5ff960fc12e221d007a4f0bd2c173d75}\label{classscene_1_1PlayerSelector_a5ff960fc12e221d007a4f0bd2c173d75}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!changeType@{changeType}}
+\index{changeType@{changeType}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{changeType()}{changeType()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::change\+Type (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{irr\+::s32}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+change\+Type method This method change the type of a player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+{\em id} & \+: The id of the player that has to change. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a8f16a83cd21be1aafca1e9cd3386d199}\label{classscene_1_1PlayerSelector_a8f16a83cd21be1aafca1e9cd3386d199}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!checkKeybinding@{checkKeybinding}}
+\index{checkKeybinding@{checkKeybinding}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{checkKeybinding()}{checkKeybinding()}}
+{\footnotesize\ttfamily static bool scene\+::\+Player\+Selector\+::check\+Keybinding (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+check\+Keybinding method This method check if a key is already used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if each keys is used once and False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_aceff3a85b8112e6511bca9798859f119}\label{classscene_1_1PlayerSelector_aceff3a85b8112e6511bca9798859f119}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!destroy@{destroy}}
+\index{destroy@{destroy}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::destroy (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a1dc5e75c413416c9c0a96e45e4325056}\label{classscene_1_1PlayerSelector_a1dc5e75c413416c9c0a96e45e4325056}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!init@{init}}
+\index{init@{init}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::init (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{sf\+::\+Time}]{music\+Timer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+init method This method create the whole \mbox{\hyperlink{classscene_1_1PlayerSelector}{Player\+Selector}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+{\em music\+Timer} & \+: Playback time of current music. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a3c53231678ad1c30a02137ac5f8532e6}\label{classscene_1_1PlayerSelector_a3c53231678ad1c30a02137ac5f8532e6}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!invalidKeybinding@{invalidKeybinding}}
+\index{invalidKeybinding@{invalidKeybinding}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{invalidKeybinding()}{invalidKeybinding()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::invalid\+Keybinding (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+invalid\+Keybinding method This method create a pop-\/up to notify the user that a key is used more than once. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_a37943c80e9626e0423383a319b864436}\label{classscene_1_1PlayerSelector_a37943c80e9626e0423383a319b864436}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!removePlayer@{removePlayer}}
+\index{removePlayer@{removePlayer}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{removePlayer()}{removePlayer()}}
+{\footnotesize\ttfamily static void scene\+::\+Player\+Selector\+::remove\+Player (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+remove\+Player method This method remove the last player on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classscene_1_1PlayerSelector_ac1f98b8c863c2f398b9e0e868e6a5156}\label{classscene_1_1PlayerSelector_ac1f98b8c863c2f398b9e0e868e6a5156}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!bombColors@{bombColors}}
+\index{bombColors@{bombColors}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{bombColors}{bombColors}}
+{\footnotesize\ttfamily std\+::array$<$irr\+::video\+::\+S\+Color, 4$>$ scene\+::\+Player\+Selector\+::bomb\+Colors\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of player type. \mbox{\Hypertarget{classscene_1_1PlayerSelector_acc7b7f822099b396adce657d8cd92b41}\label{classscene_1_1PlayerSelector_acc7b7f822099b396adce657d8cd92b41}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!modal@{modal}}
+\index{modal@{modal}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{modal}{modal}}
+{\footnotesize\ttfamily irr\+::gui\+::\+I\+G\+U\+I\+Element$\ast$ scene\+::\+Player\+Selector\+::modal\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of player\textquotesingle{}s bomb color. \mbox{\Hypertarget{classscene_1_1PlayerSelector_a022e64ad3e999ecf0e1df84f6eda40c2}\label{classscene_1_1PlayerSelector_a022e64ad3e999ecf0e1df84f6eda40c2}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerComponent@{playerComponent}}
+\index{playerComponent@{playerComponent}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerComponent}{playerComponent}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}}$>$ scene\+::\+Player\+Selector\+::player\+Component\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of player type preview. \mbox{\Hypertarget{classscene_1_1PlayerSelector_adcdb7b708c38c4a7c1229a59ae8e628d}\label{classscene_1_1PlayerSelector_adcdb7b708c38c4a7c1229a59ae8e628d}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerCustomButtonIds@{playerCustomButtonIds}}
+\index{playerCustomButtonIds@{playerCustomButtonIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerCustomButtonIds}{playerCustomButtonIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Custom\+Button\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of change type (right) button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_a683a0e4c4a16739f2ccc7d0d23b7d34b}\label{classscene_1_1PlayerSelector_a683a0e4c4a16739f2ccc7d0d23b7d34b}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerKeysIds@{playerKeysIds}}
+\index{playerKeysIds@{playerKeysIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerKeysIds}{playerKeysIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Keys\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of skin preview. \mbox{\Hypertarget{classscene_1_1PlayerSelector_afd809a129cb6b0fe55fc08e79299447e}\label{classscene_1_1PlayerSelector_afd809a129cb6b0fe55fc08e79299447e}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerSkinButtonLeftIds@{playerSkinButtonLeftIds}}
+\index{playerSkinButtonLeftIds@{playerSkinButtonLeftIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerSkinButtonLeftIds}{playerSkinButtonLeftIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Skin\+Button\+Left\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of keybinding button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_ab19da75ae7813e76489fb25f9e161729}\label{classscene_1_1PlayerSelector_ab19da75ae7813e76489fb25f9e161729}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerSkinButtonRightIds@{playerSkinButtonRightIds}}
+\index{playerSkinButtonRightIds@{playerSkinButtonRightIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerSkinButtonRightIds}{playerSkinButtonRightIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Skin\+Button\+Right\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of change skin (left) button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_a8224b5b7c36e545f4d088e2e96b9f7ec}\label{classscene_1_1PlayerSelector_a8224b5b7c36e545f4d088e2e96b9f7ec}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerType@{playerType}}
+\index{playerType@{playerType}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerType}{playerType}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Type\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of custom bomb button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_ac35ecebad4bce9134ae092fb46c70a1c}\label{classscene_1_1PlayerSelector_ac35ecebad4bce9134ae092fb46c70a1c}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerTypeButtonLeftIds@{playerTypeButtonLeftIds}}
+\index{playerTypeButtonLeftIds@{playerTypeButtonLeftIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerTypeButtonLeftIds}{playerTypeButtonLeftIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Type\+Button\+Left\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of change skin (right) button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_a81938c48ad2b2995c9b7d57f07a79ac3}\label{classscene_1_1PlayerSelector_a81938c48ad2b2995c9b7d57f07a79ac3}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!playerTypeButtonRightIds@{playerTypeButtonRightIds}}
+\index{playerTypeButtonRightIds@{playerTypeButtonRightIds}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{playerTypeButtonRightIds}{playerTypeButtonRightIds}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Player\+Selector\+::player\+Type\+Button\+Right\+Ids\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of change type (left) button. \mbox{\Hypertarget{classscene_1_1PlayerSelector_a86facc38d81b93fd625ac8301c80dae8}\label{classscene_1_1PlayerSelector_a86facc38d81b93fd625ac8301c80dae8}} 
+\index{scene::PlayerSelector@{scene::PlayerSelector}!typeList@{typeList}}
+\index{typeList@{typeList}!scene::PlayerSelector@{scene::PlayerSelector}}
+\doxysubsubsection{\texorpdfstring{typeList}{typeList}}
+{\footnotesize\ttfamily std\+::vector$<$bool$>$ scene\+::\+Player\+Selector\+::type\+List\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of player component. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/scene/\mbox{\hyperlink{PlayerSelector_8hpp}{Player\+Selector.\+hpp}}\end{DoxyCompactItemize}

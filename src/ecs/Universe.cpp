@@ -12,12 +12,18 @@ Universe::Universe()
     : _worldManagers(std::unordered_map<std::string, std::unique_ptr<WorldManager>>()),
       _currentWorldManager(""),
       _eventReceiver(EventReceiver(this)),
-      _device(createDevice(
-          irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1920, 1080), 16, true, false, false, &_eventReceiver))
+      _device(createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1920, 1080), 16, true, false, false,
+          &_eventReceiver))
 {
 }
 
-Universe::~Universe() = default;
+Universe::~Universe()
+{
+    _device->getGUIEnvironment()->clear();
+    _device->getSceneManager()->clear();
+    _device->getVideoDriver()->removeAllTextures();
+    _device->drop();
+}
 
 WorldManager* Universe::createWorldManager(const std::string& name)
 {
@@ -60,7 +66,7 @@ void Universe::deleteWorldManager(const std::string& name)
         _worldManagers.erase(name);
 }
 
-irr::IrrlichtDevice *Universe::getDevice() const
+irr::IrrlichtDevice* Universe::getDevice() const
 {
     return (_device);
 }

@@ -1,0 +1,89 @@
+\hypertarget{classecs_1_1component_1_1BombStats}{}\doxysection{ecs\+::component\+::Bomb\+Stats Class Reference}
+\label{classecs_1_1component_1_1BombStats}\index{ecs::component::BombStats@{ecs::component::BombStats}}
+
+
+Allow entity to explode and have stats.  
+
+
+
+
+{\ttfamily \#include $<$Bomb\+Stats.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1BombStats_acb23dd6fc3a7cc49c859c3dfa11cfda3}{Bomb\+Stats}} (const size\+\_\+t \&bomb\+Radius=0, const bool \&\mbox{\hyperlink{classecs_1_1component_1_1BombStats_add274e63ddf3770c575831d1254c3fc0}{wall\+Pass}}=false)
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1BombStats_a39bfc9c833630b73748d9135ee896446}{Bomb\+Stats}} (const \mbox{\hyperlink{classecs_1_1component_1_1BombStats}{Bomb\+Stats}} \&bombstat)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1BombStats_adcb3677903c10c1f9e167b8ab57129c6}\label{classecs_1_1component_1_1BombStats_adcb3677903c10c1f9e167b8ab57129c6}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1BombStats_adcb3677903c10c1f9e167b8ab57129c6}{$\sim$\+Bomb\+Stats}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1BombStats_ad127727a54bc8cdc8cb0ef5e652e87b3}\label{classecs_1_1component_1_1BombStats_ad127727a54bc8cdc8cb0ef5e652e87b3}} 
+size\+\_\+t {\bfseries bomb\+Radius}
+\item 
+bool \mbox{\hyperlink{classecs_1_1component_1_1BombStats_add274e63ddf3770c575831d1254c3fc0}{wall\+Pass}}
+\item 
+bool \mbox{\hyperlink{classecs_1_1component_1_1BombStats_a8cabb6981f92e1efdbd75ea00cdc7a35}{explode}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Allow entity to explode and have stats. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1BombStats_acb23dd6fc3a7cc49c859c3dfa11cfda3}\label{classecs_1_1component_1_1BombStats_acb23dd6fc3a7cc49c859c3dfa11cfda3}} 
+\index{ecs::component::BombStats@{ecs::component::BombStats}!BombStats@{BombStats}}
+\index{BombStats@{BombStats}!ecs::component::BombStats@{ecs::component::BombStats}}
+\doxysubsubsection{\texorpdfstring{BombStats()}{BombStats()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Bomb\+Stats\+::\+Bomb\+Stats (\begin{DoxyParamCaption}\item[{const size\+\_\+t \&}]{bomb\+Radius = {\ttfamily 0},  }\item[{const bool \&}]{wall\+Pass = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bomb\+Radius} & \+: Radius of the bomb. \\
+\hline
+{\em wall\+Pass} & \+: Say if the bomb can pass through boxes. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1BombStats_a39bfc9c833630b73748d9135ee896446}\label{classecs_1_1component_1_1BombStats_a39bfc9c833630b73748d9135ee896446}} 
+\index{ecs::component::BombStats@{ecs::component::BombStats}!BombStats@{BombStats}}
+\index{BombStats@{BombStats}!ecs::component::BombStats@{ecs::component::BombStats}}
+\doxysubsubsection{\texorpdfstring{BombStats()}{BombStats()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Bomb\+Stats\+::\+Bomb\+Stats (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1BombStats}{Bomb\+Stats}} \&}]{bombstat }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bombstat} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1BombStats_a8cabb6981f92e1efdbd75ea00cdc7a35}\label{classecs_1_1component_1_1BombStats_a8cabb6981f92e1efdbd75ea00cdc7a35}} 
+\index{ecs::component::BombStats@{ecs::component::BombStats}!explode@{explode}}
+\index{explode@{explode}!ecs::component::BombStats@{ecs::component::BombStats}}
+\doxysubsubsection{\texorpdfstring{explode}{explode}}
+{\footnotesize\ttfamily bool ecs\+::component\+::\+Bomb\+Stats\+::explode}
+
+$<$ wall pass stat. \mbox{\Hypertarget{classecs_1_1component_1_1BombStats_add274e63ddf3770c575831d1254c3fc0}\label{classecs_1_1component_1_1BombStats_add274e63ddf3770c575831d1254c3fc0}} 
+\index{ecs::component::BombStats@{ecs::component::BombStats}!wallPass@{wallPass}}
+\index{wallPass@{wallPass}!ecs::component::BombStats@{ecs::component::BombStats}}
+\doxysubsubsection{\texorpdfstring{wallPass}{wallPass}}
+{\footnotesize\ttfamily bool ecs\+::component\+::\+Bomb\+Stats\+::wall\+Pass}
+
+$<$ Radius of the bomb. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{BombStats_8hpp}{Bomb\+Stats.\+hpp}}\end{DoxyCompactItemize}

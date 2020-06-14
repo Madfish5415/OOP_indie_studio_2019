@@ -7,13 +7,13 @@
 
 #include "Blink.hpp"
 
+#include "../Universe.hpp"
 #include "../component/Blink.hpp"
 #include "../component/Image.hpp"
-#include "../Universe.hpp"
 
 using namespace ecs::system;
 
-Blink::Blink(ecs::WorldManager *worldManager) : System(worldManager)
+Blink::Blink(ecs::WorldManager* worldManager) : System(worldManager)
 {
     auto timer = worldManager->getUniverse()->getDevice()->getTimer();
 

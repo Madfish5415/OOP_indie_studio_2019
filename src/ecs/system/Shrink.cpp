@@ -8,8 +8,6 @@
 #include "Shrink.hpp"
 
 #include "../../scene/Bomberman.hpp"
-#include "../Universe.hpp"
-#include "../component/BombStats.hpp"
 #include "../component/BoundingBox.hpp"
 #include "../component/Breakable.hpp"
 #include "../component/Collision.hpp"
@@ -76,9 +74,9 @@ static void destroyPlayers(ecs::WorldManager* worldManager, const irr::core::vec
         const auto& playerPos = playerRender.node->getPosition();
 
         irr::core::vector3d<irr::f32> ajustedPos = playerPos;
-        ajustedPos.X = static_cast<int>(playerPos.X / 10.f) * 10 + 5;
+        ajustedPos.X = static_cast<irr::f32>(static_cast<int>(playerPos.X / 10.f) * 10 + 5);
         ajustedPos.Y = playerPos.Y;
-        ajustedPos.Z = static_cast<int>(playerPos.Z / 10.f) * 10 + 5;
+        ajustedPos.Z = static_cast<irr::f32>(static_cast<int>(playerPos.Z / 10.f) * 10 + 5);
 
         if (pos.X == ajustedPos.X && pos.Z == ajustedPos.Z) {
             std::vector<ecs::Entity> imageEntities =
@@ -126,10 +124,9 @@ static void createWall(ecs::WorldManager* worldManager, const irr::core::vector3
     ecs::Entity wall = worldManager->createEntity();
     auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
     auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
-    irr::scene::IMeshSceneNode *wallMesh = smgr->addCubeSceneNode(10);
+    irr::scene::IMeshSceneNode* wallMesh = smgr->addCubeSceneNode(10);
 
-    irr::scene::ITriangleSelector *selector =
-        smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
+    irr::scene::ITriangleSelector* selector = smgr->createOctreeTriangleSelector(wallMesh->getMesh(), wallMesh, 128);
     wallMesh->setTriangleSelector(selector);
     for (auto& metaSelector : scene::Bomberman::metaTriangleSelector)
         metaSelector->addTriangleSelector(selector);

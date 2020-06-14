@@ -15,18 +15,18 @@
 
 namespace ecs::system {
 
-class Render : public ecs::System {
-    public:
-        explicit Render(WorldManager *worldManager);
-        ~Render();
+class Render : public System {
+  public:
+    explicit Render(WorldManager *worldManager);
+    ~Render() override;
 
-    public:
-        void update();
+  public:
+    void update() override;
 
-    public:
-        irr::scene::ISceneManager *smgr;
-        irr::gui::IGUIEnvironment *gui;
+  public:
+    irr::scene::ISceneManager *smgr;
+    irr::gui::IGUIEnvironment *gui;
 };
-}
+} // namespace ecs::system
 
 #endif /* !RENDER_HPP_ */

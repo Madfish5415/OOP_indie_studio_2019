@@ -22,7 +22,6 @@ class StatRender : public System {
     void update() override;
 };
 
-}
-
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_STATRENDER_HPP

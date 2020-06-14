@@ -144,8 +144,13 @@ class EventManager {
     void unsubscribe()
     {
         for (auto& i : _subscribers) {
-            if (i.second != nullptr)
+            if (i.second != nullptr) {
+                for (auto& j : *i.second) {
+                    delete j;
+                }
                 i.second->clear();
+                delete i.second;
+            }
         }
         _subscribers.clear();
     }

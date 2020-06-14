@@ -1,0 +1,121 @@
+\hypertarget{classecs_1_1component_1_1Text}{}\doxysection{ecs\+::component\+::Text Class Reference}
+\label{classecs_1_1component_1_1Text}\index{ecs::component::Text@{ecs::component::Text}}
+
+
+A text.  
+
+
+
+
+{\ttfamily \#include $<$Text.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Text_a4a7c2b1973b3b0bed825649269212715}{Text}} (irr\+::gui\+::\+I\+G\+U\+I\+Environment $\ast$gui=nullptr, const wchar\+\_\+t $\ast$\mbox{\hyperlink{classecs_1_1component_1_1Text_ab2b9d3ff2b96dc4ff9ff52249e325b42}{text}}=L\char`\"{}\char`\"{}, const irr\+::core\+::rect$<$ irr\+::s32 $>$ \&rectangle=irr\+::core\+::recti(), bool border=false, bool word\+Wrap=true, irr\+::gui\+::\+I\+G\+U\+I\+Element $\ast$parent=nullptr, irr\+::s32 id=-\/1, bool fill\+Background=false)
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Text_adc62598c10a048956c006fcd0818bba0}{Text}} (const \mbox{\hyperlink{classecs_1_1component_1_1Text}{Text}} \&\mbox{\hyperlink{classecs_1_1component_1_1Text_ab2b9d3ff2b96dc4ff9ff52249e325b42}{text}})
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_a9060eb6c03bdb2256b823630d0f27c41}\label{classecs_1_1component_1_1Text_a9060eb6c03bdb2256b823630d0f27c41}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1Text_a9060eb6c03bdb2256b823630d0f27c41}{$\sim$\+Text}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classecs_1_1component_1_1Text_afc81abd3481ae5eaa443dd4697404afc}{set\+Font}} (const irr\+::io\+::path \&path)
+\begin{DoxyCompactList}\small\item\em set\+Font method This method change the font of the text on the button. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_a3e612912e18e0d4b86c7de941a269a4c}\label{classecs_1_1component_1_1Text_a3e612912e18e0d4b86c7de941a269a4c}} 
+irr\+::gui\+::\+I\+G\+U\+I\+Environment $\ast$ {\bfseries gui}
+\item 
+irr\+::gui\+::\+I\+G\+U\+I\+Static\+Text $\ast$ \mbox{\hyperlink{classecs_1_1component_1_1Text_ab2b9d3ff2b96dc4ff9ff52249e325b42}{text}}
+\item 
+irr\+::gui\+::\+I\+G\+U\+I\+Font $\ast$ \mbox{\hyperlink{classecs_1_1component_1_1Text_ae72e48b05f6e4733514d9829f63d261a}{font}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A text. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_a4a7c2b1973b3b0bed825649269212715}\label{classecs_1_1component_1_1Text_a4a7c2b1973b3b0bed825649269212715}} 
+\index{ecs::component::Text@{ecs::component::Text}!Text@{Text}}
+\index{Text@{Text}!ecs::component::Text@{ecs::component::Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Text\+::\+Text (\begin{DoxyParamCaption}\item[{irr\+::gui\+::\+I\+G\+U\+I\+Environment $\ast$}]{gui = {\ttfamily nullptr},  }\item[{const wchar\+\_\+t $\ast$}]{text = {\ttfamily L\char`\"{}\char`\"{}},  }\item[{const irr\+::core\+::rect$<$ irr\+::s32 $>$ \&}]{rectangle = {\ttfamily irr\+:\+:core\+:\+:recti()},  }\item[{bool}]{border = {\ttfamily false},  }\item[{bool}]{word\+Wrap = {\ttfamily true},  }\item[{irr\+::gui\+::\+I\+G\+U\+I\+Element $\ast$}]{parent = {\ttfamily nullptr},  }\item[{irr\+::s32}]{id = {\ttfamily -\/1},  }\item[{bool}]{fill\+Background = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & \+: A pointer on the G\+UI environment. \\
+\hline
+{\em text} & \+: The text to be displayed. \\
+\hline
+{\em rectangle} & \+: The size of the text. \\
+\hline
+{\em border} & \+: Draw text box border. \\
+\hline
+{\em word\+Wrap} & \+: The word wrap. \\
+\hline
+{\em parent} & \+: The parent of the element. \\
+\hline
+{\em id} & \+: The id of the element. \\
+\hline
+{\em fill\+Background} & \+: True if we need to fill the background. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_adc62598c10a048956c006fcd0818bba0}\label{classecs_1_1component_1_1Text_adc62598c10a048956c006fcd0818bba0}} 
+\index{ecs::component::Text@{ecs::component::Text}!Text@{Text}}
+\index{Text@{Text}!ecs::component::Text@{ecs::component::Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Text\+::\+Text (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1Text}{Text}} \&}]{text }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_afc81abd3481ae5eaa443dd4697404afc}\label{classecs_1_1component_1_1Text_afc81abd3481ae5eaa443dd4697404afc}} 
+\index{ecs::component::Text@{ecs::component::Text}!setFont@{setFont}}
+\index{setFont@{setFont}!ecs::component::Text@{ecs::component::Text}}
+\doxysubsubsection{\texorpdfstring{setFont()}{setFont()}}
+{\footnotesize\ttfamily void ecs\+::component\+::\+Text\+::set\+Font (\begin{DoxyParamCaption}\item[{const irr\+::io\+::path \&}]{path }\end{DoxyParamCaption})}
+
+
+
+set\+Font method This method change the font of the text on the button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \+: Path to the font. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Text_ae72e48b05f6e4733514d9829f63d261a}\label{classecs_1_1component_1_1Text_ae72e48b05f6e4733514d9829f63d261a}} 
+\index{ecs::component::Text@{ecs::component::Text}!font@{font}}
+\index{font@{font}!ecs::component::Text@{ecs::component::Text}}
+\doxysubsubsection{\texorpdfstring{font}{font}}
+{\footnotesize\ttfamily irr\+::gui\+::\+I\+G\+U\+I\+Font$\ast$ ecs\+::component\+::\+Text\+::font}
+
+$<$ The text element. \mbox{\Hypertarget{classecs_1_1component_1_1Text_ab2b9d3ff2b96dc4ff9ff52249e325b42}\label{classecs_1_1component_1_1Text_ab2b9d3ff2b96dc4ff9ff52249e325b42}} 
+\index{ecs::component::Text@{ecs::component::Text}!text@{text}}
+\index{text@{text}!ecs::component::Text@{ecs::component::Text}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily irr\+::gui\+::\+I\+G\+U\+I\+Static\+Text$\ast$ ecs\+::component\+::\+Text\+::text}
+
+$<$ A pointer on the G\+UI environment. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{Text_8hpp}{Text.\+hpp}}\end{DoxyCompactItemize}

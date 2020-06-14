@@ -7,12 +7,12 @@
 
 #include "Music.hpp"
 
-#include "../component/Music.hpp"
 #include "../../scene/Settings.hpp"
+#include "../component/Music.hpp"
 
 using namespace ecs::system;
 
-Music::Music(ecs::WorldManager *worldManager) : System(worldManager)
+Music::Music(ecs::WorldManager* worldManager) : System(worldManager)
 {
 }
 
@@ -20,9 +20,9 @@ Music::~Music() = default;
 
 void Music::update()
 {
-    for (const auto& entity: entities) {
+    for (const auto& entity : entities) {
         auto& music = worldManager->getComponent<ecs::component::Music>(entity);
-        if (music.music.get()) {
+        if (music.music) {
             auto var = music.music->getPlayingOffset();
             if (music.music->getVolume() != scene::Settings::musicVolume)
                 music.music->setVolume(scene::Settings::musicVolume);

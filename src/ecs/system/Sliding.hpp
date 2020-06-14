@@ -24,6 +24,7 @@ class Sliding : public System {
 
   public:
     irr::u32 time;
+
   private:
     irr::u32 _then;
 };

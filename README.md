@@ -1,8 +1,8 @@
 # OOP_indie_studio_2019
-![Pull Request](https://github.com/Madfish5415/OOP_indie_studio_2019/workflows/Pull%20Request/badge.svg?branch=master)
+![Pull Request](https://github.com/Madfish5415/OOP_indie_studio_2019/workflows/Pull%20Request/badge.svg)
 ![Push](https://github.com/Madfish5415/OOP_indie_studio_2019/workflows/Push/badge.svg?branch=master)
 
-##Epitech Year End Project created by:
+## Epitech Year End Project created by:
 - [@Madfish5415](https://github.com/Madfish5415)
 - [@Mihobsine](https://github.com/Mihobsine)
 - [@LucasFab](https://github.com/LucasFab)

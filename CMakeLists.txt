@@ -21,7 +21,6 @@ set(SRCS
         src/ecs/component/BombStats.cpp
         src/ecs/component/BombTimer.cpp
         src/ecs/component/Button.cpp
-        src/ecs/component/HitboxDetection.cpp
         src/ecs/component/Image.cpp
         src/ecs/component/Particle.cpp
         src/ecs/component/LookingView.cpp
@@ -51,6 +50,8 @@ set(SRCS
         src/ecs/component/ToDelete.cpp
         src/ecs/component/Spinner.cpp
         src/ecs/component/Sliding.cpp
+        src/ecs/component/PlayerIndex.cpp
+        src/ecs/system/AI.cpp
         src/ecs/system/Music.cpp
         src/ecs/system/Movement.cpp
         src/ecs/system/Motion.cpp
@@ -91,6 +92,7 @@ set(SRCS
         src/map-generator/MapGenerator.cpp
         src/ecs/event/Key.cpp
         src/ecs/event/TimerEnd.cpp
+        src/irrlicht/GUIColorPicker.cpp
         )
 
 set(HEADERS
@@ -112,7 +114,6 @@ set(HEADERS
         src/ecs/component/BombTimer.hpp
         src/ecs/component/Button.hpp
         src/ecs/component/Delay.hpp
-        src/ecs/component/HitboxDetection.hpp
         src/ecs/component/Image.hpp
         src/ecs/component/LookingView.hpp
         src/ecs/component/Lootable.hpp
@@ -141,6 +142,7 @@ set(HEADERS
         src/ecs/component/ToDelete.hpp
         src/ecs/component/Spinner.hpp
         src/ecs/component/Sliding.hpp
+        src/ecs/component/PlayerIndex.hpp
         src/ecs/system/Countdown.hpp
         src/ecs/system/Music.hpp
         src/ecs/system/WinChecking.hpp
@@ -163,6 +165,7 @@ set(HEADERS
         src/ecs/system/Spinner.hpp
         src/ecs/system/Shrink.hpp
         src/ecs/system/Sliding.hpp
+        src/ecs/system/AI.hpp
         src/scene/Bomberman.hpp
         src/scene/Menu.hpp
         src/scene/WinScreen.hpp
@@ -180,6 +183,7 @@ set(HEADERS
         src/map-generator/MapGenerator.hpp
         src/ecs/event/Key.hpp
         src/ecs/event/TimerEnd.hpp
+        src/irrlicht/GUIColorPicker.hpp
         )
 
 if (DEBUG)
@@ -189,6 +193,7 @@ endif()
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(bomberman ${SRCS} ${HEADERS})
 
+add_custom_command(TARGET bomberman POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bomberman> ../)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 

@@ -27,7 +27,7 @@
 
 using namespace scene;
 
-static std::string getIcon(const std::string &path)
+static const std::string &getIcon(const std::string &path)
 {
     if (gamehud::icon::MODEL_TO_ICON.count(path) == 0)
         return gamehud::icon::WHITE;
@@ -64,13 +64,13 @@ static void createNumber(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironm
         ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32> {x, y}));
     worldManager->addComponent<ecs::component::StatRender>(number, ecs::component::StatRender(playerId, type));
     worldManager->addComponent<ecs::component::Owner>(number, ecs::component::Owner(playerId));
-
 }
 
 static void createIcons(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
     irr::video::IVideoDriver *driver, const std::vector<std::string> &paths)
 {
-    auto players = worldManager->getEntities<ecs::component::PlayerId, ecs::component::Render3d, ecs::component::Motion, ecs::component::Stats>();
+    std::vector<ecs::Entity> players = worldManager->getEntities<ecs::component::PlayerId, ecs::component::Render3d,
+        ecs::component::Motion, ecs::component::Stats>();
 
     int idx = 0;
     for (const auto &path : paths) {
@@ -127,32 +127,37 @@ static void createTimer(
         frame, ecs::component::Image(gui, driver, gamehud::TIMER_FRAME, new irr::core::position2d<irr::s32>(835, 905)));
 
     ecs::Entity dot = worldManager->createEntity();
-    worldManager->addComponent(dot, ecs::component::Image(gui, driver, gamehud::DOUBLE_DOT, new irr::core::position2d<irr::s32>(930, 905)));
+    worldManager->addComponent(
+        dot, ecs::component::Image(gui, driver, gamehud::DOUBLE_DOT, new irr::core::position2d<irr::s32>(930, 905)));
     worldManager->addComponent(dot, ecs::component::Blink(1000));
 
     ecs::Entity timer = worldManager->createEntity();
     worldManager->addComponent(timer, ecs::component::Timer(180000));
 
     ecs::Entity numberOne = worldManager->createEntity();
-    worldManager->addComponent(numberOne, ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(848, 905)));
+    worldManager->addComponent(numberOne,
+        ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(848, 905)));
     worldManager->addComponent(numberOne, ecs::component::TimerRender(timer, 0));
 
     ecs::Entity numberTwo = worldManager->createEntity();
-    worldManager->addComponent(numberTwo, ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(897, 905)));
+    worldManager->addComponent(numberTwo,
+        ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(897, 905)));
     worldManager->addComponent(numberTwo, ecs::component::TimerRender(timer, 1));
 
     ecs::Entity numberThree = worldManager->createEntity();
-    worldManager->addComponent(numberThree, ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(966, 905)));
+    worldManager->addComponent(numberThree,
+        ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(966, 905)));
     worldManager->addComponent(numberThree, ecs::component::TimerRender(timer, 2));
 
     ecs::Entity numberFour = worldManager->createEntity();
-    worldManager->addComponent(numberFour, ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(1015, 905)));
+    worldManager->addComponent(numberFour,
+        ecs::component::Image(gui, driver, gamehud::number::NUMBER9, new irr::core::position2d<irr::s32>(1015, 905)));
     worldManager->addComponent(numberFour, ecs::component::TimerRender(timer, 3));
 }
 
-static void createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
-                         irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
-                         const std::string& hoverImage, const std::string& setPressedImage)
+static void createButton(ecs::WorldManager *worldManager, irr::gui::IGUIEnvironment *gui,
+    irr::core::rect<irr::s32> *rect, irr::gui::IGUIElement *parent, irr::s32 id, const std::string &normalImage,
+    const std::string &hoverImage, const std::string &setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -222,8 +227,9 @@ void GameHud::init(ecs::Universe *universe, const std::vector<std::string> &path
 
     createIcons(worldManager, gui, driver, paths);
     createTimer(worldManager, gui, driver);
-    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1785, 35, 1785 + 75, 35 + 75), nullptr, BUTTON_ID::GUI_GAME_PAUSE, gamehud::button::settings::NORMAL,
-        gamehud::button::settings::HOVER, gamehud::button::settings::PRESSED);
+    createButton(worldManager, gui, new irr::core::rect<irr::s32>(1785, 35, 1785 + 75, 35 + 75), nullptr,
+        BUTTON_ID::GUI_GAME_PAUSE, gamehud::button::settings::NORMAL, gamehud::button::settings::HOVER,
+        gamehud::button::settings::PRESSED);
 }
 
 void GameHud::destroy(ecs::Universe *universe)

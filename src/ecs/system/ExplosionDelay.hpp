@@ -16,16 +16,17 @@
 namespace ecs::system {
 
 class ExplosionDelay : public ecs::System {
-    public:
-      explicit ExplosionDelay(ecs::WorldManager* worldManager);
-      ~ExplosionDelay();
-    
-    public:
-      void update();
+  public:
+    explicit ExplosionDelay(ecs::WorldManager* worldManager);
+    ~ExplosionDelay() override;
+
+  public:
+    void update() override;
 
   private:
     irr::u32 time;
 };
-}
+
+} // namespace ecs::system
 
 #endif /* !EXPLOSIONDELAY_HPP_ */

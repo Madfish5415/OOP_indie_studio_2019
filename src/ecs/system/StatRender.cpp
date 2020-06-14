@@ -8,7 +8,6 @@
 #include "StatRender.hpp"
 
 #include "../../scene/GameHud.hpp"
-#include "../Universe.hpp"
 #include "../component/Image.hpp"
 #include "../component/StatRender.hpp"
 #include "../component/Stats.hpp"

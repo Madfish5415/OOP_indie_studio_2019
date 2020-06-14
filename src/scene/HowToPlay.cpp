@@ -18,8 +18,8 @@
 using namespace scene;
 
 static ecs::Entity createButton(ecs::WorldManager* worldManager, irr::gui::IGUIEnvironment* gui,
-                                irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
-                                const std::string& hoverImage, const std::string& setPressedImage)
+    irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent, irr::s32 id, const std::string& normalImage,
+    const std::string& hoverImage, const std::string& setPressedImage)
 {
     ecs::Entity button = worldManager->createEntity();
     auto videoDriver = worldManager->getUniverse()->getDevice()->getVideoDriver();
@@ -33,7 +33,7 @@ static ecs::Entity createButton(ecs::WorldManager* worldManager, irr::gui::IGUIE
     return button;
 }
 
-void HowToPlay::init(ecs::Universe *universe, sf::Time musicTimer)
+void HowToPlay::init(ecs::Universe* universe, sf::Time musicTimer)
 {
     auto worldManager = universe->createWorldManager("HowToPlay");
     auto gui = worldManager->getUniverse()->getDevice()->getGUIEnvironment();
@@ -60,14 +60,15 @@ void HowToPlay::init(ecs::Universe *universe, sf::Time musicTimer)
     }
 
     ecs::Entity background = worldManager->createEntity();
-    worldManager->addComponent(background, ecs::component::Image(gui, driver, scene::howtoplay::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
+    worldManager->addComponent(background,
+        ecs::component::Image(gui, driver, scene::howtoplay::BACKGROUND, new irr::core::position2d<irr::s32> {0, 0}));
 
     ecs::Entity music = worldManager->createEntity();
     worldManager->addComponent(music, ecs::component::Music(scene::menu::MUSIC, musicTimer));
 
     createButton(worldManager, gui, new irr::core::rect<irr::s32>(175 - 125, 40, 175 + 125, 40 + 100), nullptr,
-                 GUI_HTP_MENU, howtoplay::button::back::NORMAL, howtoplay::button::back::HOVER,
-                 howtoplay::button::back::PRESSED);
+        GUI_HTP_MENU, howtoplay::button::back::NORMAL, howtoplay::button::back::HOVER,
+        howtoplay::button::back::PRESSED);
 }
 
 void HowToPlay::destroy(ecs::Universe* universe)

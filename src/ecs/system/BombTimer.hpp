@@ -9,6 +9,7 @@
 #define INDIESTUDIO_BOMBTIMER_HPP
 
 #include <irrlicht.h>
+
 #include <vector>
 
 #include "../System.hpp"
@@ -17,7 +18,7 @@ namespace ecs::system {
 
 class BombTimer : public System {
   public:
-    BombTimer(WorldManager *worldManager);
+    explicit BombTimer(WorldManager* worldManager);
     ~BombTimer() override;
 
   public:
@@ -28,6 +29,6 @@ class BombTimer : public System {
     irr::u32 time;
 };
 
-}
+} // namespace ecs::system
 
 #endif // INDIESTUDIO_BOMBTIMER_HPP

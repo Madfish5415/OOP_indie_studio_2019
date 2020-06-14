@@ -12,7 +12,7 @@
 
 using namespace ecs::system;
 
-Timer::Timer(WorldManager *worldManager) : System(worldManager)
+Timer::Timer(WorldManager* worldManager) : System(worldManager)
 {
     time = worldManager->getUniverse()->getDevice()->getTimer()->getTime();
 }

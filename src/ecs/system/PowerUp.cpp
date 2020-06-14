@@ -7,12 +7,7 @@
 
 #include "PowerUp.hpp"
 
-#include <iostream>
-
 #include "../Universe.hpp"
-#include "../WorldManager.hpp"
-#include "../component/AI.hpp"
-#include "../component/Player.hpp"
 #include "../component/PlayerId.hpp"
 #include "../component/Render3d.hpp"
 #include "../component/Sound.hpp"
@@ -21,17 +16,19 @@
 
 using namespace ecs::system;
 
-PowerUp::PowerUp(ecs::WorldManager *worldManager) : System(worldManager)
+PowerUp::PowerUp(ecs::WorldManager* worldManager) : System(worldManager)
 {
 }
 
 PowerUp::~PowerUp() = default;
 
-static bool checkIfCollision(ecs::WorldManager *worldManager, const ecs::Entity& entity, const std::vector<ecs::Entity>& characterEntities)
+static bool checkIfCollision(
+    ecs::WorldManager* worldManager, const ecs::Entity& entity, const std::vector<ecs::Entity>& characterEntities)
 {
     for (const auto& characterEntity : characterEntities) {
-        irr::scene::ISceneNode * characterNode = worldManager->getComponent<ecs::component::Render3d>(characterEntity).node;
-        irr::scene::ISceneNode * powerNode = worldManager->getComponent<ecs::component::Render3d>(entity).node;
+        irr::scene::ISceneNode* characterNode =
+            worldManager->getComponent<ecs::component::Render3d>(characterEntity).node;
+        irr::scene::ISceneNode* powerNode = worldManager->getComponent<ecs::component::Render3d>(entity).node;
         irr::core::vector3df charPos = characterNode->getPosition();
         irr::core::vector3df powerPos = powerNode->getPosition();
 
