@@ -1,0 +1,79 @@
+\hypertarget{classecs_1_1component_1_1Sound}{}\doxysection{ecs\+::component\+::Sound Class Reference}
+\label{classecs_1_1component_1_1Sound}\index{ecs::component::Sound@{ecs::component::Sound}}
+
+
+Add sound list of an entity.  
+
+
+
+
+{\ttfamily \#include $<$Sound.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Sound_aeea08b54fb2455f1325a59a705de0d06}{Sound}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&paths=std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$())
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Sound_ace37e586e449a9f83e17328f828647cb}{Sound}} (const \mbox{\hyperlink{classecs_1_1component_1_1Sound}{Sound}} \&sound)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Sound_a3272eb783b08cb477c00da6fa3465c31}\label{classecs_1_1component_1_1Sound_a3272eb783b08cb477c00da6fa3465c31}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1Sound_a3272eb783b08cb477c00da6fa3465c31}{$\sim$\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Sound_a1c67ddd0989264934b8e381fc18e906a}\label{classecs_1_1component_1_1Sound_a1c67ddd0989264934b8e381fc18e906a}} 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ sf\+::\+Music $>$ $>$ {\bfseries sounds}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classecs_1_1component_1_1Sound_a158ce11e7e364229e8d6e9e07b30506e}{sounds\+To\+Play}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Add sound list of an entity. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sound_aeea08b54fb2455f1325a59a705de0d06}\label{classecs_1_1component_1_1Sound_aeea08b54fb2455f1325a59a705de0d06}} 
+\index{ecs::component::Sound@{ecs::component::Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!ecs::component::Sound@{ecs::component::Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{paths = {\ttfamily std\+:\+:unordered\+\_\+map$<$~std\+:\+:string,~std\+:\+:string~$>$()} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em paths} & \+: List of sounds names with sounds paths. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sound_ace37e586e449a9f83e17328f828647cb}\label{classecs_1_1component_1_1Sound_ace37e586e449a9f83e17328f828647cb}} 
+\index{ecs::component::Sound@{ecs::component::Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!ecs::component::Sound@{ecs::component::Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1Sound}{Sound}} \&}]{sound }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sound_a158ce11e7e364229e8d6e9e07b30506e}\label{classecs_1_1component_1_1Sound_a158ce11e7e364229e8d6e9e07b30506e}} 
+\index{ecs::component::Sound@{ecs::component::Sound}!soundsToPlay@{soundsToPlay}}
+\index{soundsToPlay@{soundsToPlay}!ecs::component::Sound@{ecs::component::Sound}}
+\doxysubsubsection{\texorpdfstring{soundsToPlay}{soundsToPlay}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ ecs\+::component\+::\+Sound\+::sounds\+To\+Play}
+
+$<$ List of sounds names with sounds. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{Sound_8hpp}{Sound.\+hpp}}\end{DoxyCompactItemize}

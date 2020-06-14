@@ -1,0 +1,79 @@
+\hypertarget{classecs_1_1component_1_1Player}{}\doxysection{ecs\+::component\+::Player Class Reference}
+\label{classecs_1_1component_1_1Player}\index{ecs::component::Player@{ecs::component::Player}}
+
+
+Controlable by user input.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Player_a339fa2339af18fa342f893fea7dac4dc}{Player}} (std\+::unordered\+\_\+map$<$ std\+::string, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+DE $>$ keys=\{\{\char`\"{}up\char`\"{}, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+D\+E\+::\+K\+E\+Y\+\_\+\+K\+E\+Y\+\_\+Z\}, \{\char`\"{}down\char`\"{}, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+D\+E\+::\+K\+E\+Y\+\_\+\+K\+E\+Y\+\_\+S\}, \{\char`\"{}left\char`\"{}, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+D\+E\+::\+K\+E\+Y\+\_\+\+K\+E\+Y\+\_\+Q\}, \{\char`\"{}right\char`\"{}, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+D\+E\+::\+K\+E\+Y\+\_\+\+K\+E\+Y\+\_\+D\}, \{\char`\"{}bomb\char`\"{}, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+D\+E\+::\+K\+E\+Y\+\_\+\+S\+P\+A\+CE\}\})
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Player_a6726fa24d7999b85cd2e604562b959f5}{Player}} (const \mbox{\hyperlink{classecs_1_1component_1_1Player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Player_a5e7d7d0fdba040aa9d9bd627b48f708c}\label{classecs_1_1component_1_1Player_a5e7d7d0fdba040aa9d9bd627b48f708c}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1Player_a5e7d7d0fdba040aa9d9bd627b48f708c}{$\sim$\+Player}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Player_ad0af3f76a0d3387521059e9507891318}\label{classecs_1_1component_1_1Player_ad0af3f76a0d3387521059e9507891318}} 
+std\+::unordered\+\_\+map$<$ std\+::string, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+DE $>$ {\bfseries keys}
+\item 
+std\+::string \mbox{\hyperlink{classecs_1_1component_1_1Player_a1791b8f04ffd8c368ac14bebca7f5c7b}{last\+Key}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controlable by user input. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Player_a339fa2339af18fa342f893fea7dac4dc}\label{classecs_1_1component_1_1Player_a339fa2339af18fa342f893fea7dac4dc}} 
+\index{ecs::component::Player@{ecs::component::Player}!Player@{Player}}
+\index{Player@{Player}!ecs::component::Player@{ecs::component::Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Player\+::\+Player (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ std\+::string, irr\+::\+E\+K\+E\+Y\+\_\+\+C\+O\+DE $>$}]{keys = {\ttfamily \{\{\char`\"{}up\char`\"{},~irr\+:\+:EKEY\+\_\+CODE\+:\+:KEY\+\_\+KEY\+\_\+Z\},~\{\char`\"{}down\char`\"{},~irr\+:\+:EKEY\+\_\+CODE\+:\+:KEY\+\_\+KEY\+\_\+S\},~\{\char`\"{}left\char`\"{},~irr\+:\+:EKEY\+\_\+CODE\+:\+:KEY\+\_\+KEY\+\_\+Q\},~\{\char`\"{}right\char`\"{},~irr\+:\+:EKEY\+\_\+CODE\+:\+:KEY\+\_\+KEY\+\_\+D\},~\{\char`\"{}bomb\char`\"{},~irr\+:\+:EKEY\+\_\+CODE\+:\+:KEY\+\_\+SPACE\}\}} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em keys} & \+: The map of all the inputs. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1Player_a6726fa24d7999b85cd2e604562b959f5}\label{classecs_1_1component_1_1Player_a6726fa24d7999b85cd2e604562b959f5}} 
+\index{ecs::component::Player@{ecs::component::Player}!Player@{Player}}
+\index{Player@{Player}!ecs::component::Player@{ecs::component::Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Player\+::\+Player (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1Player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Player_a1791b8f04ffd8c368ac14bebca7f5c7b}\label{classecs_1_1component_1_1Player_a1791b8f04ffd8c368ac14bebca7f5c7b}} 
+\index{ecs::component::Player@{ecs::component::Player}!lastKey@{lastKey}}
+\index{lastKey@{lastKey}!ecs::component::Player@{ecs::component::Player}}
+\doxysubsubsection{\texorpdfstring{lastKey}{lastKey}}
+{\footnotesize\ttfamily std\+::string ecs\+::component\+::\+Player\+::last\+Key}
+
+$<$ The map of all the inputs. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{Player_8hpp}{Player.\+hpp}}\end{DoxyCompactItemize}

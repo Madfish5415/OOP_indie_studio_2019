@@ -1,0 +1,89 @@
+\hypertarget{classecs_1_1component_1_1BoundingBox}{}\doxysection{ecs\+::component\+::Bounding\+Box Class Reference}
+\label{classecs_1_1component_1_1BoundingBox}\index{ecs::component::BoundingBox@{ecs::component::BoundingBox}}
+
+
+Rectangular collision.  
+
+
+
+
+{\ttfamily \#include $<$Bounding\+Box.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_a04fb7b7afd3ddcbdb0e2df62ae259892}{Bounding\+Box}} (irr\+::scene\+::\+I\+Mesh\+Scene\+Node $\ast$mesh=nullptr, irr\+::scene\+::\+I\+Triangle\+Selector $\ast$\mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_ab243e223d1ac0c2017f87f57318ec68e}{selector}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_a3d3276490a79e06e1260ba48162273f8}{Bounding\+Box}} (const \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} \&box)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_acafba359028d28dbe051a1d1e6fc55fd}\label{classecs_1_1component_1_1BoundingBox_acafba359028d28dbe051a1d1e6fc55fd}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_acafba359028d28dbe051a1d1e6fc55fd}{$\sim$\+Bounding\+Box}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_a44db880150e1dde273f7458c00a6e6c9}\label{classecs_1_1component_1_1BoundingBox_a44db880150e1dde273f7458c00a6e6c9}} 
+irr\+::scene\+::\+I\+Mesh\+Scene\+Node $\ast$ {\bfseries mesh}
+\item 
+irr\+::scene\+::\+I\+Triangle\+Selector $\ast$ \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_ab243e223d1ac0c2017f87f57318ec68e}{selector}}
+\item 
+std\+::array$<$ bool, 4 $>$ \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox_a367f3aca2920a0a9fec0c727c10518be}{collision}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Rectangular collision. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_a04fb7b7afd3ddcbdb0e2df62ae259892}\label{classecs_1_1component_1_1BoundingBox_a04fb7b7afd3ddcbdb0e2df62ae259892}} 
+\index{ecs::component::BoundingBox@{ecs::component::BoundingBox}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!ecs::component::BoundingBox@{ecs::component::BoundingBox}}
+\doxysubsubsection{\texorpdfstring{BoundingBox()}{BoundingBox()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Bounding\+Box\+::\+Bounding\+Box (\begin{DoxyParamCaption}\item[{irr\+::scene\+::\+I\+Mesh\+Scene\+Node $\ast$}]{mesh = {\ttfamily nullptr},  }\item[{irr\+::scene\+::\+I\+Triangle\+Selector $\ast$}]{selector = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & \+: \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} mesh. \\
+\hline
+{\em selector} & \+: \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} triangle selector. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_a3d3276490a79e06e1260ba48162273f8}\label{classecs_1_1component_1_1BoundingBox_a3d3276490a79e06e1260ba48162273f8}} 
+\index{ecs::component::BoundingBox@{ecs::component::BoundingBox}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!ecs::component::BoundingBox@{ecs::component::BoundingBox}}
+\doxysubsubsection{\texorpdfstring{BoundingBox()}{BoundingBox()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Bounding\+Box\+::\+Bounding\+Box (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} \&}]{box }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em box} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_a367f3aca2920a0a9fec0c727c10518be}\label{classecs_1_1component_1_1BoundingBox_a367f3aca2920a0a9fec0c727c10518be}} 
+\index{ecs::component::BoundingBox@{ecs::component::BoundingBox}!collision@{collision}}
+\index{collision@{collision}!ecs::component::BoundingBox@{ecs::component::BoundingBox}}
+\doxysubsubsection{\texorpdfstring{collision}{collision}}
+{\footnotesize\ttfamily std\+::array$<$bool, 4$>$ ecs\+::component\+::\+Bounding\+Box\+::collision}
+
+$<$ \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} triangle selector. \mbox{\Hypertarget{classecs_1_1component_1_1BoundingBox_ab243e223d1ac0c2017f87f57318ec68e}\label{classecs_1_1component_1_1BoundingBox_ab243e223d1ac0c2017f87f57318ec68e}} 
+\index{ecs::component::BoundingBox@{ecs::component::BoundingBox}!selector@{selector}}
+\index{selector@{selector}!ecs::component::BoundingBox@{ecs::component::BoundingBox}}
+\doxysubsubsection{\texorpdfstring{selector}{selector}}
+{\footnotesize\ttfamily irr\+::scene\+::\+I\+Triangle\+Selector$\ast$ ecs\+::component\+::\+Bounding\+Box\+::selector}
+
+$<$ \mbox{\hyperlink{classecs_1_1component_1_1BoundingBox}{Bounding\+Box}} mesh. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{BoundingBox_8hpp}{Bounding\+Box.\+hpp}}\end{DoxyCompactItemize}
