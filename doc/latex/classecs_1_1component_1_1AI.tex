@@ -1,0 +1,81 @@
+\hypertarget{classecs_1_1component_1_1AI}{}\doxysection{ecs\+::component\+::AI Class Reference}
+\label{classecs_1_1component_1_1AI}\index{ecs::component::AI@{ecs::component::AI}}
+
+
+Describes an entity as being controlled by an \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}}.  
+
+
+
+
+{\ttfamily \#include $<$A\+I.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1AI_a287278eca5b35159ad5142e918d665d3}\label{classecs_1_1component_1_1AI_a287278eca5b35159ad5142e918d665d3}} 
+\mbox{\hyperlink{classecs_1_1component_1_1AI_a287278eca5b35159ad5142e918d665d3}{AI}} ()
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1AI_af04ea83bf1ae47bf6e6c36372bfe0aa5}{AI}} (const \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}} \&ai)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1AI_aed1059d922ce5c15b8a393ec1b70251d}\label{classecs_1_1component_1_1AI_aed1059d922ce5c15b8a393ec1b70251d}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1AI_aed1059d922ce5c15b8a393ec1b70251d}{$\sim$\+AI}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1AI_a9a965cea19f1e7ef4d41e64fae246200}\label{classecs_1_1component_1_1AI_a9a965cea19f1e7ef4d41e64fae246200}} 
+std\+::string {\bfseries last\+Direction}
+\item 
+irr\+::core\+::vector3d$<$ irr\+::f32 $>$ \mbox{\hyperlink{classecs_1_1component_1_1AI_a32a610d154963a5abbe2173394666eaf}{last\+Pos}}
+\item 
+irr\+::core\+::vector3d$<$ irr\+::f32 $>$ \mbox{\hyperlink{classecs_1_1component_1_1AI_a52e8da607ff13caa57276202af010f8a}{last\+Escape}}
+\item 
+std\+::string \mbox{\hyperlink{classecs_1_1component_1_1AI_a56ccbd18d1ce8ef82b9b4aaaf7cb8b4e}{last\+Choice}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Describes an entity as being controlled by an \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1AI_af04ea83bf1ae47bf6e6c36372bfe0aa5}\label{classecs_1_1component_1_1AI_af04ea83bf1ae47bf6e6c36372bfe0aa5}} 
+\index{ecs::component::AI@{ecs::component::AI}!AI@{AI}}
+\index{AI@{AI}!ecs::component::AI@{ecs::component::AI}}
+\doxysubsubsection{\texorpdfstring{AI()}{AI()}}
+{\footnotesize\ttfamily ecs\+::component\+::\+A\+I\+::\+AI (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}} \&}]{ai }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ai} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1AI_a56ccbd18d1ce8ef82b9b4aaaf7cb8b4e}\label{classecs_1_1component_1_1AI_a56ccbd18d1ce8ef82b9b4aaaf7cb8b4e}} 
+\index{ecs::component::AI@{ecs::component::AI}!lastChoice@{lastChoice}}
+\index{lastChoice@{lastChoice}!ecs::component::AI@{ecs::component::AI}}
+\doxysubsubsection{\texorpdfstring{lastChoice}{lastChoice}}
+{\footnotesize\ttfamily std\+::string ecs\+::component\+::\+A\+I\+::last\+Choice}
+
+$<$ The last pos choosen by the escape method. \mbox{\Hypertarget{classecs_1_1component_1_1AI_a52e8da607ff13caa57276202af010f8a}\label{classecs_1_1component_1_1AI_a52e8da607ff13caa57276202af010f8a}} 
+\index{ecs::component::AI@{ecs::component::AI}!lastEscape@{lastEscape}}
+\index{lastEscape@{lastEscape}!ecs::component::AI@{ecs::component::AI}}
+\doxysubsubsection{\texorpdfstring{lastEscape}{lastEscape}}
+{\footnotesize\ttfamily irr\+::core\+::vector3d$<$irr\+::f32$>$ ecs\+::component\+::\+A\+I\+::last\+Escape}
+
+$<$ The last pos choosen by the \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}} system. \mbox{\Hypertarget{classecs_1_1component_1_1AI_a32a610d154963a5abbe2173394666eaf}\label{classecs_1_1component_1_1AI_a32a610d154963a5abbe2173394666eaf}} 
+\index{ecs::component::AI@{ecs::component::AI}!lastPos@{lastPos}}
+\index{lastPos@{lastPos}!ecs::component::AI@{ecs::component::AI}}
+\doxysubsubsection{\texorpdfstring{lastPos}{lastPos}}
+{\footnotesize\ttfamily irr\+::core\+::vector3d$<$irr\+::f32$>$ ecs\+::component\+::\+A\+I\+::last\+Pos}
+
+$<$ The last direction choosen by the \mbox{\hyperlink{classecs_1_1component_1_1AI}{AI}} system. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{AI_8hpp}{A\+I.\+hpp}}\end{DoxyCompactItemize}

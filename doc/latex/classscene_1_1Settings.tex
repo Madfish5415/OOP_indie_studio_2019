@@ -1,0 +1,136 @@
+\hypertarget{classscene_1_1Settings}{}\doxysection{scene\+::Settings Class Reference}
+\label{classscene_1_1Settings}\index{scene::Settings@{scene::Settings}}
+
+
+Handle the \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene.  
+
+
+
+
+{\ttfamily \#include $<$Settings.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Settings_a7ca6d996b75e805f4108817845fcf1d2}\label{classscene_1_1Settings_a7ca6d996b75e805f4108817845fcf1d2}} 
+\mbox{\hyperlink{classscene_1_1Settings_a7ca6d996b75e805f4108817845fcf1d2}{Settings}} ()=delete
+\begin{DoxyCompactList}\small\item\em Constructor Delete to avoid the construction of the class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classscene_1_1Settings_acfbf65ba5706df4152c1b6485163dbbc}\label{classscene_1_1Settings_acfbf65ba5706df4152c1b6485163dbbc}} 
+\mbox{\hyperlink{classscene_1_1Settings_acfbf65ba5706df4152c1b6485163dbbc}{$\sim$\+Settings}} ()=delete
+\begin{DoxyCompactList}\small\item\em Destructor Delete to avoid the destruction of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classscene_1_1Settings_a4d901af1d5547825dc05527fbf79855f}{init}} (ecs\+::\+Universe $\ast$universe, std\+::shared\+\_\+ptr$<$ sf\+::\+Music $>$ \mbox{\hyperlink{classscene_1_1Settings_ab56c3522884b02d37661920a485c126e}{current\+Music}})
+\begin{DoxyCompactList}\small\item\em init method This method create the whole \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Settings_ac88b28e7c0e111698901bf5a3eb5bcd0}{destroy}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Settings_ad92892e75e7545c07c0156d9781d11e8}{update\+Sound\+Bar}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em update\+Sound\+Bar method This method update the sound bar and the music bar images. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Settings_affa0dbca6d8909fdda0f30e30453a025}\label{classscene_1_1Settings_affa0dbca6d8909fdda0f30e30453a025}} 
+static std\+::vector$<$ ecs\+::\+Entity $>$ {\bfseries buttons}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1Settings_a716e1720320aed3fa31e0ccf11ef7d24}{push\+Buttons}}
+\item 
+static std\+::vector$<$ ecs\+::\+Entity $>$ \mbox{\hyperlink{classscene_1_1Settings_a4a09033b0d4366dee11f011be28e1975}{images}}
+\item 
+static sf\+::\+Music $\ast$ \mbox{\hyperlink{classscene_1_1Settings_ab56c3522884b02d37661920a485c126e}{current\+Music}}
+\item 
+static float \mbox{\hyperlink{classscene_1_1Settings_a288f280e0429adeb82f7c9c98dfeb613}{sound\+Volume}}
+\item 
+static float \mbox{\hyperlink{classscene_1_1Settings_ab24d913888e1b6507060c98e89897072}{music\+Volume}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handle the \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classscene_1_1Settings_ac88b28e7c0e111698901bf5a3eb5bcd0}\label{classscene_1_1Settings_ac88b28e7c0e111698901bf5a3eb5bcd0}} 
+\index{scene::Settings@{scene::Settings}!destroy@{destroy}}
+\index{destroy@{destroy}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily static void scene\+::\+Settings\+::destroy (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Settings_a4d901af1d5547825dc05527fbf79855f}\label{classscene_1_1Settings_a4d901af1d5547825dc05527fbf79855f}} 
+\index{scene::Settings@{scene::Settings}!init@{init}}
+\index{init@{init}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static void scene\+::\+Settings\+::init (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Music $>$}]{current\+Music }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+init method This method create the whole \mbox{\hyperlink{classscene_1_1Settings}{Settings}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+{\em current\+Music} & \+: The currently played music. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Settings_ad92892e75e7545c07c0156d9781d11e8}\label{classscene_1_1Settings_ad92892e75e7545c07c0156d9781d11e8}} 
+\index{scene::Settings@{scene::Settings}!updateSoundBar@{updateSoundBar}}
+\index{updateSoundBar@{updateSoundBar}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{updateSoundBar()}{updateSoundBar()}}
+{\footnotesize\ttfamily static void scene\+::\+Settings\+::update\+Sound\+Bar (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+update\+Sound\+Bar method This method update the sound bar and the music bar images. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classscene_1_1Settings_ab56c3522884b02d37661920a485c126e}\label{classscene_1_1Settings_ab56c3522884b02d37661920a485c126e}} 
+\index{scene::Settings@{scene::Settings}!currentMusic@{currentMusic}}
+\index{currentMusic@{currentMusic}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{currentMusic}{currentMusic}}
+{\footnotesize\ttfamily sf\+::\+Music$\ast$ scene\+::\+Settings\+::current\+Music\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of all used images on this scene. \mbox{\Hypertarget{classscene_1_1Settings_a4a09033b0d4366dee11f011be28e1975}\label{classscene_1_1Settings_a4a09033b0d4366dee11f011be28e1975}} 
+\index{scene::Settings@{scene::Settings}!images@{images}}
+\index{images@{images}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{images}{images}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Settings\+::images\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of all used push buttons on this scene. \mbox{\Hypertarget{classscene_1_1Settings_ab24d913888e1b6507060c98e89897072}\label{classscene_1_1Settings_ab24d913888e1b6507060c98e89897072}} 
+\index{scene::Settings@{scene::Settings}!musicVolume@{musicVolume}}
+\index{musicVolume@{musicVolume}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{musicVolume}{musicVolume}}
+{\footnotesize\ttfamily float scene\+::\+Settings\+::music\+Volume\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ The global sound volume \mbox{\Hypertarget{classscene_1_1Settings_a716e1720320aed3fa31e0ccf11ef7d24}\label{classscene_1_1Settings_a716e1720320aed3fa31e0ccf11ef7d24}} 
+\index{scene::Settings@{scene::Settings}!pushButtons@{pushButtons}}
+\index{pushButtons@{pushButtons}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{pushButtons}{pushButtons}}
+{\footnotesize\ttfamily std\+::vector$<$ecs\+::\+Entity$>$ scene\+::\+Settings\+::push\+Buttons\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ List of all used buttons on this scene. \mbox{\Hypertarget{classscene_1_1Settings_a288f280e0429adeb82f7c9c98dfeb613}\label{classscene_1_1Settings_a288f280e0429adeb82f7c9c98dfeb613}} 
+\index{scene::Settings@{scene::Settings}!soundVolume@{soundVolume}}
+\index{soundVolume@{soundVolume}!scene::Settings@{scene::Settings}}
+\doxysubsubsection{\texorpdfstring{soundVolume}{soundVolume}}
+{\footnotesize\ttfamily float scene\+::\+Settings\+::sound\+Volume\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ The currently played music. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/scene/\mbox{\hyperlink{Settings_8hpp}{Settings.\+hpp}}\end{DoxyCompactItemize}

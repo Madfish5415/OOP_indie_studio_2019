@@ -13,18 +13,16 @@
 #include "../System.hpp"
 #include "../WorldManager.hpp"
 
-
 namespace ecs::system {
 
-    class Size : public ecs::System {
+class Size : public ecs::System {
+  public:
+    explicit Size(WorldManager *worldManager);
+    ~Size() override;
 
-    public:
-        explicit Size(WorldManager *worldManager);
-        ~Size();
-
-    public:
-        void update();
+  public:
+    void update() override;
 };
-}
+} // namespace ecs::system
 
 #endif /* !OOP_INDIE_STUDIO_2019_SIZE_HPP_ */

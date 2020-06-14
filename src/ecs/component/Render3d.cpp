@@ -13,8 +13,6 @@ Render3d::Render3d(irr::scene::ISceneNode *node) : node(node)
 {
 }
 
-Render3d::Render3d(const Render3d &render) : node(render.node)
-{
-}
+Render3d::Render3d(const Render3d &render) = default;
 
 Render3d::~Render3d() = default;

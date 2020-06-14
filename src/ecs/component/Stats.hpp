@@ -10,21 +10,62 @@
 
 #include <cstddef>
 
+/**
+ * @file Stats.hpp
+ * @brief Stats Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace ecs
+ * @namespace component
+ */
 namespace ecs::component {
 
+/**
+ * @class Stats
+ * @brief Render stats.
+ */
 class Stats {
   public:
-    Stats(const size_t &moveSpeed = 1, const size_t &bombRadius = 2, const size_t &maxBomb = 1, const bool &wallPass = false);
-    Stats(const Stats& stats);
-    ~Stats();
-
-    Stats operator+(const Stats& right);
+    /**
+     * @brief Constructor
+     * Default constructor.
+     * @param moveSpeed : move speed stat value.
+     * @param bombRadius : bomb radius stat value.
+     * @param maxBomb : max bomb stat value.
+     * @param wallPass : wall pass stat value.
+     */
+    Stats(const size_t &moveSpeed = 1, const size_t &bombRadius = 2, const size_t &maxBomb = 1,
+        const bool &wallPass = false);
+    /**
+     * @brief Copy Constructor
+     * Default copy constructor.
+     * @param stats : Element to be copied.
+     */
+    Stats(const Stats &stats);
+    /**
+     * @brief Destructor
+     * Default destructor.
+     */
+    virtual ~Stats();
 
   public:
-    size_t moveSpeed;
-    size_t bombRadius;
-    size_t maxBomb;
-    size_t wallPass;
+    /**
+     * @brief operator+ method
+     * Overload the + operator.
+     * @param right : element to add.
+     * @return The result of the addition.
+     */
+    Stats operator+(const Stats &right);
+
+  public:
+    size_t moveSpeed; /** < The move speed stat value. */
+    size_t bombRadius; /** < The bomb radius stat value. */
+    size_t maxBomb; /** < The max bomb stat value. */
+    size_t wallPass; /** < The wall pass stat value. */
 };
 
 } // namespace ecs::component

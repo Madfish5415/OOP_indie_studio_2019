@@ -13,8 +13,6 @@ Particle::Particle(irr::scene::IParticleSystemSceneNode *particleSystem) : parti
 {
 }
 
-Particle::Particle(const Particle &particle) : particleSystem(particle.particleSystem)
-{
-}
+Particle::Particle(const Particle &particle) = default;
 
 Particle::~Particle() = default;

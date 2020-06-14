@@ -1,0 +1,99 @@
+\hypertarget{classecs_1_1component_1_1Sliding}{}\doxysection{ecs\+::component\+::Sliding Class Reference}
+\label{classecs_1_1component_1_1Sliding}\index{ecs::component::Sliding@{ecs::component::Sliding}}
+
+
+Add sliding effect on the entity.  
+
+
+
+
+{\ttfamily \#include $<$Sliding.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Sliding_af4b19c772262f7ed47f93648f5126b24}{Sliding}} (irr\+::u32 delay=1000, const irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \&\mbox{\hyperlink{classecs_1_1component_1_1Sliding_a72b63cdf30c4f25e8d2fb42de2469d87}{end\+Position}}=irr\+::core\+::vector2d$<$ irr\+::s32 $>$(0, 0), const irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \&\mbox{\hyperlink{classecs_1_1component_1_1Sliding_a8519d9259450c278957b8eafa2c2d05e}{add\+Position}}=irr\+::core\+::vector2d$<$ irr\+::s32 $>$(0, 0))
+\begin{DoxyCompactList}\small\item\em Constructor Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classecs_1_1component_1_1Sliding_a6880c3379b408b47a1c71930e3ce1167}{Sliding}} (const \mbox{\hyperlink{classecs_1_1component_1_1Sliding}{Sliding}} \&sliding)
+\begin{DoxyCompactList}\small\item\em Copy Constructor Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a0130c500b5f52e8651340114d74cbebf}\label{classecs_1_1component_1_1Sliding_a0130c500b5f52e8651340114d74cbebf}} 
+virtual \mbox{\hyperlink{classecs_1_1component_1_1Sliding_a0130c500b5f52e8651340114d74cbebf}{$\sim$\+Sliding}} ()
+\begin{DoxyCompactList}\small\item\em Destructor Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a192cef8d47f9cd152017a2782584ba3c}\label{classecs_1_1component_1_1Sliding_a192cef8d47f9cd152017a2782584ba3c}} 
+irr\+::u32 {\bfseries delay}
+\item 
+irr\+::u32 \mbox{\hyperlink{classecs_1_1component_1_1Sliding_a1fc30a8b955b9a49132c66b428ee1f46}{last\+Update}}
+\item 
+irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \mbox{\hyperlink{classecs_1_1component_1_1Sliding_a72b63cdf30c4f25e8d2fb42de2469d87}{end\+Position}}
+\item 
+irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \mbox{\hyperlink{classecs_1_1component_1_1Sliding_a8519d9259450c278957b8eafa2c2d05e}{add\+Position}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Add sliding effect on the entity. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sliding_af4b19c772262f7ed47f93648f5126b24}\label{classecs_1_1component_1_1Sliding_af4b19c772262f7ed47f93648f5126b24}} 
+\index{ecs::component::Sliding@{ecs::component::Sliding}!Sliding@{Sliding}}
+\index{Sliding@{Sliding}!ecs::component::Sliding@{ecs::component::Sliding}}
+\doxysubsubsection{\texorpdfstring{Sliding()}{Sliding()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Sliding\+::\+Sliding (\begin{DoxyParamCaption}\item[{irr\+::u32}]{delay = {\ttfamily 1000},  }\item[{const irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \&}]{end\+Position = {\ttfamily irr\+:\+:core\+:\+:vector2d$<$~irr\+:\+:s32~$>$(0,~0)},  }\item[{const irr\+::core\+::vector2d$<$ irr\+::s32 $>$ \&}]{add\+Position = {\ttfamily irr\+:\+:core\+:\+:vector2d$<$~irr\+:\+:s32~$>$(0,~0)} }\end{DoxyParamCaption})}
+
+
+
+Constructor Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & \+: \mbox{\hyperlink{classecs_1_1component_1_1Sliding}{Sliding}} delay. \\
+\hline
+{\em end\+Position} & \+: The end position of the entity. \\
+\hline
+{\em add\+Position} & \+: The vector to be added each delay. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a6880c3379b408b47a1c71930e3ce1167}\label{classecs_1_1component_1_1Sliding_a6880c3379b408b47a1c71930e3ce1167}} 
+\index{ecs::component::Sliding@{ecs::component::Sliding}!Sliding@{Sliding}}
+\index{Sliding@{Sliding}!ecs::component::Sliding@{ecs::component::Sliding}}
+\doxysubsubsection{\texorpdfstring{Sliding()}{Sliding()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ecs\+::component\+::\+Sliding\+::\+Sliding (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classecs_1_1component_1_1Sliding}{Sliding}} \&}]{sliding }\end{DoxyParamCaption})}
+
+
+
+Copy Constructor Default copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sliding} & \+: Element to be copied. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a8519d9259450c278957b8eafa2c2d05e}\label{classecs_1_1component_1_1Sliding_a8519d9259450c278957b8eafa2c2d05e}} 
+\index{ecs::component::Sliding@{ecs::component::Sliding}!addPosition@{addPosition}}
+\index{addPosition@{addPosition}!ecs::component::Sliding@{ecs::component::Sliding}}
+\doxysubsubsection{\texorpdfstring{addPosition}{addPosition}}
+{\footnotesize\ttfamily irr\+::core\+::vector2d$<$irr\+::s32$>$ ecs\+::component\+::\+Sliding\+::add\+Position}
+
+$<$ The end position of the entity. \mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a72b63cdf30c4f25e8d2fb42de2469d87}\label{classecs_1_1component_1_1Sliding_a72b63cdf30c4f25e8d2fb42de2469d87}} 
+\index{ecs::component::Sliding@{ecs::component::Sliding}!endPosition@{endPosition}}
+\index{endPosition@{endPosition}!ecs::component::Sliding@{ecs::component::Sliding}}
+\doxysubsubsection{\texorpdfstring{endPosition}{endPosition}}
+{\footnotesize\ttfamily irr\+::core\+::vector2d$<$irr\+::s32$>$ ecs\+::component\+::\+Sliding\+::end\+Position}
+
+$<$ Last time where the entity blink. \mbox{\Hypertarget{classecs_1_1component_1_1Sliding_a1fc30a8b955b9a49132c66b428ee1f46}\label{classecs_1_1component_1_1Sliding_a1fc30a8b955b9a49132c66b428ee1f46}} 
+\index{ecs::component::Sliding@{ecs::component::Sliding}!lastUpdate@{lastUpdate}}
+\index{lastUpdate@{lastUpdate}!ecs::component::Sliding@{ecs::component::Sliding}}
+\doxysubsubsection{\texorpdfstring{lastUpdate}{lastUpdate}}
+{\footnotesize\ttfamily irr\+::u32 ecs\+::component\+::\+Sliding\+::last\+Update}
+
+$<$ \mbox{\hyperlink{classecs_1_1component_1_1Sliding}{Sliding}} delay. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/ecs/component/\mbox{\hyperlink{Sliding_8hpp}{Sliding.\+hpp}}\end{DoxyCompactItemize}

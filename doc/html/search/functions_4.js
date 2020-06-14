@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['get_114',['get',['../classecs_1_1ComponentArray.html#ac25a6b05e92bb46fe5035bdc97c3dee8',1,'ecs::ComponentArray']]],
-  ['getcomponent_115',['getComponent',['../classecs_1_1ComponentManager.html#a629f8be134abe8c58369bbcaa8d70ebb',1,'ecs::ComponentManager::getComponent()'],['../classecs_1_1WorldManager.html#adba6e0824d54b628aba65784921c7d95',1,'ecs::WorldManager::getComponent()']]],
-  ['getcomponenttype_116',['getComponentType',['../classecs_1_1ComponentManager.html#a064bef841749d693e57fec6321d34d4b',1,'ecs::ComponentManager::getComponentType()'],['../classecs_1_1WorldManager.html#a8448bafc1aa88f9c2792b0ca3d0d2365',1,'ecs::WorldManager::getComponentType()']]],
-  ['getentities_117',['getEntities',['../classecs_1_1EntityManager.html#a806a4461c9c9c298f65c17fa7013ede6',1,'ecs::EntityManager::getEntities()'],['../classecs_1_1WorldManager.html#ad8aa8d4ed5ac17d334529c711101d1b7',1,'ecs::WorldManager::getEntities()']]],
-  ['getsignature_118',['getSignature',['../classecs_1_1EntityManager.html#a9b9b8f2b009689f9f706e742f6b4e28b',1,'ecs::EntityManager']]],
-  ['getsystem_119',['getSystem',['../classecs_1_1SystemManager.html#a16cc591398a7f572d039c8502bad4b7b',1,'ecs::SystemManager::getSystem()'],['../classecs_1_1WorldManager.html#a26f793a284dc41df7e70f4467426fa75',1,'ecs::WorldManager::getSystem()']]],
-  ['getuniverse_120',['getUniverse',['../classecs_1_1WorldManager.html#a5b139eaa34c58a6a0db295f082334683',1,'ecs::WorldManager']]]
+  ['entitydestroyed_477',['entityDestroyed',['../classecs_1_1ComponentArray.html#acca8bf77cbc4d74743fd2ce44f70478f',1,'ecs::ComponentArray::entityDestroyed()'],['../classecs_1_1ComponentManager.html#a771de18cf71bfeab91afa2ce161c80a8',1,'ecs::ComponentManager::entityDestroyed()'],['../classecs_1_1IComponentArray.html#a4cbcb9b0b4eeaa48440974d9bdd15e03',1,'ecs::IComponentArray::entityDestroyed()'],['../classecs_1_1SystemManager.html#a435efd8c4d8f8bd23a97ad71525bec54',1,'ecs::SystemManager::entityDestroyed()']]],
+  ['entitymanager_478',['EntityManager',['../classecs_1_1EntityManager.html#acba3847d62f7cd79e22d5ffa490c1f53',1,'ecs::EntityManager']]],
+  ['entitysignaturechanged_479',['entitySignatureChanged',['../classecs_1_1SystemManager.html#a0abf4270ed13499ddb47b4b7f4f87bb5',1,'ecs::SystemManager']]],
+  ['event_480',['Event',['../classecs_1_1Event.html#a7c3c3ebfa2f3f40e779ad13fc323dae4',1,'ecs::Event']]],
+  ['eventmanager_481',['EventManager',['../classecs_1_1EventManager.html#a443c054ac5a93bb265928da9b99fc5fd',1,'ecs::EventManager']]],
+  ['eventreceiver_482',['EventReceiver',['../classEventReceiver.html#a8ea6785780311feb1b7ff6608051a659',1,'EventReceiver']]]
 ];

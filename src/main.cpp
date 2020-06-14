@@ -5,10 +5,8 @@
 ** main.cpp
 */
 
-#include <iostream>
-#include "ecs/Universe.hpp"
+
 #include "core/Core.hpp"
-#include "ecs/WorldManager.hpp"
 
 int main()
 {

@@ -65,7 +65,6 @@ enum BUTTON_ID {
     GUI_SELECT_TYPE_P4_LEFT, /** < Button type change left Player 4.*/
     GUI_SELECT_TYPE_P4_RIGHT, /** < Button type change right Player 4.*/
 
-
     GUI_SELECT_KB_P1, /** < Open Player 1 keybinding window */
     GUI_SELECT_KB_P2, /** < Open Player 2 keybinding window */
     GUI_SELECT_KB_P3, /** < Open Player 3 keybinding window */

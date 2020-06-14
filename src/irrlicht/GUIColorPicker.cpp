@@ -8,19 +8,19 @@
 #include "GUIColorPicker.hpp"
 
 #ifndef _WIN32
-#include <irrlicht/IGUIEnvironment.h>
 #include <irrlicht/IGUIButton.h>
+#include <irrlicht/IGUIEnvironment.h>
 #include <irrlicht/IGUIScrollBar.h>
 #include <irrlicht/IVideoDriver.h>
-#include <irrlicht/irrMath.h>
 #include <irrlicht/SColor.h>
+#include <irrlicht/irrMath.h>
 #else
-#include <IGUIEnvironment.h>
 #include <IGUIButton.h>
+#include <IGUIEnvironment.h>
 #include <IGUIScrollBar.h>
 #include <IVideoDriver.h>
-#include <irrMath.h>
 #include <SColor.h>
+#include <irrMath.h>
 #endif
 
 namespace irr {
@@ -65,7 +65,7 @@ GUIColorPicker::GUIColorPicker(IGUIEnvironment *environment, IGUIElement *parent
       isGradient(false),
       isColor(false)
 {
-    close = Environment->addButton({5, 140, 85, 156}, this, 999, L"Take this color");
+    close = Environment->addButton({5, 140, 85, 156}, this, 999, L"Choose this bomb color");
 
     scroll = Environment->addScrollBar(true, {5, 125, 85, 135}, this);
     scroll->setMin(0);
@@ -228,9 +228,9 @@ void GUIColorPicker::setPickedColor(const video::SColor &c) noexcept
     core::vector3df hsv =
         RGBftoHSV({c.getRed() / 255.f, c.getGreen() / 255.f, c.getBlue() / 255.f, c.getAlpha() / 255.f});
 
-    colorpos = 150 - hsv.X / 360.f * 150.f;
-    pickpos.X = hsv.Y * 80.f;
-    pickpos.Y = 80 - (hsv.Z) * 80.f;
+    colorpos = static_cast<int>(150 - hsv.X / 360.f * 150.f);
+    pickpos.X = static_cast<int>(hsv.Y * 80.f);
+    pickpos.Y = static_cast<int>(80 - (hsv.Z) * 80.f);
 
     u32 *tmp = (u32 *)img[1]->lock();
     color.set(tmp[colorpos * img[1]->getOriginalSize().Width]);

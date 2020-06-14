@@ -799,7 +799,58 @@ INPUT                  = 	../src/ecs/Event.hpp                        \
 							../src/ecs/IComponentArray.hpp				\
 							../src/ecs/System.hpp						\
 							../src/ecs/SystemManager.hpp				\
-							../src/ecs/WorldManager.hpp
+							../src/ecs/WorldManager.hpp					\
+							../src/EventReceiver.hpp					\
+							../src/core/Core.hpp						\
+							../src/map-generator/MapGenerator.hpp		\
+							../src/scene/Bomberman.hpp					\
+							../src/scene/CountDown.hpp					\
+							../src/scene/GameHud.hpp					\
+							../src/scene/HowToPlay.hpp					\
+							../src/scene/Keybinding.hpp					\
+							../src/scene/LoadingMenu.hpp				\
+							../src/scene/Menu.hpp						\
+							../src/scene/Pause.hpp						\
+							../src/scene/PlayerSelector.hpp				\
+							../src/scene/Settings.hpp					\
+							../src/scene/WinScreen.hpp					\
+							../src/ecs/component/AI.hpp					\
+							../src/ecs/component/Animation.hpp			\
+							../src/ecs/component/Blink.hpp				\
+							../src/ecs/component/BombStats.hpp			\
+							../src/ecs/component/BombTimer.hpp			\
+							../src/ecs/component/BoundingBox.hpp		\
+							../src/ecs/component/Breakable.hpp			\
+							../src/ecs/component/Button.hpp				\
+							../src/ecs/component/Collision.hpp			\
+							../src/ecs/component/Delay.hpp				\
+							../src/ecs/component/Image.hpp				\
+							../src/ecs/component/LookingView.hpp		\
+							../src/ecs/component/Lootable.hpp			\
+							../src/ecs/component/MessageBox.hpp			\
+							../src/ecs/component/Motion.hpp				\
+							../src/ecs/component/Music.hpp				\
+							../src/ecs/component/Owner.hpp				\
+							../src/ecs/component/Particle.hpp			\
+							../src/ecs/component/Player.hpp				\
+							../src/ecs/component/PlayerId.hpp			\
+							../src/ecs/component/PlayerIndex.hpp		\
+							../src/ecs/component/PowerUp.hpp			\
+							../src/ecs/component/PushButton.hpp			\
+							../src/ecs/component/Render3d.hpp			\
+							../src/ecs/component/Size.hpp				\
+							../src/ecs/component/SkinColor.hpp			\
+							../src/ecs/component/Sliding.hpp			\
+							../src/ecs/component/Sound.hpp				\
+							../src/ecs/component/Spinner.hpp			\
+							../src/ecs/component/StatRender.hpp			\
+							../src/ecs/component/Stats.hpp				\
+							../src/ecs/component/Text.hpp				\
+							../src/ecs/component/Timer.hpp				\
+							../src/ecs/component/TimerRender.hpp		\
+							../src/ecs/component/ToDelete.hpp			\
+							../src/ecs/component/Transform.hpp			\
+							../src/ecs/component/Unbreakable.hpp
 
 
 # This tag can be used to specify the character encoding of the source files

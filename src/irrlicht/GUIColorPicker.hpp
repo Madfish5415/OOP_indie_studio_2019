@@ -16,8 +16,8 @@
 #include <S3DVertex.h>
 #endif
 
-namespace irr {
-namespace gui {
+namespace irr::gui {
+
 class IGUIButton;
 class IGUIStaticText;
 class IGUIScrollBar;
@@ -61,7 +61,7 @@ class GUIColorPicker : public IGUIElement {
     core::vector2di pickpos;
     int colorpos;
 };
-} // namespace gui
-} // namespace irr
+
+} // namespace irr::gui
 
 #endif // INDIESTUDIO_GUICOLORPICKER_HPP

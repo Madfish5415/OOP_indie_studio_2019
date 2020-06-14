@@ -15,6 +15,7 @@ Animation::Animation(std::unordered_map<std::string, std::pair<size_t, size_t>> 
     : animationRange(std::move(animationRange)), currentAnimation("")
 {
 }
-Animation::Animation(const Animation &Animation) = default;
+
+Animation::Animation(const Animation &animation) = default;
 
 Animation::~Animation() = default;

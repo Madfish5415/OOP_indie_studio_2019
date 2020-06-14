@@ -13,8 +13,6 @@ SkinColor::SkinColor(const std::string &color) : color(color)
 {
 }
 
-SkinColor::SkinColor(const SkinColor &skinColor) : color(skinColor.color)
-{
-}
+SkinColor::SkinColor(const SkinColor &skinColor) = default;
 
 SkinColor::~SkinColor() = default;

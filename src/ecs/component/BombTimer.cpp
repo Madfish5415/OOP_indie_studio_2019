@@ -15,9 +15,6 @@ BombTimer::BombTimer(irr::u32 delay) : delay(delay), elapsed(0), lastUpdate(0)
 {
 }
 
-BombTimer::BombTimer(const BombTimer &bombTimer)
-    : delay(bombTimer.delay), elapsed(bombTimer.elapsed), lastUpdate(bombTimer.lastUpdate)
-{
-}
+BombTimer::BombTimer(const BombTimer &bombTimer) = default;
 
 BombTimer::~BombTimer() = default;

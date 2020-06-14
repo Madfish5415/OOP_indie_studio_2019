@@ -5,17 +5,19 @@
 ** MapGenerator.cpp
 */
 
+#include "MapGenerator.hpp"
+
 #include <cstdlib>
 #include <ctime>
 
-#include "MapGenerator.hpp"
-
 MapGenerator::MapGenerator()
 {
-    std::srand(std::time(nullptr));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     createMap();
 }
+
+MapGenerator::~MapGenerator() = default;
 
 void MapGenerator::initMap()
 {
@@ -68,11 +70,12 @@ int MapGenerator::countWallNumber(int x, int y)
 void MapGenerator::putWall(int x, int y)
 {
     int wallNbr = 0;
-    
+
     if (std::rand() % 2 == 0)
         return;
 
-    wallNbr = (countWallNumber(x - 1, y) + countWallNumber(x, y + 1) + countWallNumber(x + 1, y) + countWallNumber(x, y - 1));
+    wallNbr =
+        (countWallNumber(x - 1, y) + countWallNumber(x, y + 1) + countWallNumber(x + 1, y) + countWallNumber(x, y - 1));
     if (wallNbr < 2)
         _map[y][x] = '#';
 }

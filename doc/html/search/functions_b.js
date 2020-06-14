@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['_7ecomponentarray_136',['~ComponentArray',['../classecs_1_1ComponentArray.html#a07dc3d5737f29428dd967f546973387f',1,'ecs::ComponentArray']]],
-  ['_7ecomponentmanager_137',['~ComponentManager',['../classecs_1_1ComponentManager.html#a3ad2253271afc28b4d81b51cd87f4f6b',1,'ecs::ComponentManager']]],
-  ['_7eentitymanager_138',['~EntityManager',['../classecs_1_1EntityManager.html#aff49d037faf0dd9e2a3ae5bad2ca7161',1,'ecs::EntityManager']]],
-  ['_7eevent_139',['~Event',['../classecs_1_1Event.html#a9fb4f119b92acd0515f28b914b4869da',1,'ecs::Event']]],
-  ['_7eeventmanager_140',['~EventManager',['../classecs_1_1EventManager.html#af0ef91b8a5db26338483f7b7308085ff',1,'ecs::EventManager']]],
-  ['_7eicomponentarray_141',['~IComponentArray',['../classecs_1_1IComponentArray.html#a545718692c898d7b4bc31af496efb90e',1,'ecs::IComponentArray']]],
-  ['_7esystem_142',['~System',['../classecs_1_1System.html#ab0ae8f1804130e3b8cfa2bbe2b0c5e6b',1,'ecs::System']]],
-  ['_7esystemmanager_143',['~SystemManager',['../classecs_1_1SystemManager.html#a034b7034b5fb31ac683731614c4adcd4',1,'ecs::SystemManager']]],
-  ['_7eworldmanager_144',['~WorldManager',['../classecs_1_1WorldManager.html#ad664e8b3149930ecb59a0afb36733d01',1,'ecs::WorldManager']]]
+  ['onevent_506',['OnEvent',['../classEventReceiver.html#a3a037c7588606c749e11c88be60a1f3a',1,'EventReceiver']]],
+  ['operator_2b_507',['operator+',['../classecs_1_1component_1_1Stats.html#ab9156b6818301e7f672ff324e7cea2e9',1,'ecs::component::Stats']]],
+  ['owner_508',['Owner',['../classecs_1_1component_1_1Owner.html#a00c10a3f93ba072001c9e901d3780d42',1,'ecs::component::Owner::Owner(const ecs::Entity &amp;ID=0)'],['../classecs_1_1component_1_1Owner.html#a3a540f1758da4000f7a815cd9ac1f872',1,'ecs::component::Owner::Owner(const Owner &amp;owner)']]]
 ];

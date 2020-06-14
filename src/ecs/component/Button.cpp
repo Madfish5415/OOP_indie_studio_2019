@@ -11,8 +11,15 @@ using namespace ecs::component;
 
 Button::Button(irr::gui::IGUIEnvironment* gui, irr::core::rect<irr::s32>* rect, irr::gui::IGUIElement* parent,
     irr::s32 id, const wchar_t* text, const wchar_t* tooltipText)
-    : gui(gui), rect(rect), parent(parent), id(id), text(text), tooltipText(tooltipText), font(nullptr),
-      normalImage(nullptr), hoverImage(nullptr)
+    : gui(gui),
+      rect(rect),
+      parent(parent),
+      id(id),
+      text(text),
+      tooltipText(tooltipText),
+      font(nullptr),
+      normalImage(nullptr),
+      hoverImage(nullptr)
 {
     if (gui) {
         button = gui->addButton(*rect, parent, id, text, tooltipText);
@@ -25,7 +32,7 @@ Button::Button(const Button& btn)
 {
     gui = btn.gui;
     if (btn.rect)
-        rect = new irr::core::rect<irr::s32>(btn.rect->UpperLeftCorner, btn.rect->LowerRightCorner);
+        rect.reset(new irr::core::rect<irr::s32>(btn.rect->UpperLeftCorner, btn.rect->LowerRightCorner));
     else
         rect = nullptr;
     parent = btn.parent;
@@ -61,4 +68,3 @@ void Button::setPressedImage(irr::video::ITexture* image)
 {
     button->setPressedImage(image);
 }
-

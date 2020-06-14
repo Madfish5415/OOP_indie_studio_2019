@@ -1,0 +1,4 @@
+<map id="scene::Keybinding" name="scene::Keybinding">
+<area shape="rect" id="node1" title="Handle the Keybinding scene." alt="" coords="23,95,163,121"/>
+<area shape="rect" id="node2" href="$classecs_1_1component_1_1Player.html" title="Controlable by user input." alt="" coords="5,5,180,32"/>
+</map>

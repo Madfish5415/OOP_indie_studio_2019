@@ -7,13 +7,11 @@
 
 #include "Image.hpp"
 
-#include <utility>
-
 using namespace ecs::component;
 
 Image::Image(irr::gui::IGUIEnvironment* gui, irr::video::IVideoDriver* driver, const std::string& pathTexture,
-             irr::core::position2d<irr::s32>* position, bool useAlphaChannelOfTexture,
-             irr::gui::IGUIElement* parent, irr::s32 id)
+    irr::core::position2d<irr::s32>* position, bool useAlphaChannelOfTexture, irr::gui::IGUIElement* parent,
+    irr::s32 id)
     : gui(gui),
       driver(driver),
       pathTexture(pathTexture),
@@ -23,7 +21,7 @@ Image::Image(irr::gui::IGUIEnvironment* gui, irr::video::IVideoDriver* driver, c
       id(id)
 {
     if (gui && driver) {
-        irr::video::ITexture *texture = driver->getTexture(pathTexture.c_str());
+        irr::video::ITexture* texture = driver->getTexture(pathTexture.c_str());
         this->image = gui->addImage(texture, *position, useAlphaChannelOfTexture, parent, id, nullptr);
     }
 }

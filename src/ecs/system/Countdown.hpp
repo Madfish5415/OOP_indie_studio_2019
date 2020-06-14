@@ -16,14 +16,14 @@
 namespace ecs::system {
 
 class Countdown : public System {
-    public:
-        Countdown(ecs::WorldManager* worldManager);
-        ~Countdown();
+  public:
+    explicit Countdown(ecs::WorldManager* worldManager);
+    ~Countdown() override;
 
-    public:
-        void update() override;
+  public:
+    void update() override;
 };
 
-}
+} // namespace ecs::system
 
 #endif /* !COUNTDOWN_HPP_ */

@@ -18,10 +18,10 @@ namespace ecs::system {
 class Blink : public ecs::System {
   public:
     explicit Blink(ecs::WorldManager* worldManager);
-    ~Blink();
+    ~Blink() override;
 
   public:
-    void update();
+    void update() override;
 
   private:
     irr::u32 time;
