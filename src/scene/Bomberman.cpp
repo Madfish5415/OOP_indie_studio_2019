@@ -592,11 +592,10 @@ void scene::Bomberman::destroy(ecs::Universe *universe)
     }
 }
 
-void scene::Bomberman::createPowerUp(ecs::Universe *universe, const irr::core::vector3df &position)
+void scene::Bomberman::createPowerUp(ecs::WorldManager* worldManager, const irr::core::vector3df &position)
 {
-    auto smgr = universe->getDevice()->getSceneManager();
-    auto driver = universe->getDevice()->getVideoDriver();
-    auto worldManager = universe->getWorldManager("Bomberman");
+    auto smgr = worldManager->getUniverse()->getDevice()->getSceneManager();
+    auto driver = worldManager->getUniverse()->getDevice()->getVideoDriver();
     size_t powerUpChoice = std::rand() % 10;
 
     ecs::Entity powerUp = worldManager->createEntity();

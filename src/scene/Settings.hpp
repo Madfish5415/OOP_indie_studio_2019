@@ -12,25 +12,64 @@
 
 #include "../ecs/Universe.hpp"
 
+/**
+ * @file Settings.hpp
+ * @brief Settings Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class Settings
+ * @brief Handle the Settings scene.
+ */
 class Settings {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     Settings() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~Settings() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole Settings scene.
+     * @param universe : A pointer on the universe.
+     * @param currentMusic : The currently played music.
+     */
     static void init(ecs::Universe *universe, std::shared_ptr<sf::Music> currentMusic);
+    /**
+     * @brief destroy method
+     * This method destroy the whole Settings scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe *universe);
+    /**
+     * @brief updateSoundBar method
+     * This method update the sound bar and the music bar images.
+     * @param universe : A pointer on the universe.
+     */
     static void updateSoundBar(ecs::Universe *universe);
 
   public:
-    static std::vector<ecs::Entity> buttons;
-    static std::vector<ecs::Entity> pushButtons;
-    static std::vector<ecs::Entity> images;
-    static sf::Music *currentMusic;
-    static float soundVolume;
-    static float musicVolume;
+    static std::vector<ecs::Entity> buttons; /** < List of all used buttons on this scene. */
+    static std::vector<ecs::Entity> pushButtons; /** < List of all used push buttons on this scene. */
+    static std::vector<ecs::Entity> images; /** < List of all used images on this scene. */
+    static sf::Music *currentMusic; /** < The currently played music. */
+    static float soundVolume; /** < The global sound volume */
+    static float musicVolume; /** < The global music volume */
 };
 
 namespace settings {

@@ -16,22 +16,58 @@
 #include "../ecs/Universe.hpp"
 #include "../ecs/component/Player.hpp"
 
+/**
+ * @file Keybinding.hpp
+ * @brief Keybinding Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class Keybinding
+ * @brief Handle the Keybinding scene.
+ */
 class Keybinding {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     Keybinding() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~Keybinding() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole Keybinding scene.
+     * @param universe : A pointer on the universe.
+     * @param pathTexture : The current skin of the player.
+     * @param ply : A pointer to a player component that contains the last player's key assignment.
+     */
     static void init(ecs::Universe* universe, const std::string& pathTexture, ecs::component::Player* ply);
+    /**
+     * @brief destroy method
+     * This method destroy the whole Keybinding scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 
   public:
-    static ecs::component::Player* player;
-    static std::vector<ecs::Entity> buttons;
-    static std::vector<ecs::Entity> pushButtons;
-    static std::vector<ecs::Entity> images;
+    static ecs::component::Player*
+        player; /** < A pointer to a player component that contains the last player's key assignment. */
+    static std::vector<ecs::Entity> buttons; /** < List of all used buttons on this scene. */
+    static std::vector<ecs::Entity> pushButtons; /** < List of all used push buttons on this scene. */
+    static std::vector<ecs::Entity> images; /** < List of all used images on this scene. */
 };
 
 namespace keybinding {

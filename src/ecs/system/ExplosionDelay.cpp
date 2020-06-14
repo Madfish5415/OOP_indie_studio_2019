@@ -59,7 +59,7 @@ static void explodeObjects(ecs::WorldManager* worldManager, ecs::component::Rend
                 smgr->addToDeletionQueue(boundingBox.mesh);
             } catch (std::exception& e) {
                 if (rand() % 3 == 0) {
-                    scene::Bomberman::createPowerUp(worldManager->getUniverse(), pos);
+                    scene::Bomberman::createPowerUp(worldManager, pos);
                 }
             }
             for (auto& metaTriangleSelector : scene::Bomberman::metaTriangleSelector)
