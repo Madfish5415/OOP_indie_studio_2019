@@ -16,36 +16,103 @@
 #include "../ecs/component/Player.hpp"
 #include "Bomberman.hpp"
 
+/**
+ * @file PlayerSelector.hpp
+ * @brief PlayerSelector Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class PlayerSelector
+ * @brief Handle the PlayerSelector scene.
+ */
 class PlayerSelector {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     PlayerSelector() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~PlayerSelector() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole PlayerSelector scene.
+     * @param universe : A pointer on the universe.
+     * @param musicTimer : Playback time of current music.
+     */
     static void init(ecs::Universe* universe, sf::Time musicTimer);
+    /**
+     * @brief destroy method
+     * This method destroy the whole PlayerSelector scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
+    /**
+     * @brief addPlayer method
+     * This method add a new player on the screen.
+     * @param universe : A pointer on the universe.
+     */
     static void addPlayer(ecs::Universe* universe);
+    /**
+     * @brief removePlayer method
+     * This method remove the last player on the screen.
+     * @param universe : A pointer on the universe.
+     */
     static void removePlayer(ecs::Universe* universe);
+    /**
+     * @brief changeSkin method
+     * This method change the skin of a player.
+     * @param universe : A pointer on the universe.
+     * @param id : The id of the player that has to change.
+     */
     static void changeSkin(ecs::Universe* universe, irr::s32 id);
+    /**
+     * @brief changeType method
+     * This method change the type of a player.
+     * @param universe : A pointer on the universe.
+     * @param id : The id of the player that has to change.
+     */
     static void changeType(ecs::Universe* universe, irr::s32 id);
+    /**
+     * @brief checkKeybinding method
+     * This method check if a key is already used.
+     * @param universe : A pointer on the universe.
+     * @return True if each keys is used once and False otherwise.
+     */
     static bool checkKeybinding(ecs::Universe* universe);
+    /**
+     * @brief invalidKeybinding method
+     * This method create a pop-up to notify the user that a key is used more than once.
+     * @param universe  : A pointer on the universe.
+     */
     static void invalidKeybinding(ecs::Universe* universe);
 
   public:
-    static std::vector<ecs::Entity> playerIds;
-    static std::vector<ecs::Entity> playerKeysIds;
-    static std::vector<ecs::Entity> playerSkinButtonLeftIds;
-    static std::vector<ecs::Entity> playerSkinButtonRightIds;
-    static std::vector<ecs::Entity> playerTypeButtonLeftIds;
-    static std::vector<ecs::Entity> playerTypeButtonRightIds;
-    static std::vector<ecs::Entity> playerCustomButtonIds;
-    static std::vector<ecs::Entity> playerType;
-    static std::vector<ecs::component::Player> playerComponent;
-    static std::vector<bool> typeList;
-    static std::array<irr::video::SColor, 4> bombColors;
-    static irr::gui::IGUIElement* modal;
+    static std::vector<ecs::Entity> playerIds; /** < List of skin preview. */
+    static std::vector<ecs::Entity> playerKeysIds; /** < List of keybinding button. */
+    static std::vector<ecs::Entity> playerSkinButtonLeftIds; /** < List of change skin (left) button. */
+    static std::vector<ecs::Entity> playerSkinButtonRightIds; /** < List of change skin (right) button. */
+    static std::vector<ecs::Entity> playerTypeButtonLeftIds; /** < List of change type (left) button. */
+    static std::vector<ecs::Entity> playerTypeButtonRightIds; /** < List of change type (right) button. */
+    static std::vector<ecs::Entity> playerCustomButtonIds; /** < List of custom bomb button. */
+    static std::vector<ecs::Entity> playerType; /** < List of player type preview. */
+    static std::vector<ecs::component::Player> playerComponent; /** < List of player component. */
+    static std::vector<bool> typeList; /** < List of player type. */
+    static std::array<irr::video::SColor, 4> bombColors; /** < List of player's bomb color. */
+    static irr::gui::IGUIElement* modal; /** < The choose color modal. */
 };
 
 namespace playerselector {

@@ -13,15 +13,49 @@
 #include "../ecs/Universe.hpp"
 #include "Bomberman.hpp"
 
+/**
+ * @file GameHud.hpp
+ * @brief GameHud Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class GameHud
+ * @brief Handle the GameHud scene.
+ */
 class GameHud {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     GameHud() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~GameHud() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole GameHud scene.
+     * @param universe : A pointer on the universe.
+     * @param paths : List of players skins.
+     */
     static void init(ecs::Universe* universe, const std::vector<std::string>& paths);
+    /**
+     * @brief destroy method
+     * This method destroy the whole GameHud scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 };
 

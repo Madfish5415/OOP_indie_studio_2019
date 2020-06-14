@@ -14,15 +14,49 @@
 
 #include "../ecs/WorldManager.hpp"
 
+/**
+ * @file Menu.hpp
+ * @brief Menu Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class Menu
+ * @brief Handle the Menu scene.
+ */
 class Menu {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     Menu() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~Menu() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole Menu scene.
+     * @param universe : A pointer on the universe.
+     * @param musicTimer : Playback time of current music.
+     */
     static void init(ecs::Universe* universe, sf::Time musicTimer);
+    /**
+     * @brief destroy method
+     * This method destroy the whole Menu scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 };
 

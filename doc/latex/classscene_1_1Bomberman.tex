@@ -1,0 +1,177 @@
+\hypertarget{classscene_1_1Bomberman}{}\doxysection{scene\+::Bomberman Class Reference}
+\label{classscene_1_1Bomberman}\index{scene::Bomberman@{scene::Bomberman}}
+
+
+Handle the \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene.  
+
+
+
+
+{\ttfamily \#include $<$Bomberman.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Bomberman_a3b5bbed99b2cb3cc48e04a3f2b6d7308}\label{classscene_1_1Bomberman_a3b5bbed99b2cb3cc48e04a3f2b6d7308}} 
+\mbox{\hyperlink{classscene_1_1Bomberman_a3b5bbed99b2cb3cc48e04a3f2b6d7308}{Bomberman}} ()=delete
+\begin{DoxyCompactList}\small\item\em Constructor Delete to avoid the construction of the class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classscene_1_1Bomberman_a963354b3c534f04e2eaf1642d53cf44b}\label{classscene_1_1Bomberman_a963354b3c534f04e2eaf1642d53cf44b}} 
+\mbox{\hyperlink{classscene_1_1Bomberman_a963354b3c534f04e2eaf1642d53cf44b}{$\sim$\+Bomberman}} ()=delete
+\begin{DoxyCompactList}\small\item\em Destructor Delete to avoid the destruction of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_aec6e9b075a5f42b1232ebd10c04bd8fd}{init}} (ecs\+::\+Universe $\ast$universe, std\+::vector$<$ \mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $>$ players, const std\+::vector$<$ std\+::string $>$ \&paths, std\+::vector$<$ bool $>$ player\+Type)
+\begin{DoxyCompactList}\small\item\em init method This method create the whole \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_a24a0fc38b24c88845d27026f5f1fd8f3}{destroy}} (ecs\+::\+Universe $\ast$universe)
+\begin{DoxyCompactList}\small\item\em destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_af1d6a08255ea96822e5cb22cc94bd4b9}{create\+Bomb}} (\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$world\+Manager, ecs\+::\+Entity player\+Id, size\+\_\+t bomb\+Radius, bool wall\+Pass, const irr\+::core\+::vector3d$<$ irr\+::f32 $>$ \&pos, int idx)
+\begin{DoxyCompactList}\small\item\em create\+Bomb method This method create a bomb entity. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_a151b6d18d50bdb5746f12b5e865c9cce}{update\+Collision}} (\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$world\+Manager)
+\begin{DoxyCompactList}\small\item\em update\+Collision method This method update the collision of each entity of the world manager. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_a0b50fb3305f08745e31af5462376413a}{create\+Power\+Up}} (\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$world\+Manager, const irr\+::core\+::vector3df \&position)
+\begin{DoxyCompactList}\small\item\em create\+Power\+Up method This method create a random power-\/up entity. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classscene_1_1Bomberman_aeafff802dc8cc0ac5762d3c7a4ecc16a}{create\+Explosion}} (\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$world\+Manager, irr\+::u32 delay, const irr\+::core\+::vector3df \&pos, int idx)
+\begin{DoxyCompactList}\small\item\em create\+Explosion method This method create a explosion entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classscene_1_1Bomberman_a9d7b123efd148ccac61fb321ed691d1f}\label{classscene_1_1Bomberman_a9d7b123efd148ccac61fb321ed691d1f}} 
+static std\+::vector$<$ ecs\+::\+Entity $>$ {\bfseries player\+Ids}
+\item 
+static std\+::array$<$ irr\+::scene\+::\+I\+Meta\+Triangle\+Selector $\ast$, 4 $>$ \mbox{\hyperlink{classscene_1_1Bomberman_a1889dba7106edb68064c2dfe5b53813d}{meta\+Triangle\+Selector}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handle the \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classscene_1_1Bomberman_af1d6a08255ea96822e5cb22cc94bd4b9}\label{classscene_1_1Bomberman_af1d6a08255ea96822e5cb22cc94bd4b9}} 
+\index{scene::Bomberman@{scene::Bomberman}!createBomb@{createBomb}}
+\index{createBomb@{createBomb}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{createBomb()}{createBomb()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::create\+Bomb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$}]{world\+Manager,  }\item[{ecs\+::\+Entity}]{player\+Id,  }\item[{size\+\_\+t}]{bomb\+Radius,  }\item[{bool}]{wall\+Pass,  }\item[{const irr\+::core\+::vector3d$<$ irr\+::f32 $>$ \&}]{pos,  }\item[{int}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create\+Bomb method This method create a bomb entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: The world manager where the bomb is to be created. \\
+\hline
+{\em player\+Id} & \+: The owner of the bomb. \\
+\hline
+{\em bomb\+Radius} & \+: The radius of the bomb. \\
+\hline
+{\em wall\+Pass} & \+: True if the bomb explosion can pass through the boxes, False otherwise. \\
+\hline
+{\em pos} & \+: The 3D position of the bomb. \\
+\hline
+{\em idx} & \+: The owner\textquotesingle{}s player index. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Bomberman_aeafff802dc8cc0ac5762d3c7a4ecc16a}\label{classscene_1_1Bomberman_aeafff802dc8cc0ac5762d3c7a4ecc16a}} 
+\index{scene::Bomberman@{scene::Bomberman}!createExplosion@{createExplosion}}
+\index{createExplosion@{createExplosion}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{createExplosion()}{createExplosion()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::create\+Explosion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$}]{world\+Manager,  }\item[{irr\+::u32}]{delay,  }\item[{const irr\+::core\+::vector3df \&}]{pos,  }\item[{int}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create\+Explosion method This method create a explosion entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: The world manager where the power-\/up is to be created. \\
+\hline
+{\em delay} & \+: The duration of the explosion. \\
+\hline
+{\em pos} & \+: The 3D position of the power-\/up. \\
+\hline
+{\em idx} & \+: The owner\textquotesingle{}s player index. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Bomberman_a0b50fb3305f08745e31af5462376413a}\label{classscene_1_1Bomberman_a0b50fb3305f08745e31af5462376413a}} 
+\index{scene::Bomberman@{scene::Bomberman}!createPowerUp@{createPowerUp}}
+\index{createPowerUp@{createPowerUp}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{createPowerUp()}{createPowerUp()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::create\+Power\+Up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$}]{world\+Manager,  }\item[{const irr\+::core\+::vector3df \&}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+create\+Power\+Up method This method create a random power-\/up entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: The world manager where the power-\/up is to be created. \\
+\hline
+{\em position} & \+: The 3D position of the power-\/up. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Bomberman_a24a0fc38b24c88845d27026f5f1fd8f3}\label{classscene_1_1Bomberman_a24a0fc38b24c88845d27026f5f1fd8f3}} 
+\index{scene::Bomberman@{scene::Bomberman}!destroy@{destroy}}
+\index{destroy@{destroy}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::destroy (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+destroy method This method destroy the whole \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer on the universe. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Bomberman_aec6e9b075a5f42b1232ebd10c04bd8fd}\label{classscene_1_1Bomberman_aec6e9b075a5f42b1232ebd10c04bd8fd}} 
+\index{scene::Bomberman@{scene::Bomberman}!init@{init}}
+\index{init@{init}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::init (\begin{DoxyParamCaption}\item[{ecs\+::\+Universe $\ast$}]{universe,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classecs_1_1component_1_1Player}{ecs\+::component\+::\+Player}} $>$}]{players,  }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{paths,  }\item[{std\+::vector$<$ bool $>$}]{player\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+init method This method create the whole \mbox{\hyperlink{classscene_1_1Bomberman}{Bomberman}} scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em universe} & \+: A pointer to the universe. \\
+\hline
+{\em players} & \+: A list of components that contain the key binding. \\
+\hline
+{\em paths} & \+: A path list to the skins of the different players. \\
+\hline
+{\em player\+Type} & \+: A list informing which players need to be controlled by an AI. True if it should be, False otherwise. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classscene_1_1Bomberman_a151b6d18d50bdb5746f12b5e865c9cce}\label{classscene_1_1Bomberman_a151b6d18d50bdb5746f12b5e865c9cce}} 
+\index{scene::Bomberman@{scene::Bomberman}!updateCollision@{updateCollision}}
+\index{updateCollision@{updateCollision}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{updateCollision()}{updateCollision()}}
+{\footnotesize\ttfamily static void scene\+::\+Bomberman\+::update\+Collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classecs_1_1WorldManager}{ecs\+::\+World\+Manager}} $\ast$}]{world\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+update\+Collision method This method update the collision of each entity of the world manager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Manager} & \+: The world manager where collisions are to be updated. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classscene_1_1Bomberman_a1889dba7106edb68064c2dfe5b53813d}\label{classscene_1_1Bomberman_a1889dba7106edb68064c2dfe5b53813d}} 
+\index{scene::Bomberman@{scene::Bomberman}!metaTriangleSelector@{metaTriangleSelector}}
+\index{metaTriangleSelector@{metaTriangleSelector}!scene::Bomberman@{scene::Bomberman}}
+\doxysubsubsection{\texorpdfstring{metaTriangleSelector}{metaTriangleSelector}}
+{\footnotesize\ttfamily std\+::array$<$irr\+::scene\+::\+I\+Meta\+Triangle\+Selector$\ast$, 4$>$ scene\+::\+Bomberman\+::meta\+Triangle\+Selector\hspace{0.3cm}{\ttfamily [static]}}
+
+$<$ A list of player/\+AI entities. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/lucas/\+Delivery/2019/\+O\+O\+P/\+Github/\+O\+O\+P\+\_\+indie\+\_\+studio\+\_\+2019/src/scene/\mbox{\hyperlink{Bomberman_8hpp}{Bomberman.\+hpp}}\end{DoxyCompactItemize}

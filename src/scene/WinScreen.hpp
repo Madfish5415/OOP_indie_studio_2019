@@ -11,15 +11,49 @@
 #include "../ecs/WorldManager.hpp"
 #include "irrlicht.h"
 
+/**
+ * @file WinScreen.hpp
+ * @brief WinScreen Class
+ * @author Lucas.M
+ * @version 1.0
+ * @date 14 june 2020
+ */
+
+/**
+ * @namespace scene
+ */
 namespace scene {
 
+/**
+ * @class WinScreen
+ * @brief Handle the WinScreen scene.
+ */
 class WinScreen {
   public:
+    /**
+     * @brief Constructor
+     * Delete to avoid the construction of the class.
+     */
     WinScreen() = delete;
+    /**
+     * @brief Destructor
+     * Delete to avoid the destruction of the class.
+     */
     ~WinScreen() = delete;
 
   public:
+    /**
+     * @brief init method
+     * This method create the whole WinScreen scene.
+     * @param universe : A pointer on the universe.
+     * @param skinPath : The skin of the winner or "draw" if no one win.
+     */
     static void init(ecs::Universe* universe, const std::string& skinPath);
+    /**
+     * @brief destroy method
+     * This method destroy the whole WinScreen scene.
+     * @param universe : A pointer on the universe.
+     */
     static void destroy(ecs::Universe* universe);
 };
 

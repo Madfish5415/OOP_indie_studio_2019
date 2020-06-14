@@ -1,0 +1,24 @@
+<map id="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/scene/WinScreen.hpp" name="/home/lucas/Delivery/2019/OOP/Github/OOP_indie_studio_2019/src/scene/WinScreen.hpp">
+<area shape="rect" id="node1" title="WinScreen Class." alt="" coords="517,5,688,76"/>
+<area shape="rect" id="node2" href="$WorldManager_8hpp.html" title="WorldManager Class." alt="" coords="436,124,617,151"/>
+<area shape="rect" id="node22" title=" " alt="" coords="642,124,718,151"/>
+<area shape="rect" id="node3" title=" " alt="" coords="491,273,568,300"/>
+<area shape="rect" id="node4" href="$ComponentManager_8hpp.html" title="ComponentManager Class." alt="" coords="296,199,477,225"/>
+<area shape="rect" id="node12" href="$EntityManager_8hpp.html" title="EntityManager Class." alt="" coords="5,273,149,300"/>
+<area shape="rect" id="node15" href="$EventManager_8hpp.html" title="EventManager Class." alt="" coords="787,199,930,225"/>
+<area shape="rect" id="node20" href="$SystemManager_8hpp.html" title="SystemManager Class." alt="" coords="564,199,719,225"/>
+<area shape="rect" id="node5" title=" " alt="" coords="173,273,232,300"/>
+<area shape="rect" id="node6" href="$ComponentArray_8hpp.html" title="ComponentArray Class." alt="" coords="307,273,466,300"/>
+<area shape="rect" id="node10" href="$Def_8hpp.html" title="Def File." alt="" coords="320,423,392,449"/>
+<area shape="rect" id="node7" title=" " alt="" coords="295,348,351,375"/>
+<area shape="rect" id="node8" title=" " alt="" coords="679,348,803,375"/>
+<area shape="rect" id="node9" href="$IComponentArray_8hpp.html" title="IComponentArray Class." alt="" coords="375,348,537,375"/>
+<area shape="rect" id="node11" title=" " alt="" coords="327,497,385,524"/>
+<area shape="rect" id="node13" title=" " alt="" coords="115,348,178,375"/>
+<area shape="rect" id="node14" title=" " alt="" coords="561,348,604,375"/>
+<area shape="rect" id="node16" title=" " alt="" coords="877,273,928,300"/>
+<area shape="rect" id="node17" title=" " alt="" coords="953,273,1039,300"/>
+<area shape="rect" id="node18" href="$Event_8hpp.html" title="Event Class." alt="" coords="766,273,853,300"/>
+<area shape="rect" id="node19" title=" " alt="" coords="827,348,887,375"/>
+<area shape="rect" id="node21" href="$System_8hpp.html" title="System Class." alt="" coords="592,273,691,300"/>
+</map>
