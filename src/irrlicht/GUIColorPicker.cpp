@@ -65,7 +65,7 @@ GUIColorPicker::GUIColorPicker(IGUIEnvironment *environment, IGUIElement *parent
       isGradient(false),
       isColor(false)
 {
-    close = Environment->addButton({5, 140, 85, 156}, this, 999, L"Take this color");
+    close = Environment->addButton({5, 140, 85, 156}, this, 999, L"Choose this bomb color");
 
     scroll = Environment->addScrollBar(true, {5, 125, 85, 135}, this);
     scroll->setMin(0);
