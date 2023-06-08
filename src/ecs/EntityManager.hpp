@@ -11,10 +11,7 @@
 #include <array>
 #include <queue>
 #include <set>
-
-#ifdef _WIN32
 #include <stdexcept>
-#endif
 
 #include "Def.hpp"
 

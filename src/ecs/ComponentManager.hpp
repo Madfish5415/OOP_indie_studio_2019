@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <string>
+#include <stdexcept>
 
 #include "ComponentArray.hpp"
 #include "Def.hpp"

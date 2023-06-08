@@ -9,6 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_SYSTEMMANAGER_HPP
 
 #include <memory>
+#include <stdexcept>
 #include <unordered_map>
 
 #include "System.hpp"
