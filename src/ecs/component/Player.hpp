@@ -9,7 +9,7 @@
 #define OOP_INDIE_STUDIO_2019_COMP_PLAYER_HPP
 
 #include <irrlicht.h>
-
+#include <string>
 #include <map>
 #include <unordered_map>
 

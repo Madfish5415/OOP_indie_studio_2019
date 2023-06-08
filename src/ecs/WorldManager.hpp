@@ -13,6 +13,7 @@ class Universe;
 }
 
 #include <memory>
+#include <stdexcept>
 
 #include "ComponentManager.hpp"
 #include "EntityManager.hpp"

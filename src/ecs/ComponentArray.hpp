@@ -10,6 +10,7 @@
 
 #include <array>
 #include <unordered_map>
+#include <stdexcept>
 
 #include "IComponentArray.hpp"
 
